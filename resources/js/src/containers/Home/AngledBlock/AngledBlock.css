@@ -1,0 +1,28 @@
+.AngledBlock .hover {
+    transition: all .25s;
+    transform-origin: center;
+    transform: rotate(15deg);
+    top: 0;
+}
+
+.AngledBlock .hover.inverse {
+    transform: rotate(-15deg);
+}
+
+.AngledBlock .hover:hover {
+    transform: rotate(0deg) scale(1.1);
+}
+
+.AngledBlock .hover>.position-absolute {
+    transition: all .25s;
+    transform-origin: center;
+    transform: rotate(-15deg);
+}
+
+.AngledBlock .hover.inverse>.position-absolute {
+    transform: rotate(15deg);
+}
+
+.AngledBlock .hover:hover>.position-absolute {
+    transform: rotate(0deg);
+}

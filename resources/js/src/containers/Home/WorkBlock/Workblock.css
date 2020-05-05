@@ -1,0 +1,8 @@
+.Workblock .hover {
+    transform: scale(.8);
+    transition: all .25s;
+}
+
+.Workblock .hover:hover {
+    transform: scale(1);
+}
