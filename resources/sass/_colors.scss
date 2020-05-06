@@ -22,6 +22,7 @@ $light: #cacaca;
 $darklight: #1b223f;
 $border: #606060;
 $input: #28324C;
+$transparent: transparent;
 
 // Colors
 $colors: "green" $mygreen $white, "lemongreen" $mylemongreen $dark, "darkgreen" $darkgreen $white, "darkblue" $darkblue $white,
@@ -29,7 +30,7 @@ $colors: "green" $mygreen $white, "lemongreen" $mylemongreen $dark, "darkgreen" 
   "orange" $myorange $white, "oranger" $myoranger $white, "scarlet" $scarlet $white, "blue" $myblue $white,
   "lightblue" $mylightblue $white, "pink" $mypink $white, "mydarkblue" $mydarkblue $white, "white" $white $black,
   "black" $black $white, "gray" $gray $white, "darklight" $darklight $white, "border" $border $white,
-  "light" $light $black, "input" $input $white;
+  "light" $light $black, "input" $input $white, "transparent" $transparent $black;
 @each $name, $color, $font in $colors {
   .text-#{$name} {
     color: $color !important;

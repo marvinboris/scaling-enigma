@@ -13,7 +13,8 @@ import * as actions from './store/actions';
 import 'aos/dist/aos.css';
 
 // Common routes
-const asyncAboutUs = asyncComponent(() => import('./containers/AboutUs/AboutUs'));
+const asyncRequestSuccess = asyncComponent(() => import('./containers/Request/Success/Success'));
+const asyncRequest = asyncComponent(() => import('./containers/Request/Request'));
 const asyncContact = asyncComponent(() => import('./containers/Contact/Contact'));
 const asyncLogin = asyncComponent(() => import('./containers/Auth/Login/Login'));
 const asyncSignup = asyncComponent(() => import('./containers/Auth/Signup/Signup'));
@@ -34,7 +35,8 @@ class App extends Component {
                 <Route path="/signup" component={asyncSignup} />
                 <Route path="/login" component={asyncLogin} />
                 <Route path="/contact" component={asyncContact} />
-                <Route path="/about-us" component={asyncAboutUs} />
+                <Route path="/request/success" component={asyncRequestSuccess} />
+                <Route path="/request" component={asyncRequest} />
                 <Route path="/" component={Home} />
                 <Redirect to="/" />
             </Switch>
@@ -44,7 +46,8 @@ class App extends Component {
             routes = (
                 <Switch>
                     <Route path="/contact" component={asyncContact} />
-                    <Route path="/about-us" component={asyncAboutUs} />
+                    <Route path="/request/success" component={asyncRequestSuccess} />
+                    <Route path="/request" component={asyncRequest} />
                     <Route path="/" component={Home} />
                     <Redirect to="/" />
                 </Switch>

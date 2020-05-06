@@ -1,92 +1,25 @@
 import React from 'react';
-import { FormGroup, Label, Input, Col, CustomInput } from 'reactstrap';
+import { FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const input = ({ icon, name, type, check, placeholder, required, autoFocus, children, className, onChange, invalid, touched, shouldValidate, row, select, options, file, value }) => {
-    let optionEls = null;
-    if (select) {
-        optionEls = options.array.map(option => <option key={option[options.value]} value={option[options.value]}>{option[options.name]}</option>);
-    }
+export default ({ icon, addon, onChange, className = '', name, type = 'text', required, readonly, placeholder, value = '', append, children }) => <FormGroup className={className}>
+    <InputGroup className="bg-white" size="lg">
+        {addon ? <InputGroupAddon addonType="prepend">
+            <InputGroupText className="bg-transparent border-light rounded-pill rounded-right-0 px-4">
+                {addon}
+            </InputGroupText>
+        </InputGroupAddon> : null}
 
-    return (
-        <FormGroup row={row} className={className + (row ? " align-items-center" : '')} check={check}>
-            {
-                check ? (
-                    <CustomInput type={type} name={name} id={name} label={children} value={value ? value : ''} />
-                ) : (
-                        <>
-                            <Label sm={row ? 4 : null} className={(row ? " text-right font-weight-bold" : "")} for={name}>{icon ? <FontAwesomeIcon fixedWidth icon={icon} className="mr-1" /> : null}{children}</Label>
-                            {row ? (
-                                <Col sm={8}>
-                                    {file ? <CustomInput
-                                        type={type}
-                                        invalid={invalid && touched && shouldValidate}
-                                        valid={!invalid && touched && shouldValidate}
-                                        name={name}
-                                        id={name}
-                                        required={required}
-                                        autoFocus={autoFocus}
-                                        placeholder={placeholder}
-                                        onChange={onChange} /> :
-                                        <Input
-                                            type={type}
-                                            value={value ? value : ''}
-                                            invalid={invalid && touched && shouldValidate}
-                                            valid={!invalid && touched && shouldValidate}
-                                            name={name}
-                                            id={name}
-                                            required={required}
-                                            autoFocus={autoFocus}
-                                            placeholder={placeholder}
-                                            onChange={onChange} />}
-                                </Col>
-                            ) : (
-                                    select ? (
-                                        <Input
-                                            type={type}
-                                            value={value ? value : ''}
-                                            invalid={invalid && touched && shouldValidate}
-                                            valid={!invalid && touched && shouldValidate}
-                                            name={name}
-                                            id={name}
-                                            required={required}
-                                            autoFocus={autoFocus}
-                                            placeholder={placeholder}
-                                            onChange={onChange}>
-                                            {optionEls}
-                                        </Input>
-                                    ) : (
-                                            file ? (
-                                                <CustomInput
-                                                    type={type}
-                                                    invalid={invalid && touched && shouldValidate}
-                                                    valid={!invalid && touched && shouldValidate}
-                                                    name={name}
-                                                    id={name}
-                                                    required={required}
-                                                    autoFocus={autoFocus}
-                                                    placeholder={placeholder}
-                                                    onChange={onChange} />
-                                            ) : (
-                                                    <Input
-                                                        type={type}
-                                                        value={value ? value : ''}
-                                                        invalid={invalid && touched && shouldValidate}
-                                                        valid={!invalid && touched && shouldValidate}
-                                                        name={name}
-                                                        id={name}
-                                                        required={required}
-                                                        autoFocus={autoFocus}
-                                                        placeholder={placeholder}
-                                                        onChange={onChange} />
-                                                )
-                                        )
-                                )}
-                        </>
-                    )
-            }
-        </FormGroup>
-    )
-};
+        {children ?
+            <Input onChange={onChange} type={type} name={name} required={required} readOnly={readonly} value={value} className={"bg-white rounded-pill " + (addon ? 'rounded-left-0' : '') + " border-light text-small text-secondary h-100 px-4 py-3"} placeholder={placeholder}>{children}</Input>
+            :
+            <Input onChange={onChange} type={type} name={name} required={required} readOnly={readonly} value={value} className={"bg-transparent rounded-pill " + (addon ? 'rounded-left-0' : '') + " border-light text-small text-secondary h-100 px-4 py-3"} placeholder={placeholder} />
+        }
 
-export default input;
+        {append ? <InputGroupAddon addonType="append">
+            <InputGroupText className="bg-transparent border-0 text-secondary text-small px-4">
+                {append}
+            </InputGroupText>
+        </InputGroupAddon> : null}
+    </InputGroup>
+</FormGroup>;

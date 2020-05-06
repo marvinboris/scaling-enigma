@@ -49,7 +49,8 @@ class Home extends Component {
                                     try it now.
                                 </div>
 
-                                <BetweenButton icon={faPaperPlane} pill className="py-3 px-4" color="darkblue">Submit a request</BetweenButton>
+                                <BetweenButton icon={faPaperPlane} pill className="py-3 px-4 mr-2" color="darkblue">Submit a request</BetweenButton>
+                                <BetweenButton icon={faCheck} pill className="py-3 px-4" color="yellow">Check request</BetweenButton>
                             </Col>
 
                             <Col lg={4}>

@@ -1,17 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Container, Col, Row, Form, FormGroup, InputGroup, Input, InputGroupAddon, Button } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeadset, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import FooterBlock from './FooterBlock/FooterBlock';
-import Logo from '../UI/Logo/Logo';
 
 import './Footer.css';
-
-import Facebook from '../../assets/images/change-Facebook-page-name1@2x.png';
-import Briluce from '../../assets/images/briluce-fav2@2x.png';
-import BdTask from '../../assets/images/bdtask-logo-white@2x.png';
-import { faHeadset, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const footer = () => (
     <div className="Footer bg-white text-secondary">

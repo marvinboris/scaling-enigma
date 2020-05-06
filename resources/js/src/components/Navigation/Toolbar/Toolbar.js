@@ -10,7 +10,7 @@ import Logo from '../../UI/Logo/Logo';
 import './Toolbar.css';
 
 const toolbar = ({ isAuth, name, drawerToggleClicked, logoutHandler, role, cartItemsNumber, notifications }) => (
-    <div className="Toolbar bg-white">
+    <div className="Toolbar bg-white sticky-top">
         <Container>
             <Navbar light className="border-bottom border-border-50 py-4" expand="md">
                 <NavbarBrand><Logo /></NavbarBrand>

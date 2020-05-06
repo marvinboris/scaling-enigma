@@ -1,4 +1,4 @@
-@for $i from 1 through 75 {
+@for $i from 0 through 75 {
   .border-#{$i} {
     border-width: $i * 1px !important;
   }

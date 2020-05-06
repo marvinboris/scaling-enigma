@@ -35,114 +35,55 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-var input = function input(_ref) {
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var icon = _ref.icon,
-      name = _ref.name,
-      type = _ref.type,
-      check = _ref.check,
-      placeholder = _ref.placeholder,
-      required = _ref.required,
-      autoFocus = _ref.autoFocus,
-      children = _ref.children,
-      className = _ref.className,
+      addon = _ref.addon,
       onChange = _ref.onChange,
-      invalid = _ref.invalid,
-      touched = _ref.touched,
-      shouldValidate = _ref.shouldValidate,
-      row = _ref.row,
-      select = _ref.select,
-      options = _ref.options,
-      file = _ref.file,
-      value = _ref.value;
-  var optionEls = null;
-
-  if (select) {
-    optionEls = options.array.map(function (option) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        key: option[options.value],
-        value: option[options.value]
-      }, option[options.name]);
-    });
-  }
-
+      _ref$className = _ref.className,
+      className = _ref$className === void 0 ? '' : _ref$className,
+      name = _ref.name,
+      _ref$type = _ref.type,
+      type = _ref$type === void 0 ? 'text' : _ref$type,
+      required = _ref.required,
+      readonly = _ref.readonly,
+      placeholder = _ref.placeholder,
+      _ref$value = _ref.value,
+      value = _ref$value === void 0 ? '' : _ref$value,
+      append = _ref.append,
+      children = _ref.children;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
-    row: row,
-    className: className + (row ? " align-items-center" : ''),
-    check: check
-  }, check ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["CustomInput"], {
+    className: className
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], {
+    className: "bg-white",
+    size: "lg"
+  }, addon ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroupAddon"], {
+    addonType: "prepend"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroupText"], {
+    className: "bg-transparent border-light rounded-pill rounded-right-0 px-4"
+  }, addon)) : null, children ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    onChange: onChange,
     type: type,
     name: name,
-    id: name,
-    label: children,
-    value: value ? value : ''
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
-    sm: row ? 4 : null,
-    className: row ? " text-right font-weight-bold" : "",
-    "for": name
-  }, icon ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], {
-    fixedWidth: true,
-    icon: icon,
-    className: "mr-1"
-  }) : null, children), row ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-    sm: 8
-  }, file ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["CustomInput"], {
-    type: type,
-    invalid: invalid && touched && shouldValidate,
-    valid: !invalid && touched && shouldValidate,
-    name: name,
-    id: name,
     required: required,
-    autoFocus: autoFocus,
-    placeholder: placeholder,
-    onChange: onChange
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    readOnly: readonly,
+    value: value,
+    className: "bg-white rounded-pill " + (addon ? 'rounded-left-0' : '') + " border-light text-small text-secondary h-100 px-4 py-3",
+    placeholder: placeholder
+  }, children) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    onChange: onChange,
     type: type,
-    value: value ? value : '',
-    invalid: invalid && touched && shouldValidate,
-    valid: !invalid && touched && shouldValidate,
     name: name,
-    id: name,
     required: required,
-    autoFocus: autoFocus,
-    placeholder: placeholder,
-    onChange: onChange
-  })) : select ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    type: type,
-    value: value ? value : '',
-    invalid: invalid && touched && shouldValidate,
-    valid: !invalid && touched && shouldValidate,
-    name: name,
-    id: name,
-    required: required,
-    autoFocus: autoFocus,
-    placeholder: placeholder,
-    onChange: onChange
-  }, optionEls) : file ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["CustomInput"], {
-    type: type,
-    invalid: invalid && touched && shouldValidate,
-    valid: !invalid && touched && shouldValidate,
-    name: name,
-    id: name,
-    required: required,
-    autoFocus: autoFocus,
-    placeholder: placeholder,
-    onChange: onChange
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    type: type,
-    value: value ? value : '',
-    invalid: invalid && touched && shouldValidate,
-    valid: !invalid && touched && shouldValidate,
-    name: name,
-    id: name,
-    required: required,
-    autoFocus: autoFocus,
-    placeholder: placeholder,
-    onChange: onChange
-  })));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (input);
+    readOnly: readonly,
+    value: value,
+    className: "bg-transparent rounded-pill " + (addon ? 'rounded-left-0' : '') + " border-light text-small text-secondary h-100 px-4 py-3",
+    placeholder: placeholder
+  }), append ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroupAddon"], {
+    addonType: "append"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroupText"], {
+    className: "bg-transparent border-0 text-secondary text-small px-4"
+  }, append)) : null));
+});
 
 /***/ }),
 
