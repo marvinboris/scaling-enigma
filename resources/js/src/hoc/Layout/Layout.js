@@ -8,6 +8,8 @@ import './Layout.css';
 import Logo from '../../components/UI/Logo/Logo';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import Footer from '../../components/Footer/Footer';
+import BackendLayout from '../../containers/Backend/Layout';
+
 import * as actions from '../../store/actions';
 
 
@@ -53,16 +55,7 @@ class Layout extends Component {
                 {authPage ? children : (
                     userPage ? (
                         <>
-                            <AdminToolbar notifications={notifications} name={name} role={role} logoutHandler={logoutHandler} />
-                            <AdminSideDrawer name={name} photo={photo} role={role} />
-                            <main className="bg-light position-relative pb-5" style={{ paddingLeft: 240, minHeight: 'calc(100vh - 57px)' }}>
-                                <div className="container-fluid bg-light p-0">
-                                    {children}
-                                </div>
-                                <footer style={{ position: 'absolute', left: 240, bottom: 0, width: 'calc(100% - 240px)' }} className="py-2 px-4 border-top small bg-white">
-                                    <strong>Copyright &copy; {new Date().getFullYear()} <NavLink to="/" className="text-info">MEAD</NavLink>.</strong> Tous droits réservés.
-                                </footer>
-                            </main>
+                            <BackendLayout>{children}</BackendLayout>
                         </>
                     ) : (
                             <>

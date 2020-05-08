@@ -2,6 +2,13 @@ export const updateObject = (oldObject, updatedProps) => ({
     ...oldObject, ...updatedProps
 });
 
+export const convertDate = date => {
+    const d = new Date(date)
+    const dtf = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' });
+
+    return dtf.formatToParts(d).map(({ value }) => value).join('');
+};
+
 export const checkValidity = (value, rules) => {
     let isValid = true;
 

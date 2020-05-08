@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { Col, Container, Row, Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Owl from "react-owl";
-import $ from 'jquery';
 import { faPaperPlane, faCheck, faClock, faComments } from "@fortawesome/free-solid-svg-icons";
 import { faComment, faCircle } from '@fortawesome/free-regular-svg-icons';
 
 import "./Home.css";
-import PresentationalContainer from "../../components/UI/PresentationalContainer/PresentationalContainer";
 import * as actions from "../../store/actions";
 import BetweenButton from "../../components/UI/Button/BetweenButton/BetweenButton";
-import AbsoluteButton from "../../components/UI/Button/AbsoluteButton/AbsoluteButton";
 
 import UnderCarouselBlock from "./UnderCarouselBlock/UnderCarouselBlock";
 import CustomerBlock from "./CustomerBlock/CustomerBlock";

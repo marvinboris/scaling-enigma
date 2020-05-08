@@ -1,7 +1,7 @@
 // My colors
 $myblue: #001DAE;
-$mylightblue: #06b0b6;
-$mydarkblue: #04166C;
+$brokenblue: #00305A;
+$nightblue: #000937;
 $mypink: #df0873;
 $scarlet: #8d004b;
 $myred: #ff0b33;
@@ -19,6 +19,7 @@ $white: #ffffff;
 $gray: #aaa;
 $black: #000000;
 $light: #cacaca;
+$soft: #E9E9E9;
 $darklight: #1b223f;
 $border: #606060;
 $input: #28324C;
@@ -28,9 +29,9 @@ $transparent: transparent;
 $colors: "green" $mygreen $white, "lemongreen" $mylemongreen $dark, "darkgreen" $darkgreen $white, "darkblue" $darkblue $white,
   "yellow" $myyellow $white, "darkyellow" $darkyellow $white, "red" $myred $white, "purered" $purered $white,
   "orange" $myorange $white, "oranger" $myoranger $white, "scarlet" $scarlet $white, "blue" $myblue $white,
-  "lightblue" $mylightblue $white, "pink" $mypink $white, "mydarkblue" $mydarkblue $white, "white" $white $black,
+  "brokenblue" $brokenblue $white, "pink" $mypink $white, "nightblue" $nightblue $white, "white" $white $black,
   "black" $black $white, "gray" $gray $white, "darklight" $darklight $white, "border" $border $white,
-  "light" $light $black, "input" $input $white, "transparent" $transparent $black;
+  "light" $light $black, "input" $input $white, "transparent" $transparent $black, "soft" $soft $black;
 @each $name, $color, $font in $colors {
   .text-#{$name} {
     color: $color !important;
@@ -152,7 +153,7 @@ $colors: "green" $mygreen $white, "lemongreen" $mylemongreen $dark, "darkgreen" 
   }
 }
 
-$gradients: "scarlet" $scarlet $myred 259deg, "orange" $myoranger $brown 253deg, "blue" $myblue $mydarkblue 210deg;
+$gradients: "scarlet" $scarlet $myred 259deg, "orange" $myoranger $brown 253deg, "blue" $myblue $nightblue 210deg;
 @each $name, $primary, $secondary, $angle in $gradients {
   .bg-#{$name}-gradient {
     background-image: linear-gradient($angle, $primary 0%, $secondary 100%) !important;

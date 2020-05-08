@@ -1,10 +1,5 @@
 import React from 'react';
 
-const subtitle = ({ children, className }) => (
-    <>
-        <div className={"text-muted lead small " + className}>{children}</div>
-        <hr />
-    </>
-);
+const subtitle = ({ children, className }) => <div className={"text-nightblue lead small " + className}>{children}</div>;
 
 export default subtitle;
