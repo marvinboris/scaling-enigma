@@ -12,34 +12,35 @@ import * as actions from './store/actions';
 
 import 'aos/dist/aos.css';
 
-// Common routes
+// User routes
 const asyncUserDashboard = asyncComponent(() => import('./containers/Backend/User/Dashboard/Dashboard'));
 const asyncUserRequestsPending = asyncComponent(() => import('./containers/Backend/User/Requests/Pending/Pending'));
+const asyncUserRequestsSolved = asyncComponent(() => import('./containers/Backend/User/Requests/Solved/Solved'));
+const asyncUserRequestsCancelled = asyncComponent(() => import('./containers/Backend/User/Requests/Cancelled/Cancelled'));
 
 // Common routes
 const asyncRequestSuccess = asyncComponent(() => import('./containers/Request/Success/Success'));
 const asyncRequest = asyncComponent(() => import('./containers/Request/Request'));
 const asyncContact = asyncComponent(() => import('./containers/Contact/Contact'));
 const asyncLogin = asyncComponent(() => import('./containers/Auth/Login/Login'));
-const asyncSignup = asyncComponent(() => import('./containers/Auth/Signup/Signup'));
+const asyncVerify = asyncComponent(() => import('./containers/Auth/Verify/Verify'));
 
 class App extends Component {
     componentDidMount() {
         const { onTryAuthSignup } = this.props;
-        // onTryAuthSignup();
+        onTryAuthSignup();
         init();
     }
 
     render() {
-        // const { auth: { profile, token } } = this.props;
-        const profile = { role: 'user' };
-        const token = 'Token';
-        const role = profile ? profile.role : null;
+        const { auth: { token } } = this.props;
 
         let routes = (
             <Switch>
-                <Route path="/signup" component={asyncSignup} />
-                <Route path="/login" component={asyncLogin} />
+                <Route path="/auth/verify" component={asyncVerify} />
+                <Route path="/auth/login" component={asyncLogin} />
+                <Redirect path="/login" to="/auth/login" />
+
                 <Route path="/contact" component={asyncContact} />
                 <Route path="/request/success" component={asyncRequestSuccess} />
                 <Route path="/request" component={asyncRequest} />
@@ -48,11 +49,14 @@ class App extends Component {
             </Switch>
         );
 
-        if (token !== null && profile) {
+        if (token !== null) {
             routes = (
                 <Switch>
                     <Route path="/user/dashboard" component={asyncUserDashboard} />
                     <Route path="/user/requests/pending" component={asyncUserRequestsPending} />
+                    <Route path="/user/requests/solved" component={asyncUserRequestsSolved} />
+                    <Route path="/user/requests/cancelled" component={asyncUserRequestsCancelled} />
+                    <Redirect path="/auth" to="/user/dashboard" />
 
                     <Route path="/contact" component={asyncContact} />
                     <Route path="/request/success" component={asyncRequestSuccess} />

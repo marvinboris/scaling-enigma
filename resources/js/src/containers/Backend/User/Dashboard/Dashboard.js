@@ -26,9 +26,7 @@ class Dashboard extends Component {
     }
 
     async componentDidMount() {
-        if (this.props.auth.authPage) this.props.onAuthPageOff();
-        if (!this.props.auth.userPage) this.props.onUserPageOn();
-        const { onGetAdminDashboard } = this.props;
+        this.props.onGetDashboard();
         const cors = 'https://cors-anywhere.herokuapp.com/';
 
         const phoneRes = await fetch(cors + 'http://country.io/phone.json', { method: 'GET', mode: 'cors' });
@@ -39,64 +37,15 @@ class Dashboard extends Component {
 
         const countries = Object.keys(phone).map(key => ({ country: key, code: phone[key], name: names[key] })).sort((a, b) => a.country > b.country);
 
-        await this.setState({ countries });
-        // onGetAdminDashboard();
+        this.setState({ countries });
+    }
+
+    componentWillUnmount() {
+        this.props.onResetDashboard();
     }
 
     render() {
-        // let { backend: { dashboard: { loading, error, blocksData, totalUsers } } } = this.props;
-
-        const
-            loading = false,
-            error = null,
-            blocksData = {
-                totalRequests: 2345,
-                pendingRequests: 234,
-                resolvedRequests: 142,
-                accomplishedRate: 23,
-            },
-            totalUsers = [
-                {
-                    created_at: new Date(),
-                    ref: 'FCG434',
-                    name: 'James DOE',
-                    platform: 'Liyeplimal',
-                    email: 'demo@test.com',
-                    country: 'CM'
-                },
-                {
-                    created_at: new Date(),
-                    ref: 'FCG434',
-                    name: 'Jakei DOGAO',
-                    platform: 'Simbcoin',
-                    email: 'demo@test.com',
-                    country: 'CM'
-                },
-                {
-                    created_at: new Date(),
-                    ref: 'FCG434',
-                    name: 'Fialia Jaile',
-                    platform: 'Liyeplimal',
-                    email: 'demo@test.com',
-                    country: 'CM'
-                },
-                {
-                    created_at: new Date(),
-                    ref: 'FCG434',
-                    name: 'Jamkea Aodi',
-                    platform: 'Liyeplimal',
-                    email: 'demo@test.com',
-                    country: 'CM'
-                },
-                {
-                    created_at: new Date(),
-                    ref: 'FCG434',
-                    name: 'Miake Oeda',
-                    platform: 'Simbcoin',
-                    email: 'demo@test.com',
-                    country: 'CM'
-                },
-            ];
+        let { backend: { dashboard: { loading, error, blocksData, requests } } } = this.props;
 
         const { countries } = this.state;
         let content = null;
@@ -109,7 +58,7 @@ class Dashboard extends Component {
             errors = <>
                 <Error err={error} />
             </>;
-            if (totalUsers && blocksData) {
+            if (requests && blocksData) {
                 const { totalRequests, pendingRequests, resolvedRequests, accomplishedRate } = blocksData;
                 const data = [
                     {
@@ -160,17 +109,18 @@ class Dashboard extends Component {
 
                 const cards = data.map(({ title, titleColor, icon, link, color, children, details, circleBorder, circleColor }, index) => <Card color={color} key={index} title={title} titleColor={titleColor} details={details} circleBorder={circleBorder} circleColor={circleColor} icon={icon} link={link}>{children}</Card>);
 
-                const usersData = totalUsers.map(user => {
-                    const country = countries.find(country => country.country === user.country);
-                    return updateObject(user, {
+                const requestsData = requests.map(request => {
+                    const country = countries.find(({ country }) => country === request.country);
+                    return updateObject(request, {
                         country: <div className="d-flex align-items-center">
                             <div className="border border-1 border-white rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center mr-2" style={{ width: 20, height: 20 }}>
-                                <span className={`flag-icon text-large position-absolute flag-icon-${user.country.toLowerCase()}`} />
+                                <span className={`flag-icon text-large position-absolute flag-icon-${request.country.toLowerCase()}`} />
                             </div>
 
                             {country ? country.name : null}
                         </div>,
-                        created_at: convertDate(user.created_at),
+                        platform: request.platform.name,
+                        created_at: convertDate(request.created_at),
                         action: <div className="text-center">
                             <FontAwesomeIcon icon={faEye} className="text-brokenblue mr-2" fixedWidth />
                             <FontAwesomeIcon icon={faEdit} className="text-green mr-2" fixedWidth />
@@ -186,7 +136,7 @@ class Dashboard extends Component {
                         </Row>
 
                         <Row className="mt-5">
-                            <Table array={usersData} draggable closable title="Today's Requests" icon={faTasks} bordered limit={5} lg={6} className="bg-white shadow-sm"
+                            <Table array={requestsData} draggable closable title="Today's Requests" icon={faTasks} bordered limit={5} lg={6} className="bg-white shadow-sm"
                                 fields={[
                                     { name: 'Creation Date', key: 'created_at' },
                                     { name: 'User ID', key: 'ref' },
@@ -196,7 +146,7 @@ class Dashboard extends Component {
                                     { name: 'Country', key: 'country' },
                                     { name: 'Action', key: 'action' }
                                 ]}>
-                                <Link to="/user/users" className="text-secondary">View full task list | ></Link>
+                                <Link to="/user/requests/pending" className="text-secondary">View full task list | ></Link>
                             </Table>
 
                             <Col lg={6} className="pt-3 pt-sm-0">
@@ -243,9 +193,8 @@ class Dashboard extends Component {
 const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
-    // onGetAdminDashboard: () => dispatch(actions.getAdminDashboard()),
-    onAuthPageOff: () => dispatch(actions.authPageOff()),
-    onUserPageOn: () => dispatch(actions.userPageOn()),
+    onGetDashboard: () => dispatch(actions.getDashboard()),
+    onResetDashboard: () => dispatch(actions.resetDashboard()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));

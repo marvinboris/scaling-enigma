@@ -319,15 +319,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-
-var error = function error(_ref) {
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var err = _ref.err;
   return err ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "alert alert-danger"
   }, err.message ? err.message : err) : null;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (error);
+});
 
 /***/ }),
 
@@ -498,40 +495,38 @@ var Dashboard = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var onGetAdminDashboard, cors, phoneRes, namesRes, phone, names, countries;
+        var cors, phoneRes, namesRes, phone, names, countries;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (this.props.auth.authPage) this.props.onAuthPageOff();
-                if (!this.props.auth.userPage) this.props.onUserPageOn();
-                onGetAdminDashboard = this.props.onGetAdminDashboard;
+                this.props.onGetDashboard();
                 cors = 'https://cors-anywhere.herokuapp.com/';
-                _context.next = 6;
+                _context.next = 4;
                 return fetch(cors + 'http://country.io/phone.json', {
                   method: 'GET',
                   mode: 'cors'
                 });
 
-              case 6:
+              case 4:
                 phoneRes = _context.sent;
-                _context.next = 9;
+                _context.next = 7;
                 return fetch(cors + 'http://country.io/names.json', {
                   method: 'GET',
                   mode: 'cors'
                 });
 
-              case 9:
+              case 7:
                 namesRes = _context.sent;
-                _context.next = 12;
+                _context.next = 10;
                 return phoneRes.json();
 
-              case 12:
+              case 10:
                 phone = _context.sent;
-                _context.next = 15;
+                _context.next = 13;
                 return namesRes.json();
 
-              case 15:
+              case 13:
                 names = _context.sent;
                 countries = Object.keys(phone).map(function (key) {
                   return {
@@ -542,12 +537,11 @@ var Dashboard = /*#__PURE__*/function (_Component) {
                 }).sort(function (a, b) {
                   return a.country > b.country;
                 });
-                _context.next = 19;
-                return this.setState({
+                this.setState({
                   countries: countries
                 });
 
-              case 19:
+              case 16:
               case "end":
                 return _context.stop();
             }
@@ -562,53 +556,18 @@ var Dashboard = /*#__PURE__*/function (_Component) {
       return componentDidMount;
     }()
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.onResetDashboard();
+    }
+  }, {
     key: "render",
     value: function render() {
-      // let { backend: { dashboard: { loading, error, blocksData, totalUsers } } } = this.props;
-      var loading = false,
-          error = null,
-          blocksData = {
-        totalRequests: 2345,
-        pendingRequests: 234,
-        resolvedRequests: 142,
-        accomplishedRate: 23
-      },
-          totalUsers = [{
-        created_at: new Date(),
-        ref: 'FCG434',
-        name: 'James DOE',
-        platform: 'Liyeplimal',
-        email: 'demo@test.com',
-        country: 'CM'
-      }, {
-        created_at: new Date(),
-        ref: 'FCG434',
-        name: 'Jakei DOGAO',
-        platform: 'Simbcoin',
-        email: 'demo@test.com',
-        country: 'CM'
-      }, {
-        created_at: new Date(),
-        ref: 'FCG434',
-        name: 'Fialia Jaile',
-        platform: 'Liyeplimal',
-        email: 'demo@test.com',
-        country: 'CM'
-      }, {
-        created_at: new Date(),
-        ref: 'FCG434',
-        name: 'Jamkea Aodi',
-        platform: 'Liyeplimal',
-        email: 'demo@test.com',
-        country: 'CM'
-      }, {
-        created_at: new Date(),
-        ref: 'FCG434',
-        name: 'Miake Oeda',
-        platform: 'Simbcoin',
-        email: 'demo@test.com',
-        country: 'CM'
-      }];
+      var _this$props$backend$d = this.props.backend.dashboard,
+          loading = _this$props$backend$d.loading,
+          error = _this$props$backend$d.error,
+          blocksData = _this$props$backend$d.blocksData,
+          requests = _this$props$backend$d.requests;
       var countries = this.state.countries;
       var content = null;
       var errors = null;
@@ -619,7 +578,7 @@ var Dashboard = /*#__PURE__*/function (_Component) {
           err: error
         }));
 
-        if (totalUsers && blocksData) {
+        if (requests && blocksData) {
           var totalRequests = blocksData.totalRequests,
               pendingRequests = blocksData.pendingRequests,
               resolvedRequests = blocksData.resolvedRequests,
@@ -687,11 +646,12 @@ var Dashboard = /*#__PURE__*/function (_Component) {
               link: link
             }, children);
           });
-          var usersData = totalUsers.map(function (user) {
-            var country = countries.find(function (country) {
-              return country.country === user.country;
+          var requestsData = requests.map(function (request) {
+            var country = countries.find(function (_ref2) {
+              var country = _ref2.country;
+              return country === request.country;
             });
-            return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_15__["updateObject"])(user, {
+            return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_15__["updateObject"])(request, {
               country: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 className: "d-flex align-items-center"
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -701,9 +661,10 @@ var Dashboard = /*#__PURE__*/function (_Component) {
                   height: 20
                 }
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-                className: "flag-icon text-large position-absolute flag-icon-".concat(user.country.toLowerCase())
+                className: "flag-icon text-large position-absolute flag-icon-".concat(request.country.toLowerCase())
               })), country ? country.name : null),
-              created_at: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_15__["convertDate"])(user.created_at),
+              platform: request.platform.name,
+              created_at: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_15__["convertDate"])(request.created_at),
               action: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 className: "text-center"
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
@@ -724,7 +685,7 @@ var Dashboard = /*#__PURE__*/function (_Component) {
           content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, cards), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
             className: "mt-5"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Table_Table__WEBPACK_IMPORTED_MODULE_11__["default"], {
-            array: usersData,
+            array: requestsData,
             draggable: true,
             closable: true,
             title: "Today's Requests",
@@ -756,7 +717,7 @@ var Dashboard = /*#__PURE__*/function (_Component) {
               key: 'action'
             }]
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-            to: "/user/users",
+            to: "/user/requests/pending",
             className: "text-secondary"
           }, "View full task list | >")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
             lg: 6,
@@ -823,12 +784,11 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    // onGetAdminDashboard: () => dispatch(actions.getAdminDashboard()),
-    onAuthPageOff: function onAuthPageOff() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_14__["authPageOff"]());
+    onGetDashboard: function onGetDashboard() {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_14__["getDashboard"]());
     },
-    onUserPageOn: function onUserPageOn() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_14__["userPageOn"]());
+    onResetDashboard: function onResetDashboard() {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_14__["resetDashboard"]());
     }
   };
 };

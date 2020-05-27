@@ -1,148 +1,160 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/containers/Auth/Signup/Signup.css":
-/*!********************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/src/containers/Auth/Signup/Signup.css ***!
-  \********************************************************************************************************************************************/
+/***/ "./node_modules/copy-to-clipboard/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/copy-to-clipboard/index.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
+"use strict";
 
 
-// module
-exports.push([module.i, ".Signup,\r\n.Signup > .container,\r\n.Signup > .container > .row {\r\n    min-height: 100vh;\r\n}", ""]);
+var deselectCurrent = __webpack_require__(/*! toggle-selection */ "./node_modules/toggle-selection/index.js");
 
-// exports
+var clipboardToIE11Formatting = {
+  "text/plain": "Text",
+  "text/html": "Url",
+  "default": "Text"
+}
+
+var defaultMessage = "Copy to clipboard: #{key}, Enter";
+
+function format(message) {
+  var copyKey = (/mac os x/i.test(navigator.userAgent) ? "⌘" : "Ctrl") + "+C";
+  return message.replace(/#{\s*key\s*}/g, copyKey);
+}
+
+function copy(text, options) {
+  var debug,
+    message,
+    reselectPrevious,
+    range,
+    selection,
+    mark,
+    success = false;
+  if (!options) {
+    options = {};
+  }
+  debug = options.debug || false;
+  try {
+    reselectPrevious = deselectCurrent();
+
+    range = document.createRange();
+    selection = document.getSelection();
+
+    mark = document.createElement("span");
+    mark.textContent = text;
+    // reset user styles for span element
+    mark.style.all = "unset";
+    // prevents scrolling to the end of the page
+    mark.style.position = "fixed";
+    mark.style.top = 0;
+    mark.style.clip = "rect(0, 0, 0, 0)";
+    // used to preserve spaces and line breaks
+    mark.style.whiteSpace = "pre";
+    // do not inherit user-select (it may be `none`)
+    mark.style.webkitUserSelect = "text";
+    mark.style.MozUserSelect = "text";
+    mark.style.msUserSelect = "text";
+    mark.style.userSelect = "text";
+    mark.addEventListener("copy", function(e) {
+      e.stopPropagation();
+      if (options.format) {
+        e.preventDefault();
+        if (typeof e.clipboardData === "undefined") { // IE 11
+          debug && console.warn("unable to use e.clipboardData");
+          debug && console.warn("trying IE specific stuff");
+          window.clipboardData.clearData();
+          var format = clipboardToIE11Formatting[options.format] || clipboardToIE11Formatting["default"]
+          window.clipboardData.setData(format, text);
+        } else { // all other browsers
+          e.clipboardData.clearData();
+          e.clipboardData.setData(options.format, text);
+        }
+      }
+      if (options.onCopy) {
+        e.preventDefault();
+        options.onCopy(e.clipboardData);
+      }
+    });
+
+    document.body.appendChild(mark);
+
+    range.selectNodeContents(mark);
+    selection.addRange(range);
+
+    var successful = document.execCommand("copy");
+    if (!successful) {
+      throw new Error("copy command was unsuccessful");
+    }
+    success = true;
+  } catch (err) {
+    debug && console.error("unable to copy using execCommand: ", err);
+    debug && console.warn("trying IE specific stuff");
+    try {
+      window.clipboardData.setData(options.format || "text", text);
+      options.onCopy && options.onCopy(window.clipboardData);
+      success = true;
+    } catch (err) {
+      debug && console.error("unable to copy using clipboardData: ", err);
+      debug && console.error("falling back to prompt");
+      message = format("message" in options ? options.message : defaultMessage);
+      window.prompt(message, text);
+    }
+  } finally {
+    if (selection) {
+      if (typeof selection.removeRange == "function") {
+        selection.removeRange(range);
+      } else {
+        selection.removeAllRanges();
+      }
+    }
+
+    if (mark) {
+      document.body.removeChild(mark);
+    }
+    reselectPrevious();
+  }
+
+  return success;
+}
+
+module.exports = copy;
 
 
 /***/ }),
 
-/***/ "./resources/js/src/components/UI/Input/Input.js":
-/*!*******************************************************!*\
-  !*** ./resources/js/src/components/UI/Input/Input.js ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/react-copy-to-clipboard/lib/Component.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/react-copy-to-clipboard/lib/Component.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 
 
-
-/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
-  var icon = _ref.icon,
-      addon = _ref.addon,
-      onChange = _ref.onChange,
-      _ref$className = _ref.className,
-      className = _ref$className === void 0 ? '' : _ref$className,
-      name = _ref.name,
-      _ref$type = _ref.type,
-      type = _ref$type === void 0 ? 'text' : _ref$type,
-      required = _ref.required,
-      readonly = _ref.readonly,
-      placeholder = _ref.placeholder,
-      _ref$value = _ref.value,
-      value = _ref$value === void 0 ? '' : _ref$value,
-      append = _ref.append,
-      children = _ref.children;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
-    className: className
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], {
-    className: "bg-white",
-    size: "lg"
-  }, addon ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroupAddon"], {
-    addonType: "prepend"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroupText"], {
-    className: "bg-transparent border-light rounded-pill rounded-right-0 px-4"
-  }, addon)) : null, children ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    onChange: onChange,
-    type: type,
-    name: name,
-    required: required,
-    readOnly: readonly,
-    value: value,
-    className: "bg-white rounded-pill " + (addon ? 'rounded-left-0' : '') + " border-light text-small text-secondary h-100 px-4 py-3",
-    placeholder: placeholder
-  }, children) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    onChange: onChange,
-    type: type,
-    name: name,
-    required: required,
-    readOnly: readonly,
-    value: value,
-    className: "bg-transparent rounded-pill " + (addon ? 'rounded-left-0' : '') + " border-light text-small text-secondary h-100 px-4 py-3",
-    placeholder: placeholder
-  }), append ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroupAddon"], {
-    addonType: "append"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroupText"], {
-    className: "bg-transparent border-0 text-secondary text-small px-4"
-  }, append)) : null));
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
+exports.CopyToClipboard = void 0;
 
-/***/ }),
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-/***/ "./resources/js/src/containers/Auth/Signup/Signup.css":
-/*!************************************************************!*\
-  !*** ./resources/js/src/containers/Auth/Signup/Signup.css ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+var _copyToClipboard = _interopRequireDefault(__webpack_require__(/*! copy-to-clipboard */ "./node_modules/copy-to-clipboard/index.js"));
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/postcss-loader/src??ref--6-2!./Signup.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/containers/Auth/Signup/Signup.css");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./resources/js/src/containers/Auth/Signup/Signup.js":
-/*!***********************************************************!*\
-  !*** ./resources/js/src/containers/Auth/Signup/Signup.js ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _Signup_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Signup.css */ "./resources/js/src/containers/Auth/Signup/Signup.css");
-/* harmony import */ var _Signup_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_Signup_css__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_UI_Logo_Logo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../components/UI/Logo/Logo */ "./resources/js/src/components/UI/Logo/Logo.js");
-/* harmony import */ var _components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/UI/Input/Input */ "./resources/js/src/components/UI/Input/Input.js");
-/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../store/actions */ "./resources/js/src/store/actions/index.js");
-/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../shared/utility */ "./resources/js/src/shared/utility.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -150,369 +162,155 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var CopyToClipboard =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(CopyToClipboard, _React$PureComponent);
 
+  function CopyToClipboard() {
+    var _getPrototypeOf2;
 
-
-
-
-
-
-
-
-
-
-var Signup = /*#__PURE__*/function (_Component) {
-  _inherits(Signup, _Component);
-
-  var _super = _createSuper(Signup);
-
-  function Signup() {
     var _this;
 
-    _classCallCheck(this, Signup);
+    _classCallCheck(this, CopyToClipboard);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _super.call.apply(_super, [this].concat(args));
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(CopyToClipboard)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_this), "state", {
-      formError: false,
-      formLoading: false,
-      controls: {
-        name: {
-          elementConfig: {
-            type: 'text',
-            label: 'Nom(s) & prénom(s)',
-            autoFocus: true
-          },
-          icon: 'signature',
-          value: '',
-          validation: {
-            required: true,
-            minLength: 5
-          },
-          valid: false,
-          touched: false
-        },
-        email: {
-          elementConfig: {
-            type: 'email',
-            label: 'Adresse mail'
-          },
-          icon: 'envelope',
-          value: '',
-          validation: {
-            required: true,
-            isEmail: true
-          },
-          valid: false,
-          touched: false
-        },
-        password: {
-          elementConfig: {
-            type: 'password',
-            label: 'Mot de passe'
-          },
-          icon: 'lock',
-          value: '',
-          validation: {
-            required: true,
-            minLength: 8
-          },
-          valid: false,
-          touched: false
-        },
-        password_confirmation: {
-          elementConfig: {
-            type: 'password',
-            label: 'Confirmation du mot de passe'
-          },
-          icon: 'key',
-          value: '',
-          validation: {
-            required: true,
-            minLength: 8
-          },
-          valid: false,
-          touched: false
-        },
-        roleId: {
-          elementConfig: {
-            type: 'select',
-            label: 'Rôle',
-            options: {
-              array: [],
-              value: '_id',
-              name: 'name'
-            }
-          },
-          icon: 'user-tag',
-          value: '',
-          validation: {
-            required: true
-          },
-          valid: true,
-          touched: false
-        },
-        phone: {
-          elementConfig: {
-            type: 'tel',
-            label: 'Numéro de téléphone'
-          },
-          icon: 'phone',
-          value: '',
-          validation: {
-            required: true,
-            minLength: 8
-          },
-          valid: false,
-          touched: false
-        },
-        image: {
-          elementConfig: {
-            type: 'file',
-            label: 'Photo'
-          },
-          icon: 'image',
-          value: '',
-          validation: {
-            required: true
-          },
-          valid: false,
-          touched: false
-        }
+    _defineProperty(_assertThisInitialized(_this), "onClick", function (event) {
+      var _this$props = _this.props,
+          text = _this$props.text,
+          onCopy = _this$props.onCopy,
+          children = _this$props.children,
+          options = _this$props.options;
+
+      var elem = _react["default"].Children.only(children);
+
+      var result = (0, _copyToClipboard["default"])(text, options);
+
+      if (onCopy) {
+        onCopy(text, result);
+      } // Bypass onClick if it was present
+
+
+      if (elem && elem.props && typeof elem.props.onClick === 'function') {
+        elem.props.onClick(event);
       }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "inputChangedHandler", function (event) {
-      var _event$target = event.target,
-          files = _event$target.files,
-          name = _event$target.name,
-          value = _event$target.value;
-      var controls = _this.state.controls;
-
-      _this.setState(Object(_shared_utility__WEBPACK_IMPORTED_MODULE_9__["updateObject"])(_this.state, {
-        controls: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_9__["updateObject"])(controls, _defineProperty({}, name, Object(_shared_utility__WEBPACK_IMPORTED_MODULE_9__["updateObject"])(controls[name], {
-          value: files ? files[0] : value,
-          valid: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_9__["checkValidity"])(value, controls[name].validation),
-          touched: true
-        })))
-      }));
-
-      _this.setState({
-        formError: false
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "submitHandler", function (event) {
-      var controls = _this.state.controls;
-      event.preventDefault();
-      var data = {};
-      var valid = true;
-
-      for (var key in controls) {
-        if (controls.hasOwnProperty(key)) {
-          var element = controls[key];
-          data[key] = element.value;
-          if (element.hasOwnProperty('valid')) valid = valid && element.valid;
-        }
-      }
-
-      if (valid) {
-        _this.props.onAuthErrorReset();
-
-        _this.props.onAuthSignup(data);
-
-        _this.setState({
-          formError: false
-        });
-      } else _this.setState({
-        formError: true
-      });
     });
 
     return _this;
   }
 
-  _createClass(Signup, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      if (!this.props.auth.authPage) this.props.onAuthPageOn();
-      if (this.props.auth.userPage) this.props.onUserPageOff();
-      this.props.onSetAuthRedirectPath();
-      fetch('http://localhost:8080/auth/signup', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(function (res) {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Erreur lors de la récupération des rôles.');
-        }
-
-        return res.json();
-      }).then(function (resData) {
-        _this2.setState({
-          controls: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_9__["updateObject"])(_this2.state.controls, {
-            roleId: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_9__["updateObject"])(_this2.state.controls.roleId, {
-              elementConfig: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_9__["updateObject"])(_this2.state.controls.roleId.elementConfig, {
-                options: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_9__["updateObject"])(_this2.state.controls.roleId.elementConfig.options, {
-                  array: resData.roles
-                })
-              })
-            })
-          })
-        });
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.props.onAuthErrorReset();
-    }
-  }, {
+  _createClass(CopyToClipboard, [{
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this$props2 = this.props,
+          _text = _this$props2.text,
+          _onCopy = _this$props2.onCopy,
+          _options = _this$props2.options,
+          children = _this$props2.children,
+          props = _objectWithoutProperties(_this$props2, ["text", "onCopy", "options", "children"]);
 
-      var _this$state = this.state,
-          controls = _this$state.controls,
-          formError = _this$state.formError,
-          formLoading = _this$state.formLoading;
-      var _this$props$auth = this.props.auth,
-          token = _this$props$auth.token,
-          authRedirectPath = _this$props$auth.authRedirectPath,
-          error = _this$props$auth.error,
-          loading = _this$props$auth.loading;
-      var redirect = null;
-      if (token !== null) redirect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-        to: authRedirectPath
-      });
-      var globalError = null;
-      if (formError) globalError = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-center text-danger"
-      }, "Veuillez v\xE9rifier vos informations.");
-      var formContent = Object.keys(controls).map(function (control) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_7__["default"], {
-          key: control,
-          value: controls[control].value,
-          onChange: function onChange(event) {
-            return _this3.inputChangedHandler(event);
-          },
-          name: control,
-          icon: controls[control].icon,
-          className: controls[control].elementConfig.className,
-          check: ['radio', 'checkbox'].includes(controls[control].elementConfig.type),
-          select: controls[control].elementConfig.type === 'select',
-          file: controls[control].elementConfig.type === 'file',
-          options: controls[control].elementConfig.options,
-          required: controls[control].validation.required,
-          type: controls[control].elementConfig.type,
-          invalid: !controls[control].valid,
-          touched: controls[control].touched,
-          shouldValidate: controls[control].validation ? true : false,
-          autoFocus: controls[control].elementConfig.autoFocus
-        }, controls[control].elementConfig.label);
-      });
-      var form = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, globalError, error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "alert alert-danger"
-      }, error.message) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Form"], {
-        onSubmit: function onSubmit(event) {
-          return _this3.submitHandler(event);
-        }
-      }, formContent, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], {
-        color: "danger",
-        block: true
-      }, "S'inscrire", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"], {
-        icon: "user-plus",
-        size: "lg",
-        className: "ml-1"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
-        to: "/login",
-        className: "text-info"
-      }, "J'ai d\xE9j\xE0 un compte.")));
-      if (formLoading || loading) form = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "text-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Spinner"], {
-        type: "grow",
-        style: {
-          width: '5rem',
-          height: '5rem'
-        },
-        color: "danger"
+      var elem = _react["default"].Children.only(children);
+
+      return _react["default"].cloneElement(elem, _objectSpread({}, props, {
+        onClick: this.onClick
       }));
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-        xs: 12,
-        className: "Signup p-0 bg-info-danger"
-      }, redirect, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Container"], {
-        className: "py-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
-        className: "justify-content-center align-items-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-        lg: 7
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Card"], {
-        className: "py-4 px-5 rounded-lg shadow-sm"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "text-center mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
-        to: "/",
-        className: "text-decoration-none"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UI_Logo_Logo__WEBPACK_IMPORTED_MODULE_6__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "text-uppercase font-weight-light text-center mb-3"
-      }, "Inscription"), form)))));
     }
   }]);
 
-  return Signup;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  return CopyToClipboard;
+}(_react["default"].PureComponent);
 
-var mapStateToProps = function mapStateToProps(state) {
-  return _objectSpread({}, state);
-};
+exports.CopyToClipboard = CopyToClipboard;
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onAuthPageOn: function onAuthPageOn() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_8__["authPageOn"]());
-    },
-    onUserPageOff: function onUserPageOff() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_8__["userPageOff"]());
-    },
-    onAuthErrorReset: function onAuthErrorReset() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_8__["authErrorReset"]());
-    },
-    onAuthSignup: function onAuthSignup(data) {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_8__["authSignup"](data));
-    },
-    onSetAuthRedirectPath: function onSetAuthRedirectPath() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_8__["setAuthRedirectPath"]('/'));
+_defineProperty(CopyToClipboard, "defaultProps", {
+  onCopy: undefined,
+  options: undefined
+});
+
+/***/ }),
+
+/***/ "./node_modules/react-copy-to-clipboard/lib/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/react-copy-to-clipboard/lib/index.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _require = __webpack_require__(/*! ./Component */ "./node_modules/react-copy-to-clipboard/lib/Component.js"),
+    CopyToClipboard = _require.CopyToClipboard;
+
+CopyToClipboard.CopyToClipboard = CopyToClipboard;
+module.exports = CopyToClipboard;
+
+/***/ }),
+
+/***/ "./node_modules/toggle-selection/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/toggle-selection/index.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+module.exports = function () {
+  var selection = document.getSelection();
+  if (!selection.rangeCount) {
+    return function () {};
+  }
+  var active = document.activeElement;
+
+  var ranges = [];
+  for (var i = 0; i < selection.rangeCount; i++) {
+    ranges.push(selection.getRangeAt(i));
+  }
+
+  switch (active.tagName.toUpperCase()) { // .toUpperCase handles XHTML
+    case 'INPUT':
+    case 'TEXTAREA':
+      active.blur();
+      break;
+
+    default:
+      active = null;
+      break;
+  }
+
+  selection.removeAllRanges();
+  return function () {
+    selection.type === 'Caret' &&
+    selection.removeAllRanges();
+
+    if (!selection.rangeCount) {
+      ranges.forEach(function(range) {
+        selection.addRange(range);
+      });
     }
+
+    active &&
+    active.focus();
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Signup)));
 
 /***/ })
 

@@ -1,207 +1,159 @@
 import * as actionTypes from './actionTypes';
+import { rootPath } from '../..';
 
-export const authReset = () => ({ type: actionTypes.AUTH_RESET });
-export const authErrorReset = () => ({ type: actionTypes.AUTH_ERROR_RESET });
+const prefix = '/auth/';
 
-export const authPageOn = () => ({ type: actionTypes.AUTH_PAGE_ON });
-export const authPageOff = () => ({ type: actionTypes.AUTH_PAGE_OFF });
+const authStart = () => ({ type: actionTypes.AUTH_START });
+const authMessage = message => ({ type: actionTypes.AUTH_MESSAGE, message });
+const authFail = error => ({ type: actionTypes.AUTH_FAIL, error });
 
-export const userPageOn = () => ({ type: actionTypes.USER_PAGE_ON });
-export const userPageOff = () => ({ type: actionTypes.USER_PAGE_OFF });
+const authLoginSuccess = hash => ({ type: actionTypes.AUTH_LOGIN_SUCCESS, hash });
+const authVerifySuccess = (token, data) => ({ type: actionTypes.AUTH_VERIFY_SUCCESS, token, data: { ...data } });
+const resendCodeSuccess = (hash, message) => ({ type: actionTypes.RESEND_CODE_SUCCESS, hash, message });
 
-export const authLoginStart = () => ({ type: actionTypes.AUTH_LOGIN_START });
-export const authLoginSuccess = payload => ({ type: actionTypes.AUTH_LOGIN_SUCCESS, payload });
-export const authLoginFail = payload => ({ type: actionTypes.AUTH_LOGIN_FAIL, payload });
-export const authLogout = () => {
+const authLogoutSuccess = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     return {
-        type: actionTypes.AUTH_LOGOUT
+        type: actionTypes.AUTH_LOGOUT_SUCCESS,
     };
 };
-export const checkAuthTimeout = expirationTime => dispatch => {
+
+const checkAuthTimeout = (expirationTime) => dispatch => {
     setTimeout(() => {
         dispatch(authLogout());
     }, expirationTime);
 };
-export const authLogin = data => dispatch => {
-    dispatch(authLoginStart());
-    fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(res => {
-            if (res.status === 422) throw new Error('La validation a échoué.');
-            if (res.status !== 200 && res.status !== 201) {
-                throw new Error('L\'authentification a échoué.');
-            }
-            return res.json();
-        })
-        .then(resData => {
-            const expiryDate = new Date(resData.expires_at);
-            localStorage.setItem('token', resData.token_type + ' ' + resData.access_token);
-            localStorage.setItem('expirationDate', expiryDate.toISOString());
-            dispatch(authLoginSuccess(resData));
-            dispatch(checkAuthTimeout(expiryDate.getTime() - (new Date()).getTime()));
-        })
-        .catch(err => {
-            dispatch(authLoginFail(err));
+
+export const authLogin = data => async dispatch => {
+    dispatch(authStart());
+
+    try {
+        const form = new FormData(data);
+
+        const res = await fetch(rootPath + prefix + 'login', {
+            method: 'POST',
+            body: form
         });
+
+        const resData = await res.json();
+
+        let { hash } = resData;
+
+        if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
+        else if (res.status === 403 || res.status === 401) return dispatch(authMessage(resData.message));
+        else if (res.status !== 200 && res.status !== 201) throw new Error(resData);
+
+        dispatch(authLoginSuccess(hash));
+        dispatch(checkAuthTimeout(expires_at - new Date().getTime()));
+    } catch (err) {
+        dispatch(authFail(err));
+    }
 };
 
-export const authSignupStart = () => ({ type: actionTypes.AUTH_SIGNUP_START });
-export const authSignupSuccess = () => ({ type: actionTypes.AUTH_SIGNUP_SUCCESS });
-export const authSignupFail = payload => ({ type: actionTypes.AUTH_SIGNUP_FAIL, payload });
-export const authSignup = data => dispatch => {
-    dispatch(authSignupStart());
-    const formData = new FormData();
-    for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-            const element = data[key];
-            formData.append(key, element);
-        }
+export const authVerify = data => async dispatch => {
+    dispatch(authStart());
+
+    try {
+        const form = new FormData(data);
+
+        const res = await fetch(rootPath + prefix + 'verify', {
+            method: 'POST',
+            body: form,
+        });
+
+        const resData = await res.json();
+
+        let { access_token, token_type, expires_at, userData } = resData;
+        const token = token_type + ' ' + access_token;
+        expires_at = new Date(expires_at).getTime();
+
+        if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
+        else if (res.status === 403 || res.status === 401) return dispatch(authMessage(resData.message));
+        else if (res.status !== 200 && res.status !== 201) throw new Error(resData);
+
+        const expirationDate = new Date(expires_at);
+        localStorage.setItem('token', token);
+        localStorage.setItem('expirationDate', expirationDate);
+        dispatch(authVerifySuccess(token, userData));
+        dispatch(checkAuthTimeout(expires_at - new Date().getTime()));
+    } catch (err) {
+        dispatch(authFail(err));
     }
-    fetch('/api/auth/signup', {
-        method: 'PUT',
-        body: formData
-    })
-        .then(res => {
-            if (res.status === 422) throw new Error('La validation a échoué. Assurez-vous que cette adresse mail n\'est pas utilisée.');
-            if (res.status !== 200 && res.status !== 201) {
-                throw new Error('L\'authentification a échoué.');
+};
+
+export const resendCode = hash => async dispatch => {
+    dispatch(authStart());
+
+    try {
+        const formData = new FormData();
+        formData.append('hash', hash);
+
+        const res = await fetch(rootPath + prefix + 'resend', {
+            method: 'POST',
+            body: formData,
+        });
+
+        const resData = await res.json();
+
+        dispatch(resendCodeSuccess(resData.hash, resData.message));
+    } catch (err) {
+        dispatch(authFail());
+    }
+};
+
+export const authLogout = () => async dispatch => {
+    dispatch(authStart());
+    const token = localStorage.getItem('token');
+
+    try {
+        const res = await fetch(rootPath + prefix + 'logout', {
+            method: 'GET',
+            headers: {
+                'Authorization': token
             }
-            return res.json();
-        })
-        .then(resData => {
-            dispatch(authSignupSuccess());
-            dispatch(authLogin(data));
-        })
-        .catch(error => {
-            dispatch(authSignupFail(error));
-        })
+        });
+
+        if (res.status !== 200) throw new ('Erreur lors de la récupération des informations.')
+
+        const { message } = await res.json();
+
+        dispatch(authLogoutSuccess());
+    } catch (err) {
+        dispatch(authFail(err));
+    }
 };
 
 export const setAuthRedirectPath = path => ({ type: actionTypes.SET_AUTH_REDIRECT_PATH, path });
+export const setHash = hash => ({ type: actionTypes.SET_HASH, hash });
 
-export const getProfileStart = () => ({ type: actionTypes.GET_PROFILE_START });
-export const getProfileSuccess = payload => ({ type: actionTypes.GET_PROFILE_SUCCESS, payload });
-export const getProfileFail = payload => ({ type: actionTypes.GET_PROFILE_FAIL, payload });
-export const getProfile = () => dispatch => {
-    dispatch(getProfileStart());
+export const authCheckState = () => async dispatch => {
+    dispatch(authStart());
     const token = localStorage.getItem('token');
-    fetch('/api/auth/profile', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token
-        }
-    })
-        .then(res => {
-            if (res.status !== 200 && res.status !== 201) {
+    if (!token) dispatch(authLogoutSuccess());
+    else {
+        try {
+            const res = await fetch(rootPath + prefix + 'user', {
+                method: 'GET',
+                headers: {
+                    'Authorization': token
+                }
+            });
+
+            if (res.status === 521) await dispatch(authLogoutSuccess());
+            else if (res.status !== 200 && res.status !== 201) {
                 throw new Error('Erreur lors de la récupération des informations.');
             }
-            return res.json();
-        })
-        .then(resData => {
-            dispatch(getProfileSuccess(resData));
-        })
-        .catch(err => {
-            dispatch(getProfileFail(err));
-        })
-};
 
-export const postProfileStart = () => ({ type: actionTypes.POST_PROFILE_START });
-export const postProfileSuccess = payload => ({ type: actionTypes.POST_PROFILE_SUCCESS, payload });
-export const postProfileFail = payload => ({ type: actionTypes.POST_PROFILE_FAIL, payload });
-export const postProfile = data => dispatch => {
-    dispatch(postProfileStart());
-    const token = localStorage.getItem('token');
-    const formData = new FormData();
-    for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-            const element = data[key];
-            formData.append(key, element);
+            const { data } = await res.json();
+
+            const expirationDate = new Date(localStorage.getItem('expirationDate'));
+            if (expirationDate > new Date()) {
+                dispatch(authVerifySuccess(token, data));
+                dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
+            } else dispatch(authLogoutSuccess());
+        } catch (err) {
+            dispatch(authFail(err));
         }
-    }
-    fetch('/api/auth/profile', {
-        method: 'POST',
-        headers: {
-            'Authorization': token
-        },
-        body: formData
-    })
-        .then(res => {
-            if (res.status !== 200 && res.status !== 201) {
-                throw new Error('Erreur lors de l\'envoi de la requête.');
-            }
-            return res.json();
-        })
-        .then(resData => {
-            dispatch(postProfileSuccess(resData));
-        })
-        .catch(err => {
-            dispatch(postProfileFail(err));
-        })
-};
-
-export const changePasswordStart = () => ({ type: actionTypes.CHANGE_PASSWORD_START });
-export const changePasswordSuccess = payload => ({ type: actionTypes.CHANGE_PASSWORD_SUCCESS });
-export const changePasswordFail = payload => ({ type: actionTypes.CHANGE_PASSWORD_FAIL });
-export const changePassword = data => dispatch => {
-    dispatch(changePasswordSuccess());
-    const token = localStorage.getItem('token');
-    fetch('/api/auth/profile/password', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: token
-        },
-        body: JSON.stringify(data)
-    })
-        .then(res => {
-            if (res.status !== 200 && res.status !== 201) {
-                throw new Error('Erreur lors de la modification des informations.');
-            }
-            return res.json();
-        })
-        .then(resData => {
-            dispatch(changePasswordSuccess(resData));
-        })
-        .catch(err => {
-            dispatch(changePasswordFail(err));
-        });
-};
-
-export const authCheckState = () => dispatch => {
-    const token = localStorage.getItem('token');
-    if (!token) dispatch(authLogout());
-    else {
-        fetch('/api/auth/profile', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token
-            }
-        })
-            .then(res => {
-                if (res.status === 521) dispatch(authLogout());
-                else if (res.status !== 200 && res.status !== 201) {
-                    throw new Error('Erreur lors de la récupération des informations.');
-                }
-                return res.json();
-            })
-            .then(resData => {
-                const expirationDate = new Date(localStorage.getItem('expirationDate'));
-                if (expirationDate > new Date()) {
-                    dispatch(authLoginSuccess({ token, ...resData }));
-                    dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
-                } else dispatch(authLogout());
-            })
-            .catch(err => {
-                dispatch(getProfileFail(err));
-            })
     }
 };

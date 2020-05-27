@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, Row, Form, Container, Input, FormGroup, Label, CustomInput } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faFilePdf, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faFilePdf, faPaperPlane, faFile, faFileImage } from '@fortawesome/free-solid-svg-icons';
+import { Redirect } from 'react-router-dom';
 
 import BetweenButton from '../../components/UI/Button/BetweenButton/BetweenButton';
 import MyInput from '../../components/UI/Input/Input';
 import CustomSpinner from '../../components/UI/CustomSpinner/CustomSpinner';
-import * as actions from '../../store/actions';
+import Error from '../../components/Error/Error';
+import Feedback from '../../components/Feedback/Feedback';
 
-import JohnAlverosa from '../../assets/images/men-images-png-1@2x.png';
-import PaloAltonio from '../../assets/images/product_111_11@2x.png';
-import DoeBorison from '../../assets/images/istockphoto-531547724-612x612@2x.png';
+import * as actions from '../../store/actions';
 
 const FormBlock = ({ title, subtitle, children }) => <div className="mt-5">
     <h5 className="text-darkblue">{title}<span className="text-danger text-300">*</span></h5>
@@ -30,15 +30,15 @@ class Request extends Component {
         code: '237',
         phone: '',
         issue_id: '',
+        documents: [null, null, null],
         description: '',
-        terms: false,
+        issue_files: [null, null, null],
 
         countries: [],
     }
 
     async componentDidMount() {
-        if (this.props.auth.authPage) this.props.onAuthPageOff();
-        if (this.props.auth.userPage) this.props.onUserPageOff();
+        this.props.onGetRequest();
         const cors = 'https://cors-anywhere.herokuapp.com/';
 
         const phoneRes = await fetch(cors + 'http://country.io/phone.json', { method: 'GET', mode: 'cors' });
@@ -47,112 +47,189 @@ class Request extends Component {
         const phone = await phoneRes.json();
         const names = await namesRes.json();
 
-        const countries = Object.keys(phone).map(key => ({ country: key, code: phone[key], name: names[key] })).sort((a, b) => a.country > b.country);
+        const countries = Object.keys(phone).map(key => ({ country: key, code: phone[key], name: names[key] })).sort((a, b) => a.name > b.name);
 
         this.setState({ countries });
     }
 
+    documentClickHandler = () => document.getElementsByClassName('documents')[this.state.documents.findIndex(el => !el)].click();
+
+    issueFileClickHandler = () => document.getElementsByClassName('issue_files')[this.state.issue_files.findIndex(el => !el)].click();
+
     inputChangeHandler = e => {
-        const { name, value, checked } = e.target;
+        const { name, value, files } = e.target;
         if (name === 'country') return this.setState({ country: value, code: this.state.countries.find(({ country }) => country === value).code });
-        if (name === 'terms') return this.setState({ terms: checked });
+        if (name === 'documents[]') {
+            const { documents } = this.state;
+            documents[this.state.documents.findIndex(el => !el)] = files[0];
+            return this.setState({ documents });
+        }
+        if (name === 'issue_files[]') {
+            const { issue_files } = this.state;
+            issue_files[this.state.issue_files.findIndex(el => !el)] = files[0];
+            return this.setState({ issue_files });
+        }
         this.setState({ [name]: value });
     }
 
     submitHandler = e => {
         e.preventDefault();
-        this.props.history.push('/request/success');
+        this.props.onPostRequest(e.target);
     }
 
     render() {
-        const { name, platform_id, email, ref, countries, country, code, phone, issue_id, terms } = this.state;
+        const { name, platform_id, email, ref, phone, issue_id, country, code, documents, description, issue_files, countries } = this.state;
+        const { frontend: { request: { loading, error, message, platforms, issues, reqid } } } = this.props;
 
+        let redirect;
+        let errors;
         let content;
-        // if (countries.length === 0) content = <CustomSpinner />;
-        if (false) content = <CustomSpinner />;
+        if (loading || countries.length === 0) content = <CustomSpinner />;
         else {
-            const countriesOptions = countries.map(({ country, code, name }) => <option key={country} value={country} code={code}>{name}</option>);
+            errors = <Error err={error} />;
+            const feedback = <Feedback message={message} />;
 
-            content = <Form onSubmit={this.submitHandler} encType="multipart/form-data">
-                <FormBlock
-                    title="User info Gathering"
-                    subtitle={<span>Please provide the information below. Note that all fields are <span className="text-danger">required</span> in this section.</span>}>
-                    <Row className="col-xl-9 px-0">
-                        <MyInput className="col-md-6" type="text" name="name" value={name} onChange={this.inputChangeHandler} placeholder="Full Name" required />
-                        <MyInput className="col-md-6" type="select" name="platform_id" value={platform_id} onChange={this.inputChangeHandler} placeholder="Select Platform" required>
-                            <option>Select Platform</option>
-                        </MyInput>
-                        <MyInput className="col-md-6" type="email" name="email" value={email} onChange={this.inputChangeHandler} placeholder="E-Mail Address" required />
-                        <MyInput className="col-md-6" type="text" name="ref" value={ref} onChange={this.inputChangeHandler} placeholder="User ID" required />
-                        <MyInput className="col-md-6" type="select" addon={<span className="text-secondary text-small d-inline-flex">
-                            <div className="rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center" style={{ width: 30, height: 30 }}>
-                                <span className={`flag-icon text-xx-large position-absolute flag-icon-${country.toLowerCase()}`} />
-                            </div>
-                        </span>} onChange={this.inputChangeHandler} value={country} name="country" required placeholder="Select Country">
-                            <option>Select your country</option>
-                            {countriesOptions}
-                        </MyInput>
-                        <input type="hidden" value={code} name="code" />
-                        <MyInput type="tel" className="col-md-6" addon={<span className="text-secondary text-small">+{code}</span>} onChange={this.inputChangeHandler} value={phone} name="phone" required placeholder="Phone Number" />
+            if (reqid) redirect = <Redirect to={'/request/success'} />;
 
-                        <MyInput className="col-md-6" type="select" name="issue_id" value={issue_id} onChange={this.inputChangeHandler} placeholder="Select Issue" required>
-                            <option>Select Issue</option>
-                        </MyInput>
-                    </Row>
-                </FormBlock>
+            if (platforms && issues) {
+                const platformsOptions = platforms.map(({ id, name }) => <option key={name + id} value={id}>{name}</option>);
+                const countriesOptions = countries.map(({ country, code, name }) => <option key={country} value={country} code={code}>{name}</option>);
+                const issuesOptions = issues.map(({ id, name }) => <option key={name + id} value={id}>{name}</option>);
 
-                <FormBlock
-                    title="User documents"
-                    subtitle="Please upload recommended documents">
-                    <Col xl={9} className="px-0">
-                        <FormGroup className="d-flex align-items-center">
-                            <Row>
-                                <Col xs={4} className="pr-0"><div style={{ background: 'url(' + JohnAlverosa + ') no-repeat center', backgroundSize: 'cover' }} className="rounded-4 overflow-hidden p-2 bg-white d-flex justify-content-center align-items-center text-nowrap text-transparent shadow embed-responsive embed-responsive-1by1"><FontAwesomeIcon icon={faFilePdf} className="mr-2" />NID_45094M</div></Col>
-                                <Col xs={4} className="pr-0"><div style={{ background: 'url(' + PaloAltonio + ') no-repeat center', backgroundSize: 'cover' }} className="rounded-4 overflow-hidden p-2 bg-white d-flex justify-content-center align-items-center text-nowrap text-transparent shadow embed-responsive embed-responsive-1by1"><FontAwesomeIcon icon={faFilePdf} className="mr-2" />SCREENS_232</div></Col>
-                                <Col xs={4} className="pr-0"><div style={{ background: 'url(' + DoeBorison + ') no-repeat center', backgroundSize: 'cover' }} className="rounded-4 overflow-hidden p-2 bg-white d-flex justify-content-center align-items-center text-nowrap text-transparent shadow embed-responsive embed-responsive-1by1"><FontAwesomeIcon icon={faFilePdf} className="mr-2" />ERROR_EE234</div></Col>
-                            </Row>
+                const documentsContent = documents.filter(d => d).map(({ type, name }) => {
+                    let icon;
+                    switch (type) {
+                        case 'application/pdf':
+                            icon = faFilePdf;
+                            break;
+                        default:
+                            icon = faFileImage;
+                            break;
+                    }
 
-                            <div className="pl-5">
-                            <div className="rounded-4 p-5 bg-green text-white d-flex justify-content-center align-items-center embed-responsive embed-responsive-1by1"><FontAwesomeIcon icon={faPlusCircle} size="2x" /></div>
-                            </div>
-                        </FormGroup>
+                    const arr = name.split('.');
+                    const formatlessName = arr.filter((n, i) => i < arr.length - 1).join('.');
 
-                        <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum.</div>
+                    return <Col xl={4} key={name + Math.random()} className="pr-0" style={{ minWidth: 100 }}>
+                        <div className="rounded-4 overflow-hidden p-2 bg-light d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1">
+                            <FontAwesomeIcon icon={faFilePdf} className="mr-2" />NID_45094M
+                            <FontAwesomeIcon icon={icon} size="5x" className="text-border position-absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
+                        </div>
+                        <div className="text-uppercase text-truncate pt-3 text-darkblue">
+                            {formatlessName}
+                        </div>
                     </Col>
-                </FormBlock>
+                });
 
-                <FormBlock
-                    title="Issue description"
-                    subtitle="Please provide a detailed description of the problem you are facing">
-                    <Col xl={9} className="px-0">
-                        <FormGroup className="px-0 col-xl-9">
-                            <Input type="textarea" name="description" onChange={this.inputChangeHandler} style={{ height: 250 }} className="border-light text-secondary" />
-                        </FormGroup>
+                const issueFilesContent = issue_files.filter(d => d).map(({ type, name }) => {
+                    let icon;
+                    switch (type) {
+                        case 'application/pdf':
+                            icon = faFilePdf;
+                            break;
+                        default:
+                            icon = faFileImage;
+                            break;
+                    }
 
-                        <FormGroup className="d-flex align-items-center">
-                            <Row>
-                                <Col xs={4} className="pr-0"><div className="rounded-2 p-2 bg-light text-darkblue text-uppercase text-nowrap"><FontAwesomeIcon icon={faFilePdf} className="mr-2" />NID_45094M</div></Col>
-                                <Col xs={4} className="pr-0"><div className="rounded-2 p-2 bg-light text-darkblue text-uppercase text-nowrap"><FontAwesomeIcon icon={faFilePdf} className="mr-2" />SCREENS_232</div></Col>
-                                <Col xs={4} className="pr-0"><div className="rounded-2 p-2 bg-light text-darkblue text-uppercase text-nowrap"><FontAwesomeIcon icon={faFilePdf} className="mr-2" />ERROR_EE234</div></Col>
-                            </Row>
+                    const arr = name.split('.');
+                    const formatlessName = arr.filter((n, i) => i < arr.length - 1).join('.');
 
-                            <div className="pl-5">
-                                <FontAwesomeIcon icon={faPlusCircle} size="2x" className="text-green" />
-                            </div>
-                        </FormGroup>
+                    return <div key={name + Math.random()} className="pr-3 d-inline-block" style={{ maxWidth: 200 }}>
+                        <div className="rounded-2 p-2 bg-light text-darkblue text-uppercase text-truncate text-nowrap">
+                            <FontAwesomeIcon icon={icon} className="mr-2" />{formatlessName}
+                        </div>
+                    </div>
+                });
 
-                        <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum.</div>
-                    </Col>
-                </FormBlock>
+                content = <Form onSubmit={this.submitHandler} encType="multipart/form-data">
+                    {feedback}
+                    <FormBlock
+                        title="User info Gathering"
+                        subtitle={<span>Please provide the information below. Note that all fields are <span className="text-danger">required</span> in this section.</span>}>
+                        <Row className="col-xl-9 px-0">
+                            <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={name} name="name" placeholder="Full Name" required />
+                            <MyInput className="col-md-6" type="select" onChange={this.inputChangeHandler} value={platform_id} name="platform_id" placeholder="Select Platform" required>
+                                <option>Select Platform</option>
+                                {platformsOptions}
+                            </MyInput>
+                            <MyInput className="col-md-6" type="email" onChange={this.inputChangeHandler} value={email} name="email" placeholder="E-Mail Address" required />
+                            <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={ref} name="ref" placeholder="User ID" />
+                            <MyInput className="col-md-6" type="select" addon={<span className="text-secondary text-small d-inline-flex">
+                                <div className="rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center" style={{ width: 30, height: 30 }}>
+                                    <span className={`flag-icon text-xx-large position-absolute flag-icon-${country.toLowerCase()}`} />
+                                </div>
+                            </span>} onChange={this.inputChangeHandler} value={country} name="country" required placeholder="Select Country">
+                                <option>Select your country</option>
+                                {countriesOptions}
+                            </MyInput>
+                            <input type="hidden" value={code} name="code" />
+                            <MyInput type="tel" className="col-md-6" addon={<span className="text-secondary text-small">+{code}</span>} onChange={this.inputChangeHandler} value={phone} name="phone" required placeholder="Phone Number" />
 
-                <FormGroup className="pl-2 my-md-5 text-secondary text-left">
-                    <Label check>
-                        <CustomInput color="yellow" type="checkbox" id="terms" onChange={this.inputChangeHandler} value={terms} name="terms" label="Accept terms and conditions" inline />
-                    </Label>
-                </FormGroup>
+                            <MyInput className="col-md-6" type="select" onChange={this.inputChangeHandler} value={issue_id} name="issue_id" placeholder="Select Issue" required>
+                                <option>Select Issue</option>
+                                {issuesOptions}
+                            </MyInput>
+                        </Row>
+                    </FormBlock>
 
-                <BetweenButton icon={faPaperPlane} pill className="py-3 px-4" color="darkblue">Submit a request</BetweenButton>
-            </Form>;
+                    <FormBlock
+                        title="User documents"
+                        subtitle="Please upload recommended documents">
+                        <Col xl={9} className="px-0">
+                            <FormGroup className="d-flex align-items-center">
+                                <Row>
+                                    {documentsContent}
+                                </Row>
+
+                                <input type="file" name="documents[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" className="d-none documents" />
+                                <input type="file" name="documents[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" className="d-none documents" />
+                                <input type="file" name="documents[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" className="d-none documents" />
+
+                                {documents.filter(d => d).length >= 3 ? null : <div className="pl-5">
+                                    <div className="rounded-4 p-5 bg-green text-white d-flex justify-content-center align-items-center embed-responsive embed-responsive-1by1" style={{ cursor: 'pointer' }} onClick={this.documentClickHandler}><FontAwesomeIcon icon={faPlusCircle} size="2x" /></div>
+                                </div>}
+                            </FormGroup>
+
+                            <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum.</div>
+                        </Col>
+                    </FormBlock>
+
+                    <FormBlock
+                        title="Issue description"
+                        subtitle="Please provide a detailed description of the problem you are facing">
+                        <Col xl={9} className="px-0">
+                            <FormGroup className="px-0 col-xl-9">
+                                <Input type="textarea" onChange={this.inputChangeHandler} value={description} name="description" style={{ height: 250 }} className="border-light text-secondary" />
+                            </FormGroup>
+
+                            <FormGroup className="d-flex align-items-center">
+                                <div>
+                                    {issueFilesContent}
+                                </div>
+
+                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" className="d-none issue_files" />
+                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" className="d-none issue_files" />
+                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" className="d-none issue_files" />
+
+                                {issue_files.filter(d => d).length >= 3 ? null : <div className="pl-5">
+                                    <FontAwesomeIcon icon={faPlusCircle} size="2x" className="text-green" style={{ cursor: 'pointer' }} onClick={this.issueFileClickHandler} />
+                                </div>}
+                            </FormGroup>
+
+                            <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum.</div>
+                        </Col>
+                    </FormBlock>
+
+                    <FormGroup className="pl-2 my-md-5 text-secondary text-left">
+                        <Label check>
+                            <CustomInput color="yellow" type="checkbox" id="terms" name="terms" label="Accept terms and conditions" inline />
+                        </Label>
+                    </FormGroup>
+
+                    <BetweenButton icon={faPaperPlane} pill className="py-3 px-4" color="darkblue">Submit a request</BetweenButton>
+                </Form>;
+            }
         }
 
         return (
@@ -168,6 +245,8 @@ class Request extends Component {
 
                 <Row className="justify-content-center">
                     <Col lg={8}>
+                        {errors}
+                        {redirect}
                         {content}
                     </Col>
                 </Row>
@@ -180,8 +259,8 @@ class Request extends Component {
 const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
-    onAuthPageOff: () => dispatch(actions.authPageOff()),
-    onUserPageOff: () => dispatch(actions.userPageOff()),
+    onGetRequest: () => dispatch(actions.getRequest()),
+    onPostRequest: data => dispatch(actions.postRequest(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Request);

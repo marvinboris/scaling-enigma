@@ -117,7 +117,7 @@ export default ({ cartItemsNumber, name, sidedrawerToggle, logoutHandler, role, 
             <ModalBody className="text-center">
                 <p>Are you sure you want to logout?</p>
                 <div>
-                    <Button color="lightblue" onClick={logoutHandler}>Logout <FontAwesomeIcon icon={faPowerOff} fixedWidth /></Button>{' '}
+                    <Button color="darkblue" onClick={logoutHandler}>Logout <FontAwesomeIcon icon={faPowerOff} fixedWidth /></Button>{' '}
                     <Button color="orange" onClick={toggle}>Close <FontAwesomeIcon icon={faTimes} fixedWidth /></Button>
                 </div>
             </ModalBody>

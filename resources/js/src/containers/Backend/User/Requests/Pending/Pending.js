@@ -12,6 +12,8 @@ import Subtitle from '../../../../../components/UI/Titles/Subtitle/Subtitle';
 import List from '../../../../../components/Backend/UI/List/List';
 import Error from '../../../../../components/Error/Error';
 import CustomSpinner from '../../../../../components/UI/CustomSpinner/CustomSpinner';
+import Feedback from '../../../../../components/Feedback/Feedback';
+import Delete from '../../../../../components/Backend/UI/Delete/Delete';
 
 import * as actions from '../../../../../store/actions';
 import { updateObject, convertDate } from '../../../../../shared/utility';
@@ -22,9 +24,7 @@ class Pending extends Component {
     }
 
     async componentDidMount() {
-        if (this.props.auth.authPage) this.props.onAuthPageOff();
-        if (!this.props.auth.userPage) this.props.onUserPageOn();
-        const { onGetAdminDashboard } = this.props;
+        this.props.onGetPendingRequests();
         const cors = 'https://cors-anywhere.herokuapp.com/';
 
         const phoneRes = await fetch(cors + 'http://country.io/phone.json', { method: 'GET', mode: 'cors' });
@@ -35,47 +35,20 @@ class Pending extends Component {
 
         const countries = Object.keys(phone).map(key => ({ country: key, code: phone[key], name: names[key] })).sort((a, b) => a.country > b.country);
 
-        await this.setState({ countries });
-        // onGetAdminDashboard();
+        this.setState({ countries });
+    }
+
+    componentWillUnmount() {
+        this.props.onResetRequests();
     }
 
     render() {
-        // let { backend: { finances: { loading, error, deposits } } } = this.props;
-
-        const
-            loading = false,
-            error = null,
-            pendingRequests = [
-                {
-                    name: 'James DOE',
-                    platform: 'Liyeplimal',
-                    issue: 'Verification',
-                },
-                {
-                    name: 'Jakei DOGAO',
-                    platform: 'Simbcoin',
-                    issue: 'Verification',
-                },
-                {
-                    name: 'Fialia Jaile',
-                    platform: 'Liyeplimal',
-                    issue: 'Withdraw',
-                },
-                {
-                    name: 'Jamkea Aodi',
-                    platform: 'Liyeplimal',
-                    issue: 'Withdraw',
-                },
-                {
-                    name: 'Miake Oeda',
-                    platform: 'Simbcoin',
-                    issue: 'Payout',
-                },
-            ];
-
+        let { backend: { requests: { loading, error, message, requests } } } = this.props;
         const { countries } = this.state;
-        let content = null;
-        let errors = null;
+
+        let content;
+        let errors;
+        let feedback;
 
         if (loading) content = <Col xs={12}>
             <CustomSpinner />
@@ -84,34 +57,34 @@ class Pending extends Component {
             errors = <>
                 <Error err={error} />
             </>;
-            if (pendingRequests) {
-                const pendingRequestsData = pendingRequests.map(request => {
-                    const colors = ['orange', 'danger', 'success'];
-                    const texts = ['Pending', 'Failed', 'Success'];
-                    const icons = [faSpinner, faTimesCircle, faCheckCircle];
-                    const country = countries.find(country => country.country === 'CM');
+            if (requests) {
+                feedback = <Feedback message={message} />;
+
+                const requestsData = requests.map(request => {
+                    const colors = ['orange', 'primary', 'danger', 'success'];
+                    const texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
+                    const icons = [faSpinner, faSpinner, faTimesCircle, faCheckCircle];
+                    const country = countries.find(({ country }) => country === request.country);
                     return updateObject(request, {
-                        created_at: convertDate(new Date()),
-                        status: <Badge color={colors[0]} className="badge-block position-static"><FontAwesomeIcon icon={icons[0]} className={0 === 0 ? "fa-spin" : ""} fixedWidth /> {texts[0]}</Badge>,
-                        documents: <Badge color="nightblue" className="badge-block position-static"><FontAwesomeIcon icon={faFileArchive} className="text-orange" fixedWidth /> {4} Documents</Badge>,
-                        attachment: <Badge color="nightblue" className="badge-block position-static"><FontAwesomeIcon icon={faFileArchive} className="text-orange" fixedWidth /> {2} Attached Files</Badge>,
+                        created_at: convertDate(request.created_at),
+                        platform: request.platform.name,
+                        issue: request.issue.name,
+                        status: <Badge color={colors[request.status]} className="badge-block position-static"><FontAwesomeIcon icon={icons[request.status]} className={[0, 1].includes(request.status) ? "fa-spin" : ""} fixedWidth /> {texts[request.status]}</Badge>,
+                        documents: <Badge color="nightblue" className="badge-block position-static"><FontAwesomeIcon icon={faFileArchive} className="text-orange" fixedWidth /> {request.documents.length} Document{request.documents.length > 1 ? 's' : ''}</Badge>,
+                        attachment: <Badge color="nightblue" className="badge-block position-static"><FontAwesomeIcon icon={faFileArchive} className="text-orange" fixedWidth /> {request.issue_files.length} Attached File{request.issue_files.length > 1 ? 's' : ''}</Badge>,
                         description: <div className="d-flex">
-                            <div className="flex-fill text-truncate">I tried to verify...</div>
+                            <div style={{ maxWidth: 150 }} className="flex-fill text-truncate">{request.description}</div>
                             <FontAwesomeIcon icon={faEye} className="text-green" fixedWidth />
                         </div>,
-                        ref: 'FCG434',
-                        country: 'CM',
-                        email: 'demo@test.com',
-                        phone: '+2379843400534',
                         action: <div className="text-center">
                             <FontAwesomeIcon icon={faEye} className="text-green mr-2" fixedWidth />
-                            <FontAwesomeIcon icon={faEdit} className="text-brokenblue mr-2" fixedWidth />
-                            <FontAwesomeIcon icon={faTrash} className="text-red mr-2" fixedWidth />
+                            <Link to={'/user/requests/' + request.id + '/edit'}><FontAwesomeIcon icon={faEdit} className="text-brokenblue mr-2" fixedWidth /></Link>
+                            <Delete deleteAction={() => this.props.onPostRequestDelete(request.id)}><FontAwesomeIcon icon={faTrash} className="text-red mr-2" fixedWidth /></Delete>
                             <FontAwesomeIcon icon={faDownload} className="text-darkblue" fixedWidth />
                         </div>,
                         country: <div className="d-flex align-items-center">
                             <div className="border border-1 border-white rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center mr-2" style={{ width: 20, height: 20 }}>
-                                <span className={`flag-icon text-large position-absolute flag-icon-${'CM'.toLowerCase()}`} />
+                                <span className={`flag-icon text-large position-absolute flag-icon-${request.country.toLowerCase()}`} />
                             </div>
 
                             {country ? country.name : null}
@@ -122,7 +95,7 @@ class Pending extends Component {
                 content = (
                     <>
                         <Row>
-                            <List array={pendingRequestsData} bordered add="File a Request" icon={faCalendarAlt} title="Pending Requests" className="bg-white shadow-sm"
+                            <List array={requestsData} data={JSON.stringify(requests)} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Pending Requests" className="bg-white shadow-sm"
                                 fields={[
                                     { name: 'Creation Date', key: 'created_at' },
                                     { name: 'User ID', key: 'ref' },
@@ -153,6 +126,7 @@ class Pending extends Component {
                 </div>
                 <div className="p-4 pb-0">
                     {errors}
+                    {feedback}
                     {content}
                 </div>
             </>
@@ -163,9 +137,9 @@ class Pending extends Component {
 const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
-    // onGetAdminDashboard: () => dispatch(actions.getAdminDashboard()),
-    onAuthPageOff: () => dispatch(actions.authPageOff()),
-    onUserPageOn: () => dispatch(actions.userPageOn()),
+    onGetPendingRequests: () => dispatch(actions.getPendingRequests()),
+    onPostRequestDelete: id => dispatch(actions.postRequestDelete(id)),
+    onResetRequests: () => dispatch(actions.resetRequests()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Pending));

@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faCheck, faClock, faComments } from "@fortawesome/free-solid-svg-icons";
 import { faComment, faCircle } from '@fortawesome/free-regular-svg-icons';
 
-import "./Home.css";
-import * as actions from "../../store/actions";
 import BetweenButton from "../../components/UI/Button/BetweenButton/BetweenButton";
 
 import UnderCarouselBlock from "./UnderCarouselBlock/UnderCarouselBlock";
 import CustomerBlock from "./CustomerBlock/CustomerBlock";
+
+import "./Home.css";
 
 import BannerImg from "../../assets/images/Group 8@2x.png";
 import AdvantagesImg from "../../assets/images/Group 19@2x.png";
@@ -22,12 +22,7 @@ import SamuelRolande from "../../assets/images/33a762719ceb41b28820b45364c02eec@
 
 const Li = ({ children }) => <div className="text-secondary"><FontAwesomeIcon icon={faCircle} className="mr-2" size="sm" />{children}</div>;
 
-class Home extends Component {
-    componentDidMount() {
-        if (this.props.auth.authPage) this.props.onAuthPageOff();
-        if (this.props.auth.userPage) this.props.onUserPageOff();
-    }
-
+export default class Home extends Component {
     render() {
         return (
             <div className="Home w-100">
@@ -35,17 +30,19 @@ class Home extends Component {
                     <Container>
                         <Row className="justify-content-between">
                             <Col lg={8}>
-                                <h1 className="text-700 text-darkblue">Global Investment Trading Support</h1>
-                                <h4 className="text-300 text-blue">Request Management System</h4>
+                                <div className="banner-text">
+                                    <h1 className="text-700 text-darkblue">Global Investment Trading Support</h1>
+                                    <h4 className="text-300 text-blue">Request Management System</h4>
 
-                                <div className="w-60 border-top border-secondary mt-4 pt-4 pb-5 text-secondary">
-                                    Hey There ! Welcome to liyeplimal request management system. Looking
-                                    for a solution ? check out our new request management system
-                                    try it now.
+                                    <div className="w-60 border-top border-secondary mt-4 pt-4 pb-5 text-secondary">
+                                        Hey There ! Welcome to liyeplimal request management system. Looking
+                                        for a solution ? check out our new request management system
+                                        try it now.
+                                    </div>
+
+                                    <BetweenButton icon={faPaperPlane} pill className="py-3 px-4 mr-2" color="darkblue">Submit a request</BetweenButton>
+                                    <BetweenButton icon={faCheck} pill className="py-3 px-4" color="yellow">Check request</BetweenButton>
                                 </div>
-
-                                <BetweenButton icon={faPaperPlane} pill className="py-3 px-4 mr-2" color="darkblue">Submit a request</BetweenButton>
-                                <BetweenButton icon={faCheck} pill className="py-3 px-4" color="yellow">Check request</BetweenButton>
                             </Col>
 
                             <Col lg={4}>
@@ -154,12 +151,3 @@ class Home extends Component {
         );
     }
 }
-
-const mapStateToProps = state => ({ ...state });
-
-const mapDispatchToProps = dispatch => ({
-    onAuthPageOff: () => dispatch(actions.authPageOff()),
-    onUserPageOff: () => dispatch(actions.userPageOff())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);

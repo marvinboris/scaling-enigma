@@ -54,17 +54,10 @@ class BackEnd extends Component {
 
     render() {
         const { isOpen, date, clock } = this.state;
-        const { 
-            // auth: { loading, data: { notifications, first_name, last_name, name, role, photo, ref, sponsor, credits } }, 
+        const {
+            auth: { loading, data: { notifications, name, photo } },
             onAuthLogout, children } = this.props;
-        // const isAuthenticated = localStorage.getItem('token') !== null;
-
-        const
-            loading = false,
-            notifications = [],
-            name = 'Test Name',
-            photo = "https://placehold.it/100x100",
-            isAuthenticated = true;
+        const isAuthenticated = localStorage.getItem('token') !== null;
 
         if (!isAuthenticated) onAuthLogout();
 

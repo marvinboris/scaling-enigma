@@ -2,6 +2,17 @@
     height: 100% !important;
 }
 
+.Home .banner-text {
+    scale: 1;
+}
+
+@media (min-width: 1200px) {
+    .Home .banner-text {
+        scale: 1.2;
+        transform-origin: left;
+    }
+}
+
 .Home #banner {
     position: absolute;
     margin: auto;

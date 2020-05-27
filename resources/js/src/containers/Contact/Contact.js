@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Col, Row, Card, FormGroup, Label, Input, Button, Spinner } from 'reactstrap';
 
 import Breadcrumb from '../../components/UI/Breadcrumb/Breadcrumb';
 import Title from '../../components/UI/Titles/Title/Title';
 import PresentationalContainer from '../../components/UI/PresentationalContainer/PresentationalContainer';
-import * as actions from '../../store/actions';
 
 class Contact extends Component {
-    componentDidMount() {
-        if (this.props.auth.authPage) this.props.onAuthPageOff();
-        if (this.props.auth.userPage) this.props.onUserPageOff();
-    }
-
     render() {
         return (
             <Col xs={12} className="Contact p-0">
@@ -81,11 +74,4 @@ class Contact extends Component {
     }
 }
 
-const mapStateToProps = state => ({ ...state });
-
-const mapDispatchToProps = dispatch => ({
-    onAuthPageOff: () => dispatch(actions.authPageOff()),
-    onUserPageOff: () => dispatch(actions.userPageOff()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Contact);
+export default Contact;
