@@ -36,7 +36,6 @@ class RequestController extends Controller
         $documents = [];
         $issue_files = [];
         $reqid = AppRequest::reqid();
-        $name = ucwords(strtolower($request->name));
         foreach ($request->documents as $document) {
             $name = $reqid . ' - ' . $document->getClientOriginalName();
             $document->move('requests', $name);
@@ -48,6 +47,7 @@ class RequestController extends Controller
             $issue_files[] = htmlspecialchars($name);
         }
 
+        $name = ucwords(strtolower($request->name));
         AppRequest::create(array_merge($request->except(['documents', 'issue_files', 'code', 'name', 'phone']), [
             'name' => $name,
             'reqid' => $reqid,
