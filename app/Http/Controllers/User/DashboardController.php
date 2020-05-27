@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $totalRequests = count(AppRequest::all());
         $pendingRequests = count(AppRequest::whereStatus(0)->orWhere('status', 1)->get());
         $resolvedRequests = count(AppRequest::whereStatus(3)->get());
-        $accomplishedRate = round($resolvedRequests * 100 / $totalRequests);
+        $accomplishedRate = $totalRequests === 0 ? 0 : round($resolvedRequests * 100 / $totalRequests);
 
         $requests = [];
         foreach (AppRequest::latest()->limit(5)->get() as $request) {
