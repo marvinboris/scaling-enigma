@@ -45,7 +45,6 @@ export const authLogin = data => async dispatch => {
         else if (res.status !== 200 && res.status !== 201) throw new Error(resData);
 
         dispatch(authLoginSuccess(hash));
-        dispatch(checkAuthTimeout(expires_at - new Date().getTime()));
     } catch (err) {
         dispatch(authFail(err));
     }
@@ -116,7 +115,9 @@ export const authLogout = () => async dispatch => {
 
         if (res.status !== 200) throw new ('Erreur lors de la récupération des informations.')
 
-        const { message } = await res.json();
+        const resData = await res.json();
+        const { message } = resData;
+        console.log({ resData })
 
         dispatch(authLogoutSuccess());
     } catch (err) {

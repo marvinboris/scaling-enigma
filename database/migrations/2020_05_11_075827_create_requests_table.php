@@ -25,7 +25,9 @@ class CreateRequestsTable extends Migration
             $table->text('documents')->nullable();
             $table->integer('issue_id')->unsigned()->index();
             $table->text('description')->nullable();
+            $table->text('comments')->nullable();
             $table->text('issue_files')->nullable();
+            $table->text('admin_files')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
