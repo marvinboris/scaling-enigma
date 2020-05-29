@@ -79,17 +79,40 @@ class RequestsController extends Controller
             ]
         ]);
 
+        $requests = [];
+        $filteredRequests = null;
+        switch ($request->page_status) {
+            case 'pending':
+                $filteredRequests = AppRequest::whereStatus(0)->orWhere('status', 1)->get();
+                break;
+            case 'solved':
+                $filteredRequests = AppRequest::whereStatus(3)->get();
+                break;
+            case 'cancelled':
+                $filteredRequests = AppRequest::whereStatus(2)->get();
+                break;
+        }
+
+        foreach ($filteredRequests as $filteredRequest) {
+            $requests[] = array_merge($filteredRequest->toArray(), [
+                'platform' => $filteredRequest->platform,
+                'issue' => $filteredRequest->issue,
+            ]);
+        }
+
         $appRequest->update($request->only(['admin_files', 'status', 'comments']));
 
         return response()->json([
             'message' => [
                 'type' => 'success',
                 'content' => 'Successfully updated request.'
-            ]
+            ],
+            'requests' => $requests
         ]);
     }
 
-    public function delete(Request $request, $id) {
+    public function delete(Request $request, $id)
+    {
         $appRequest = AppRequest::find($id);
         if (!$appRequest) return response()->json([
             'message' => [

@@ -2,6 +2,8 @@
 
 use App\Mail\VerificationCode;
 use App\Request as AppRequest;
+use App\User;
+use buibr\Budget\BudgetSMS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +36,10 @@ Route::namespace('Auth')->prefix('auth')->name('auth.')->group(function () {
     Route::post('verify', 'AuthController@verify')->name('verify');
     Route::post('login', 'AuthController@login')->name('login');
 
-    Route::middleware('auth:api')->get('user', 'AuthController@user')->name('user');
+    Route::middleware('auth:api')->group(function () {
+        Route::get('logout', 'AuthController@logout')->name('logout');
+        Route::get('user', 'AuthController@user')->name('user');
+    });
 });
 
 Route::middleware('auth:api')->namespace('User')->prefix('user')->name('user.')->group(function () {
@@ -57,6 +62,17 @@ Route::name('export.')->prefix('export')->group(function () {
 });
 
 Route::get('test', function () {
-    Mail::to('jaris.ultio.21@gmail.com')->send(new VerificationCode('code'));
-    return "Mail sent";
+    $budget = new BudgetSMS([
+        'username' => env('BUDGET_USERNAME'),
+        'userid' => env('BUDGET_USER_ID'),
+        'handle' => env('BUDGET_HANDLE'),
+        'from' => env('APP_NAME'),
+    ]);
+
+    $send = $budget->send('+237655588688', 'Testing the provider');
+    dd($send);
+});
+
+Route::get('hi', function () {
+    return AppRequest::all();
 });

@@ -17,6 +17,8 @@ class BackEnd extends Component {
         date: { weekDay: null, day: null, month: null, year: null },
         clock: { hours: null, minutes: null, seconds: null },
 
+        selectedItem: '',
+
         interval: null
     }
 
@@ -52,18 +54,21 @@ class BackEnd extends Component {
         this.setState(prevState => ({ isOpen: !prevState.isOpen }));
     }
 
+    selectItem = item => this.setState({ selectedItem: item });
+
+
     render() {
-        const { isOpen, date, clock } = this.state;
+        const { isOpen, date, clock, selectedItem } = this.state;
         const {
             auth: { loading, data: { notifications, name, photo } },
-            onAuthLogout, children } = this.props;
+            history, children } = this.props;
         const isAuthenticated = localStorage.getItem('token') !== null;
 
-        if (!isAuthenticated) onAuthLogout();
+        if (!isAuthenticated) history.push('/login');
 
         return <div className="BackEnd text-left">
             <Toolbar notifications={notifications} name={name} toggle={this.toggle} logoutHandler={this.logoutHandler} date={date} clock={clock} />
-            <SideDrawer name={name} isOpen={isOpen} photo={photo} />
+            <SideDrawer name={name} isOpen={isOpen} photo={photo} toggle={this.toggle} selectItem={this.selectItem} selectedItem={selectedItem} />
 
             <main className="bg-soft position-relative full-height-user pb-5">
                 <div className="mb-5 pb-5">

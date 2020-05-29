@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Request extends Model
 {
     //
+    protected $directory = '/requests/';
+
     protected $fillable = [
         'reqid', 'name', 'platform_id', 'country', 'phone', 'email', 'ref', 'documents', 'issue_id', 'issue_files', 'description', 'status'
     ];
@@ -24,12 +26,20 @@ class Request extends Model
 
     public function getDocumentsAttribute($value)
     {
-        return json_decode($value);
+        $documents = [];
+        foreach (json_decode($value) as $document) {
+            $documents[] = $this->directory . $document;
+        }
+        return $documents;
     }
 
     public function getIssueFilesAttribute($value)
     {
-        return json_decode($value);
+        $issue_files = [];
+        foreach (json_decode($value) as $issue_file) {
+            $issue_files[] = $this->directory . $issue_file;
+        }
+        return $issue_files;
     }
 
     public function getNameAttribute($value)

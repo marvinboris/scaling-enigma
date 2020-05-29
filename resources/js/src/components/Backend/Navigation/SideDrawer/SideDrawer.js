@@ -12,21 +12,21 @@ const roles = {
     admin: 'Administrator'
 };
 
-export default ({ name, photo = "https://placehold.it/100x100", role = 'user', isOpen }) => {
+export default ({ name, messages = [], photo = "https://placehold.it/100x100", role = 'user', toggle, isOpen, selectItem, selectedItem }) => {
     let addOns = null;
     let sideDrawerItems = null;
     switch (role) {
         case 'user':
             sideDrawerItems = <>
-                <SideDrawerItem icon={faTachometerAlt} href="/user/dashboard">Dashboard</SideDrawerItem>
-                <SideDrawerItem icon={faUserTie} href="/user/request-report">Request Report</SideDrawerItem>
-                <SideDrawerItem icon={faCalendarAlt} dropdown path="/user/requests" items={[
+                <SideDrawerItem id="Dashboard" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faTachometerAlt} href="/user/dashboard">Dashboard</SideDrawerItem>
+                <SideDrawerItem id="Request Report" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faUserTie} href="/user/request-report">Request Report</SideDrawerItem>
+                <SideDrawerItem id="Request Check" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faCalendarAlt} dropdown path="/user/requests" items={[
                     { link: '/user/requests/file', text: 'File a Request' },
                     { link: '/user/requests/pending', text: 'Pending Requests' },
                     { link: '/user/requests/solved', text: 'Solved Requests' },
                     { link: '/user/requests/cancelled', text: 'Cancelled Requests' },
                 ]}>Request Check</SideDrawerItem>
-                <SideDrawerItem icon={faCog} dropdown path="/user/settings" items={[
+                <SideDrawerItem id="System Settings" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faCog} dropdown path="/user/settings" items={[
                     { link: '/user/settings/cms', text: 'CMS' },
                     { link: '/user/settings/language', text: 'Language Settings' },
                 ]}>System Settings</SideDrawerItem>
@@ -98,7 +98,7 @@ export default ({ name, photo = "https://placehold.it/100x100", role = 'user', i
                     </div>
                 </nav>
             </div>
-            <div className="backdrop w-100 bg-nightblue-50 position-fixed d-md-none" style={{ top: 101, zIndex: -1 }} />
+            <div className="backdrop w-100 bg-nightblue-50 position-fixed d-md-none" onClick={toggle} style={{ top: 101, zIndex: -1 }} />
         </Collapse>
     )
 };

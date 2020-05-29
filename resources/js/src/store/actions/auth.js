@@ -109,15 +109,15 @@ export const authLogout = () => async dispatch => {
         const res = await fetch(rootPath + prefix + 'logout', {
             method: 'GET',
             headers: {
-                'Authorization': token
+                Authorization: token
             }
         });
 
         if (res.status !== 200) throw new ('Erreur lors de la récupération des informations.')
 
         const resData = await res.json();
-        const { message } = resData;
-        console.log({ resData })
+
+        console.log("authLogout")
 
         dispatch(authLogoutSuccess());
     } catch (err) {
