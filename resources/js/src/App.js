@@ -19,6 +19,7 @@ const asyncUserRequestsSolved = asyncComponent(() => import('./containers/Backen
 const asyncUserRequestsCancelled = asyncComponent(() => import('./containers/Backend/User/Requests/Cancelled/Cancelled'));
 
 // Common routes
+const asyncRequestCheck = asyncComponent(() => import('./containers/Request/Check/Check'));
 const asyncRequestSuccess = asyncComponent(() => import('./containers/Request/Success/Success'));
 const asyncRequest = asyncComponent(() => import('./containers/Request/Request'));
 const asyncContact = asyncComponent(() => import('./containers/Contact/Contact'));
@@ -42,6 +43,7 @@ class App extends Component {
                 <Redirect path="/login" to="/auth/login" />
 
                 <Route path="/contact" component={asyncContact} />
+                <Route path="/request/check" component={asyncRequestCheck} />
                 <Route path="/request/success" component={asyncRequestSuccess} />
                 <Route path="/request" component={asyncRequest} />
                 <Route path="/" component={Home} />
@@ -59,6 +61,7 @@ class App extends Component {
                     <Redirect path="/auth" to="/user/dashboard" />
 
                     <Route path="/contact" component={asyncContact} />
+                    <Route path="/request/check" component={asyncRequestCheck} />
                     <Route path="/request/success" component={asyncRequestSuccess} />
                     <Route path="/request" component={asyncRequest} />
                     <Route path="/" component={Home} />

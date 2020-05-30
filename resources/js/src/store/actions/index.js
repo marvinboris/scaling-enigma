@@ -12,6 +12,7 @@ export {
     resetRequest,
     getRequest,
     postRequest,
+    postCheckRequest,
 } from './frontend';
 
 export {

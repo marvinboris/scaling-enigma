@@ -24,9 +24,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Backend_UI_List_List__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../../components/Backend/UI/List/List */ "./resources/js/src/components/Backend/UI/List/List.js");
 /* harmony import */ var _components_Error_Error__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../../components/Error/Error */ "./resources/js/src/components/Error/Error.js");
 /* harmony import */ var _components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../../components/UI/CustomSpinner/CustomSpinner */ "./resources/js/src/components/UI/CustomSpinner/CustomSpinner.js");
-/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../../store/actions */ "./resources/js/src/store/actions/index.js");
-/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../../shared/utility */ "./resources/js/src/shared/utility.js");
-/* harmony import */ var _components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../../components/Feedback/Feedback */ "./resources/js/src/components/Feedback/Feedback.js");
+/* harmony import */ var _components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../../components/Feedback/Feedback */ "./resources/js/src/components/Feedback/Feedback.js");
+/* harmony import */ var _components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../../components/Backend/UI/Delete/Delete */ "./resources/js/src/components/Backend/UI/Delete/Delete.js");
+/* harmony import */ var _components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../../components/Backend/UI/View/View */ "./resources/js/src/components/Backend/UI/View/View.js");
+/* harmony import */ var _components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../../../components/Backend/UI/Download/Download */ "./resources/js/src/components/Backend/UI/Download/Download.js");
+/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../../../store/actions */ "./resources/js/src/store/actions/index.js");
+/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../../../shared/utility */ "./resources/js/src/shared/utility.js");
+/* harmony import */ var _Edit__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../Edit */ "./resources/js/src/containers/Backend/User/Requests/Edit.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -77,6 +81,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
+
+
+var I = function I(_ref) {
+  var _ref$size = _ref.size,
+      size = _ref$size === void 0 ? 6 : _ref$size,
+      _ref$label = _ref.label,
+      label = _ref$label === void 0 ? null : _ref$label,
+      children = _ref.children;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    lg: size,
+    className: "pb-3"
+  }, label ? label + ': ' : '', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "text-green text-500"
+  }, children));
+};
 
 var Cancelled = /*#__PURE__*/function (_Component) {
   _inherits(Cancelled, _Component);
@@ -173,6 +195,8 @@ var Cancelled = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props$backend$r = this.props.backend.requests,
           loading = _this$props$backend$r.loading,
           error = _this$props$backend$r.error,
@@ -190,19 +214,175 @@ var Cancelled = /*#__PURE__*/function (_Component) {
         }));
 
         if (requests) {
-          feedback = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_15__["default"], {
+          feedback = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_13__["default"], {
             message: message
           });
           var requestsData = requests.map(function (request) {
             var colors = ['orange', 'primary', 'danger', 'success'];
             var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
             var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCheckCircle"]];
-            var country = countries.find(function (_ref) {
-              var country = _ref.country;
+            var country = countries.find(function (_ref2) {
+              var country = _ref2.country;
               return country === request.country;
             });
-            return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_14__["updateObject"])(request, {
-              created_at: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_14__["convertDate"])(request.created_at),
+            var documentsContent = request.documents.filter(function (d) {
+              return d;
+            }).map(function (doc) {
+              var arr1 = doc.split('.');
+              var format = arr1[arr1.length - 1];
+              var arr2 = doc.split('/');
+              var arr3 = arr2[arr2.length - 1].split('.');
+              var formatlessName = arr3.filter(function (n, i) {
+                return i < arr3.length - 1;
+              }).join('.');
+              var content;
+
+              switch (format.toLowerCase()) {
+                case 'pdf':
+                  content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+                    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFilePdf"],
+                    size: "5x",
+                    className: "text-border position-absolute",
+                    style: {
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%,-50%)'
+                    }
+                  });
+                  break;
+
+                default:
+                  content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                    className: "embed-responsive embed-responsive-1by1 position-absolute",
+                    style: {
+                      background: 'url("' + doc + '") no-repeat center',
+                      backgroundSize: 'cover',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%,-50%)'
+                    }
+                  });
+                  break;
+              }
+
+              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+                xl: 3,
+                key: name + Math.random(),
+                className: "pr-0",
+                style: {
+                  minWidth: 100
+                }
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                className: "rounded-4 overflow-hidden p-2 bg-light d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1"
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFilePdf"],
+                className: "mr-2"
+              }), "NID_45094M", content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_16__["default"], {
+                link: doc,
+                name: formatlessName + '.' + format
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                className: "text-uppercase text-truncate pt-3 text-darkblue"
+              }, formatlessName)));
+            });
+            var issueFilesContent = request.issue_files.filter(function (d) {
+              return d;
+            }).map(function (issue_file) {
+              var arr1 = issue_file.split('.');
+              var format = arr1[arr1.length - 1];
+              var arr2 = issue_file.split('/');
+              var arr3 = arr2[arr2.length - 1].split('.');
+              var formatlessName = arr3.filter(function (n, i) {
+                return i < arr3.length - 1;
+              }).join('.');
+              var icon;
+
+              switch (format.toLowerCase()) {
+                case 'pdf':
+                  icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFilePdf"];
+                  break;
+
+                default:
+                  icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFileImage"];
+                  break;
+              }
+
+              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                key: formatlessName + Math.random(),
+                className: "pr-3 d-inline-block",
+                style: {
+                  maxWidth: 200
+                }
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_16__["default"], {
+                link: issue_file,
+                name: formatlessName + '.' + format
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                className: "rounded-2 p-2 bg-light text-darkblue text-uppercase text-truncate text-nowrap"
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+                icon: icon,
+                className: "mr-2"
+              }), formatlessName)));
+            });
+            var viewContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+              className: "m-0 p-3 rounded bg-green-20"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+              xs: 12
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              className: "text-green text-700 mb-2"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+              icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faUser"],
+              className: "mr-2",
+              fixedWidth: true
+            }), "User info Gathering"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
+              label: "Full Name"
+            }, request.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
+              label: "Platform"
+            }, request.platform.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
+              label: "E-Mail Address"
+            }, request.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
+              label: "User ID"
+            }, request.ref), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
+              label: "Country"
+            }, country ? country.name : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
+              label: "Phone Number"
+            }, request.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
+              label: "Issue"
+            }, request.issue.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+              className: "mt-4 mx-0 p-3 rounded bg-orange-20"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+              xs: 12
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              className: "text-orange text-700 mb-2"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+              icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faBook"],
+              className: "mr-2",
+              fixedWidth: true
+            }), "User documents"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+              xs: 12
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, documentsContent))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+              className: "mt-4 mx-0 p-3 rounded bg-soft"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+              xs: 12
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              className: "text-black text-700 mb-2"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+              icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEdit"],
+              className: "mr-2",
+              fixedWidth: true
+            }), "Issue description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+              xs: 12
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+              xs: 12,
+              className: "pb-3"
+            }, request.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+              xl: 12
+            }, issueFilesContent)))));
+            var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_19__["default"], {
+              request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_18__["updateObject"])(request, {
+                page_status: 'cancelled'
+              })
+            });
+            return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_18__["updateObject"])(request, {
+              created_at: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_18__["convertDate"])(request.created_at),
               platform: request.platform.name,
               issue: request.issue.name,
               status: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
@@ -236,26 +416,39 @@ var Cancelled = /*#__PURE__*/function (_Component) {
                   maxWidth: 150
                 },
                 className: "flex-fill text-truncate"
-              }, request.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+              }, request.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_15__["default"], {
+                title: 'Request description: ' + request.reqid,
+                content: request.description
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEye"],
                 className: "text-green",
                 fixedWidth: true
-              })),
+              }))),
               action: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 className: "text-center"
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_15__["default"], {
+                title: 'Request details: ' + request.reqid,
+                content: viewContent
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEye"],
                 className: "text-green mr-2",
                 fixedWidth: true
-              }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_15__["default"], {
+                title: 'Request edit: ' + request.reqid,
+                content: editContent
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEdit"],
-                className: "text-brokenblue mr-2",
+                className: "text-brokenblue",
                 fixedWidth: true
-              }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_14__["default"], {
+                deleteAction: function deleteAction() {
+                  return _this2.props.onPostRequestDelete(request.id);
+                }
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTrash"],
                 className: "text-red mr-2",
                 fixedWidth: true
-              }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faDownload"],
                 className: "text-darkblue",
                 fixedWidth: true
@@ -320,7 +513,7 @@ var Cancelled = /*#__PURE__*/function (_Component) {
             }, {
               name: 'Status',
               key: 'status',
-              minWidth: 130
+              minWidth: 140
             }, {
               name: 'Action',
               key: 'action'
@@ -354,10 +547,16 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onGetCancelledRequests: function onGetCancelledRequests() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_13__["getCancelledRequests"]());
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_17__["getCancelledRequests"]());
+    },
+    onPostRequestDelete: function onPostRequestDelete(id) {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_17__["postRequestDelete"](id));
+    },
+    onPostRequestUpdate: function onPostRequestUpdate(id, data) {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_17__["postRequestUpdate"](id, data));
     },
     onResetRequests: function onResetRequests() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_13__["resetRequests"]());
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_17__["resetRequests"]());
     }
   };
 };

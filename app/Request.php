@@ -11,7 +11,7 @@ class Request extends Model
     protected $directory = '/requests/';
 
     protected $fillable = [
-        'reqid', 'name', 'platform_id', 'country', 'phone', 'email', 'ref', 'documents', 'issue_id', 'issue_files', 'description', 'status'
+        'reqid', 'name', 'platform_id', 'country', 'phone', 'email', 'ref', 'documents', 'issue_id', 'issue_files', 'description', 'status', 'comments', 'admin_files'
     ];
 
     public function platform()
@@ -40,6 +40,16 @@ class Request extends Model
             $issue_files[] = $this->directory . $issue_file;
         }
         return $issue_files;
+    }
+    
+    public function getAdminFilesAttribute($value)
+    {
+        $admin_files = [];
+        $array = $value ? json_decode($value) : [];
+        foreach ($array as $admin_file) {
+            $admin_files[] = $this->directory . $admin_file;
+        }
+        return $admin_files;
     }
 
     public function getNameAttribute($value)

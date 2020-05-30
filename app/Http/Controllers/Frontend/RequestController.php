@@ -62,4 +62,20 @@ class RequestController extends Controller
             'name' => $name
         ]);
     }
+
+    public function check(Request $request)
+    {
+        $request->validate([
+            'reqid' => 'required|exists:requests'
+        ]);
+
+        $appRequest = AppRequest::whereReqid($request->reqid)->first();
+
+        return response()->json([
+            'request' => array_merge($appRequest->toArray(), [
+                'platform' => $appRequest->platform,
+                'issue' => $appRequest->issue,
+            ]),
+        ]);
+    }
 }

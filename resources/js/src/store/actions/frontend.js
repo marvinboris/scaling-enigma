@@ -39,3 +39,21 @@ export const postRequest = data => async dispatch => {
         dispatch(requestFail(error));
     }
 };
+
+export const postCheckRequest = data => async dispatch => {
+    dispatch(requestStart());
+
+    try {
+        const form = new FormData(data);
+        const res = await fetch(rootPath + prefix + 'request/check', {
+            method: 'POST',
+            body: form
+        });
+        const resData = await res.json();
+        if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
+        dispatch(requestSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(requestFail(error));
+    }
+};

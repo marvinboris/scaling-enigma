@@ -25,6 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('Frontend')->prefix('frontend')->name('frontend.')->group(function () {
     Route::prefix('request')->name('request.')->group(function () {
+        Route::post('check', 'RequestController@check')->name('check');
         Route::post('', 'RequestController@store')->name('store');
         Route::get('', 'RequestController@index')->name('index');
     });

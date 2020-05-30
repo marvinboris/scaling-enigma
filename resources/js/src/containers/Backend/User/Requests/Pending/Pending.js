@@ -19,6 +19,7 @@ import Download from '../../../../../components/Backend/UI/Download/Download';
 
 import * as actions from '../../../../../store/actions';
 import { updateObject, convertDate } from '../../../../../shared/utility';
+import Edit from '../Edit';
 
 const I = ({ size = 6, label = null, children }) => <Col lg={size} className="pb-3">
     {label ? (label + ': ') : ''}<span className="text-green text-500">{children}</span>
@@ -46,11 +47,6 @@ class Pending extends Component {
 
     componentWillUnmount() {
         this.props.onResetRequests();
-    }
-
-    submitHandler = e => {
-        e.preventDefault();
-        this.props.onPostRequestUpdate(e.target.id, e.target);
     }
 
     render() {
@@ -187,28 +183,7 @@ class Pending extends Component {
                         </Row>
                     </>;
 
-                    const editContent = <Form id={request.id} onSubmit={this.submitHandler}>
-                        <FormGroup className="d-flex align-items-center">
-                            <div className='text-700 pr-4'>Status</div>
-                            <Label check>
-                                <CustomInput type="radio" name="status" id="status-3" value={3} defaultChecked={request.status === 3} className={request.status === 3 ? 'text-700 text-' + colors[request.status] : ''} label="Solved" inline />
-                            </Label>
-                            <Label check>
-                                <CustomInput type="radio" name="status" id="status-2" value={1} defaultChecked={request.status === 1} className={request.status === 1 ? 'text-700 text-' + colors[request.status] : ''} label="Processing" inline />
-                            </Label>
-                            <Label check>
-                                <CustomInput type="radio" name="status" id="status-1" value={2} defaultChecked={request.status === 2} className={request.status === 2 ? 'text-700 text-' + colors[request.status] : ''} label="Cancelled" inline />
-                            </Label>
-                        </FormGroup>
-                        <input type="hidden" name="page_status" value="pending" />
-
-                        <div className="mt-4">
-                            {request.status === 1 ? <Alert color={colors[request.status]} className={'pb-3'}>This request is under process. Would you like to update it?</Alert> : null}
-
-                            <Button color="green">Confirm<FontAwesomeIcon icon={faCheck} fixedWidth className="ml-2" /></Button>{' '}
-                            <Button color="danger">Cancel<FontAwesomeIcon icon={faTimes} fixedWidth className="ml-2" /></Button>
-                        </div>
-                    </Form>;
+                    const editContent = <Edit request={updateObject(request, { page_status: 'pending' })} />;
 
                     return updateObject(request, {
                         created_at: convertDate(request.created_at),

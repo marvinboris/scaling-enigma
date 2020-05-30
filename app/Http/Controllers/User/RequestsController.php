@@ -79,6 +79,16 @@ class RequestsController extends Controller
             ]
         ]);
 
+        $admin_files = [];
+        foreach ($request->admin_files as $admin_file) {
+            $name = $appRequest->reqid . ' - ' . $admin_file->getClientOriginalName();
+            $admin_file->move('requests', $name);
+            $admin_files[] = htmlspecialchars($name);
+        }
+        $appRequest->update(array_merge($request->only(['status', 'comments']), [
+            'admin_files' => $admin_files
+        ]));
+
         $requests = [];
         $filteredRequests = null;
         switch ($request->page_status) {
@@ -99,8 +109,6 @@ class RequestsController extends Controller
                 'issue' => $filteredRequest->issue,
             ]);
         }
-
-        $appRequest->update($request->only(['admin_files', 'status', 'comments']));
 
         return response()->json([
             'message' => [
@@ -123,12 +131,33 @@ class RequestsController extends Controller
 
         $appRequest->delete();
 
+        $requests = [];
+        $filteredRequests = null;
+        switch ($request->page_status) {
+            case 'pending':
+                $filteredRequests = AppRequest::whereStatus(0)->orWhere('status', 1)->get();
+                break;
+            case 'solved':
+                $filteredRequests = AppRequest::whereStatus(3)->get();
+                break;
+            case 'cancelled':
+                $filteredRequests = AppRequest::whereStatus(2)->get();
+                break;
+        }
+
+        foreach ($filteredRequests as $filteredRequest) {
+            $requests[] = array_merge($filteredRequest->toArray(), [
+                'platform' => $filteredRequest->platform,
+                'issue' => $filteredRequest->issue,
+            ]);
+        }
+
         return response()->json([
             'message' => [
                 'type' => 'success',
                 'content' => 'Successfully deleted request.'
             ],
-            'requests' => AppRequest::whereStatus($request->status)->get(),
+            'requests' => $requests,
         ]);
     }
 }

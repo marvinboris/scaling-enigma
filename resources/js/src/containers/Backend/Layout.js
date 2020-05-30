@@ -76,7 +76,7 @@ class BackEnd extends Component {
                 </div>
 
                 <footer className="position-absolute d-none d-sm-block py-3 px-4 bg-brokenblue text-white">
-                    <strong className="text-orange text-large">&copy;</strong> Copyright {new Date().getFullYear()} <strong><Link to="/" className="text-white">GIT Request Management System</Link></strong>. All rights reserved by <strong className="text-orange">Briluce Services</strong>.
+                    <strong className="text-orange text-large">&copy;</strong> Copyright {new Date().getFullYear()} <strong><Link to="/" className="text-white">GIT Request Management System</Link></strong>. All rights reserved by <strong className="text-orange">GIT Developers</strong>.
                 </footer>
             </main>
         </div>;
