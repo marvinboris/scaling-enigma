@@ -997,7 +997,7 @@ var Edit = /*#__PURE__*/function (_Component) {
         className: request.status === 2 ? 'text-700 text-' + colors[request.status] : '',
         label: "Cancelled",
         inline: true
-      }))), +status === 2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], {
+      }))), +status === 2 && +request.status < 2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], {
         className: "text-700",
         "for": "comments"
       }, "Reason"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], {
@@ -1012,7 +1012,7 @@ var Edit = /*#__PURE__*/function (_Component) {
       }, "Attach files"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["CustomInput"], {
         type: "file",
         id: "admin_files",
-        name: "admin_files",
+        name: "admin_files[]",
         multiple: true,
         accept: ".png,.jpg,.jpeg,.pdf",
         onChange: this.inputChangedHandler,

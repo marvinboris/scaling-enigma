@@ -19,6 +19,7 @@ import RotateImg from "../../assets/images/Group 624@2x.png";
 import FridolinBruno from "../../assets/images/man-in-suit2@2x.png";
 import JaffGodwill from "../../assets/images/images@2x.png";
 import SamuelRolande from "../../assets/images/33a762719ceb41b28820b45364c02eec@2x.png";
+import { Link } from "react-router-dom";
 
 const Li = ({ children }) => <div className="text-secondary"><FontAwesomeIcon icon={faCircle} className="mr-2" size="sm" />{children}</div>;
 
@@ -40,8 +41,8 @@ export default class Home extends Component {
                                         try it now.
                                     </div>
 
-                                    <BetweenButton icon={faPaperPlane} pill className="py-3 px-4 mr-2" color="darkblue">Submit a request</BetweenButton>
-                                    <BetweenButton icon={faCheck} pill className="py-3 px-4" color="yellow">Check request</BetweenButton>
+                                    <Link to="/request"><BetweenButton icon={faPaperPlane} pill className="py-3 px-4 mr-2" color="darkblue">Submit a request</BetweenButton></Link>
+                                    <Link to="/request/check"><BetweenButton icon={faCheck} pill className="py-3 px-4" color="yellow">Check request</BetweenButton></Link>
                                 </div>
                             </Col>
 

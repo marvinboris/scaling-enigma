@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Issue;
+use App\Mail\RequestSubmitted;
 use App\Platform;
 use App\Request as AppRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RequestController extends Controller
 {
@@ -35,26 +37,31 @@ class RequestController extends Controller
 
         $documents = [];
         $issue_files = [];
+
+        $requestDocuments = $request->documents ? $request->documents : [];
+        $requestIssueFiles = $request->issue_files ? $request->issue_files : [];
         $reqid = AppRequest::reqid();
-        foreach ($request->documents as $document) {
+        foreach ($requestDocuments as $document) {
             $name = $reqid . ' - ' . $document->getClientOriginalName();
             $document->move('requests', $name);
             $documents[] = htmlspecialchars($name);
         }
-        foreach ($request->issue_files as $issue_file) {
+        foreach ($requestIssueFiles as $issue_file) {
             $name = $reqid . ' - ' . $document->getClientOriginalName();
             $issue_file->move('requests', $name);
             $issue_files[] = htmlspecialchars($name);
         }
 
         $name = ucwords(strtolower($request->name));
-        AppRequest::create(array_merge($request->except(['documents', 'issue_files', 'code', 'name', 'phone']), [
+        $appRequest = AppRequest::create(array_merge($request->except(['documents', 'issue_files', 'code', 'name', 'phone']), [
             'name' => $name,
             'reqid' => $reqid,
             'phone' => $request->code . $request->phone,
             'documents' => json_encode($documents),
             'issue_files' => json_encode($issue_files),
         ]));
+
+        Mail::to($request->email)->send(new RequestSubmitted($appRequest));
 
         return response()->json([
             'reqid' => $reqid,

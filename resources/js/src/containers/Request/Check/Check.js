@@ -174,9 +174,11 @@ class Request extends Component {
                                 Status: <span className={'text-' + colors[status]}>{texts[status]}</span>
                             </FormGroup>
                             {comments ? <FormGroup className="col-xl-9">
-                                <Input type="textarea" readOnly value={comments} className="border-light text-secondary" />
+                                <Input type="textarea" readOnly value={comments} height={250} className="border-light text-secondary" />
                             </FormGroup> : null}
-                            {admin_files && admin_files.length > 0 ? adminFilesContent : null}
+                            {admin_files && admin_files.length > 0 ? <FormGroup className="col-12">
+                                <Row>{adminFilesContent}</Row>
+                            </FormGroup> : null}
 
                             <Col xs={12}>
                                 <hr />
@@ -184,8 +186,7 @@ class Request extends Component {
                         </Row>
                     </FormBlock>
 
-                    <FormBlock
-                        title="User info Gathering">
+                    <FormBlock title="User info Gathering">
                         <Row className="col-xl-9 px-0">
                             <MyInput className="col-md-6" type="text" value={name} readonly />
                             <MyInput className="col-md-6" type="text" value={platform.name} readonly />
@@ -202,9 +203,7 @@ class Request extends Component {
                         </Row>
                     </FormBlock>
 
-                    <FormBlock
-                        title="User documents"
-                        subtitle="Please upload recommended documents">
+                    <FormBlock title="User documents">
                         <Col xl={9} className="px-0">
                             <FormGroup className="d-flex align-items-center">
                                 <Row>
@@ -214,9 +213,7 @@ class Request extends Component {
                         </Col>
                     </FormBlock>
 
-                    <FormBlock
-                        title="Issue description"
-                        subtitle="Please provide a detailed description of the problem you are facing">
+                    <FormBlock title="Issue description">
                         <Col xl={9} className="px-0">
                             <FormGroup className="px-0 col-xl-9">
                                 <Input type="textarea" value={description} readOnly style={{ height: 250 }} className="border-light text-secondary" />

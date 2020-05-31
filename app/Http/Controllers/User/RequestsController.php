@@ -80,7 +80,8 @@ class RequestsController extends Controller
         ]);
 
         $admin_files = [];
-        foreach ($request->admin_files as $admin_file) {
+        $requestAdminFiles = $request->admin_files ? $request->admin_files : [];
+        foreach ($requestAdminFiles as $admin_file) {
             $name = $appRequest->reqid . ' - ' . $admin_file->getClientOriginalName();
             $admin_file->move('requests', $name);
             $admin_files[] = htmlspecialchars($name);

@@ -562,8 +562,11 @@ var Request = /*#__PURE__*/function (_Component) {
             type: "textarea",
             readOnly: true,
             value: comments,
+            height: 250,
             className: "border-light text-secondary"
-          })) : null, admin_files && admin_files.length > 0 ? adminFilesContent : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+          })) : null, admin_files && admin_files.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+            className: "col-12"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, adminFilesContent)) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
             xs: 12
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
             title: "User info Gathering"
@@ -620,16 +623,14 @@ var Request = /*#__PURE__*/function (_Component) {
             value: issue.name,
             readonly: true
           }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
-            title: "User documents",
-            subtitle: "Please upload recommended documents"
+            title: "User documents"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
             xl: 9,
             className: "px-0"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
             className: "d-flex align-items-center"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, documentsContent)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
-            title: "Issue description",
-            subtitle: "Please provide a detailed description of the problem you are facing"
+            title: "Issue description"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
             xl: 9,
             className: "px-0"
