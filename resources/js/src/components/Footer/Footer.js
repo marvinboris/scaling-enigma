@@ -9,7 +9,7 @@ import './Footer.css';
 
 const footer = () => (
     <div className="Footer bg-white text-secondary">
-        <footer className="container py-5">
+        <footer className="container d-none d-md-block py-5">
             <Row>
                 <Col>
                     <FooterBlock title="FOLLOW US">

@@ -68,7 +68,7 @@ class Pending extends Component {
                 feedback = <Feedback message={message} />;
 
                 const requestsData = requests.map(request => {
-                    const colors = ['orange', 'primary', 'danger', 'success'];
+                    const colors = ['orange', 'blue', 'red', 'green'];
                     const texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
                     const icons = [faSpinner, faSpinner, faTimesCircle, faCheckCircle];
 
@@ -143,12 +143,12 @@ class Pending extends Component {
                                 <hr />
                             </Col>
                             <I label="Full Name">{request.name}</I>
-                            <I label="Platform">{request.platform.name}</I>
+                            <I label="Platform">{request.platform}</I>
                             <I label="E-Mail Address">{request.email}</I>
                             <I label="User ID">{request.ref}</I>
                             <I label="Country">{country ? country.name : null}</I>
                             <I label="Phone Number">{request.phone}</I>
-                            <I label="Issue">{request.issue.name}</I>
+                            <I label="Issue">{request.issue}</I>
                         </Row>
 
                         <Row className="mt-4 mx-0 p-3 rounded bg-orange-20">

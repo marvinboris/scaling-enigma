@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Col, Row, Form, Container, Input, FormGroup, Label, CustomInput } from 'reactstrap';
+import { Col, Row, Form, Container, Input, FormGroup, Label, CustomInput, Table } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faFilePdf, faPaperPlane, faFile, faFileImage } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faFilePdf, faPaperPlane, faFile, faFileImage, faCheckCircle, faSpinner, faTimesCircle, faUser, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import BetweenButton from '../../../components/UI/Button/BetweenButton/BetweenButton';
 import MyInput from '../../../components/UI/Input/Input';
@@ -13,12 +13,19 @@ import Download from '../../../components/Backend/UI/Download/Download';
 
 import * as actions from '../../../store/actions';
 
+import './Check.css';
+
 const FormBlock = ({ title, subtitle, children }) => <div className="mt-5">
     <h5 className="text-darkblue">{title}</h5>
     <div className="text-secondary text-300">{subtitle}</div>
 
     <div className="mt-4">{children}</div>
 </div>;
+
+const TableRow = ({ label, border, children }) => <tr>
+    <td className={border ? border : ""}>{label}</td>
+    <td className={"text-700 " + (border ? border : "")}>{children}</td>
+</tr>;
 
 class Request extends Component {
     state = {
@@ -41,6 +48,10 @@ class Request extends Component {
         this.setState({ countries });
     }
 
+    componentWillUnmount() {
+        this.props.onResetRequest();
+    }
+
     inputChangedHandler = e => {
         const { name, value } = e.target;
         this.setState({ [name]: value });
@@ -55,13 +66,49 @@ class Request extends Component {
         const { reqid, countries } = this.state;
         const { frontend: { request: { loading, error, message, request } } } = this.props;
 
+        const colors = ['orange', 'blue', 'red', 'green'];
+        const texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
+        const icons = [faSpinner, faSpinner, faTimesCircle, faCheckCircle];
+        let width;
+        if (request) {
+            if (request.status < 2) width = 10 + (45) * request.status;
+            else width = 100;
+            width = width + '%';
+        }
+
         let errors;
-        const form = <Form inline onSubmit={this.submitHandler}>
-            <FormGroup>
-                <MyInput type="text" name="reqid" id="reqid" onChange={this.inputChangedHandler} value={reqid} placeholder="Request ID" />
-            </FormGroup>
-            <BetweenButton icon={faPaperPlane} pill className="ml-3 py-3 px-4" color="darkblue">Submit</BetweenButton>
-        </Form>;
+        const form = <div className="d-flex align-items-center flex-wrap">
+            <Form className="d-flex align-items-start" onSubmit={this.submitHandler}>
+                <FormGroup className="pr-3">
+                    <MyInput type="text" name="reqid" id="reqid" onChange={this.inputChangedHandler} value={reqid} placeholder="Request ID" />
+                </FormGroup>
+                <BetweenButton icon={faCheckCircle} pill className="ml-md-3 py-3 px-4" color="yellow">Check</BetweenButton>
+            </Form>
+
+            {request ? <div className="ml-lg-5 mr-4 mt-5 mt-md-0 py-4 position-relative flex-fill">
+                <div className={"position-absolute text-700 text-orange" + (request.status > 0 ? "-50" : "")} style={{ bottom: 'calc(100% + 10px)', left: '10%', transform: 'translateX(-50%)' }}>Pending</div>
+                {request.status > 0 ? <>
+                    <div className={"position-absolute text-700 text-blue" + (request.status > 1 ? "-50" : "")} style={{ bottom: 'calc(100% + 10px)', left: '55%', transform: 'translateX(-50%)' }}>Processing</div>
+                </> : null}
+                {request.status > 1 ? <>
+                    {request.status === 3 ?
+                        <div className={"position-absolute text-700 text-green"} style={{ bottom: 'calc(100% + 10px)', left: '100%', transform: 'translateX(-50%)' }}>Solved</div>
+                        : <div className={"position-absolute text-700 text-red"} style={{ bottom: 'calc(100% + 10px)', left: '100%', transform: 'translateX(-50%)' }}>Cancelled</div>}
+                </> : null}
+                <div className={"position-absolute triangle bg-" + colors[request.status] + "-25"} style={{ width: 25, height: 25, top: 'calc(100% + 1rem)', left: width, clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }} />
+
+                <div className="rounded overflow-hidden" style={{ background: '#d2d2d2', height: 7 }}>
+                    <div className={"h-100 bg-" + colors[request.status]} style={{ width }} />
+                </div>
+                <div className="position-absolute d-inline" style={{ top: '50%', left: width, transform: 'translate(-50%,-50%)' }}>
+                    <div className={"d-flex justify-content-center align-items-center bg-white rounded-circle border border-2 border-" + colors[request.status]} style={{ width: 25, height: 25 }}>
+                        {/* <div className={"rounded-circle d-flex text-center align-items-center shadow-sm bg-" + colors[request.status]} style={{ width: 18, height: 18 }}> */}
+                        <FontAwesomeIcon icon={icons[request.status]} className={"text-" + colors[request.status] + " " + ([0, 1].includes(request.status) ? "fa-spin" : '')} fixedWidth size="sm" />
+                        {/* </div> */}
+                    </div>
+                </div>
+            </div> : null}
+        </div>;
         let content;
         if (loading || countries.length === 0) content = <CustomSpinner />;
         else {
@@ -163,12 +210,19 @@ class Request extends Component {
                     </Col>
                 }) : null;
 
-                const colors = ['orange', 'primary', 'danger', 'success'];
-                const texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
+                const tableContent = <>
+                    <TableRow border={"border border-" + colors[status]} label="Full Name">{name}</TableRow>
+                    <TableRow border={"border border-" + colors[status]} label="Selected Platform">{platform.name}</TableRow>
+                    <TableRow border={"border border-" + colors[status]} label="E-Mail Address">{email}</TableRow>
+                    <TableRow border={"border border-" + colors[status]} label="User ID">{ref}</TableRow>
+                    <TableRow border={"border border-" + colors[status]} label="Country">{countryEl.name}</TableRow>
+                    <TableRow border={"border border-" + colors[status]} label="Phone Number">{phone}</TableRow>
+                    <TableRow border={"border border-" + colors[status]} label="Isue Selected">{issue.name}</TableRow>
+                </>;
 
-                content = <div>
+                content = <div className="pt-3">
                     {feedback}
-                    <FormBlock title="Support feedback">
+                    {/* <FormBlock title="Support feedback">
                         <Row className="col-xl-9 px-0">
                             <FormGroup className="col-12 text-700">
                                 Status: <span className={'text-' + colors[status]}>{texts[status]}</span>
@@ -184,54 +238,47 @@ class Request extends Component {
                                 <hr />
                             </Col>
                         </Row>
-                    </FormBlock>
+                    </FormBlock> */}
 
-                    <FormBlock title="User info Gathering">
-                        <Row className="col-xl-9 px-0">
-                            <MyInput className="col-md-6" type="text" value={name} readonly />
-                            <MyInput className="col-md-6" type="text" value={platform.name} readonly />
-                            <MyInput className="col-md-6" type="email" value={email} readonly />
-                            <MyInput className="col-md-6" type="text" value={ref} placeholder="User ID" readonly />
-                            <MyInput className="col-md-6" type="text" addon={<span className="text-secondary text-small d-inline-flex">
-                                <div className="rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center" style={{ width: 30, height: 30 }}>
-                                    <span className={`flag-icon text-xx-large position-absolute flag-icon-${country.toLowerCase()}`} />
-                                </div>
-                            </span>} value={countryEl.name} readonly />
-                            <MyInput type="tel" className="col-md-6" addon={<span className="text-secondary text-small">+{countryEl.code}</span>} value={phone} readonly />
+                    <div className={"rounded-2 text-secondary p-1 bg-" + colors[status] + "-25"}>
+                        <div className={"py-3 px-4 d-flex justify-content-between flex-wrap align-items-center border-bottom border-2 border-" + colors[status]}>
+                            <div>
+                                <FontAwesomeIcon icon={faUser} className={"mr-2 text-" + colors[status]} />Information <span className="text-700">provided</span>
+                            </div>
 
-                            <MyInput className="col-md-6" type="text" value={issue.name} readonly />
-                        </Row>
-                    </FormBlock>
+                            <div>
+                                <FontAwesomeIcon icon={faUser} className={"mr-2 text-" + colors[status]} />Request Status :
+                                <span className={"pl-4 text-" + colors[status]}>
+                                    <FontAwesomeIcon icon={icons[status]} className={[0, 1].includes(status) ? "fa-spin" : ""} />
+                                    <span className="ml-2 text-700">{texts[status]}</span>
+                                </span>
+                            </div>
+                        </div>
 
-                    <FormBlock title="User documents">
-                        <Col xl={9} className="px-0">
-                            <FormGroup className="d-flex align-items-center">
-                                <Row>
-                                    {documentsContent}
-                                </Row>
-                            </FormGroup>
-                        </Col>
-                    </FormBlock>
+                        <div className={"p-4"}>
+                            <Row>
+                                <Col lg={6}>
+                                    <Table borderless className={"text-secondary border border-" + colors[status]}>
+                                        <tbody>
+                                            {tableContent}
+                                        </tbody>
+                                    </Table>
+                                </Col>
 
-                    <FormBlock title="Issue description">
-                        <Col xl={9} className="px-0">
-                            <FormGroup className="px-0 col-xl-9">
-                                <Input type="textarea" value={description} readOnly style={{ height: 250 }} className="border-light text-secondary" />
-                            </FormGroup>
+                                <Col lg={6}>
+                                    <div className="mb-3"><FontAwesomeIcon icon={faEdit} className={"mr-2 text-" + colors[status]} />Issue description</div>
 
-                            <FormGroup className="d-flex align-items-center">
-                                <div>
-                                    {issueFilesContent}
-                                </div>
-                            </FormGroup>
-                        </Col>
-                    </FormBlock>
+                                    <div className={"text-justify py-4 px-4 bg-white-20 rounded-1 border border-" + colors[status] + "-50"} style={{ height: 298, overflowY: 'auto' }}>{description}</div>
+                                </Col>
+                            </Row>
+                        </div>
+                    </div>
                 </div>;
             }
         }
 
         return (
-            <Container>
+            <Container className="Check">
                 <Row className="pt-5">
                     <Col lg={8} className="pt-5">
                         <h1 className="text-700 text-darkblue">Check a request of yours</h1>
@@ -258,6 +305,7 @@ const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
     onPostCheckRequest: data => dispatch(actions.postCheckRequest(data)),
+    onResetRequest: () => dispatch(actions.resetRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Request);

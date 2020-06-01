@@ -110,8 +110,8 @@ class RequestsController extends Controller
 
         foreach ($filteredRequests as $filteredRequest) {
             $requests[] = array_merge($filteredRequest->toArray(), [
-                'platform' => $filteredRequest->platform,
-                'issue' => $filteredRequest->issue,
+                'platform' => $filteredRequest->platform->name,
+                'issue' => $filteredRequest->issue->name,
             ]);
         }
 
@@ -152,8 +152,8 @@ class RequestsController extends Controller
 
         foreach ($filteredRequests as $filteredRequest) {
             $requests[] = array_merge($filteredRequest->toArray(), [
-                'platform' => $filteredRequest->platform,
-                'issue' => $filteredRequest->issue,
+                'platform' => $filteredRequest->platform->name,
+                'issue' => $filteredRequest->issue->name,
             ]);
         }
 

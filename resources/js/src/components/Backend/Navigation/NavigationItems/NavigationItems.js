@@ -30,12 +30,12 @@ export default ({ name, sidedrawerToggle, logoutHandler, role, pending = [], pro
                     <Badge color="orange" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
                 </Link>
                 <Link className="position-relative" to="/user/requests/pending">
-                    <Button color="primary" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Processing</span><FontAwesomeIcon icon={faSpinner} className="fa-spin" /></Button>
-                    <Badge color="primary" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
+                    <Button color="blue" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Processing</span><FontAwesomeIcon icon={faSpinner} className="fa-spin" /></Button>
+                    <Badge color="blue" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
                 </Link>
                 <Link className="position-relative" to="/user/requests/solved">
-                    <Button color="success" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Solved</span><FontAwesomeIcon icon={faCheckCircle} /></Button>
-                    <Badge color="success" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
+                    <Button color="green" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Solved</span><FontAwesomeIcon icon={faCheckCircle} /></Button>
+                    <Badge color="green" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
                 </Link>
             </div>
         </Nav>

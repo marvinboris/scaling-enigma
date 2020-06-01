@@ -53,7 +53,7 @@ class Layout extends Component {
         else if (url.includes('user')) content = <BackendLayout>{children}</BackendLayout>;
         else content = <>
             <Toolbar isAuth={token !== null} name={name} notifications={notifications} role={role} logoutHandler={logoutHandler} drawerToggleClicked={sideDrawerToggleHandler} />
-            <main className="Content w-100 bg-white" style={{ overflowX: 'hidden' }}>
+            <main className="Content w-100 bg-white" style={{ overflowX: 'hidden', minHeight: 'calc(100vh - 105px)' }}>
                 {children}
             </main>
             <Footer />

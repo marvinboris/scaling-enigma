@@ -12981,6 +12981,10 @@ a.text-dark:focus {
   color: rgba(4, 157, 39, 0.2);
 }
 
+.text-green-50 {
+  color: rgba(4, 157, 39, 0.5);
+}
+
 .badge-green {
   background-color: #049d27 !important;
   color: #ffffff !important;
@@ -12996,6 +13000,10 @@ a.text-dark:focus {
 
 .bg-green-20 {
   background-color: rgba(4, 157, 39, 0.2) !important;
+}
+
+.bg-green-25 {
+  background-color: rgba(4, 157, 39, 0.25) !important;
 }
 
 .bg-green-33 {
@@ -13100,6 +13108,10 @@ a.text-dark:focus {
   color: rgba(246, 255, 1, 0.2);
 }
 
+.text-lemongreen-50 {
+  color: rgba(246, 255, 1, 0.5);
+}
+
 .badge-lemongreen {
   background-color: #f6ff01 !important;
   color: #343a40 !important;
@@ -13115,6 +13127,10 @@ a.text-dark:focus {
 
 .bg-lemongreen-20 {
   background-color: rgba(246, 255, 1, 0.2) !important;
+}
+
+.bg-lemongreen-25 {
+  background-color: rgba(246, 255, 1, 0.25) !important;
 }
 
 .bg-lemongreen-33 {
@@ -13219,6 +13235,10 @@ a.text-dark:focus {
   color: rgba(1, 40, 64, 0.2);
 }
 
+.text-darkgreen-50 {
+  color: rgba(1, 40, 64, 0.5);
+}
+
 .badge-darkgreen {
   background-color: #012840 !important;
   color: #ffffff !important;
@@ -13234,6 +13254,10 @@ a.text-dark:focus {
 
 .bg-darkgreen-20 {
   background-color: rgba(1, 40, 64, 0.2) !important;
+}
+
+.bg-darkgreen-25 {
+  background-color: rgba(1, 40, 64, 0.25) !important;
 }
 
 .bg-darkgreen-33 {
@@ -13338,6 +13362,10 @@ a.text-dark:focus {
   color: rgba(4, 22, 108, 0.2);
 }
 
+.text-darkblue-50 {
+  color: rgba(4, 22, 108, 0.5);
+}
+
 .badge-darkblue {
   background-color: #04166C !important;
   color: #ffffff !important;
@@ -13353,6 +13381,10 @@ a.text-dark:focus {
 
 .bg-darkblue-20 {
   background-color: rgba(4, 22, 108, 0.2) !important;
+}
+
+.bg-darkblue-25 {
+  background-color: rgba(4, 22, 108, 0.25) !important;
 }
 
 .bg-darkblue-33 {
@@ -13457,6 +13489,10 @@ a.text-dark:focus {
   color: rgba(245, 161, 14, 0.2);
 }
 
+.text-yellow-50 {
+  color: rgba(245, 161, 14, 0.5);
+}
+
 .badge-yellow {
   background-color: #f5a10e !important;
   color: #ffffff !important;
@@ -13472,6 +13508,10 @@ a.text-dark:focus {
 
 .bg-yellow-20 {
   background-color: rgba(245, 161, 14, 0.2) !important;
+}
+
+.bg-yellow-25 {
+  background-color: rgba(245, 161, 14, 0.25) !important;
 }
 
 .bg-yellow-33 {
@@ -13576,6 +13616,10 @@ a.text-dark:focus {
   color: rgba(200, 130, 8, 0.2);
 }
 
+.text-darkyellow-50 {
+  color: rgba(200, 130, 8, 0.5);
+}
+
 .badge-darkyellow {
   background-color: #c88208 !important;
   color: #ffffff !important;
@@ -13591,6 +13635,10 @@ a.text-dark:focus {
 
 .bg-darkyellow-20 {
   background-color: rgba(200, 130, 8, 0.2) !important;
+}
+
+.bg-darkyellow-25 {
+  background-color: rgba(200, 130, 8, 0.25) !important;
 }
 
 .bg-darkyellow-33 {
@@ -13695,6 +13743,10 @@ a.text-dark:focus {
   color: rgba(255, 11, 51, 0.2);
 }
 
+.text-red-50 {
+  color: rgba(255, 11, 51, 0.5);
+}
+
 .badge-red {
   background-color: #ff0b33 !important;
   color: #ffffff !important;
@@ -13710,6 +13762,10 @@ a.text-dark:focus {
 
 .bg-red-20 {
   background-color: rgba(255, 11, 51, 0.2) !important;
+}
+
+.bg-red-25 {
+  background-color: rgba(255, 11, 51, 0.25) !important;
 }
 
 .bg-red-33 {
@@ -13814,6 +13870,10 @@ a.text-dark:focus {
   color: rgba(246, 9, 41, 0.2);
 }
 
+.text-purered-50 {
+  color: rgba(246, 9, 41, 0.5);
+}
+
 .badge-purered {
   background-color: #f60929 !important;
   color: #ffffff !important;
@@ -13829,6 +13889,10 @@ a.text-dark:focus {
 
 .bg-purered-20 {
   background-color: rgba(246, 9, 41, 0.2) !important;
+}
+
+.bg-purered-25 {
+  background-color: rgba(246, 9, 41, 0.25) !important;
 }
 
 .bg-purered-33 {
@@ -13936,6 +14000,10 @@ a.text-dark:focus {
   color: rgba(231, 147, 0, 0.2);
 }
 
+.text-orange-50 {
+  color: rgba(231, 147, 0, 0.5);
+}
+
 .badge-orange {
   background-color: #e79300 !important;
   color: #ffffff !important;
@@ -13951,6 +14019,10 @@ a.text-dark:focus {
 
 .bg-orange-20 {
   background-color: rgba(231, 147, 0, 0.2) !important;
+}
+
+.bg-orange-25 {
+  background-color: rgba(231, 147, 0, 0.25) !important;
 }
 
 .bg-orange-33 {
@@ -14055,6 +14127,10 @@ a.text-dark:focus {
   color: rgba(246, 126, 9, 0.2);
 }
 
+.text-oranger-50 {
+  color: rgba(246, 126, 9, 0.5);
+}
+
 .badge-oranger {
   background-color: #f67e09 !important;
   color: #ffffff !important;
@@ -14070,6 +14146,10 @@ a.text-dark:focus {
 
 .bg-oranger-20 {
   background-color: rgba(246, 126, 9, 0.2) !important;
+}
+
+.bg-oranger-25 {
+  background-color: rgba(246, 126, 9, 0.25) !important;
 }
 
 .bg-oranger-33 {
@@ -14174,6 +14254,10 @@ a.text-dark:focus {
   color: rgba(141, 0, 75, 0.2);
 }
 
+.text-scarlet-50 {
+  color: rgba(141, 0, 75, 0.5);
+}
+
 .badge-scarlet {
   background-color: #8d004b !important;
   color: #ffffff !important;
@@ -14189,6 +14273,10 @@ a.text-dark:focus {
 
 .bg-scarlet-20 {
   background-color: rgba(141, 0, 75, 0.2) !important;
+}
+
+.bg-scarlet-25 {
+  background-color: rgba(141, 0, 75, 0.25) !important;
 }
 
 .bg-scarlet-33 {
@@ -14293,6 +14381,10 @@ a.text-dark:focus {
   color: rgba(0, 29, 174, 0.2);
 }
 
+.text-blue-50 {
+  color: rgba(0, 29, 174, 0.5);
+}
+
 .badge-blue {
   background-color: #001DAE !important;
   color: #ffffff !important;
@@ -14308,6 +14400,10 @@ a.text-dark:focus {
 
 .bg-blue-20 {
   background-color: rgba(0, 29, 174, 0.2) !important;
+}
+
+.bg-blue-25 {
+  background-color: rgba(0, 29, 174, 0.25) !important;
 }
 
 .bg-blue-33 {
@@ -14412,6 +14508,10 @@ a.text-dark:focus {
   color: rgba(0, 48, 90, 0.2);
 }
 
+.text-brokenblue-50 {
+  color: rgba(0, 48, 90, 0.5);
+}
+
 .badge-brokenblue {
   background-color: #00305A !important;
   color: #ffffff !important;
@@ -14427,6 +14527,10 @@ a.text-dark:focus {
 
 .bg-brokenblue-20 {
   background-color: rgba(0, 48, 90, 0.2) !important;
+}
+
+.bg-brokenblue-25 {
+  background-color: rgba(0, 48, 90, 0.25) !important;
 }
 
 .bg-brokenblue-33 {
@@ -14531,6 +14635,10 @@ a.text-dark:focus {
   color: rgba(223, 8, 115, 0.2);
 }
 
+.text-pink-50 {
+  color: rgba(223, 8, 115, 0.5);
+}
+
 .badge-pink {
   background-color: #df0873 !important;
   color: #ffffff !important;
@@ -14546,6 +14654,10 @@ a.text-dark:focus {
 
 .bg-pink-20 {
   background-color: rgba(223, 8, 115, 0.2) !important;
+}
+
+.bg-pink-25 {
+  background-color: rgba(223, 8, 115, 0.25) !important;
 }
 
 .bg-pink-33 {
@@ -14650,6 +14762,10 @@ a.text-dark:focus {
   color: rgba(0, 9, 55, 0.2);
 }
 
+.text-nightblue-50 {
+  color: rgba(0, 9, 55, 0.5);
+}
+
 .badge-nightblue {
   background-color: #000937 !important;
   color: #ffffff !important;
@@ -14665,6 +14781,10 @@ a.text-dark:focus {
 
 .bg-nightblue-20 {
   background-color: rgba(0, 9, 55, 0.2) !important;
+}
+
+.bg-nightblue-25 {
+  background-color: rgba(0, 9, 55, 0.25) !important;
 }
 
 .bg-nightblue-33 {
@@ -14769,6 +14889,10 @@ a.text-dark:focus {
   color: rgba(255, 255, 255, 0.2);
 }
 
+.text-white-50 {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .badge-white {
   background-color: #ffffff !important;
   color: #000000 !important;
@@ -14784,6 +14908,10 @@ a.text-dark:focus {
 
 .bg-white-20 {
   background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.bg-white-25 {
+  background-color: rgba(255, 255, 255, 0.25) !important;
 }
 
 .bg-white-33 {
@@ -14888,6 +15016,10 @@ a.text-dark:focus {
   color: rgba(0, 0, 0, 0.2);
 }
 
+.text-black-50 {
+  color: rgba(0, 0, 0, 0.5);
+}
+
 .badge-black {
   background-color: #000000 !important;
   color: #ffffff !important;
@@ -14903,6 +15035,10 @@ a.text-dark:focus {
 
 .bg-black-20 {
   background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.bg-black-25 {
+  background-color: rgba(0, 0, 0, 0.25) !important;
 }
 
 .bg-black-33 {
@@ -15007,6 +15143,10 @@ a.text-dark:focus {
   color: rgba(170, 170, 170, 0.2);
 }
 
+.text-gray-50 {
+  color: rgba(170, 170, 170, 0.5);
+}
+
 .badge-gray {
   background-color: #aaa !important;
   color: #ffffff !important;
@@ -15022,6 +15162,10 @@ a.text-dark:focus {
 
 .bg-gray-20 {
   background-color: rgba(170, 170, 170, 0.2) !important;
+}
+
+.bg-gray-25 {
+  background-color: rgba(170, 170, 170, 0.25) !important;
 }
 
 .bg-gray-33 {
@@ -15126,6 +15270,10 @@ a.text-dark:focus {
   color: rgba(27, 34, 63, 0.2);
 }
 
+.text-darklight-50 {
+  color: rgba(27, 34, 63, 0.5);
+}
+
 .badge-darklight {
   background-color: #1b223f !important;
   color: #ffffff !important;
@@ -15141,6 +15289,10 @@ a.text-dark:focus {
 
 .bg-darklight-20 {
   background-color: rgba(27, 34, 63, 0.2) !important;
+}
+
+.bg-darklight-25 {
+  background-color: rgba(27, 34, 63, 0.25) !important;
 }
 
 .bg-darklight-33 {
@@ -15245,6 +15397,10 @@ a.text-dark:focus {
   color: rgba(96, 96, 96, 0.2);
 }
 
+.text-border-50 {
+  color: rgba(96, 96, 96, 0.5);
+}
+
 .badge-border {
   background-color: #606060 !important;
   color: #ffffff !important;
@@ -15260,6 +15416,10 @@ a.text-dark:focus {
 
 .bg-border-20 {
   background-color: rgba(96, 96, 96, 0.2) !important;
+}
+
+.bg-border-25 {
+  background-color: rgba(96, 96, 96, 0.25) !important;
 }
 
 .bg-border-33 {
@@ -15364,6 +15524,10 @@ a.text-dark:focus {
   color: rgba(202, 202, 202, 0.2);
 }
 
+.text-light-50 {
+  color: rgba(202, 202, 202, 0.5);
+}
+
 .badge-light {
   background-color: #cacaca !important;
   color: #000000 !important;
@@ -15379,6 +15543,10 @@ a.text-dark:focus {
 
 .bg-light-20 {
   background-color: rgba(202, 202, 202, 0.2) !important;
+}
+
+.bg-light-25 {
+  background-color: rgba(202, 202, 202, 0.25) !important;
 }
 
 .bg-light-33 {
@@ -15483,6 +15651,10 @@ a.text-dark:focus {
   color: rgba(40, 50, 76, 0.2);
 }
 
+.text-input-50 {
+  color: rgba(40, 50, 76, 0.5);
+}
+
 .badge-input {
   background-color: #28324C !important;
   color: #ffffff !important;
@@ -15498,6 +15670,10 @@ a.text-dark:focus {
 
 .bg-input-20 {
   background-color: rgba(40, 50, 76, 0.2) !important;
+}
+
+.bg-input-25 {
+  background-color: rgba(40, 50, 76, 0.25) !important;
 }
 
 .bg-input-33 {
@@ -15602,6 +15778,10 @@ a.text-dark:focus {
   color: rgba(0, 0, 0, 0.2);
 }
 
+.text-transparent-50 {
+  color: rgba(0, 0, 0, 0.5);
+}
+
 .badge-transparent {
   background-color: transparent !important;
   color: #000000 !important;
@@ -15617,6 +15797,10 @@ a.text-dark:focus {
 
 .bg-transparent-20 {
   background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.bg-transparent-25 {
+  background-color: rgba(0, 0, 0, 0.25) !important;
 }
 
 .bg-transparent-33 {
@@ -15721,6 +15905,10 @@ a.text-dark:focus {
   color: rgba(233, 233, 233, 0.2);
 }
 
+.text-soft-50 {
+  color: rgba(233, 233, 233, 0.5);
+}
+
 .badge-soft {
   background-color: #E9E9E9 !important;
   color: #000000 !important;
@@ -15736,6 +15924,10 @@ a.text-dark:focus {
 
 .bg-soft-20 {
   background-color: rgba(233, 233, 233, 0.2) !important;
+}
+
+.bg-soft-25 {
+  background-color: rgba(233, 233, 233, 0.25) !important;
 }
 
 .bg-soft-33 {
@@ -32283,7 +32475,7 @@ body {
 }
 
 .full-height-user {
-  min-height: calc(100vh - 101px);
+  min-height: calc(100vh - 70px);
 }
 
 .full-height-app {

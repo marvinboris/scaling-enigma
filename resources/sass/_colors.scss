@@ -54,6 +54,10 @@ $colors: "green" $mygreen $white, "lemongreen" $mylemongreen $dark, "darkgreen" 
     color: rgba($color, 0.2);
   }
 
+  .text-#{$name}-50 {
+    color: rgba($color, 0.5);
+  }
+
   .badge-#{$name} {
     background-color: $color !important;
     color: $font !important;
@@ -69,6 +73,10 @@ $colors: "green" $mygreen $white, "lemongreen" $mylemongreen $dark, "darkgreen" 
 
   .bg-#{$name}-20 {
     background-color: rgba($color, 0.2) !important;
+  }
+
+  .bg-#{$name}-25 {
+    background-color: rgba($color, 0.25) !important;
   }
 
   .bg-#{$name}-33 {

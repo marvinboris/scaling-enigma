@@ -1,0 +1,9 @@
+.Check .triangle {
+    transform: translate(-50%, -100%);
+}
+
+@media (min-width: 768px) {
+    .Check .triangle {
+        transform: translate(-50%, -9px);
+    }
+}

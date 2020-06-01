@@ -218,7 +218,7 @@ var Solved = /*#__PURE__*/function (_Component) {
             message: message
           });
           var requestsData = requests.map(function (request) {
-            var colors = ['orange', 'primary', 'danger', 'success'];
+            var colors = ['orange', 'blue', 'red', 'green'];
             var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
             var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCheckCircle"]];
             var country = countries.find(function (_ref2) {
@@ -338,7 +338,7 @@ var Solved = /*#__PURE__*/function (_Component) {
               label: "Full Name"
             }, request.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
               label: "Platform"
-            }, request.platform.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
+            }, request.platform), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
               label: "E-Mail Address"
             }, request.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
               label: "User ID"
@@ -348,7 +348,7 @@ var Solved = /*#__PURE__*/function (_Component) {
               label: "Phone Number"
             }, request.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
               label: "Issue"
-            }, request.issue.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+            }, request.issue)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
               className: "mt-4 mx-0 p-3 rounded bg-orange-20"
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
               xs: 12
