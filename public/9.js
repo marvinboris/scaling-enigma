@@ -267,12 +267,14 @@ var Cancelled = /*#__PURE__*/function (_Component) {
 
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
                 xl: 3,
-                key: name + Math.random(),
+                key: formatlessName + Math.random(),
                 className: "pr-0",
                 style: {
                   minWidth: 100
                 }
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+                target: "_blank",
+                href: doc,
                 className: "rounded-4 overflow-hidden p-2 bg-light d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1"
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFilePdf"],
@@ -382,9 +384,19 @@ var Cancelled = /*#__PURE__*/function (_Component) {
               })
             });
             return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_18__["updateObject"])(request, {
+              ref: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, request.ref, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
+                color: colors[request.status],
+                style: {
+                  width: 20,
+                  height: 20
+                },
+                className: "position-static p-0 ml-2 rounded-circle d-inline-flex justify-content-center align-items-center"
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+                icon: icons[request.status],
+                className: [0, 1].includes(request.status) ? "fa-spin" : "",
+                fixedWidth: true
+              }))),
               created_at: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_18__["convertDate"])(request.created_at),
-              platform: request.platform.name,
-              issue: request.issue.name,
               status: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
                 color: colors[request.status],
                 className: "badge-block position-static"

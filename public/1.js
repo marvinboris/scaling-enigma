@@ -378,7 +378,7 @@ var subtitle = function subtitle(_ref) {
   var children = _ref.children,
       className = _ref.className;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "text-nightblue lead small " + className
+    className: "text-nightblue lead small ml-4 pl-3 " + className
   }, children);
 };
 

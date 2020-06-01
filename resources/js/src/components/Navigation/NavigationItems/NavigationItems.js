@@ -11,8 +11,8 @@ const navigationItems = ({ isAuth, name, logoutHandler, role, cartItemsNumber, n
             <Nav className="d-flex align-items-center" navbar>
                 <NavigationItem font={font} icon={faHome} href="/">Home</NavigationItem>
                 <NavigationItem font={font} icon={faEnvelope} exact={false} href="/request">Request</NavigationItem>
-                <NavigationItem font={font} icon={faCommentDots} href="/forum">Forum</NavigationItem>
-                <NavigationItem font={font} icon={faComments} href="/livechat">LiveChat</NavigationItem>
+                <NavigationItem font={font} icon={faCommentDots} external href="https://forum.liyeplimal.net">Forum</NavigationItem>
+                <NavigationItem font={font} icon={faComments} external href="https://support.liyeplimal.net/livechat">LiveChat</NavigationItem>
             </Nav>
         </Collapse>
     );

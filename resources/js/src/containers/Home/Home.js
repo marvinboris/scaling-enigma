@@ -138,7 +138,7 @@ export default class Home extends Component {
 
                                 <div className="my-5">Start using now</div>
 
-                                <BetweenButton icon={faPaperPlane} pill className="py-3 px-4" color="yellow">Submit a request</BetweenButton>
+                                <Link to="/request"><BetweenButton icon={faPaperPlane} pill className="py-3 px-4" color="yellow">Submit a request</BetweenButton></Link>
                             </Col>
 
                             <Col lg={4}>

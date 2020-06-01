@@ -98,7 +98,7 @@ export default ({ name, messages = [], photo = "https://placehold.it/100x100", r
                     </div>
                 </nav>
             </div>
-            <div className="backdrop w-100 bg-nightblue-50 position-fixed d-md-none" onClick={toggle} style={{ top: 101, zIndex: -1 }} />
+            <div className="backdrop w-100 bg-nightblue-50 position-fixed d-md-none" onClick={toggle} style={{ top: 70, zIndex: -1 }} />
         </Collapse>
     )
 };

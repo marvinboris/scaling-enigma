@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RequestStatus;
 use App\Request as AppRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RequestsController extends Controller
 {
@@ -14,8 +16,8 @@ class RequestsController extends Controller
         $requests = [];
         foreach (AppRequest::all() as $request) {
             $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform,
-                'issue' => $request->issue,
+                'platform' => $request->platform->name,
+                'issue' => $request->issue->name,
             ]);
         }
 
@@ -29,8 +31,8 @@ class RequestsController extends Controller
         $requests = [];
         foreach (AppRequest::whereStatus(0)->orWhere('status', 1)->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform,
-                'issue' => $request->issue,
+                'platform' => $request->platform->name,
+                'issue' => $request->issue->name,
             ]);
         }
 
@@ -44,8 +46,8 @@ class RequestsController extends Controller
         $requests = [];
         foreach (AppRequest::whereStatus(3)->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform,
-                'issue' => $request->issue,
+                'platform' => $request->platform->name,
+                'issue' => $request->issue->name,
             ]);
         }
 
@@ -59,8 +61,8 @@ class RequestsController extends Controller
         $requests = [];
         foreach (AppRequest::whereStatus(2)->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform,
-                'issue' => $request->issue,
+                'platform' => $request->platform->name,
+                'issue' => $request->issue->name,
             ]);
         }
 
@@ -89,6 +91,8 @@ class RequestsController extends Controller
         $appRequest->update(array_merge($request->only(['status', 'comments']), [
             'admin_files' => $admin_files
         ]));
+
+        Mail::to($appRequest->email)->send(new RequestStatus($appRequest));
 
         $requests = [];
         $filteredRequests = null;

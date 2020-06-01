@@ -30,7 +30,7 @@ class RequestSubmitted extends Mailable
      */
     public function build()
     {
-        return $this->subject('GIT Support - ' . $this->request->reqid)
+        return $this->subject('GIT Support - Request Successfully Submitted - ' . $this->request->reqid)
             ->view('emails.request-submitted')
             ->with([
                 'request' => $this->request

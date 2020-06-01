@@ -2,9 +2,9 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container, Row, NavbarBrand, Navbar } from 'reactstrap';
 import { faCircle, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 import NavigationItems from '../NavigationItems/NavigationItems';
-import CenterButton from '../../UI/Button/CenterButton/CenterButton';
 import Logo from '../../UI/Logo/Logo';
 
 import './Toolbar.css';
@@ -13,7 +13,7 @@ const toolbar = ({ isAuth, name, drawerToggleClicked, logoutHandler, role, cartI
     <div className="Toolbar bg-white sticky-top">
         <Container>
             <Navbar light className="border-bottom border-border-50 py-4" expand="md">
-                <NavbarBrand><Logo /></NavbarBrand>
+                <NavbarBrand><Link to="/"><Logo /></Link></NavbarBrand>
 
                 <div className="pr-3 ml-auto d-flex align-items-center">
                     <NavigationItems />

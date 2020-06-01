@@ -1,65 +1,19 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Collapse, Nav, UncontrolledDropdown, DropdownToggle, Badge, DropdownMenu, DropdownItem, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faBell, faBars, faCalendar, faPowerOff, faEnvelope, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { faClock, faComments } from '@fortawesome/free-regular-svg-icons';
+import { faBars, faCalendar, faPowerOff, faTimes, faSpinner, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faClock } from '@fortawesome/free-regular-svg-icons';
 
 // import NavigationItem from './NavigationItem/NavigationItem';
 // import MyDropdownItem from '../../../Navigation/NavigationItems/DropdownItem/DropdownItem';
 
-export default ({ cartItemsNumber, name, sidedrawerToggle, logoutHandler, role, notifications = [], messages = [], comments = [], date: { weekDay, day, month, year }, clock: { hours, minutes, seconds } }) => {
-    const notificationItems = notifications.map(notification => {
-        let message, icon;
-        switch (notification.type) {
-            case 'App\\Notifications\\PlanUser':
-                message = <Link to={"/notifications/" + notification.id} className="text-reset small"><FontAwesomeIcon className="text-success mr-1" size="lg" fixedWidth icon={faShoppingCart} />New plan bought.</Link>;
-                break;
-
-            case 'App\\Notifications\\Deposit':
-                message = <Link to={"/notifications/" + notification.id} className="text-reset small"><FontAwesomeIcon className="text-primary mr-1" size="lg" fixedWidth icon={faMoneyBillWaveAlt} />Deposit successfully made.</Link>;
-                break;
-
-            case 'App\\Notifications\\LimoPayment':
-                message = <Link to={"/notifications/" + notification.id} className="text-reset small"><FontAwesomeIcon className="text-yellow mr-1" size="lg" fixedWidth icon={faPaperPlane} />Limo Payment successfully submitted.</Link>;
-                break;
-
-            case 'App\\Notifications\\LimoPaymentStatus':
-                const { message: notificationMessage, status } = notification.data;
-                if (status === 1) {
-                    icon = <FontAwesomeIcon className="text-green mr-1" size="lg" fixedWidth icon={faCheck} />;
-                } else if (status === 2) {
-                    icon = <FontAwesomeIcon className="text-danger mr-1" size="lg" fixedWidth icon={faTimes} />;
-                }
-                message = <Link to={"/notifications/" + notification.id} className="text-reset small">{icon}{notificationMessage}</Link>;
-                break;
-
-            default:
-                break;
-        }
-
-        return <DropdownItem key={'notification_' + notification.id} className="text-dark text-truncate border-top">
-            {message}
-        </DropdownItem>
-    });
-
-    const messageItems = messages.map(message => {
-        return <DropdownItem key={'message_' + message.id} className="text-dark text-truncate border-top">
-            {message.content}
-        </DropdownItem>
-    });
-
-    const commentItems = comments.map(comment => {
-        return <DropdownItem key={'comment_' + comment.id} className="text-dark border-top">
-            {comment.content}
-        </DropdownItem>
-    });
-
+export default ({ name, sidedrawerToggle, logoutHandler, role, pending = [], processing = [], solved = [], date: { weekDay, day, month, year }, clock: { hours, minutes, seconds } }) => {
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
 
-    return <div className="px-3 bg-nightblue flex-fill d-flex align-items-center text-white text-large" style={{ height: 101 }}>
+    return <div className="px-3 bg-nightblue flex-fill d-flex align-items-center text-white text-large position-relative" style={{ height: 70 }}>
         <Nav className="mr-auto d-flex align-items-center" navbar>
             <FontAwesomeIcon icon={faBars} className="mr-3 mr-md-5 ml-2 ml-md-4" style={{ cursor: 'pointer' }} onClick={sidedrawerToggle} size="2x" />
             <div className="mr-4 d-none d-md-block">
@@ -70,71 +24,22 @@ export default ({ cartItemsNumber, name, sidedrawerToggle, logoutHandler, role, 
                 <FontAwesomeIcon icon={faClock} className="mr-2" />
                 <strong>TIME : {hours} : {minutes} : {seconds}</strong>
             </div>
+            <div className="py-3 d-none d-md-flex align-items-center position-absolute" style={{ left: 650 }}>
+                <Link className="position-relative" to="/user/requests/pending">
+                    <Button color="orange" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Pending</span><FontAwesomeIcon icon={faSpinner} className="fa-spin" /></Button>
+                    <Badge color="orange" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
+                </Link>
+                <Link className="position-relative" to="/user/requests/pending">
+                    <Button color="primary" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Processing</span><FontAwesomeIcon icon={faSpinner} className="fa-spin" /></Button>
+                    <Badge color="primary" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
+                </Link>
+                <Link className="position-relative" to="/user/requests/solved">
+                    <Button color="success" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Solved</span><FontAwesomeIcon icon={faCheckCircle} /></Button>
+                    <Badge color="success" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
+                </Link>
+            </div>
         </Nav>
         <div className="ml-auto d-flex align-items-center">
-            <div className="py-3 d-flex justify-content-between align-items-center">
-                <div className="pr-5">{role === 'user' ? <Button onClick={clickHandler} size="lg" className="rounded-2 d-none d-md-inline px-4" color="orange">Calculate Now</Button> : null}</div>
-
-                <UncontrolledDropdown inNavbar>
-                    <DropdownToggle nav className="p-0">
-                        <FontAwesomeIcon icon={faComments} className="text-light mr-3" size="lg" />
-                        <Badge color="pink" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center" style={{ width: 20, height: 20, transform: 'translate(-30px, -5px)', zIndex: 2 }}>{comments.length}</Badge>
-                    </DropdownToggle>
-                    <DropdownMenu right style={{ width: '20rem' }}>
-                        {comments.length === 0 ? <DropdownItem disabled className="bg-dark text-white">
-                            <div className="py-2">No comment.</div>
-                        </DropdownItem> : <>
-                                <DropdownItem disabled className="text-left pt-0 small">
-                                    You have {comments.length || 4} comments.
-                                        </DropdownItem>
-                                {commentItems}
-                                <DropdownItem className="text-center pb-0 border-top">
-                                    <Link className="text-reset small" to={"/comments"}>View all comments</Link>
-                                </DropdownItem>
-                            </>}
-                    </DropdownMenu>
-                </UncontrolledDropdown>
-
-                <UncontrolledDropdown inNavbar>
-                    <DropdownToggle nav className="p-0">
-                        <FontAwesomeIcon icon={faEnvelope} className="text-light mr-3" size="lg" />
-                        <Badge color="green" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center" style={{ width: 20, height: 20, transform: 'translate(-30px, -5px)', zIndex: 2 }}>{messages.length}</Badge>
-                    </DropdownToggle>
-                    <DropdownMenu right style={{ width: '20rem' }}>
-                        {messages.length === 0 ? <DropdownItem disabled className="bg-dark text-white">
-                            <div className="py-2">No message.</div>
-                        </DropdownItem> : <>
-                                <DropdownItem disabled className="text-left pt-0 small">
-                                    You have {messages.length} messages.
-                                </DropdownItem>
-                                {messageItems}
-                                <DropdownItem className="text-center pb-0 border-top">
-                                    <Link className="text-reset small" to={"/messages"}>View all messages</Link>
-                                </DropdownItem>
-                            </>}
-                    </DropdownMenu>
-                </UncontrolledDropdown>
-
-                <UncontrolledDropdown inNavbar>
-                    <DropdownToggle nav className="p-0">
-                        <FontAwesomeIcon icon={faBell} className="text-light mr-3" size="lg" />
-                        <Badge color="yellow" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center" style={{ width: 20, height: 20, transform: 'translate(-30px, -5px)', zIndex: 2 }}>{notifications.length}</Badge>
-                    </DropdownToggle>
-                    <DropdownMenu right style={{ width: '20rem' }}>
-                        {notifications.length === 0 ? <DropdownItem disabled className="bg-dark text-white">
-                            <div className="py-2">No notification.</div>
-                        </DropdownItem> : <>
-                                <DropdownItem disabled className="text-left pt-0 small">
-                                    You have {notifications.length} notifications.
-                                        </DropdownItem>
-                                {notificationItems}
-                                <DropdownItem className="text-center pb-0 border-top">
-                                    <Link className="text-reset small" to={"/notifications"}>View all notifications</Link>
-                                </DropdownItem>
-                            </>}
-                    </DropdownMenu>
-                </UncontrolledDropdown>
-            </div>
             <div onClick={toggle} style={{ cursor: 'pointer' }} className="d-flex align-items-center ml-md-5">
                 <span className="d-none d-md-inline">Sign out</span>
                 <FontAwesomeIcon icon={faPowerOff} size="lg" className="ml-2" />
