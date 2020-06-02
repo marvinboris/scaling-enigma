@@ -32,7 +32,8 @@ export default class Home extends Component {
                         <Row className="justify-content-between">
                             <Col lg={8}>
                                 <div className="banner-text">
-                                    <h1 className="text-700 text-center text-lg-left text-darkblue">Global Investment Trading Support</h1>
+                                    <h1 className="text-700 text-center d-none d-sm-block text-lg-left text-darkblue">Global Investment Trading Support</h1>
+                                    <h2 className="text-700 text-center d-sm-none text-lg-left text-darkblue">Global Investment Trading Support</h2>
                                     <h4 className="text-300 text-center text-lg-left text-blue">Request Management System</h4>
 
                                     <div className="w-60 d-none d-lg-block border-top border-secondary mt-4 pt-4 pb-5 text-secondary">
@@ -140,7 +141,7 @@ export default class Home extends Component {
 
                     <Container>
                         <Row>
-                            <Col lg={8} style={{ transform: 'translateY(25%)' }}>
+                            <Col lg={8} className="mb-5 mb-lg-0" style={{ transform: 'translateY(25%)' }}>
                                 <h4>Get started with Global Investment Trading</h4>
                                 <h1>Request Management System</h1>
 
@@ -149,7 +150,7 @@ export default class Home extends Component {
                                 <Link to="/request"><BetweenButton icon={faPaperPlane} pill className="py-3 px-4" color="yellow">Submit a request</BetweenButton></Link>
                             </Col>
 
-                            <Col lg={4} className="mt-5 mt-lg-0">
+                            <Col lg={4} className="mt-5 pt-5 mt-lg-0 pt-lg-0">
                                 <img src={RotateImg} className="img-fluid" />
                             </Col>
                         </Row>

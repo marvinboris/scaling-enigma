@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Container, Row, NavbarBrand, Navbar } from 'reactstrap';
+import { Container, Row, NavbarBrand, Navbar, Collapse, NavbarToggler } from 'reactstrap';
 import { faCircle, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
@@ -9,33 +9,44 @@ import Logo from '../../UI/Logo/Logo';
 
 import './Toolbar.css';
 
-const toolbar = ({ isAuth, name, drawerToggleClicked, logoutHandler, role, cartItemsNumber, notifications }) => (
-    <div className="Toolbar bg-white sticky-top">
-        <Container>
-            <Navbar light className="border-bottom border-border-50 py-4" expand="md">
-                <NavbarBrand><Link to="/"><Logo /></Link></NavbarBrand>
+export default ({ isAuth, name, drawerToggleClicked, logoutHandler, role, cartItemsNumber, notifications }) => {
+    const [collapsed, setCollapsed] = useState(true);
 
-                <div className="pr-3 ml-auto d-flex align-items-center">
-                    <NavigationItems />
+    const toggleNavbar = () => setCollapsed(!collapsed);
 
-                    <div className="pl-5">
-                        <div className="d-inline-flex align-items-center">
-                            <a href="#language-dropdown" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="language-dropdown" className="text-dark text-decoration-none d-flex justify-content-around align-items-center">
-                                <span className="language-flag shadow-lg mr-2 overflow-hidden d-inline-flex justify-content-center align-items-center position-relative">
-                                    <span className="flag-icon position-absolute flag-icon-gb"></span>
-                                </span>
-                                <span className="px-2 border-left border-dark-20 position-relative">
-                                    <span className="text-700">EN</span>
-                                    <FontAwesomeIcon icon={faCircle} className="text-yellow text-xx-small position-absolute" style={{ left: 0, transform: 'translate(-50%, -50%)', top: '50%' }} />
-                                </span>
-                                <FontAwesomeIcon icon={faCaretDown} />
-                            </a>
+    return (
+        <div className="Toolbar bg-white sticky-top">
+            <Container>
+                <Navbar light className="border-bottom border-border-50 py-4" expand="md">
+                    <NavbarBrand><Link to="/"><Logo /></Link></NavbarBrand>
+
+                    <div className="pr-lg-3 ml-auto d-flex align-items-center">
+                        <div className="d-none d-lg-block"><NavigationItems /></div>
+
+                        <div className="pl-lg-5">
+                            <div className="d-inline-flex align-items-center">
+                                <a href="#language-dropdown" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="language-dropdown" className="text-dark text-decoration-none d-flex justify-content-around align-items-center">
+                                    <span className="language-flag shadow-lg mr-2 overflow-hidden d-none d-lg-inline-flex justify-content-center align-items-center position-relative">
+                                        <span className="flag-icon position-absolute flag-icon-gb"></span>
+                                    </span>
+                                    <span className="px-2 border-left border-dark-20 position-relative">
+                                        <span className="text-700">EN</span>
+                                        <FontAwesomeIcon icon={faCircle} className="text-yellow text-xx-small position-absolute" style={{ left: 0, transform: 'translate(-50%, -50%)', top: '50%' }} />
+                                    </span>
+                                    <FontAwesomeIcon icon={faCaretDown} />
+                                </a>
+
+                                <NavbarToggler onClick={toggleNavbar} className="ml-3 d-lg-none" />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Navbar>
-        </Container>
-    </div>
-);
-
-export default toolbar;
+                </Navbar>
+            </Container>
+            <div className="d-lg-none">
+                <Collapse isOpen={!collapsed} navbar>
+                    <NavigationItems font="secondary" toggleNavbar={toggleNavbar} />
+                </Collapse>
+            </div>
+        </div>
+    );
+}

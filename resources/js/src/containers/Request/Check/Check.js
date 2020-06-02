@@ -258,14 +258,16 @@ class Request extends Component {
                         <div className={"p-4"}>
                             <Row>
                                 <Col lg={6}>
-                                    <Table borderless className={"text-secondary border border-" + colors[status]}>
-                                        <tbody>
-                                            {tableContent}
-                                        </tbody>
-                                    </Table>
+                                    <div className="table-responsive">
+                                        <Table borderless className={"text-secondary border border-" + colors[status]}>
+                                            <tbody>
+                                                {tableContent}
+                                            </tbody>
+                                        </Table>
+                                    </div>
                                 </Col>
 
-                                <Col lg={6}>
+                                <Col lg={6} className="pt-3 pt-lg-0">
                                     <div className="mb-3"><FontAwesomeIcon icon={faEdit} className={"mr-2 text-" + colors[status]} />Issue description</div>
 
                                     <div className={"text-justify py-4 px-4 bg-white-20 rounded-1 border border-" + colors[status] + "-50"} style={{ height: 298, overflowY: 'auto' }}>{description}</div>

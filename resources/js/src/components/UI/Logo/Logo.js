@@ -8,9 +8,9 @@ import Dark from '../../../assets/images/Group 1@2x.png';
 export default ({ big, dark }) => (
     <div className="Logo mb-0 text-white" >
         {dark ?
-            <img src={Dark} style={big ? { height: 46 } : { height: 46 }} />
+            <img src={Dark} />
             :
-            <img src={Image} style={big ? { height: 46 } : { height: 46 }} />
+            <img src={Image} />
         }
     </div>
 );

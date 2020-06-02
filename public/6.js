@@ -449,25 +449,33 @@ var Dashboard = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var _this$props$backend$d = this.props.backend.dashboard,
+      var _this$props$backend = this.props.backend,
+          _this$props$backend$d = _this$props$backend.dashboard,
           loading = _this$props$backend$d.loading,
           error = _this$props$backend$d.error,
           blocksData = _this$props$backend$d.blocksData,
-          requests = _this$props$backend$d.requests;
+          requests = _this$props$backend$d.requests,
+          _this$props$backend$r = _this$props$backend.requests,
+          requestsLoading = _this$props$backend$r.loading,
+          requestsError = _this$props$backend$r.error,
+          requestsRequests = _this$props$backend$r.requests;
       var countries = this.state.countries;
       var content = null;
       var errors = null;
       var colors = ['orange', 'blue', 'red', 'green'];
       var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
       var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCheckCircle"]];
-      if (loading) content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+      if (loading || requestsLoading) content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
         xs: 12
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_14__["default"], null));else {
         errors = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_13__["default"], {
           err: error
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          err: requestsError
         }));
 
         if (requests && blocksData) {
+          var mainRequests = requestsRequests ? requestsRequests : requests;
           var totalRequests = blocksData.totalRequests,
               pendingRequests = blocksData.pendingRequests,
               resolvedRequests = blocksData.resolvedRequests,
@@ -535,7 +543,7 @@ var Dashboard = /*#__PURE__*/function (_Component) {
               link: link
             }, children);
           });
-          var requestsData = requests.map(function (request) {
+          var requestsData = mainRequests.map(function (request) {
             var country = countries.find(function (_ref3) {
               var country = _ref3.country;
               return country === request.country;

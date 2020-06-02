@@ -54,7 +54,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        let { backend: { dashboard: { loading, error, blocksData, requests } } } = this.props;
+        let { backend: { dashboard: { loading, error, blocksData, requests }, requests: { loading: requestsLoading, error: requestsError, requests: requestsRequests } } } = this.props;
 
         const { countries } = this.state;
         let content = null;
@@ -64,14 +64,16 @@ class Dashboard extends Component {
         const texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
         const icons = [faSpinner, faSpinner, faTimesCircle, faCheckCircle];
 
-        if (loading) content = <Col xs={12}>
+        if (loading || requestsLoading) content = <Col xs={12}>
             <CustomSpinner />
         </Col>;
         else {
             errors = <>
                 <Error err={error} />
+                <Error err={requestsError} />
             </>;
             if (requests && blocksData) {
+                const mainRequests = requestsRequests ? requestsRequests : requests;
                 const { totalRequests, pendingRequests, resolvedRequests, accomplishedRate } = blocksData;
                 const data = [
                     {
@@ -122,7 +124,7 @@ class Dashboard extends Component {
 
                 const cards = data.map(({ title, titleColor, icon, link, color, children, details, circleBorder, circleColor }, index) => <Card color={color} key={index} title={title} titleColor={titleColor} details={details} circleBorder={circleBorder} circleColor={circleColor} icon={icon} link={link}>{children}</Card>);
 
-                const requestsData = requests.map(request => {
+                const requestsData = mainRequests.map(request => {
                     const country = countries.find(({ country }) => country === request.country);
 
                     const documentsContent = request.documents.filter(d => d).map(doc => {

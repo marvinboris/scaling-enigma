@@ -9,7 +9,7 @@ import BetweenButton from '../../../components/UI/Button/BetweenButton/BetweenBu
 
 const customerBlock = ({ children, animation = "fade-up", title, src, name, mark, link = '/', flag = 'cm', active }) =>
     <Col data-aos={animation} lg={4} className="mb-5 pb-5 mb-lg-0 pb-lg-0">
-        <div className="rounded-4 shadow-sm bg-white px-5 pb-4 text-left position-relative" style={{ paddingTop: 82 }}>
+        <div className="rounded-4 shadow-sm bg-white px-3 px-lg-5 pb-4 text-left position-relative" style={{ paddingTop: 82 }}>
             <div className="position-absolute w-100" style={{ top: -82, left: 0 }}>
                 <div className="border border-5 border-blue rounded-circle position-relative mx-auto embed-responsive embed-responsive-1by1 bg-white" style={{ width: 164 }}>
                     <div className="w-100 h-100 rounded-circle shadow-sm position-absolute" style={{ background: "url('" + src + "') no-repeat center", backgroundSize: 'cover', top: 0 }} />
