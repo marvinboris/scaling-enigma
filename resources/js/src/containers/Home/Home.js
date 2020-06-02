@@ -32,21 +32,29 @@ export default class Home extends Component {
                         <Row className="justify-content-between">
                             <Col lg={8}>
                                 <div className="banner-text">
-                                    <h1 className="text-700 text-darkblue">Global Investment Trading Support</h1>
-                                    <h4 className="text-300 text-blue">Request Management System</h4>
+                                    <h1 className="text-700 text-center text-lg-left text-darkblue">Global Investment Trading Support</h1>
+                                    <h4 className="text-300 text-center text-lg-left text-blue">Request Management System</h4>
 
-                                    <div className="w-60 border-top border-secondary mt-4 pt-4 pb-5 text-secondary">
+                                    <div className="w-60 d-none d-lg-block border-top border-secondary mt-4 pt-4 pb-5 text-secondary">
                                         Hey There ! Welcome to liyeplimal request management system. Looking
                                         for a solution ? check out our new request management system
                                         try it now.
                                     </div>
 
-                                    <Link to="/request"><BetweenButton icon={faPaperPlane} pill className="py-3 px-4 mr-2" color="darkblue">Submit a request</BetweenButton></Link>
-                                    <Link to="/request/check"><BetweenButton icon={faCheck} pill className="py-3 px-4" color="yellow">Check request</BetweenButton></Link>
+                                    <div className="d-lg-none border-top border-secondary mt-4 pt-4 pb-5 text-center text-secondary">
+                                        Hey There ! Welcome to liyeplimal request management system. Looking
+                                        for a solution ? check out our new request management system
+                                        try it now.
+                                    </div>
+
+                                    <div className="text-center text-lg-left">
+                                        <Link className="d-block mx-auto d-lg-inline-block" to="/request"><BetweenButton icon={faPaperPlane} pill className="py-3 px-4 mr-lg-2 mb-3 mb-lg-0" color="darkblue">Submit a request</BetweenButton></Link>
+                                        <Link className="d-block mx-auto d-lg-inline-block" to="/request/check"><BetweenButton icon={faCheck} pill className="py-3 px-4" color="yellow">Check request</BetweenButton></Link>
+                                    </div>
                                 </div>
                             </Col>
 
-                            <Col lg={4}>
+                            <Col lg={4} className="d-none d-lg-block">
                                 <img src={BannerImg} className="img-fluid" />
                             </Col>
                         </Row>
@@ -103,7 +111,7 @@ export default class Home extends Component {
                             </div>
                         </Col>
 
-                        <Col lg={4}>
+                        <Col lg={4} className="mt-5 mt-lg-0">
                             <img src={AdvantagesImg} className="img-fluid" />
                         </Col>
                     </Row>
@@ -127,7 +135,7 @@ export default class Home extends Component {
 
                 <div className="position-relative py-5 text-white">
                     <div className="w-100 h-100 position-absolute" style={{ top: 0, left: 0 }}>
-                        <div className="position-relative bg-darkblue h-100" style={{ transform: 'rotate(5deg)', transformOrigin: 'top left', width: '200%' }} />
+                        <div className="position-relative bg-darkblue h-100" style={{ transform: 'rotate(5deg) translateX(-1rem)', transformOrigin: 'top left', width: '200%' }} />
                     </div>
 
                     <Container>
@@ -141,7 +149,7 @@ export default class Home extends Component {
                                 <Link to="/request"><BetweenButton icon={faPaperPlane} pill className="py-3 px-4" color="yellow">Submit a request</BetweenButton></Link>
                             </Col>
 
-                            <Col lg={4}>
+                            <Col lg={4} className="mt-5 mt-lg-0">
                                 <img src={RotateImg} className="img-fluid" />
                             </Col>
                         </Row>

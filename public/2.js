@@ -294,7 +294,7 @@ var TableRow = function TableRow(_ref2) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
     className: border ? border : ""
   }, label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
-    className: "text-700 " + (border ? border : "")
+    className: "text-700 text-wrap " + (border ? border : "")
   }, children));
 };
 

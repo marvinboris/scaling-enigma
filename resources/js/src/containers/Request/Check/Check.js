@@ -24,7 +24,7 @@ const FormBlock = ({ title, subtitle, children }) => <div className="mt-5">
 
 const TableRow = ({ label, border, children }) => <tr>
     <td className={border ? border : ""}>{label}</td>
-    <td className={"text-700 " + (border ? border : "")}>{children}</td>
+    <td className={"text-700 text-wrap " + (border ? border : "")}>{children}</td>
 </tr>;
 
 class Request extends Component {

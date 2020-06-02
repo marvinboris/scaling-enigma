@@ -54,7 +54,7 @@ const footer = () => (
         </footer>
         <footer className="container-fluid border-top border-border-50 pb-4">
             <div className="container text-center pt-4">
-                © Copyrights 2020 <span className="text-yellow text-700">Briluce Services</span>. All rights reserved.
+                © Copyrights 2020 <span className="text-yellow text-700">GIT Developers</span>. All rights reserved.
             </div>
         </footer>
     </div>
