@@ -60,7 +60,7 @@ class Dashboard extends Component {
         let content = null;
         let errors = null;
         
-        const colors = ['orange', 'blue', 'red', 'green'];
+        const colors = ['orange', 'myprimary', 'red', 'green'];
         const texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
         const icons = [faSpinner, faSpinner, faTimesCircle, faCheckCircle];
 

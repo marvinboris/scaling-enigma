@@ -15,9 +15,9 @@ export default ({ isAuth, name, drawerToggleClicked, logoutHandler, role, cartIt
     const toggleNavbar = () => setCollapsed(!collapsed);
 
     return (
-        <div className="Toolbar bg-white sticky-top">
+        <div className="Toolbar bg-white sticky-top border-bottom border-border-50">
             <Container>
-                <Navbar light className="border-bottom border-border-50 py-4" expand="md">
+                <Navbar light className="border-botto border-border-5 py-4" expand="md">
                     <NavbarBrand><Link to="/"><Logo /></Link></NavbarBrand>
 
                     <div className="pr-lg-3 ml-auto d-flex align-items-center">

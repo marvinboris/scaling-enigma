@@ -11,6 +11,19 @@
  */
 require('./bootstrap');
 
+import Echo from 'laravel-echo';
+
+window.Pusher = require('pusher-js');
+
+Pusher.logToConsole = true;
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'af4e22377132b7f65a20',
+    cluster: 'mt1',
+    forceTLS: true,
+});
+
 $(function () {
     $.getScript('/js/jquery.star-rating-svg.js', function () {
         $(".ranking-stars").starRating({

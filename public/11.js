@@ -218,7 +218,7 @@ var Pending = /*#__PURE__*/function (_Component) {
             message: message
           });
           var requestsData = requests.map(function (request) {
-            var colors = ['orange', 'blue', 'red', 'green'];
+            var colors = ['orange', 'myprimary', 'red', 'green'];
             var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
             var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCheckCircle"]];
             var country = countries.find(function (_ref2) {

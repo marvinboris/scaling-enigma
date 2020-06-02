@@ -415,7 +415,7 @@ var Request = /*#__PURE__*/function (_Component) {
           error = _this$props$frontend$.error,
           message = _this$props$frontend$.message,
           request = _this$props$frontend$.request;
-      var colors = ['orange', 'blue', 'red', 'green'];
+      var colors = ['orange', 'myprimary', 'red', 'green'];
       var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
       var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faCheckCircle"]];
       var width;
@@ -455,7 +455,7 @@ var Request = /*#__PURE__*/function (_Component) {
           transform: 'translateX(-50%)'
         }
       }, "Pending"), request.status > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "position-absolute text-700 text-blue" + (request.status > 1 ? "-50" : ""),
+        className: "position-absolute text-700 text-myprimary" + (request.status > 1 ? "-50" : ""),
         style: {
           bottom: 'calc(100% + 10px)',
           left: '55%',

@@ -7,6 +7,7 @@ import SideDrawer from '../../components/Backend/Navigation/SideDrawer/SideDrawe
 import CustomSpinner from '../../components/UI/CustomSpinner/CustomSpinner';
 
 import { authLogout } from '../../store/actions';
+import { updateObject } from '../../shared/utility';
 
 import './BackEnd.css';
 
@@ -19,7 +20,21 @@ class BackEnd extends Component {
 
         selectedItem: '',
 
-        interval: null
+        interval: null,
+
+        pending: 0,
+        processing: 0,
+        solved: 0,
+
+        notifications: null,
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.auth.data.notifications && !prevState.notifications) {
+            const { pending, processing, solved, notifications } = nextProps.auth.data;
+            return updateObject(prevState, { pending, processing, solved, notifications });
+        }
+        return prevState;
     }
 
     componentDidMount() {
@@ -41,6 +56,25 @@ class BackEnd extends Component {
         this.setState({ interval });
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.auth.data.notifications && !prevProps.auth.data.notifications) {
+            const channel = Echo.channel('public');
+            channel.listen('Requests', ({ pending, processing, solved }) => {
+                if (
+                    this.props.auth.token && (
+                        pending !== this.state.pending ||
+                        processing !== this.state.processing ||
+                        solved !== this.state.solved
+                    )
+                ) {
+                    const audio = new Audio('/audio/swiftly.mp3');
+                    audio.play();
+                    this.setState({ pending, processing, solved });
+                }
+            });
+        }
+    }
+
     componentWillUnmount() {
         clearInterval(this.state.interval);
     }
@@ -58,9 +92,9 @@ class BackEnd extends Component {
 
 
     render() {
-        const { isOpen, date, clock, selectedItem } = this.state;
+        const { isOpen, date, clock, selectedItem, pending, processing, solved, notifications } = this.state;
         const {
-            auth: { loading, data: { notifications, name, photo, pending, processing, solved } },
+            auth: { loading, data: { name, photo } },
             history, children } = this.props;
         const isAuthenticated = localStorage.getItem('token') !== null;
 

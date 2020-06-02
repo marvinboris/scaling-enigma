@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\Requests;
 use App\Http\Controllers\Controller;
 use App\Issue;
 use App\Mail\RequestSubmitted;
@@ -62,6 +63,12 @@ class RequestController extends Controller
         ]));
 
         Mail::to($request->email)->send(new RequestSubmitted($appRequest));
+
+        event(new Requests(
+            count(AppRequest::whereStatus(0)->get()),
+            count(AppRequest::whereStatus(1)->get()),
+            count(AppRequest::whereStatus(3)->get())
+        ));
 
         return response()->json([
             'reqid' => $reqid,

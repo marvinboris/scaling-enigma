@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\Requests;
 use App\Http\Controllers\Controller;
 use App\Request as AppRequest;
 use Illuminate\Http\Request;

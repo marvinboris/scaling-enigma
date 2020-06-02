@@ -66,7 +66,7 @@ class Request extends Component {
         const { reqid, countries } = this.state;
         const { frontend: { request: { loading, error, message, request } } } = this.props;
 
-        const colors = ['orange', 'blue', 'red', 'green'];
+        const colors = ['orange', 'myprimary', 'red', 'green'];
         const texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
         const icons = [faSpinner, faSpinner, faTimesCircle, faCheckCircle];
         let width;
@@ -88,7 +88,7 @@ class Request extends Component {
             {request ? <div className="ml-lg-5 mr-4 mt-5 mt-md-0 py-4 position-relative flex-fill">
                 <div className={"position-absolute text-700 text-orange" + (request.status > 0 ? "-50" : "")} style={{ bottom: 'calc(100% + 10px)', left: '10%', transform: 'translateX(-50%)' }}>Pending</div>
                 {request.status > 0 ? <>
-                    <div className={"position-absolute text-700 text-blue" + (request.status > 1 ? "-50" : "")} style={{ bottom: 'calc(100% + 10px)', left: '55%', transform: 'translateX(-50%)' }}>Processing</div>
+                    <div className={"position-absolute text-700 text-myprimary" + (request.status > 1 ? "-50" : "")} style={{ bottom: 'calc(100% + 10px)', left: '55%', transform: 'translateX(-50%)' }}>Processing</div>
                 </> : null}
                 {request.status > 1 ? <>
                     {request.status === 3 ?

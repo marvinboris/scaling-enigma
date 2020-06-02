@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\Requests;
 use App\Http\Controllers\Controller;
 use App\Mail\RequestStatus;
 use App\Request as AppRequest;
@@ -118,6 +119,12 @@ class RequestsController extends Controller
             ]);
         }
 
+        event(new Requests(
+            count(AppRequest::whereStatus(0)->get()),
+            count(AppRequest::whereStatus(1)->get()),
+            count(AppRequest::whereStatus(3)->get())
+        ));
+
         return response()->json([
             'message' => [
                 'type' => 'success',
@@ -159,6 +166,12 @@ class RequestsController extends Controller
                 'issue' => $filteredRequest->issue->name,
             ]);
         }
+
+        event(new Requests(
+            count(AppRequest::whereStatus(0)->get()),
+            count(AppRequest::whereStatus(1)->get()),
+            count(AppRequest::whereStatus(3)->get())
+        ));
 
         return response()->json([
             'message' => [

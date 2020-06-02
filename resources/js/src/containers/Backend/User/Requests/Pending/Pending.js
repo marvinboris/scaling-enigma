@@ -68,7 +68,7 @@ class Pending extends Component {
                 feedback = <Feedback message={message} />;
 
                 const requestsData = requests.map(request => {
-                    const colors = ['orange', 'blue', 'red', 'green'];
+                    const colors = ['orange', 'myprimary', 'red', 'green'];
                     const texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
                     const icons = [faSpinner, faSpinner, faTimesCircle, faCheckCircle];
 

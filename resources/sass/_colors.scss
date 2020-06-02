@@ -1,6 +1,7 @@
 // My colors
-$myblue: #001DAE;
-$brokenblue: #00305A;
+$myprimary: #3490dc;
+$myblue: #001dae;
+$brokenblue: #00305a;
 $nightblue: #000937;
 $mypink: #df0873;
 $scarlet: #8d004b;
@@ -14,24 +15,25 @@ $darkyellow: darken($myyellow, 10%);
 $mygreen: #049d27;
 $mylemongreen: #f6ff01;
 $darkgreen: #012840;
-$darkblue: #04166C;
+$darkblue: #04166c;
 $white: #ffffff;
 $gray: #aaa;
 $black: #000000;
 $light: #cacaca;
-$soft: #E9E9E9;
+$soft: #e9e9e9;
 $darklight: #1b223f;
 $border: #606060;
-$input: #28324C;
+$input: #28324c;
 $transparent: transparent;
 
 // Colors
-$colors: "green" $mygreen $white, "lemongreen" $mylemongreen $dark, "darkgreen" $darkgreen $white, "darkblue" $darkblue $white,
-  "yellow" $myyellow $white, "darkyellow" $darkyellow $white, "red" $myred $white, "purered" $purered $white,
-  "orange" $myorange $white, "oranger" $myoranger $white, "scarlet" $scarlet $white, "blue" $myblue $white,
-  "brokenblue" $brokenblue $white, "pink" $mypink $white, "nightblue" $nightblue $white, "white" $white $black,
-  "black" $black $white, "gray" $gray $white, "darklight" $darklight $white, "border" $border $white,
-  "light" $light $black, "input" $input $white, "transparent" $transparent $black, "soft" $soft $black;
+$colors: "green" $mygreen $white, "lemongreen" $mylemongreen $dark, "darkgreen" $darkgreen $white,
+  "darkblue" $darkblue $white, "yellow" $myyellow $white, "darkyellow" $darkyellow $white, "red" $myred $white,
+  "purered" $purered $white, "orange" $myorange $white, "oranger" $myoranger $white, "scarlet" $scarlet $white,
+  "blue" $myblue $white, "myprimary" $myprimary $white, "brokenblue" $brokenblue $white, "pink" $mypink $white,
+  "nightblue" $nightblue $white, "white" $white $black, "black" $black $white, "gray" $gray $white,
+  "darklight" $darklight $white, "border" $border $white, "light" $light $black, "input" $input $white,
+  "transparent" $transparent $black, "soft" $soft $black;
 @each $name, $color, $font in $colors {
   .text-#{$name} {
     color: $color !important;
