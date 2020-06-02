@@ -106,6 +106,9 @@ class RequestsController extends Controller
             case 'cancelled':
                 $filteredRequests = AppRequest::whereStatus(2)->get();
                 break;
+            case 'dashboard':
+                $filteredRequests = AppRequest::latest()->limit(5)->get();
+                break;
         }
 
         foreach ($filteredRequests as $filteredRequest) {

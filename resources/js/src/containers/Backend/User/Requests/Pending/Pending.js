@@ -183,7 +183,7 @@ class Pending extends Component {
                         </Row>
                     </>;
 
-                    const editContent = <Edit request={updateObject(request, { page_status: 'pending' })} />;
+                    const editContent = <Edit request={updateObject(request, { page_status: 'dashboard' })} />;
 
                     return updateObject(request, {
                         ref: <span>{request.ref}<Badge color={colors[request.status]} style={{ width: 20, height: 20 }} className="position-static p-0 ml-2 rounded-circle d-inline-flex justify-content-center align-items-center"><FontAwesomeIcon icon={icons[request.status]} className={[0, 1].includes(request.status) ? "fa-spin" : ""} fixedWidth /></Badge></span>,

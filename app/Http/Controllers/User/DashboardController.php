@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $requests = [];
         foreach (AppRequest::latest()->limit(5)->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform
+                'platform' => $request->platform->name
             ]);
         }
 

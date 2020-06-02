@@ -8,7 +8,7 @@ import { faClock } from '@fortawesome/free-regular-svg-icons';
 // import NavigationItem from './NavigationItem/NavigationItem';
 // import MyDropdownItem from '../../../Navigation/NavigationItems/DropdownItem/DropdownItem';
 
-export default ({ name, sidedrawerToggle, logoutHandler, role, pending = [], processing = [], solved = [], date: { weekDay, day, month, year }, clock: { hours, minutes, seconds } }) => {
+export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, processing = 0, solved = 0, date: { weekDay, day, month, year }, clock: { hours, minutes, seconds } }) => {
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
@@ -27,15 +27,15 @@ export default ({ name, sidedrawerToggle, logoutHandler, role, pending = [], pro
             <div className="py-3 d-none d-md-flex align-items-center position-absolute" style={{ left: 650 }}>
                 <Link className="position-relative" to="/user/requests/pending">
                     <Button color="orange" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Pending</span><FontAwesomeIcon icon={faSpinner} className="fa-spin" /></Button>
-                    <Badge color="orange" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
+                    <Badge color="orange" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending}</Badge>
                 </Link>
                 <Link className="position-relative" to="/user/requests/pending">
                     <Button color="blue" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Processing</span><FontAwesomeIcon icon={faSpinner} className="fa-spin" /></Button>
-                    <Badge color="blue" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
+                    <Badge color="blue" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{processing}</Badge>
                 </Link>
                 <Link className="position-relative" to="/user/requests/solved">
                     <Button color="green" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Solved</span><FontAwesomeIcon icon={faCheckCircle} /></Button>
-                    <Badge color="green" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending.length}</Badge>
+                    <Badge color="green" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{solved}</Badge>
                 </Link>
             </div>
         </Nav>

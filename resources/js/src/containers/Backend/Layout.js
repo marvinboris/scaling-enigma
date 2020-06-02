@@ -60,14 +60,14 @@ class BackEnd extends Component {
     render() {
         const { isOpen, date, clock, selectedItem } = this.state;
         const {
-            auth: { loading, data: { notifications, name, photo } },
+            auth: { loading, data: { notifications, name, photo, pending, processing, solved } },
             history, children } = this.props;
         const isAuthenticated = localStorage.getItem('token') !== null;
 
         if (!isAuthenticated) history.push('/login');
 
         return <div className="BackEnd text-left">
-            <Toolbar notifications={notifications} name={name} toggle={this.toggle} logoutHandler={this.logoutHandler} date={date} clock={clock} />
+            <Toolbar pending={pending} processing={processing} solved={solved} notifications={notifications} name={name} toggle={this.toggle} logoutHandler={this.logoutHandler} date={date} clock={clock} />
             <SideDrawer name={name} isOpen={isOpen} photo={photo} toggle={this.toggle} selectItem={this.selectItem} selectedItem={selectedItem} />
 
             <main className="bg-soft position-relative full-height-user pb-5">
