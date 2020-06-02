@@ -328,6 +328,7 @@ var Login = /*#__PURE__*/function (_Component) {
         name: "otp",
         value: "sms",
         label: "SMS",
+        disabled: true,
         inline: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
         check: true

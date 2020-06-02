@@ -56,7 +56,7 @@ export class Login extends Component {
                 <FormGroup className="ml-2 mt-4 mb-5 d-flex align-items-center text-darkblue">
                     <div className='text-700 pr-4'>OTP Method</div>
                     <Label check>
-                        <CustomInput type="radio" id="sms" name="otp" value="sms" label="SMS" inline />
+                        <CustomInput type="radio" id="sms" name="otp" value="sms" label="SMS" disabled inline />
                     </Label>
                     <Label check>
                         <CustomInput type="radio" id="email" defaultChecked name="otp" value="email" label="Email" inline />
