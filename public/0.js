@@ -515,6 +515,9 @@ var Edit = /*#__PURE__*/function (_Component) {
         id: "comments",
         name: "comments",
         onChange: this.inputChangedHandler,
+        style: {
+          height: 250
+        },
         value: comments
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], {
         className: "text-700",

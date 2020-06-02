@@ -71,7 +71,7 @@ class Edit extends Component {
             {+status === 2 && +request.status < 2 ? <>
                 <FormGroup>
                     <Label className="text-700" for="comments">Reason</Label>
-                    <Input type="textarea" id="comments" name="comments" onChange={this.inputChangedHandler} value={comments} />
+                    <Input type="textarea" id="comments" name="comments" onChange={this.inputChangedHandler} style={{ height: 250 }} value={comments} />
                 </FormGroup>
 
                 <FormGroup>
