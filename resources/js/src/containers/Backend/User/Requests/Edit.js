@@ -69,15 +69,16 @@ class Edit extends Component {
                 </Label>
             </FormGroup>
             {+request.status < 2 ? <>
-                {[1, 2].includes(+status) ? <FormGroup>
-                    <Label className="text-700" for="comments">{+status === 2 ? 'Reason' : 'Reply'}</Label>
-                    <Input type="textarea" id="comments" name="comments" onChange={this.inputChangedHandler} style={{ height: 250 }} value={comments} />
-                </FormGroup> : null}
-
-                {+status === 2 ? <FormGroup>
-                    <Label className="text-700" for="admin_files">Attach files</Label>
-                    <CustomInput type="file" id="admin_files" name="admin_files[]" multiple accept=".png,.jpg,.jpeg,.pdf" onChange={this.inputChangedHandler} files={admin_files} />
-                </FormGroup> : null}
+                {+status > 0 ? <>
+                    <FormGroup>
+                        <Label className="text-700" for="comments">{+status === 2 ? 'Reason' : 'Reply'}</Label>
+                        <Input type="textarea" id="comments" name="comments" onChange={this.inputChangedHandler} style={{ height: 250 }} value={comments} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label className="text-700" for="admin_files">Attach files</Label>
+                        <CustomInput type="file" id="admin_files" name="admin_files[]" multiple accept=".png,.jpg,.jpeg,.pdf" onChange={this.inputChangedHandler} files={admin_files} />
+                    </FormGroup>
+                </> : null}
             </> : null}
             <input type="hidden" name="page_status" value={page_status} />
 
