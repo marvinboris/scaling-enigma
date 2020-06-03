@@ -6,6 +6,11 @@
             @switch($request->status)
                 @case(1)
                     Thank you for your patience. We are hereby informing you that your request <strong>{{ $request->reqid }}</strong> is being under process. You will be notified shortly.
+
+                    @if ($request->comments)
+                    Here are some information about your request. <br><br>
+                    <div style="background-color: rgba(245, 163, 0, .25); padding: 1rem 1.25rem; border-radius: .25rem;">"{{ $request->comments }}"</div>
+                    @endif
                     @break
                 @case(2)
                     Your request <strong>{{ $request->reqid }}</strong> has been cancelled. Please check below to find the reason. <br><br>

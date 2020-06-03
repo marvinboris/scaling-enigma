@@ -125,10 +125,11 @@ export default class Home extends Component {
                             </h4>
                         </div>
                         <Row className="justify-content-center text-center">
-                            <Row className="pt-5 my-5">
-                                <CustomerBlock title="What A System ! This Is Tremendous" mark={4} name="FRIDOLIN BRUNO" src={FridolinBruno}>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in is jos jomes jiooes n oes oh seri os oifeuo s oifeso</CustomerBlock>
+                            <Row className="pt-5 my-5 justify-content-center">
+                                {/* <CustomerBlock title="What A System ! This Is Tremendous" mark={4} name="FRIDOLIN BRUNO" src={FridolinBruno}>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in is jos jomes jiooes n oes oh seri os oifeuo s oifeso</CustomerBlock>
                                 <CustomerBlock title="Amazing Support Response Time" mark={5} flag="ca" name="JAFF GODWILL. Y" active src={JaffGodwill}>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in is jos jomes jiooes n oes oh seri os oifeuo s oifeso</CustomerBlock>
-                                <CustomerBlock title="Best Expirience So Farience So Far" mark={5} name="SAMUEL ROLANDE" src={SamuelRolande}>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in is jos jomes jiooes n oes oh seri os oifeuo s oifeso</CustomerBlock>
+                                <CustomerBlock title="Best Expirience So Farience So Far" mark={5} name="SAMUEL ROLANDE" src={SamuelRolande}>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in is jos jomes jiooes n oes oh seri os oifeuo s oifeso</CustomerBlock> */}
+                                <BetweenButton icon={faPaperPlane} pill className="py-3 px-4" color="blue">Send testimonial</BetweenButton>
                             </Row>
                         </Row>
                     </div>
