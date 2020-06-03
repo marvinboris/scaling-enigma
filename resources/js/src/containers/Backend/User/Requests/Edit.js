@@ -68,18 +68,16 @@ class Edit extends Component {
                     <CustomInput type="radio" name="status" id="status-1" onChange={this.inputChangedHandler} value={2} defaultChecked={request.status === 2} className={request.status === 2 ? 'text-700 text-' + colors[request.status] : ''} label="Cancelled" inline />
                 </Label>
             </FormGroup>
-            {+request.status < 2 ? <>
-                {+status > 0 ? <>
-                    <FormGroup>
-                        <Label className="text-700" for="comments">{+status === 2 ? 'Reason' : 'Reply'}</Label>
-                        <Input type="textarea" id="comments" name="comments" onChange={this.inputChangedHandler} style={{ height: 250 }} value={comments} />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label className="text-700" for="admin_files">Attach files</Label>
-                        <CustomInput type="file" id="admin_files" name="admin_files[]" multiple accept=".png,.jpg,.jpeg,.pdf" onChange={this.inputChangedHandler} files={admin_files} />
-                    </FormGroup>
-                </> : null}
-            </> : null}
+            {(+request.status < 2 && +status > 0) && <>
+                <FormGroup>
+                    <Label className="text-700" for="comments">{+status === 2 ? 'Reason' : 'Reply'}</Label>
+                    <Input type="textarea" id="comments" name="comments" onChange={this.inputChangedHandler} style={{ height: 250 }} value={comments} />
+                </FormGroup>
+                <FormGroup>
+                    <Label className="text-700" for="admin_files">Attach files</Label>
+                    <CustomInput type="file" id="admin_files" name="admin_files[]" multiple accept=".png,.jpg,.jpeg,.pdf" onChange={this.inputChangedHandler} files={admin_files} />
+                </FormGroup>
+            </>}
             <input type="hidden" name="page_status" value={page_status} />
 
             <div className="mt-4">
