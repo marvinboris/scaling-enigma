@@ -67,7 +67,8 @@ class RequestController extends Controller
         event(new Requests(
             count(AppRequest::whereStatus(0)->get()),
             count(AppRequest::whereStatus(1)->get()),
-            count(AppRequest::whereStatus(3)->get())
+            count(AppRequest::whereStatus(3)->get()),
+            count(AppRequest::get())
         ));
 
         return response()->json([

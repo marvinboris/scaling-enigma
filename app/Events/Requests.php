@@ -15,12 +15,14 @@ class Requests implements ShouldBroadcast
     public $pending;
     public $processing;
     public $solved;
+    public $total;
 
-    public function __construct($pending, $processing, $solved)
+    public function __construct($pending, $processing, $solved, $total)
     {
         $this->pending = $pending;
         $this->processing = $processing;
         $this->solved = $solved;
+        $this->total = $total;
     }
 
     public function broadcastOn()

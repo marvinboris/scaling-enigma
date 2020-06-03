@@ -26,13 +26,15 @@ class BackEnd extends Component {
         processing: 0,
         solved: 0,
 
+        total: 0,
+
         notifications: null,
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.auth.data.notifications && !prevState.notifications) {
-            const { pending, processing, solved, notifications } = nextProps.auth.data;
-            return updateObject(prevState, { pending, processing, solved, notifications });
+            const { pending, processing, solved, total, notifications } = nextProps.auth.data;
+            return updateObject(prevState, { pending, processing, solved, total, notifications });
         }
         return prevState;
     }
@@ -58,8 +60,9 @@ class BackEnd extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.auth.data.notifications && !prevProps.auth.data.notifications) {
+            const audio = new Audio('/audio/swiftly.mp3');
             const channel = Echo.channel('public');
-            channel.listen('Requests', ({ pending, processing, solved }) => {
+            channel.listen('Requests', ({ pending, processing, solved, total }) => {
                 if (
                     this.props.auth.token && (
                         pending !== this.state.pending ||
@@ -67,9 +70,8 @@ class BackEnd extends Component {
                         solved !== this.state.solved
                     )
                 ) {
-                    const audio = new Audio('/audio/swiftly.mp3');
-                    audio.play();
-                    this.setState({ pending, processing, solved });
+                    if (total !== this.state.total) audio.play();
+                    this.setState({ pending, processing, solved, total });
                 }
             });
         }
