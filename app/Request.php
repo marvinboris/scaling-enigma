@@ -11,7 +11,7 @@ class Request extends Model
     protected $directory = '/requests/';
 
     protected $fillable = [
-        'reqid', 'name', 'platform_id', 'country', 'phone', 'email', 'ref', 'documents', 'issue_id', 'issue_files', 'description', 'status', 'comments', 'admin_files'
+        'reqid', 'name', 'platform_id', 'country', 'phone', 'email', 'ref', 'documents', 'issue_id', 'issue_files', 'description', 'status', 'comments', 'admin_files', 'edited_by', 'client_ip', 'client_mac', 'client_browser', 'user_ip', 'user_mac', 'user_browser'
     ];
 
     public function platform()
@@ -41,7 +41,7 @@ class Request extends Model
         }
         return $issue_files;
     }
-    
+
     public function getAdminFilesAttribute($value)
     {
         $admin_files = [];

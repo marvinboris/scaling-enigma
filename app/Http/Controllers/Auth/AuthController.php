@@ -117,6 +117,7 @@ class AuthController extends Controller
                     'notifications' => $user->unreadNotifications()->latest()->limit(5)->get(),
                     'pending' => count(AppRequest::whereStatus(0)->get()),
                     'processing' => count(AppRequest::whereStatus(1)->get()),
+                    'cancelled' => count(AppRequest::whereStatus(2)->get()),
                     'solved' => count(AppRequest::whereStatus(3)->get()),
                 ])
             ]);
@@ -135,6 +136,7 @@ class AuthController extends Controller
             'notifications' => $user->unreadNotifications()->latest()->limit(5)->get(),
             'pending' => count(AppRequest::whereStatus(0)->get()),
             'processing' => count(AppRequest::whereStatus(1)->get()),
+            'cancelled' => count(AppRequest::whereStatus(2)->get()),
             'solved' => count(AppRequest::whereStatus(3)->get()),
         ]);
 

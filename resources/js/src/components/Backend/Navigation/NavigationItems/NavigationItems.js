@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Collapse, Nav, UncontrolledDropdown, DropdownToggle, Badge, DropdownMenu, DropdownItem, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCalendar, faPowerOff, faTimes, faSpinner, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCalendar, faPowerOff, faTimes, faSpinner, faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 
 // import NavigationItem from './NavigationItem/NavigationItem';
 // import MyDropdownItem from '../../../Navigation/NavigationItems/DropdownItem/DropdownItem';
 
-export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, processing = 0, solved = 0, date: { weekDay, day, month, year }, clock: { hours, minutes, seconds } }) => {
+export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, processing = 0, cancelled = 0, solved = 0, date: { weekDay, day, month, year }, clock: { hours, minutes, seconds } }) => {
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
@@ -32,6 +32,10 @@ export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, proc
                 <Link className="position-relative" to="/user/requests/pending">
                     <Button color="myprimary" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Processing</span><FontAwesomeIcon icon={faSpinner} className="fa-spin" /></Button>
                     <Badge color="myprimary" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{processing}</Badge>
+                </Link>
+                <Link className="position-relative" to="/user/requests/pending">
+                    <Button color="red" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Cancelled</span><FontAwesomeIcon icon={faTimesCircle} /></Button>
+                    <Badge color="red" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{cancelled}</Badge>
                 </Link>
                 <Link className="position-relative" to="/user/requests/solved">
                     <Button color="green" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Solved</span><FontAwesomeIcon icon={faCheckCircle} /></Button>

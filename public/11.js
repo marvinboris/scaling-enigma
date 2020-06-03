@@ -380,7 +380,7 @@ var Pending = /*#__PURE__*/function (_Component) {
             }, issueFilesContent)))));
             var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_19__["default"], {
               request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_18__["updateObject"])(request, {
-                page_status: 'dashboard'
+                page_status: 'pending'
               })
             });
             return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_18__["updateObject"])(request, {
