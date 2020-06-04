@@ -46,7 +46,7 @@ class BackEnd extends Component {
             const date = new Date();
             const twoDigits = number => number < 10 ? '0' + number : number;
 
-            const weekDay = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][date.getDay()];
+            const weekDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][date.getDay()];
             const day = date.getDate();
             const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][date.getMonth()];
             const year = date.getFullYear();
