@@ -154,7 +154,7 @@ class Request extends Component {
                                 {platformsOptions}
                             </MyInput>
                             <MyInput className="col-md-6" type="email" onChange={this.inputChangeHandler} value={email} name="email" placeholder="E-Mail Address" required />
-                            <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={ref} name="ref" placeholder="User ID" />
+                            <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={ref} name="ref" placeholder="User ID" required={platform_id != 3} />
                             <MyInput className="col-md-6" type="select" addon={<span className="text-secondary text-small d-inline-flex">
                                 <div className="rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center" style={{ width: 30, height: 30 }}>
                                     <span className={`flag-icon text-xx-large position-absolute flag-icon-${country.toLowerCase()}`} />

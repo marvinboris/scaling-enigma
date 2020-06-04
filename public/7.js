@@ -536,7 +536,8 @@ var Request = /*#__PURE__*/function (_Component) {
             onChange: this.inputChangeHandler,
             value: ref,
             name: "ref",
-            placeholder: "User ID"
+            placeholder: "User ID",
+            required: platform_id != 3
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
             className: "col-md-6",
             type: "select",
