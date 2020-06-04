@@ -240,9 +240,12 @@ var Pending = /*#__PURE__*/function (_Component) {
                 content: request.edited_by
               }, request.status === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
                 color: colors[request.status],
-                className: "position-static ml-2"
+                style: {
+                  width: 70
+                },
+                className: "position-static d-inline-block text-center ml-2"
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Counter_Counter__WEBPACK_IMPORTED_MODULE_17__["default"], {
-                start: request.created_at
+                start: request.updated_at
               })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
                 color: colors[request.status],
                 style: {

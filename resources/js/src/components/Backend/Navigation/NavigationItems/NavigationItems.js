@@ -25,25 +25,25 @@ export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, proc
                 <strong>TIME : {hours} : {minutes} : {seconds}</strong>
             </div>
             <div className="py-3 d-none d-md-flex align-items-center position-absolute" style={{ left: 650 }}>
-                <Link className="position-relative" to="/user/requests/pending">
+                <Link className="position-relative text-decoration-none" to="/user/requests/pending">
                     <Button color="orange" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Pending</span><FontAwesomeIcon icon={faSpinner} className="fa-spin" /></Button>
-                    <Badge color="orange" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending}</Badge>
+                    <Badge color="orange" className="position-absolute text-x-small text-500 rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending}</Badge>
                 </Link>
-                <Link className="position-relative" to="/user/requests/pending">
+                <Link className="position-relative text-decoration-none" to="/user/requests/pending">
                     <Button color="myprimary" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Processing</span><FontAwesomeIcon icon={faSpinner} className="fa-spin" /></Button>
-                    <Badge color="myprimary" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{processing}</Badge>
+                    <Badge color="myprimary" className="position-absolute text-x-small text-500 rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{processing}</Badge>
                 </Link>
-                <Link className="position-relative" to="/user/requests/cancelled">
+                <Link className="position-relative text-decoration-none" to="/user/requests/cancelled">
                     <Button color="red" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Cancelled</span><FontAwesomeIcon icon={faTimesCircle} /></Button>
-                    <Badge color="red" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{cancelled}</Badge>
+                    <Badge color="red" className="position-absolute text-x-small text-500 rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{cancelled}</Badge>
                 </Link>
-                <Link className="position-relative" to="/user/requests/solved">
+                <Link className="position-relative text-decoration-none" to="/user/requests/solved">
                     <Button color="green" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Solved</span><FontAwesomeIcon icon={faCheckCircle} /></Button>
-                    <Badge color="green" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{solved}</Badge>
+                    <Badge color="green" className="position-absolute text-x-small text-500 rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{solved}</Badge>
                 </Link>
-                <Link className="position-relative" to="/user/requests/important">
+                <Link className="position-relative text-decoration-none" to="/user/requests/important">
                     <Button color="lemongreen" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Important</span><FontAwesomeIcon icon={faExclamationTriangle} /></Button>
-                    <Badge color="lemongreen" className="position-absolute rounded-circle d-inline-flex justify-content-center align-items-center border border-dark border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{important}</Badge>
+                    <Badge color="lemongreen" className="position-absolute text-x-small text-500 rounded-circle d-inline-flex justify-content-center align-items-center border border-dark border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{important}</Badge>
                 </Link>
             </div>
         </Nav>

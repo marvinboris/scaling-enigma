@@ -85,8 +85,8 @@ class Important extends Component {
                             {request.ref}
                             <WithTooltip id={'request-' + request.reqid} content={request.edited_by}>
                                 {request.status === 1 ?
-                                    <Badge color={colors[request.status]} className="position-static ml-2">
-                                        <Counter start={request.created_at} />
+                                    <Badge color={colors[request.status]} style={{ width: 70 }} className="position-static d-inline-block text-center ml-2">
+                                        <Counter start={request.updated_at} />
                                     </Badge> :
                                     <Badge color={colors[request.status]} style={{ width: 20, height: 20 }} className="position-static p-0 ml-2 rounded-circle d-inline-flex justify-content-center align-items-center">
                                         <FontAwesomeIcon icon={icons[request.status]} className={[0, 1].includes(request.status) ? "fa-spin" : ""} fixedWidth />

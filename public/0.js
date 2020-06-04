@@ -98,8 +98,9 @@ var twoDigits = function twoDigits(number) {
 
   setInterval(function () {
     var counterStart = new Date(start).getTime();
+    var counterEnd = counterStart + 72 * 3600 * 1000;
     var now = new Date().getTime();
-    var totalSeconds = Math.round((now - counterStart) / 1000);
+    var totalSeconds = Math.round((counterEnd - now) / 1000);
     var hours = Math.floor(totalSeconds / 3600);
     var minutes = Math.floor((totalSeconds - hours * 3600) / 60);
     var seconds = totalSeconds - hours * 3600 - minutes * 60;
