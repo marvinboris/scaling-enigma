@@ -26,6 +26,7 @@ class BackEnd extends Component {
         processing: 0,
         cancelled: 0,
         solved: 0,
+        important: 0,
 
         total: 0,
 
@@ -34,8 +35,8 @@ class BackEnd extends Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.auth.data.notifications && !prevState.notifications) {
-            const { pending, processing, cancelled, solved, total, notifications } = nextProps.auth.data;
-            return updateObject(prevState, { pending, processing, cancelled, solved, total, notifications });
+            const { pending, processing, cancelled, solved, important, total, notifications } = nextProps.auth.data;
+            return updateObject(prevState, { pending, processing, cancelled, solved, important, total, notifications });
         }
         return prevState;
     }
@@ -63,17 +64,18 @@ class BackEnd extends Component {
         if (this.props.auth.data.notifications && !prevProps.auth.data.notifications) {
             const audio = new Audio('/audio/swiftly.mp3');
             const channel = Echo.channel('public');
-            channel.listen('Requests', ({ pending, processing, cancelled, solved, total }) => {
+            channel.listen('Requests', ({ pending, processing, cancelled, solved, important, total }) => {
                 if (
                     this.props.auth.token && (
                         pending !== this.state.pending ||
                         processing !== this.state.processing ||
                         cancelled !== this.state.cancelled ||
+                        important !== this.state.important ||
                         solved !== this.state.solved
                     )
                 ) {
                     if (total !== this.state.total) audio.play();
-                    this.setState({ pending, processing, cancelled, solved, total });
+                    this.setState({ pending, processing, cancelled, solved, important, total });
                 }
             });
         }
@@ -96,7 +98,7 @@ class BackEnd extends Component {
 
 
     render() {
-        const { isOpen, date, clock, selectedItem, pending, processing, cancelled, solved, notifications } = this.state;
+        const { isOpen, date, clock, selectedItem, pending, processing, cancelled, solved, important, notifications } = this.state;
         const {
             auth: { loading, data: { name, photo } },
             history, children } = this.props;

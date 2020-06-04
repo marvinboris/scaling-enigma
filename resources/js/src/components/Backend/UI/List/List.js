@@ -4,8 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faFileExcel, faFilePdf, faFileCsv, faPrint, faAngleDoubleLeft, faChevronLeft, faChevronRight, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
+import { updateObject } from '../../../../shared/utility';
+
 export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 12, lg = 12, xl = 12, icon, title, add, link, className = '', dark, borderless, innerClassName = '', outerClassName = '', p0, select, children, selectHandler, style }) => {
-    const titles = fields.map(({ name }) => <th className="align-middle text-nowrap" key={name}>{name}</th>);
+    const titles = fields.map(({ name, fixed }) => <th className="align-middle text-nowrap bg-soft" style={fixed ? { position: 'sticky', right: 0 } : {}} key={name}>{name}</th>);
     titles.unshift(<th className="text-center align-middle" key="#">SL</th>);
     if (select) titles.unshift(<th className="align-middle text-center" key="select_all">
         <input type="checkbox" onClick={selectHandler} className="select_all" />
@@ -36,8 +38,8 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
         if (select) inside.unshift(<th className="text-center align-middle" key={'secondary' + index}>
             <input type="checkbox" value={item._id} />
         </th>);
-        fields.forEach(({ key, minWidth }) => {
-            inside.push(<td className="align-middle text-nowrap position-relative" style={{ minWidth }} key={key}>{item[key]}</td>);
+        fields.forEach(({ key, minWidth, fixed }) => {
+            inside.push(<td className="align-middle text-nowrap" style={updateObject({ minWidth, borderColor: '#DEE2E6' }, fixed ? { position: 'sticky', right: 0, backgroundColor: '#F4F4F4' } : {})} key={key}>{item[key]}</td>);
         });
 
         return <tr className="align-middle" key={index + 1}>{inside}</tr>;
@@ -195,7 +197,7 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
 
                 <div className={"flex-fill d-flex flex-column " + (!p0 ? "p-4" : "p-0")}>
                     <div className="table-responsive flex-fill">
-                        <Table dark={dark} bordered={bordered} borderless={borderless} className={innerClassName}>
+                        <Table dark={dark} bordered={bordered} hover borderless={borderless} className={innerClassName}>
                             <thead className="bg-soft text-secondary"><tr>{titles}</tr></thead>
                             <tbody className="bg-soft-50 text-secondary">{content}</tbody>
                         </Table>
@@ -226,7 +228,7 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
                                         {page === pageNumber ? null :
                                             <>
                                                 <li className="btn btn-darkblue text-secondary" onClick={nextPageHandler}><FontAwesomeIcon icon={faChevronRight} /></li>
-                                                <li className="btn btn-lightblue" onClick={lastPageHandler}>Last<FontAwesomeIcon icon={faAngleDoubleRight} className="ml-2" /></li>
+                                                <li className="btn btn-myprimary" onClick={lastPageHandler}>Last<FontAwesomeIcon icon={faAngleDoubleRight} className="ml-2" /></li>
                                             </>
                                         }
                                     </>

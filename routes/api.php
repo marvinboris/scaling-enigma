@@ -32,7 +32,6 @@ Route::namespace('Frontend')->prefix('frontend')->name('frontend.')->group(funct
 });
 
 Route::namespace('Auth')->prefix('auth')->name('auth.')->group(function () {
-    Route::get('logout', 'AuthController@logout')->name('logout');
     Route::post('resend', 'AuthController@resend')->name('resend');
     Route::post('verify', 'AuthController@verify')->name('verify');
     Route::post('login', 'AuthController@login')->name('login');
@@ -52,6 +51,7 @@ Route::middleware('auth:api')->namespace('User')->prefix('user')->name('user.')-
         Route::get('cancelled', 'RequestsController@cancelled')->name('cancelled');
         Route::get('solved', 'RequestsController@solved')->name('solved');
         Route::get('pending', 'RequestsController@pending')->name('pending');
+        Route::get('important', 'RequestsController@important')->name('important');
         Route::get('', 'RequestsController@index')->name('index');
     });
 });

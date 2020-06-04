@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[11],{
 
-/***/ "./resources/js/src/containers/Backend/User/Requests/Pending/Pending.js":
-/*!******************************************************************************!*\
-  !*** ./resources/js/src/containers/Backend/User/Requests/Pending/Pending.js ***!
-  \******************************************************************************/
+/***/ "./resources/js/src/containers/Backend/User/Requests/Cancelled/Cancelled.js":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/src/containers/Backend/User/Requests/Cancelled/Cancelled.js ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -24,13 +24,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Backend_UI_List_List__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../../components/Backend/UI/List/List */ "./resources/js/src/components/Backend/UI/List/List.js");
 /* harmony import */ var _components_Error_Error__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../../components/Error/Error */ "./resources/js/src/components/Error/Error.js");
 /* harmony import */ var _components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../../components/UI/CustomSpinner/CustomSpinner */ "./resources/js/src/components/UI/CustomSpinner/CustomSpinner.js");
-/* harmony import */ var _components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../../components/Feedback/Feedback */ "./resources/js/src/components/Feedback/Feedback.js");
-/* harmony import */ var _components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../../components/Backend/UI/Delete/Delete */ "./resources/js/src/components/Backend/UI/Delete/Delete.js");
-/* harmony import */ var _components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../../components/Backend/UI/View/View */ "./resources/js/src/components/Backend/UI/View/View.js");
-/* harmony import */ var _components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../../../components/Backend/UI/Download/Download */ "./resources/js/src/components/Backend/UI/Download/Download.js");
-/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../../../store/actions */ "./resources/js/src/store/actions/index.js");
-/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../../../shared/utility */ "./resources/js/src/shared/utility.js");
-/* harmony import */ var _Edit__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../Edit */ "./resources/js/src/containers/Backend/User/Requests/Edit.js");
+/* harmony import */ var _components_UI_WithTooltip_WithTooltip__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../../components/UI/WithTooltip/WithTooltip */ "./resources/js/src/components/UI/WithTooltip/WithTooltip.js");
+/* harmony import */ var _components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../../components/Feedback/Feedback */ "./resources/js/src/components/Feedback/Feedback.js");
+/* harmony import */ var _components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../../components/Backend/UI/Delete/Delete */ "./resources/js/src/components/Backend/UI/Delete/Delete.js");
+/* harmony import */ var _components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../../../components/Backend/UI/View/View */ "./resources/js/src/components/Backend/UI/View/View.js");
+/* harmony import */ var _components_Backend_UI_Counter_Counter__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../../../components/Backend/UI/Counter/Counter */ "./resources/js/src/components/Backend/UI/Counter/Counter.js");
+/* harmony import */ var _Edit__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../Edit */ "./resources/js/src/containers/Backend/User/Requests/Edit.js");
+/* harmony import */ var _Description__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../Description */ "./resources/js/src/containers/Backend/User/Requests/Description.js");
+/* harmony import */ var _View__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../View */ "./resources/js/src/containers/Backend/User/Requests/View.js");
+/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../../../store/actions */ "./resources/js/src/store/actions/index.js");
+/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../../../shared/utility */ "./resources/js/src/shared/utility.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -86,29 +89,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var I = function I(_ref) {
-  var _ref$size = _ref.size,
-      size = _ref$size === void 0 ? 6 : _ref$size,
-      _ref$label = _ref.label,
-      label = _ref$label === void 0 ? null : _ref$label,
-      children = _ref.children;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-    lg: size,
-    className: "pb-3"
-  }, label ? label + ': ' : '', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-    className: "text-green text-500"
-  }, children));
-};
 
-var Pending = /*#__PURE__*/function (_Component) {
-  _inherits(Pending, _Component);
 
-  var _super = _createSuper(Pending);
 
-  function Pending() {
+var Cancelled = /*#__PURE__*/function (_Component) {
+  _inherits(Cancelled, _Component);
+
+  var _super = _createSuper(Cancelled);
+
+  function Cancelled() {
     var _this;
 
-    _classCallCheck(this, Pending);
+    _classCallCheck(this, Cancelled);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -123,7 +115,7 @@ var Pending = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(Pending, [{
+  _createClass(Cancelled, [{
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -132,7 +124,7 @@ var Pending = /*#__PURE__*/function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.props.onGetPendingRequests();
+                this.props.onGetCancelledRequests();
                 cors = 'https://cors-anywhere.herokuapp.com/';
                 _context.next = 4;
                 return fetch(cors + 'http://country.io/phone.json', {
@@ -214,177 +206,44 @@ var Pending = /*#__PURE__*/function (_Component) {
         }));
 
         if (requests) {
-          feedback = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          feedback = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_14__["default"], {
             message: message
           });
           var requestsData = requests.map(function (request) {
             var colors = ['orange', 'myprimary', 'red', 'green'];
             var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
             var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCheckCircle"]];
-            var country = countries.find(function (_ref2) {
-              var country = _ref2.country;
+            var country = countries.find(function (_ref) {
+              var country = _ref.country;
               return country === request.country;
             });
-            var documentsContent = request.documents.filter(function (d) {
-              return d;
-            }).map(function (doc) {
-              var arr1 = doc.split('.');
-              var format = arr1[arr1.length - 1];
-              var arr2 = doc.split('/');
-              var arr3 = arr2[arr2.length - 1].split('.');
-              var formatlessName = arr3.filter(function (n, i) {
-                return i < arr3.length - 1;
-              }).join('.');
-              var content;
-
-              switch (format.toLowerCase()) {
-                case 'pdf':
-                  content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFilePdf"],
-                    size: "5x",
-                    className: "text-border position-absolute",
-                    style: {
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%,-50%)'
-                    }
-                  });
-                  break;
-
-                default:
-                  content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                    className: "embed-responsive embed-responsive-1by1 position-absolute",
-                    style: {
-                      background: 'url("' + doc + '") no-repeat center',
-                      backgroundSize: 'cover',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%,-50%)'
-                    }
-                  });
-                  break;
-              }
-
-              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-                xl: 3,
-                key: formatlessName + Math.random(),
-                className: "pr-0",
-                style: {
-                  minWidth: 100
-                }
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-                target: "_blank",
-                href: doc,
-                className: "rounded-4 overflow-hidden p-2 bg-light d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFilePdf"],
-                className: "mr-2"
-              }), "NID_45094M", content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_16__["default"], {
-                link: doc,
-                name: formatlessName + '.' + format
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                className: "text-uppercase text-truncate pt-3 text-darkblue"
-              }, formatlessName)));
+            var descriptionContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Description__WEBPACK_IMPORTED_MODULE_19__["default"], {
+              request: request
             });
-            var issueFilesContent = request.issue_files.filter(function (d) {
-              return d;
-            }).map(function (issue_file) {
-              var arr1 = issue_file.split('.');
-              var format = arr1[arr1.length - 1];
-              var arr2 = issue_file.split('/');
-              var arr3 = arr2[arr2.length - 1].split('.');
-              var formatlessName = arr3.filter(function (n, i) {
-                return i < arr3.length - 1;
-              }).join('.');
-              var icon;
-
-              switch (format.toLowerCase()) {
-                case 'pdf':
-                  icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFilePdf"];
-                  break;
-
-                default:
-                  icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFileImage"];
-                  break;
-              }
-
-              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                key: formatlessName + Math.random(),
-                className: "pr-3 d-inline-block",
-                style: {
-                  maxWidth: 200
-                }
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_16__["default"], {
-                link: issue_file,
-                name: formatlessName + '.' + format
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                className: "rounded-2 p-2 bg-light text-darkblue text-uppercase text-truncate text-nowrap"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: icon,
-                className: "mr-2"
-              }), formatlessName)));
+            var viewContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_View__WEBPACK_IMPORTED_MODULE_20__["default"], {
+              request: request,
+              country: country
             });
-            var viewContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
-              className: "m-0 p-3 rounded bg-green-20"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-              xs: 12
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              className: "text-green text-700 mb-2"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-              icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faUser"],
-              className: "mr-2",
-              fixedWidth: true
-            }), "User info Gathering"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
-              label: "Full Name"
-            }, request.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
-              label: "Platform"
-            }, request.platform), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
-              label: "E-Mail Address"
-            }, request.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
-              label: "User ID"
-            }, request.ref), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
-              label: "Country"
-            }, country ? country.name : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
-              label: "Phone Number"
-            }, request.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(I, {
-              label: "Issue"
-            }, request.issue)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
-              className: "mt-4 mx-0 p-3 rounded bg-orange-20"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-              xs: 12
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              className: "text-orange text-700 mb-2"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-              icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faBook"],
-              className: "mr-2",
-              fixedWidth: true
-            }), "User documents"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-              xs: 12
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, documentsContent))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
-              className: "mt-4 mx-0 p-3 rounded bg-soft"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-              xs: 12
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              className: "text-black text-700 mb-2"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-              icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEdit"],
-              className: "mr-2",
-              fixedWidth: true
-            }), "Issue description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-              xs: 12
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-              xs: 12,
-              className: "pb-3"
-            }, request.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-              xl: 12
-            }, issueFilesContent)))));
-            var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_19__["default"], {
-              request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_18__["updateObject"])(request, {
-                page_status: 'pending'
+            var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_18__["default"], {
+              request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
+                page_status: 'cancelled'
               })
             });
-            return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_18__["updateObject"])(request, {
-              ref: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, request.ref, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
+            return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
+              ref: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                className: "d-flex justify-content-between position-relative",
+                style: {
+                  minWidth: request.status === 1 ? 130 : 0
+                }
+              }, request.ref, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_WithTooltip_WithTooltip__WEBPACK_IMPORTED_MODULE_13__["default"], {
+                id: 'request-' + request.reqid,
+                content: request.edited_by
+              }, request.status === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
+                color: colors[request.status],
+                className: "position-static ml-2"
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Counter_Counter__WEBPACK_IMPORTED_MODULE_17__["default"], {
+                start: request.created_at
+              })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
                 color: colors[request.status],
                 style: {
                   width: 20,
@@ -395,8 +254,8 @@ var Pending = /*#__PURE__*/function (_Component) {
                 icon: icons[request.status],
                 className: [0, 1].includes(request.status) ? "fa-spin" : "",
                 fixedWidth: true
-              }))),
-              created_at: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_18__["convertDate"])(request.created_at),
+              })))),
+              created_at: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["convertDate"])(request.created_at),
               status: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
                 color: colors[request.status],
                 className: "badge-block position-static"
@@ -428,9 +287,9 @@ var Pending = /*#__PURE__*/function (_Component) {
                   maxWidth: 150
                 },
                 className: "flex-fill text-truncate"
-              }, request.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_15__["default"], {
+              }, request.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__["default"], {
                 title: 'Request description: ' + request.reqid,
-                content: request.description
+                content: descriptionContent
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEye"],
                 className: "text-green",
@@ -438,21 +297,21 @@ var Pending = /*#__PURE__*/function (_Component) {
               }))),
               action: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 className: "text-center"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_15__["default"], {
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__["default"], {
                 title: 'Request details: ' + request.reqid,
                 content: viewContent
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEye"],
                 className: "text-green mr-2",
                 fixedWidth: true
-              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_15__["default"], {
+              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__["default"], {
                 title: 'Request edit: ' + request.reqid,
                 content: editContent
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEdit"],
                 className: "text-brokenblue",
                 fixedWidth: true
-              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_14__["default"], {
+              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_15__["default"], {
                 deleteAction: function deleteAction() {
                   return _this2.props.onPostRequestDelete(request.id);
                 }
@@ -485,7 +344,7 @@ var Pending = /*#__PURE__*/function (_Component) {
             add: "File a Request",
             link: "/user/requests/add",
             icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"],
-            title: "Pending Requests",
+            title: "Cancelled Requests",
             className: "bg-white shadow-sm",
             fields: [{
               name: 'Creation Date',
@@ -528,7 +387,8 @@ var Pending = /*#__PURE__*/function (_Component) {
               minWidth: 140
             }, {
               name: 'Action',
-              key: 'action'
+              key: 'action',
+              fixed: true
             }]
           })));
         }
@@ -536,20 +396,20 @@ var Pending = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "bg-white py-4 pl-5 pr-4 position-relative"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Breadcrumb_Breadcrumb__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        main: "Pending Requests",
+        main: "Cancelled Requests",
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Titles_SpecialTitle_SpecialTitle__WEBPACK_IMPORTED_MODULE_8__["default"], {
         user: true,
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"]
       }, "User panel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Titles_Subtitle_Subtitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
         user: true
-      }, "Pending Requests")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Cancelled Requests")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "p-4 pb-0"
       }, errors, feedback, content));
     }
   }]);
 
-  return Pending;
+  return Cancelled;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -558,22 +418,22 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onGetPendingRequests: function onGetPendingRequests() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_17__["getPendingRequests"]());
+    onGetCancelledRequests: function onGetCancelledRequests() {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getCancelledRequests"]());
     },
     onPostRequestDelete: function onPostRequestDelete(id) {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_17__["postRequestDelete"](id));
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["postRequestDelete"](id));
     },
     onPostRequestUpdate: function onPostRequestUpdate(id, data) {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_17__["postRequestUpdate"](id, data));
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["postRequestUpdate"](id, data));
     },
     onResetRequests: function onResetRequests() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_17__["resetRequests"]());
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["resetRequests"]());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Pending)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Cancelled)));
 
 /***/ })
 

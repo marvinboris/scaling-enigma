@@ -17,6 +17,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../shared/utility */ "./resources/js/src/shared/utility.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -36,6 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -76,9 +78,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       selectHandler = _ref.selectHandler,
       style = _ref.style;
   var titles = fields.map(function (_ref2) {
-    var name = _ref2.name;
+    var name = _ref2.name,
+        fixed = _ref2.fixed;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-      className: "align-middle text-nowrap",
+      className: "align-middle text-nowrap bg-soft",
+      style: fixed ? {
+        position: 'sticky',
+        right: 0
+      } : {},
       key: name
     }, name);
   });
@@ -163,12 +170,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     })));
     fields.forEach(function (_ref3) {
       var key = _ref3.key,
-          minWidth = _ref3.minWidth;
+          minWidth = _ref3.minWidth,
+          fixed = _ref3.fixed;
       inside.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
-        className: "align-middle text-nowrap position-relative",
-        style: {
-          minWidth: minWidth
-        },
+        className: "align-middle text-nowrap",
+        style: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_6__["updateObject"])({
+          minWidth: minWidth,
+          borderColor: '#DEE2E6'
+        }, fixed ? {
+          position: 'sticky',
+          right: 0,
+          backgroundColor: '#F4F4F4'
+        } : {}),
         key: key
       }, item[key]));
     });
@@ -415,6 +428,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Table"], {
     dark: dark,
     bordered: bordered,
+    hover: true,
     borderless: borderless,
     className: innerClassName
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", {
@@ -457,7 +471,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faChevronRight"]
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-    className: "btn btn-lightblue",
+    className: "btn btn-myprimary",
     onClick: lastPageHandler
   }, "Last", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faAngleDoubleRight"],
@@ -486,6 +500,39 @@ __webpack_require__.r(__webpack_exports__);
   return message ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Alert"], {
     color: message.type
   }, message.content) : null;
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/containers/Backend/User/Requests/Description.js":
+/*!**************************************************************************!*\
+  !*** ./resources/js/src/containers/Backend/User/Requests/Description.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../shared/utility */ "./resources/js/src/shared/utility.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var request = _ref.request;
+  var comments;
+  var colors = ['orange', 'myprimary', 'red', 'green'];
+  var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
+  comments = request.status > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: 'rounded p-4 mt-3 text-' + colors[request.status] + ' bg-' + colors[request.status] + '-25'
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, texts[request.status], " by: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "text-700"
+  }, request.edited_by), " on ", Object(_shared_utility__WEBPACK_IMPORTED_MODULE_1__["convertDate"])(request.created_at)), request.comments && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mt-2"
+  }, request.comments));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "text-justify"
+  }, request.description, comments);
 });
 
 /***/ })

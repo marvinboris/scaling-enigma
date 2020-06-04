@@ -14,6 +14,8 @@ import 'aos/dist/aos.css';
 
 // User routes
 const asyncUserDashboard = asyncComponent(() => import('./containers/Backend/User/Dashboard/Dashboard'));
+const asyncUserRequestReport = asyncComponent(() => import('./containers/Backend/User/RequestReport/RequestReport'));
+const asyncUserRequestsImportant = asyncComponent(() => import('./containers/Backend/User/Requests/Important/Important'));
 const asyncUserRequestsPending = asyncComponent(() => import('./containers/Backend/User/Requests/Pending/Pending'));
 const asyncUserRequestsSolved = asyncComponent(() => import('./containers/Backend/User/Requests/Solved/Solved'));
 const asyncUserRequestsCancelled = asyncComponent(() => import('./containers/Backend/User/Requests/Cancelled/Cancelled'));
@@ -55,6 +57,8 @@ class App extends Component {
             routes = (
                 <Switch>
                     <Route path="/user/dashboard" component={asyncUserDashboard} />
+                    <Route path="/user/request-report" component={asyncUserRequestReport} />
+                    <Route path="/user/requests/important" component={asyncUserRequestsImportant} />
                     <Route path="/user/requests/pending" component={asyncUserRequestsPending} />
                     <Route path="/user/requests/solved" component={asyncUserRequestsSolved} />
                     <Route path="/user/requests/cancelled" component={asyncUserRequestsCancelled} />

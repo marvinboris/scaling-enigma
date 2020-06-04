@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
-import { rootPath } from '../..';
 
-const prefix = '/user/';
+const prefix = '/api/user/';
 
 export const resetDashboard = () => ({ type: actionTypes.RESET_DASHBOARD });
 const dashboardStart = () => ({ type: actionTypes.DASHBOARD_START });
@@ -12,7 +11,7 @@ export const getDashboard = () => async dispatch => {
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(rootPath + prefix + 'dashboard', {
+        const res = await fetch(prefix + 'dashboard', {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -35,7 +34,26 @@ export const getRequests = () => async dispatch => {
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(rootPath + prefix + 'requests', {
+        const res = await fetch(prefix + 'requests', {
+            method: 'GET',
+            headers: {
+                Authorization: token
+            }
+        });
+        const resData = await res.json();
+        dispatch(requestsSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(requestsFail(error));
+    }
+};
+
+export const getImportantRequests = () => async dispatch => {
+    dispatch(requestsStart());
+
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(prefix + 'requests/important', {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -54,7 +72,7 @@ export const getPendingRequests = () => async dispatch => {
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(rootPath + prefix + 'requests/pending', {
+        const res = await fetch(prefix + 'requests/pending', {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -73,7 +91,7 @@ export const getSolvedRequests = () => async dispatch => {
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(rootPath + prefix + 'requests/solved', {
+        const res = await fetch(prefix + 'requests/solved', {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -92,7 +110,7 @@ export const getCancelledRequests = () => async dispatch => {
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(rootPath + prefix + 'requests/cancelled', {
+        const res = await fetch(prefix + 'requests/cancelled', {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -112,7 +130,7 @@ export const postRequestUpdate = (id, data) => async dispatch => {
     try {
         const token = localStorage.getItem('token');
         const form = new FormData(data);
-        const res = await fetch(rootPath + prefix + 'requests/' + id, {
+        const res = await fetch(prefix + 'requests/' + id, {
             method: 'POST',
             body: form,
             headers: {
@@ -132,7 +150,7 @@ export const postRequestDelete = id => async dispatch => {
     dispatch(requestsStart());
 
     try {
-        const res = await fetch(rootPath + prefix + 'requests/' + id + '/delete', {
+        const res = await fetch(prefix + 'requests/' + id + '/delete', {
             method: 'POST',
             headers: {
                 Authorization: token

@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
-import { rootPath } from '../..';
 
-const prefix = '/frontend/';
+const prefix = '/api/frontend/';
 
 export const resetRequest = () => ({ type: actionTypes.RESET_REQUEST });
 const requestStart = () => ({ type: actionTypes.REQUEST_START });
@@ -11,7 +10,7 @@ export const getRequest = () => async dispatch => {
     dispatch(requestStart());
 
     try {
-        const res = await fetch(rootPath + prefix + 'request', {
+        const res = await fetch(prefix + 'request', {
             method: 'GET',
         });
         const resData = await res.json();
@@ -27,7 +26,7 @@ export const postRequest = data => async dispatch => {
 
     try {
         const form = new FormData(data);
-        const res = await fetch(rootPath + prefix + 'request', {
+        const res = await fetch(prefix + 'request', {
             method: 'POST',
             body: form
         });
@@ -45,7 +44,7 @@ export const postCheckRequest = data => async dispatch => {
 
     try {
         const form = new FormData(data);
-        const res = await fetch(rootPath + prefix + 'request/check', {
+        const res = await fetch(prefix + 'request/check', {
             method: 'POST',
             body: form
         });

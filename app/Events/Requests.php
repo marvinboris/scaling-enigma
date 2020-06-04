@@ -16,14 +16,16 @@ class Requests implements ShouldBroadcast
     public $processing;
     public $cancelled;
     public $solved;
+    public $important;
     public $total;
 
-    public function __construct($pending, $processing, $cancelled, $solved, $total)
+    public function __construct($pending, $processing, $cancelled, $solved, $important, $total)
     {
         $this->pending = $pending;
         $this->processing = $processing;
         $this->cancelled = $cancelled;
         $this->solved = $solved;
+        $this->important = $important;
         $this->total = $total;
     }
 

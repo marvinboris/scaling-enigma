@@ -10,6 +10,7 @@ use App\Platform;
 use App\Request as AppRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use hisorange\BrowserDetect\Parser as Browser;
 
 class RequestController extends Controller
 {
@@ -60,6 +61,8 @@ class RequestController extends Controller
             'phone' => $request->code . $request->phone,
             'documents' => json_encode($documents),
             'issue_files' => json_encode($issue_files),
+            'client_id' => $request->ip(),
+            'client_browser' => Browser::browserName()
         ]));
 
         Mail::to($request->email)->send(new RequestSubmitted($appRequest));
@@ -69,6 +72,7 @@ class RequestController extends Controller
             count(AppRequest::whereStatus(1)->get()),
             count(AppRequest::whereStatus(2)->get()),
             count(AppRequest::whereStatus(3)->get()),
+            count(AppRequest::whereTypeId(1)->get()),
             count(AppRequest::get())
         ));
 

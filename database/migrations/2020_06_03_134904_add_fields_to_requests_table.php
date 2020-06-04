@@ -14,6 +14,7 @@ class AddFieldsToRequestsTable extends Migration
     public function up()
     {
         Schema::table('requests', function (Blueprint $table) {
+            $table->integer('type_id')->unsigned()->index()->nullable();
             $table->string('edited_by')->nullable();
             $table->string('client_ip')->nullable();
             $table->string('client_mac')->nullable();

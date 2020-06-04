@@ -59,6 +59,57 @@ var breadcrumb = function breadcrumb(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/src/components/Backend/UI/Counter/Counter.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/src/components/Backend/UI/Counter/Counter.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var twoDigits = function twoDigits(number) {
+  return number < 10 ? '0' + number : number;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var start = _ref.start;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('00 : 00 : 00'),
+      _useState2 = _slicedToArray(_useState, 2),
+      time = _useState2[0],
+      setTime = _useState2[1];
+
+  setInterval(function () {
+    var counterStart = new Date(start).getTime();
+    var now = new Date().getTime();
+    var totalSeconds = Math.round((now - counterStart) / 1000);
+    var hours = Math.floor(totalSeconds / 3600);
+    var minutes = Math.floor((totalSeconds - hours * 3600) / 60);
+    var seconds = totalSeconds - hours * 3600 - minutes * 60;
+    setTime("".concat(twoDigits(hours), " : ").concat(twoDigits(minutes), " : ").concat(twoDigits(seconds)));
+  }, 1000);
+  return time;
+});
+
+/***/ }),
+
 /***/ "./resources/js/src/components/Backend/UI/Delete/Delete.js":
 /*!*****************************************************************!*\
   !*** ./resources/js/src/components/Backend/UI/Delete/Delete.js ***!
@@ -317,6 +368,57 @@ var subtitle = function subtitle(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/src/components/UI/WithTooltip/WithTooltip.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/src/components/UI/WithTooltip/WithTooltip.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var content = _ref.content,
+      id = _ref.id,
+      children = _ref.children;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      tooltipOpen = _useState2[0],
+      setTooltipOpen = _useState2[1];
+
+  var toggle = function toggle() {
+    return setTooltipOpen(!tooltipOpen);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    id: id
+  }, children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
+    isOpen: tooltipOpen,
+    target: id,
+    toggle: toggle
+  }, content));
+});
+
+/***/ }),
+
 /***/ "./resources/js/src/containers/Backend/User/Requests/Edit.js":
 /*!*******************************************************************!*\
   !*** ./resources/js/src/containers/Backend/User/Requests/Edit.js ***!
@@ -558,6 +660,201 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(Edit)));
+
+/***/ }),
+
+/***/ "./resources/js/src/containers/Backend/User/Requests/View.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/src/containers/Backend/User/Requests/View.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../components/Backend/UI/Download/Download */ "./resources/js/src/components/Backend/UI/Download/Download.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+
+
+
+
+
+
+var I = function I(_ref) {
+  var _ref$size = _ref.size,
+      size = _ref$size === void 0 ? 6 : _ref$size,
+      _ref$label = _ref.label,
+      label = _ref$label === void 0 ? null : _ref$label,
+      children = _ref.children;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    lg: size,
+    className: "pb-3"
+  }, label ? label + ': ' : '', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "text-green text-500"
+  }, children));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref2) {
+  var request = _ref2.request,
+      country = _ref2.country;
+  var documentsContent = request.documents.filter(function (d) {
+    return d;
+  }).map(function (doc) {
+    var arr1 = doc.split('.');
+    var format = arr1[arr1.length - 1];
+    var arr2 = doc.split('/');
+    var arr3 = arr2[arr2.length - 1].split('.');
+    var formatlessName = arr3.filter(function (n, i) {
+      return i < arr3.length - 1;
+    }).join('.');
+    var content;
+
+    switch (format.toLowerCase()) {
+      case 'pdf':
+        content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+          icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFilePdf"],
+          size: "5x",
+          className: "text-border position-absolute",
+          style: {
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%,-50%)'
+          }
+        });
+        break;
+
+      default:
+        content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "embed-responsive embed-responsive-1by1 position-absolute",
+          style: {
+            background: 'url("' + doc + '") no-repeat center',
+            backgroundSize: 'cover',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%,-50%)'
+          }
+        });
+        break;
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+      xl: 3,
+      key: formatlessName + Math.random(),
+      className: "pr-0",
+      style: {
+        minWidth: 100
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      target: "_blank",
+      href: doc,
+      className: "rounded-4 overflow-hidden p-2 bg-light d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+      icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFilePdf"],
+      className: "mr-2"
+    }), "NID_45094M", content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      link: doc,
+      name: formatlessName + '.' + format
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "text-uppercase text-truncate pt-3 text-darkblue"
+    }, formatlessName)));
+  });
+  var issueFilesContent = request.issue_files.filter(function (d) {
+    return d;
+  }).map(function (issue_file) {
+    var arr1 = issue_file.split('.');
+    var format = arr1[arr1.length - 1];
+    var arr2 = issue_file.split('/');
+    var arr3 = arr2[arr2.length - 1].split('.');
+    var formatlessName = arr3.filter(function (n, i) {
+      return i < arr3.length - 1;
+    }).join('.');
+    var icon;
+
+    switch (format.toLowerCase()) {
+      case 'pdf':
+        icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFilePdf"];
+        break;
+
+      default:
+        icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFileImage"];
+        break;
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: formatlessName + Math.random(),
+      className: "pr-3 d-inline-block",
+      style: {
+        maxWidth: 200
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      link: issue_file,
+      name: formatlessName + '.' + format
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "rounded-2 p-2 bg-light text-darkblue text-uppercase text-truncate text-nowrap"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+      icon: icon,
+      className: "mr-2"
+    }), formatlessName)));
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+    className: "m-0 p-3 rounded bg-green-20"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xs: 12
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "text-green text-700 mb-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faUser"],
+    className: "mr-2",
+    fixedWidth: true
+  }), "User info Gathering"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(I, {
+    label: "Full Name"
+  }, request.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(I, {
+    label: "Platform"
+  }, request.platform), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(I, {
+    label: "E-Mail Address"
+  }, request.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(I, {
+    label: "User ID"
+  }, request.ref), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(I, {
+    label: "Country"
+  }, country ? country.name : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(I, {
+    label: "Phone Number"
+  }, request.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(I, {
+    label: "Issue"
+  }, request.issue)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+    className: "mt-4 mx-0 p-3 rounded bg-orange-20"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xs: 12
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "text-orange text-700 mb-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBook"],
+    className: "mr-2",
+    fixedWidth: true
+  }), "User documents"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xs: 12
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, documentsContent))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+    className: "mt-4 mx-0 p-3 rounded bg-soft"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xs: 12
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "text-black text-700 mb-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEdit"],
+    className: "mr-2",
+    fixedWidth: true
+  }), "Issue description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xs: 12
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xs: 12,
+    className: "pb-3"
+  }, request.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xl: 12
+  }, issueFilesContent)))));
+});
 
 /***/ })
 

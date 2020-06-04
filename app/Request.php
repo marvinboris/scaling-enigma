@@ -11,7 +11,7 @@ class Request extends Model
     protected $directory = '/requests/';
 
     protected $fillable = [
-        'reqid', 'name', 'platform_id', 'country', 'phone', 'email', 'ref', 'documents', 'issue_id', 'issue_files', 'description', 'status', 'comments', 'admin_files', 'edited_by', 'client_ip', 'client_mac', 'client_browser', 'user_ip', 'user_mac', 'user_browser'
+        'reqid', 'name', 'platform_id', 'country', 'phone', 'email', 'ref', 'documents', 'issue_id', 'issue_files', 'description', 'status', 'comments', 'admin_files', 'type_id', 'edited_by', 'client_ip', 'client_mac', 'client_browser', 'user_ip', 'user_mac', 'user_browser'
     ];
 
     public function platform()

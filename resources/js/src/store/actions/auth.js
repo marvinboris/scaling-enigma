@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
-import { rootPath } from '../..';
 
-const prefix = '/auth/';
+const prefix = '/api/auth/';
 
 const authStart = () => ({ type: actionTypes.AUTH_START });
 const authMessage = message => ({ type: actionTypes.AUTH_MESSAGE, message });
@@ -31,7 +30,7 @@ export const authLogin = data => async dispatch => {
     try {
         const form = new FormData(data);
 
-        const res = await fetch(rootPath + prefix + 'login', {
+        const res = await fetch(prefix + 'login', {
             method: 'POST',
             body: form
         });
@@ -56,7 +55,7 @@ export const authVerify = data => async dispatch => {
     try {
         const form = new FormData(data);
 
-        const res = await fetch(rootPath + prefix + 'verify', {
+        const res = await fetch(prefix + 'verify', {
             method: 'POST',
             body: form,
         });
@@ -88,7 +87,7 @@ export const resendCode = hash => async dispatch => {
         const formData = new FormData();
         formData.append('hash', hash);
 
-        const res = await fetch(rootPath + prefix + 'resend', {
+        const res = await fetch(prefix + 'resend', {
             method: 'POST',
             body: formData,
         });
@@ -106,7 +105,7 @@ export const authLogout = () => async dispatch => {
     const token = localStorage.getItem('token');
 
     try {
-        const res = await fetch(rootPath + prefix + 'logout', {
+        const res = await fetch(prefix + 'logout', {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -134,7 +133,7 @@ export const authCheckState = () => async dispatch => {
     if (!token) dispatch(authLogoutSuccess());
     else {
         try {
-            const res = await fetch(rootPath + prefix + 'user', {
+            const res = await fetch(prefix + 'user', {
                 method: 'GET',
                 headers: {
                     'Authorization': token

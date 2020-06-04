@@ -21,6 +21,7 @@ export {
 
     resetRequests,
     getRequests,
+    getImportantRequests,
     getPendingRequests,
     getSolvedRequests,
     getCancelledRequests,

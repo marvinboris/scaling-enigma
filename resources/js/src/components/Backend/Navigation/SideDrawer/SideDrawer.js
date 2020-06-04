@@ -22,6 +22,7 @@ export default ({ name, messages = [], photo = "https://placehold.it/100x100", r
                 <SideDrawerItem id="Request Report" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faUserTie} href="/user/request-report">Request Report</SideDrawerItem>
                 <SideDrawerItem id="Request Check" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faCalendarAlt} dropdown path="/user/requests" items={[
                     { link: '/user/requests/file', text: 'File a Request' },
+                    { link: '/user/requests/important', text: 'Important Requests' },
                     { link: '/user/requests/pending', text: 'Pending Requests' },
                     { link: '/user/requests/solved', text: 'Solved Requests' },
                     { link: '/user/requests/cancelled', text: 'Cancelled Requests' },

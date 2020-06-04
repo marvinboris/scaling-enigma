@@ -8,6 +8,7 @@ use App\Mail\RequestStatus;
 use App\Request as AppRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use hisorange\BrowserDetect\Parser as Browser;
 
 class RequestsController extends Controller
 {
@@ -16,6 +17,21 @@ class RequestsController extends Controller
     {
         $requests = [];
         foreach (AppRequest::all() as $request) {
+            $requests[] = array_merge($request->toArray(), [
+                'platform' => $request->platform->name,
+                'issue' => $request->issue->name,
+            ]);
+        }
+
+        return response()->json([
+            'requests' => $requests
+        ]);
+    }
+
+    public function important()
+    {
+        $requests = [];
+        foreach (AppRequest::whereTypeId(1)->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
                 'platform' => $request->platform->name,
                 'issue' => $request->issue->name,
@@ -90,7 +106,10 @@ class RequestsController extends Controller
             $admin_files[] = htmlspecialchars($name);
         }
         $appRequest->update(array_merge($request->only(['status', 'comments']), [
-            'admin_files' => $admin_files
+            'admin_files' => $admin_files,
+            'edited_by' => $request->user()->email,
+            'user_ip' => $request->ip(),
+            'user_browser' => Browser::browserName(),
         ]));
 
         Mail::to($appRequest->email)->send(new RequestStatus($appRequest));
@@ -107,8 +126,14 @@ class RequestsController extends Controller
             case 'cancelled':
                 $filteredRequests = AppRequest::whereStatus(2)->get();
                 break;
+            case 'important':
+                $filteredRequests = AppRequest::whereType(1)->get();
+                break;
             case 'dashboard':
                 $filteredRequests = AppRequest::latest()->limit(5)->get();
+                break;
+            case 'report':
+                $filteredRequests = AppRequest::get();
                 break;
         }
 
@@ -124,6 +149,7 @@ class RequestsController extends Controller
             count(AppRequest::whereStatus(1)->get()),
             count(AppRequest::whereStatus(2)->get()),
             count(AppRequest::whereStatus(3)->get()),
+            count(AppRequest::whereTypeId(1)->get()),
             count(AppRequest::get()),
         ));
 
@@ -174,6 +200,7 @@ class RequestsController extends Controller
             count(AppRequest::whereStatus(1)->get()),
             count(AppRequest::whereStatus(2)->get()),
             count(AppRequest::whereStatus(3)->get()),
+            count(AppRequest::whereTypeId(1)->get()),
             count(AppRequest::get())
         ));
 
