@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\Dashboard;
 use App\Events\Requests;
 use App\Http\Controllers\Controller;
 use App\Issue;
@@ -67,14 +68,8 @@ class RequestController extends Controller
 
         Mail::to($request->email)->send(new RequestSubmitted($appRequest));
 
-        event(new Requests(
-            count(AppRequest::whereStatus(0)->get()),
-            count(AppRequest::whereStatus(1)->get()),
-            count(AppRequest::whereStatus(2)->get()),
-            count(AppRequest::whereStatus(3)->get()),
-            count(AppRequest::whereTypeId(1)->get()),
-            count(AppRequest::get())
-        ));
+        event(new Requests());
+        event(new Dashboard());
 
         return response()->json([
             'reqid' => $reqid,

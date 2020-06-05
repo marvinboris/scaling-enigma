@@ -346,6 +346,10 @@ var Dashboard = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
+      blocksData: null,
+      requests: null,
+      requestChart: null,
+      requestsRequests: null,
       countries: []
     });
 
@@ -417,6 +421,31 @@ var Dashboard = /*#__PURE__*/function (_Component) {
       return componentDidMount;
     }()
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this2 = this;
+
+      if (JSON.stringify(this.props.backend.requests.requests) !== JSON.stringify(prevProps.backend.requests.requests)) {
+        this.setState({
+          requestsRequests: this.props.backend.requests.requests
+        });
+      }
+
+      if (this.props.backend.dashboard.blocksData && !prevProps.backend.dashboard.blocksData) {
+        var channel = Echo.channel('public');
+        channel.listen('Dashboard', function (_ref) {
+          var blocksData = _ref.blocksData,
+              requests = _ref.requests,
+              requestChart = _ref.requestChart;
+          if (_this2.props.auth.token) _this2.setState({
+            blocksData: blocksData,
+            requests: requests,
+            requestChart: requestChart
+          });
+        });
+      }
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.onResetDashboard();
@@ -424,19 +453,20 @@ var Dashboard = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
+      var _this$state = this.state,
+          blocksData = _this$state.blocksData,
+          requests = _this$state.requests,
+          requestChart = _this$state.requestChart,
+          requestsRequests = _this$state.requestsRequests;
       var _this$props$backend = this.props.backend,
           _this$props$backend$d = _this$props$backend.dashboard,
           loading = _this$props$backend$d.loading,
           error = _this$props$backend$d.error,
-          blocksData = _this$props$backend$d.blocksData,
-          requests = _this$props$backend$d.requests,
-          requestChart = _this$props$backend$d.requestChart,
           _this$props$backend$r = _this$props$backend.requests,
           requestsLoading = _this$props$backend$r.loading,
-          requestsError = _this$props$backend$r.error,
-          requestsRequests = _this$props$backend$r.requests;
+          requestsError = _this$props$backend$r.error;
       var countries = this.state.countries;
       var content = null;
       var errors = null;
@@ -499,16 +529,16 @@ var Dashboard = /*#__PURE__*/function (_Component) {
             circleColor: 'white',
             circleBorder: 'white'
           }];
-          var cards = data.map(function (_ref, index) {
-            var title = _ref.title,
-                titleColor = _ref.titleColor,
-                icon = _ref.icon,
-                link = _ref.link,
-                color = _ref.color,
-                children = _ref.children,
-                details = _ref.details,
-                circleBorder = _ref.circleBorder,
-                circleColor = _ref.circleColor;
+          var cards = data.map(function (_ref2, index) {
+            var title = _ref2.title,
+                titleColor = _ref2.titleColor,
+                icon = _ref2.icon,
+                link = _ref2.link,
+                color = _ref2.color,
+                children = _ref2.children,
+                details = _ref2.details,
+                circleBorder = _ref2.circleBorder,
+                circleColor = _ref2.circleColor;
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_Dashboard_Card_Card__WEBPACK_IMPORTED_MODULE_13__["default"], {
               color: color,
               key: index,
@@ -522,8 +552,8 @@ var Dashboard = /*#__PURE__*/function (_Component) {
             }, children);
           });
           var requestsData = mainRequests.map(function (request) {
-            var country = countries.find(function (_ref2) {
-              var country = _ref2.country;
+            var country = countries.find(function (_ref3) {
+              var country = _ref3.country;
               return country === request.country;
             });
             var viewContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Requests_View__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -594,7 +624,7 @@ var Dashboard = /*#__PURE__*/function (_Component) {
                 fixedWidth: true
               })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_18__["default"], {
                 deleteAction: function deleteAction() {
-                  return _this2.props.onPostRequestDelete(request.id);
+                  return _this3.props.onPostRequestDelete(request.id);
                 }
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTrash"],
@@ -691,6 +721,26 @@ var Dashboard = /*#__PURE__*/function (_Component) {
       }, "Dashboard")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "p-4 pb-0"
       }, errors, content));
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(nextProps, prevState) {
+      if (nextProps.backend.dashboard.blocksData && !prevState.blocksData) {
+        var _nextProps$backend$da = nextProps.backend.dashboard,
+            blocksData = _nextProps$backend$da.blocksData,
+            requests = _nextProps$backend$da.requests,
+            requestChart = _nextProps$backend$da.requestChart;
+        return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(prevState, {
+          blocksData: blocksData,
+          requests: requests,
+          requestChart: requestChart
+        });
+      }
+
+      if (nextProps.backend.requests.requests && !prevState.requestsRequests) return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(prevState, {
+        requestsRequests: nextProps.backend.requests.requests
+      });
+      return prevState;
     }
   }]);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\Dashboard;
 use App\Events\Requests;
 use App\Http\Controllers\Controller;
 use App\Mail\RequestStatus;
@@ -144,14 +145,8 @@ class RequestsController extends Controller
             ]);
         }
 
-        event(new Requests(
-            count(AppRequest::whereStatus(0)->get()),
-            count(AppRequest::whereStatus(1)->get()),
-            count(AppRequest::whereStatus(2)->get()),
-            count(AppRequest::whereStatus(3)->get()),
-            count(AppRequest::whereTypeId(1)->get()),
-            count(AppRequest::get()),
-        ));
+        event(new Requests());
+        event(new Dashboard());
 
         return response()->json([
             'message' => [
@@ -195,14 +190,8 @@ class RequestsController extends Controller
             ]);
         }
 
-        event(new Requests(
-            count(AppRequest::whereStatus(0)->get()),
-            count(AppRequest::whereStatus(1)->get()),
-            count(AppRequest::whereStatus(2)->get()),
-            count(AppRequest::whereStatus(3)->get()),
-            count(AppRequest::whereTypeId(1)->get()),
-            count(AppRequest::get())
-        ));
+        event(new Requests());
+        event(new Dashboard());
 
         return response()->json([
             'message' => [

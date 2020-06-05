@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\Dashboard;
 use App\Mail\VerificationCode;
 use App\Request as AppRequest;
 use App\User;
@@ -74,6 +75,7 @@ Route::get('test', function () {
     dd($send);
 });
 
-Route::get('hi', function () {
-    return AppRequest::all();
+Route::get('dashboard', function () {
+    event(new Dashboard());
+    return 'Event sent';
 });

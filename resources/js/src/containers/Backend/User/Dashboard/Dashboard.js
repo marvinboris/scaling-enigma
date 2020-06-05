@@ -27,7 +27,22 @@ import { updateObject, convertDate } from '../../../../shared/utility';
 
 class Dashboard extends Component {
     state = {
+        blocksData: null,
+        requests: null,
+        requestChart: null,
+
+        requestsRequests: null,
+
         countries: []
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.backend.dashboard.blocksData && !prevState.blocksData) {
+            const { blocksData, requests, requestChart } = nextProps.backend.dashboard;
+            return updateObject(prevState, { blocksData, requests, requestChart });
+        }
+        if (nextProps.backend.requests.requests && !prevState.requestsRequests) return updateObject(prevState, { requestsRequests: nextProps.backend.requests.requests });
+        return prevState;
     }
 
     async componentDidMount() {
@@ -45,12 +60,25 @@ class Dashboard extends Component {
         this.setState({ countries });
     }
 
+    componentDidUpdate(prevProps) {
+        if (JSON.stringify(this.props.backend.requests.requests) !== JSON.stringify(prevProps.backend.requests.requests)) {
+            this.setState({ requestsRequests: this.props.backend.requests.requests });
+        }
+        if (this.props.backend.dashboard.blocksData && !prevProps.backend.dashboard.blocksData) {
+            const channel = Echo.channel('public');
+            channel.listen('Dashboard', ({ blocksData, requests, requestChart }) => {
+                if (this.props.auth.token) this.setState({ blocksData, requests, requestChart });
+            });
+        }
+    }
+
     componentWillUnmount() {
         this.props.onResetDashboard();
     }
 
     render() {
-        let { backend: { dashboard: { loading, error, blocksData, requests, requestChart }, requests: { loading: requestsLoading, error: requestsError, requests: requestsRequests } } } = this.props;
+        let { blocksData, requests, requestChart, requestsRequests } = this.state;
+        let { backend: { dashboard: { loading, error }, requests: { loading: requestsLoading, error: requestsError } } } = this.props;
 
         const { countries } = this.state;
         let content = null;
