@@ -68,6 +68,10 @@ class Edit extends Component {
                     <CustomInput type="radio" name="status" id="status-1" onChange={this.inputChangedHandler} value={2} defaultChecked={request.status === 2} className={request.status === 2 ? 'text-700 text-' + colors[request.status] : ''} label="Cancelled" inline />
                 </Label>
             </FormGroup>
+            <FormGroup>
+                <Label className="text-700" for="description">Issue description</Label>
+                <div className="bg-soft rounded p-3">{request.description}</div>
+            </FormGroup>
             {(+request.status < 2 && +status > 0) && <>
                 <FormGroup>
                     <Label className="text-700" for="comments">{+status === 2 ? 'Reason' : 'Reply'}</Label>

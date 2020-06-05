@@ -24,6 +24,11 @@ class Request extends Model
         return $this->belongsTo('App\Issue');
     }
 
+    public function getRefAttribute($value)
+    {
+        return $value ?? 'Unidentified';
+    }
+
     public function getDocumentsAttribute($value)
     {
         $documents = [];

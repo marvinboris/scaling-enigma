@@ -17,8 +17,8 @@ export default ({ isAuth, name, drawerToggleClicked, logoutHandler, role, cartIt
     return (
         <div className="Toolbar bg-white sticky-top border-bottom border-border-50">
             <Container>
-                <Navbar light className="border-botto border-border-5 py-4" expand="md">
-                    <NavbarBrand><Link to="/"><Logo /></Link></NavbarBrand>
+                <Navbar light className="py-4" expand="md">
+                    <Link to="/" className="navbar-brand"><Logo /></Link>
 
                     <div className="pr-lg-3 ml-auto d-flex align-items-center">
                         <div className="d-none d-lg-block"><NavigationItems /></div>

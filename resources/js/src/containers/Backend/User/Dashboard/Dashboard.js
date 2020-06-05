@@ -9,6 +9,7 @@ import { faTachometerAlt, faEnvelope, faTicketAlt, faTasks, faArrowsAlt, faTimes
 import Edit from '../Requests/Edit';
 import RequestView from '../Requests/View';
 
+import RequestChart from './RequestChart/RequestChart';
 import Breadcrumb from '../../../../components/Backend/UI/Breadcrumb/Breadcrumb';
 import SpecialTitle from '../../../../components/UI/Titles/SpecialTitle/SpecialTitle';
 import Subtitle from '../../../../components/UI/Titles/Subtitle/Subtitle';
@@ -19,13 +20,10 @@ import CustomSpinner from '../../../../components/UI/CustomSpinner/CustomSpinner
 import View from '../../../../components/Backend/UI/View/View';
 import Delete from '../../../../components/Backend/UI/Delete/Delete';
 import Counter from '../../../../components/Backend/UI/Counter/Counter';
+import WithTooltip from '../../../../components/UI/WithTooltip/WithTooltip';
 
 import * as actions from '../../../../store/actions';
 import { updateObject, convertDate } from '../../../../shared/utility';
-
-// Images
-import FinanceTracker from '../../../../assets/images/Group 676@2x.png';
-import WithTooltip from '../../../../components/UI/WithTooltip/WithTooltip';
 
 class Dashboard extends Component {
     state = {
@@ -52,7 +50,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        let { backend: { dashboard: { loading, error, blocksData, requests }, requests: { loading: requestsLoading, error: requestsError, requests: requestsRequests } } } = this.props;
+        let { backend: { dashboard: { loading, error, blocksData, requests, requestChart }, requests: { loading: requestsLoading, error: requestsError, requests: requestsRequests } } } = this.props;
 
         const { countries } = this.state;
         let content = null;
@@ -196,7 +194,7 @@ class Dashboard extends Component {
 
                                     <Row className="p-3 flex-fill d-flex flex-column justify-content-center">
                                         <Col xs={12} lg={11}>
-                                            <img src={FinanceTracker} alt="Finance Tracker" className="img-fluid" />
+                                            <RequestChart data={requestChart} />
                                         </Col>
                                     </Row>
                                 </div>
