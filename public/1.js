@@ -379,6 +379,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "col-6 d-lg-none pb-2 pb-lg-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
     type: "search",
+    name: "search",
     onChange: inputChangedHandler,
     className: "bg-soft border-0 rounded-2",
     placeholder: "Search..."
@@ -418,6 +419,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "col-lg-2 d-none d-lg-block"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
     type: "search",
+    name: "search",
     onChange: inputChangedHandler,
     className: "bg-soft border-0 rounded-2",
     placeholder: "Search..."

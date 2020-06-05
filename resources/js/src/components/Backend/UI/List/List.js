@@ -177,7 +177,7 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
                         </div>
 
                         <div className="col-6 d-lg-none pb-2 pb-lg-0">
-                            <Input type="search" onChange={inputChangedHandler} className="bg-soft border-0 rounded-2" placeholder="Search..." />
+                            <Input type="search" name="search" onChange={inputChangedHandler} className="bg-soft border-0 rounded-2" placeholder="Search..." />
                         </div>
 
                         <div className="col-lg-4 pb-2 pb-lg-0 rounded-2 overflow-hidden">
@@ -190,7 +190,7 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
                         </div>
 
                         <div className="col-lg-2 d-none d-lg-block">
-                            <Input type="search" onChange={inputChangedHandler} className="bg-soft border-0 rounded-2" placeholder="Search..." />
+                            <Input type="search" name="search" onChange={inputChangedHandler} className="bg-soft border-0 rounded-2" placeholder="Search..." />
                         </div>
                     </Row>
                 </div>
