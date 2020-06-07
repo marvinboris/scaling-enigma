@@ -1,35 +1,58 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ "./resources/js/src/assets/images/Group 687@2x.png":
-/*!*********************************************************!*\
-  !*** ./resources/js/src/assets/images/Group 687@2x.png ***!
-  \*********************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/containers/Request/Check/Check.css":
+/*!*********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/src/containers/Request/Check/Check.css ***!
+  \*********************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "/images/Group 687@2x.png?210927c1eb9dc03fe98c6ff797539c4a";
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".Check .triangle {\r\n    transform: translate(-50%, -100%);\r\n}\r\n\r\n@media (min-width: 768px) {\r\n    .Check .triangle {\r\n        transform: translate(-50%, -9px);\r\n    }\r\n}", ""]);
+
+// exports
+
 
 /***/ }),
 
-/***/ "./resources/js/src/assets/images/Group 688@2x.png":
-/*!*********************************************************!*\
-  !*** ./resources/js/src/assets/images/Group 688@2x.png ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./resources/js/src/components/Backend/UI/Download/Download.js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/src/components/Backend/UI/Download/Download.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = "/images/Group 688@2x.png?881a3b5b5cff3f68492a4f13875589d4";
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-/***/ }),
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var link = _ref.link,
+      name = _ref.name,
+      children = _ref.children;
 
-/***/ "./resources/js/src/assets/images/Group 689@2x.png":
-/*!*********************************************************!*\
-  !*** ./resources/js/src/assets/images/Group 689@2x.png ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+  var onClick = function onClick() {
+    var a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = link;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(link);
+  };
 
-module.exports = "/images/Group 689@2x.png?a69717360db0a831d2d93c946ede3e7c";
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      cursor: 'pointer'
+    },
+    onClick: onClick
+  }, children);
+});
 
 /***/ }),
 
@@ -174,10 +197,40 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /***/ }),
 
-/***/ "./resources/js/src/containers/Request/Request.js":
-/*!********************************************************!*\
-  !*** ./resources/js/src/containers/Request/Request.js ***!
-  \********************************************************/
+/***/ "./resources/js/src/containers/Request/Check/Check.css":
+/*!*************************************************************!*\
+  !*** ./resources/js/src/containers/Request/Check/Check.css ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/postcss-loader/src??ref--6-2!./Check.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/containers/Request/Check/Check.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./resources/js/src/containers/Request/Check/Check.js":
+/*!************************************************************!*\
+  !*** ./resources/js/src/containers/Request/Check/Check.js ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -191,19 +244,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/UI/Button/BetweenButton/BetweenButton */ "./resources/js/src/components/UI/Button/BetweenButton/BetweenButton.js");
-/* harmony import */ var _components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/UI/Input/Input */ "./resources/js/src/components/UI/Input/Input.js");
-/* harmony import */ var _components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/UI/CustomSpinner/CustomSpinner */ "./resources/js/src/components/UI/CustomSpinner/CustomSpinner.js");
-/* harmony import */ var _components_Error_Error__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/Error/Error */ "./resources/js/src/components/Error/Error.js");
-/* harmony import */ var _components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/Feedback/Feedback */ "./resources/js/src/components/Feedback/Feedback.js");
-/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../store/actions */ "./resources/js/src/store/actions/index.js");
-/* harmony import */ var _assets_images_Group_687_2x_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../assets/images/Group 687@2x.png */ "./resources/js/src/assets/images/Group 687@2x.png");
-/* harmony import */ var _assets_images_Group_687_2x_png__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_assets_images_Group_687_2x_png__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _assets_images_Group_688_2x_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../assets/images/Group 688@2x.png */ "./resources/js/src/assets/images/Group 688@2x.png");
-/* harmony import */ var _assets_images_Group_688_2x_png__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_assets_images_Group_688_2x_png__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _assets_images_Group_689_2x_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../assets/images/Group 689@2x.png */ "./resources/js/src/assets/images/Group 689@2x.png");
-/* harmony import */ var _assets_images_Group_689_2x_png__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_assets_images_Group_689_2x_png__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../components/UI/Button/BetweenButton/BetweenButton */ "./resources/js/src/components/UI/Button/BetweenButton/BetweenButton.js");
+/* harmony import */ var _components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/UI/Input/Input */ "./resources/js/src/components/UI/Input/Input.js");
+/* harmony import */ var _components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/UI/CustomSpinner/CustomSpinner */ "./resources/js/src/components/UI/CustomSpinner/CustomSpinner.js");
+/* harmony import */ var _components_Error_Error__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../components/Error/Error */ "./resources/js/src/components/Error/Error.js");
+/* harmony import */ var _components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../components/Feedback/Feedback */ "./resources/js/src/components/Feedback/Feedback.js");
+/* harmony import */ var _components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../components/Backend/UI/Download/Download */ "./resources/js/src/components/Backend/UI/Download/Download.js");
+/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../store/actions */ "./resources/js/src/store/actions/index.js");
+/* harmony import */ var _Check_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Check.css */ "./resources/js/src/containers/Request/Check/Check.css");
+/* harmony import */ var _Check_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_Check_css__WEBPACK_IMPORTED_MODULE_13__);
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -252,8 +301,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-
 var FormBlock = function FormBlock(_ref) {
   var title = _ref.title,
       subtitle = _ref.subtitle,
@@ -262,12 +309,21 @@ var FormBlock = function FormBlock(_ref) {
     className: "mt-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "text-darkblue"
-  }, title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-    className: "text-danger text-300"
-  }, "*")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "text-secondary text-300"
   }, subtitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "mt-4"
+  }, children));
+};
+
+var TableRow = function TableRow(_ref2) {
+  var label = _ref2.label,
+      border = _ref2.border,
+      children = _ref2.children;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+    className: border ? border : ""
+  }, label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+    className: "text-700 text-wrap " + (border ? border : "")
   }, children));
 };
 
@@ -288,58 +344,14 @@ var Request = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      name: '',
-      platform_id: '',
-      email: '',
-      ref: '',
-      country: 'CM',
-      code: '237',
-      phone: '',
-      issue_id: '',
-      documents: [null, null, null],
-      description: '',
-      issue_files: [null, null, null],
+      reqid: '',
       countries: []
     });
 
-    _defineProperty(_assertThisInitialized(_this), "documentClickHandler", function (index) {
-      return document.getElementsByClassName('documents')[index].click();
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "issueFileClickHandler", function (index) {
-      return document.getElementsByClassName('issue_files')[index].click();
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "inputChangeHandler", function (e) {
+    _defineProperty(_assertThisInitialized(_this), "inputChangedHandler", function (e) {
       var _e$target = e.target,
           name = _e$target.name,
-          value = _e$target.value,
-          files = _e$target.files,
-          tabIndex = _e$target.tabIndex;
-      if (name === 'phone') return !isNaN(value) && _this.setState(_defineProperty({}, name, value));
-      if (name === 'country') return _this.setState({
-        country: value,
-        code: _this.state.countries.find(function (_ref2) {
-          var country = _ref2.country;
-          return country === value;
-        }).code
-      });
-
-      if (name === 'documents[]') {
-        var documents = _this.state.documents;
-        documents[tabIndex] = files[0];
-        return _this.setState({
-          documents: documents
-        });
-      }
-
-      if (name === 'issue_files[]') {
-        var issue_files = _this.state.issue_files;
-        issue_files[tabIndex] = files[0];
-        return _this.setState({
-          issue_files: issue_files
-        });
-      }
+          value = _e$target.value;
 
       _this.setState(_defineProperty({}, name, value));
     });
@@ -347,7 +359,7 @@ var Request = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "submitHandler", function (e) {
       e.preventDefault();
 
-      _this.props.onPostRequest(e.target);
+      _this.props.onPostCheckRequest(e.target);
     });
 
     return _this;
@@ -362,33 +374,32 @@ var Request = /*#__PURE__*/function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.props.onGetRequest();
                 cors = 'https://cors-anywhere.herokuapp.com/';
-                _context.next = 4;
+                _context.next = 3;
                 return fetch(cors + 'http://country.io/phone.json', {
                   method: 'GET',
                   mode: 'cors'
                 });
 
-              case 4:
+              case 3:
                 phoneRes = _context.sent;
-                _context.next = 7;
+                _context.next = 6;
                 return fetch(cors + 'http://country.io/names.json', {
                   method: 'GET',
                   mode: 'cors'
                 });
 
-              case 7:
+              case 6:
                 namesRes = _context.sent;
-                _context.next = 10;
+                _context.next = 9;
                 return phoneRes.json();
 
-              case 10:
+              case 9:
                 phone = _context.sent;
-                _context.next = 13;
+                _context.next = 12;
                 return namesRes.json();
 
-              case 13:
+              case 12:
                 names = _context.sent;
                 countries = Object.keys(phone).map(function (key) {
                   return {
@@ -403,7 +414,7 @@ var Request = /*#__PURE__*/function (_Component) {
                   countries: countries
                 });
 
-              case 16:
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -418,170 +429,219 @@ var Request = /*#__PURE__*/function (_Component) {
       return componentDidMount;
     }()
   }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (!prevProps.frontend.request.error && this.props.frontend.request.error) {
-        window.scrollTo(0, 0);
-        this.setState({
-          documents: [null, null, null],
-          issue_files: [null, null, null]
-        });
-      }
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.onResetRequest();
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var _this$state = this.state,
-          name = _this$state.name,
-          platform_id = _this$state.platform_id,
-          email = _this$state.email,
-          ref = _this$state.ref,
-          phone = _this$state.phone,
-          issue_id = _this$state.issue_id,
-          country = _this$state.country,
-          code = _this$state.code,
-          documents = _this$state.documents,
-          description = _this$state.description,
-          issue_files = _this$state.issue_files,
+          reqid = _this$state.reqid,
           countries = _this$state.countries;
       var _this$props$frontend$ = this.props.frontend.request,
           loading = _this$props$frontend$.loading,
           error = _this$props$frontend$.error,
           message = _this$props$frontend$.message,
-          platforms = _this$props$frontend$.platforms,
-          issues = _this$props$frontend$.issues,
-          reqid = _this$props$frontend$.reqid;
-      var redirect;
+          request = _this$props$frontend$.request;
+      var colors = ['orange', 'myprimary', 'red', 'green'];
+      var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
+      var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faCheckCircle"]];
+      var width;
+
+      if (request) {
+        if (request.status < 2) width = 10 + 45 * request.status;else width = 100;
+        width = width + '%';
+      }
+
       var errors;
+      var form = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "d-flex align-items-center flex-wrap"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Form"], {
+        className: "d-flex align-items-start",
+        onSubmit: this.submitHandler
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        className: "pr-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        type: "text",
+        name: "reqid",
+        id: "reqid",
+        onChange: this.inputChangedHandler,
+        value: reqid,
+        placeholder: "Request ID"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faCheckCircle"],
+        pill: true,
+        className: "ml-md-3 py-3 px-4",
+        color: "yellow"
+      }, "Check")), request ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "ml-lg-5 mr-4 mt-5 mt-md-0 py-4 position-relative flex-fill"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "position-absolute text-700 text-orange" + (request.status > 0 ? "-50" : ""),
+        style: {
+          bottom: 'calc(100% + 10px)',
+          left: '10%',
+          transform: 'translateX(-50%)'
+        }
+      }, "Pending"), request.status > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "position-absolute text-700 text-myprimary" + (request.status > 1 ? "-50" : ""),
+        style: {
+          bottom: 'calc(100% + 10px)',
+          left: '55%',
+          transform: 'translateX(-50%)'
+        }
+      }, "Processing")) : null, request.status > 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, request.status === 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "position-absolute text-700 text-green",
+        style: {
+          bottom: 'calc(100% + 10px)',
+          left: '100%',
+          transform: 'translateX(-50%)'
+        }
+      }, "Solved") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "position-absolute text-700 text-red",
+        style: {
+          bottom: 'calc(100% + 10px)',
+          left: '100%',
+          transform: 'translateX(-50%)'
+        }
+      }, "Cancelled")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "position-absolute triangle bg-" + colors[request.status] + "-25",
+        style: {
+          width: 25,
+          height: 25,
+          top: 'calc(100% + 1rem)',
+          left: width,
+          clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "rounded overflow-hidden",
+        style: {
+          background: '#d2d2d2',
+          height: 7
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "h-100 bg-" + colors[request.status],
+        style: {
+          width: width
+        }
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "position-absolute d-inline",
+        style: {
+          top: '50%',
+          left: width,
+          transform: 'translate(-50%,-50%)'
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "d-flex justify-content-center align-items-center bg-white rounded-circle border border-2 border-" + colors[request.status],
+        style: {
+          width: 25,
+          height: 25
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
+        icon: icons[request.status],
+        className: "text-" + colors[request.status] + " " + ([0, 1].includes(request.status) ? "fa-spin" : ''),
+        fixedWidth: true,
+        size: "sm"
+      })))) : null);
       var content;
-      if (loading || countries.length === 0) content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_9__["default"], null);else {
-        errors = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      if (loading || countries.length === 0) content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_8__["default"], null);else {
+        errors = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_9__["default"], {
           err: error
         });
-        var feedback = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        var feedback = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_10__["default"], {
           message: message
         });
-        if (reqid) redirect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Redirect"], {
-          to: '/request/success'
-        });
 
-        if (platforms && issues) {
-          var platformsOptions = platforms.map(function (_ref3) {
-            var id = _ref3.id,
-                name = _ref3.name;
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-              key: name + id,
-              value: id
-            }, name);
+        if (request) {
+          var name = request.name,
+              platform = request.platform,
+              email = request.email,
+              ref = request.ref,
+              phone = request.phone,
+              issue = request.issue,
+              country = request.country,
+              documents = request.documents,
+              description = request.description,
+              issue_files = request.issue_files,
+              status = request.status,
+              admin_files = request.admin_files,
+              comments = request.comments;
+          var countryEl = countries.find(function (el) {
+            return el.country === country;
           });
-          var countriesOptions = countries.map(function (_ref4) {
-            var country = _ref4.country,
-                code = _ref4.code,
-                name = _ref4.name;
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-              key: country,
-              value: country,
-              code: code
-            }, name);
-          });
-          var issuesOptions = issues.map(function (_ref5) {
-            var id = _ref5.id,
-                name = _ref5.name;
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-              key: name + id,
-              value: id
-            }, name);
-          });
-          var documentsContent = documents.map(function (d, index) {
-            if (!d) {
-              var backgrounds = [_assets_images_Group_687_2x_png__WEBPACK_IMPORTED_MODULE_13___default.a, _assets_images_Group_688_2x_png__WEBPACK_IMPORTED_MODULE_14___default.a, _assets_images_Group_689_2x_png__WEBPACK_IMPORTED_MODULE_15___default.a];
-              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-                xl: 4,
-                key: Math.random()
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-                color: "light",
-                style: {
-                  backgroundImage: 'url("' + backgrounds[index] + '")',
-                  backgroundSize: '90% 90%',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                },
-                onClick: function onClick() {
-                  return _this2.documentClickHandler(index);
-                },
-                className: "rounded-4 overflow-hidden p-2 d-flex justify-content-center align-items-center text-nowrap text-transparent position-relative embed-responsive embed-responsive-1by1"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faFilePdf"],
-                className: "mr-2"
-              }), "NID_45094M"));
-            }
+          var documentsContent = documents.filter(function (d) {
+            return d;
+          }).map(function (doc) {
+            var arr1 = doc.split('.');
+            var format = arr1[arr1.length - 1];
+            var arr2 = doc.split('/');
+            var arr3 = arr2[arr2.length - 1].split('.');
+            var formatlessName = arr3.filter(function (n, i) {
+              return i < arr3.length - 1;
+            }).join('.');
+            var content;
 
-            var type = d.type,
-                name = d.name;
-            var icon;
-
-            switch (type) {
-              case 'application/pdf':
-                icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faFilePdf"];
+            switch (format.toLowerCase()) {
+              case 'pdf':
+                content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
+                  icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faFilePdf"],
+                  size: "5x",
+                  className: "text-border position-absolute",
+                  style: {
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%,-50%)'
+                  }
+                });
                 break;
 
               default:
-                icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faFileImage"];
+                content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                  className: "embed-responsive embed-responsive-1by1 position-absolute",
+                  style: {
+                    background: 'url("' + doc + '") no-repeat center',
+                    backgroundSize: 'cover',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%,-50%)'
+                  }
+                });
                 break;
             }
 
-            var arr = name.split('.');
-            var formatlessName = arr.filter(function (n, i) {
-              return i < arr.length - 1;
-            }).join('.');
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-              xl: 4,
-              key: name + Math.random()
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              onClick: function onClick() {
-                return _this2.documentClickHandler(index);
-              },
+              xl: 3,
+              key: name + Math.random(),
+              className: "pr-0",
               style: {
-                cursor: 'pointer'
-              },
+                minWidth: 100
+              }
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
               className: "rounded-4 overflow-hidden p-2 bg-light d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1"
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
-              icon: icon,
-              size: "5x",
-              className: "text-border position-absolute",
-              style: {
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%,-50%)'
-              }
-            })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              className: "text-uppercase text-truncate pt-3 text-darkblue"
-            }, formatlessName));
-          });
-          var issueFilesContent = issue_files.map(function (i, index) {
-            if (!i) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              key: Math.random(),
-              className: "pr-3 d-inline-block"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-              color: "light",
-              onClick: function onClick() {
-                return _this2.issueFileClickHandler(index);
-              },
-              className: "rounded-2 p-2 text-truncate text-nowrap"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-              className: "text-dark"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
-              icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faPaperclip"],
+              icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faFilePdf"],
               className: "mr-2"
-            }), "Attach a file")));
-            var type = i.type,
-                name = i.name;
+            }), "NID_45094M", content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_11__["default"], {
+              link: doc,
+              name: formatlessName + '.' + format
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              className: "text-uppercase text-truncate pt-3 text-darkblue"
+            }, formatlessName)));
+          });
+          var issueFilesContent = issue_files.filter(function (d) {
+            return d;
+          }).map(function (issue_file) {
+            var arr1 = issue_file.split('.');
+            var format = arr1[arr1.length - 1];
+            var arr2 = issue_file.split('/');
+            var arr3 = arr2[arr2.length - 1].split('.');
+            var formatlessName = arr3.filter(function (n, i) {
+              return i < arr3.length - 1;
+            }).join('.');
             var icon;
 
-            switch (type) {
-              case 'application/pdf':
+            switch (format.toLowerCase()) {
+              case 'pdf':
                 icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faFilePdf"];
                 break;
 
@@ -590,250 +650,160 @@ var Request = /*#__PURE__*/function (_Component) {
                 break;
             }
 
-            var arr = name.split('.');
-            var formatlessName = arr.filter(function (n, i) {
-              return i < arr.length - 1;
-            }).join('.');
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              key: name + Math.random(),
+              key: formatlessName + Math.random(),
               className: "pr-3 d-inline-block",
               style: {
                 maxWidth: 200
               }
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_11__["default"], {
+              link: issue_file,
+              name: formatlessName + '.' + format
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              style: {
-                cursor: 'pointer'
-              },
-              onClick: function onClick() {
-                return _this2.issueFileClickHandler(index);
-              },
-              className: "rounded-2 p-2 bg-light text-dark text-uppercase text-truncate text-nowrap"
+              className: "rounded-2 p-2 bg-light text-darkblue text-uppercase text-truncate text-nowrap"
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
               icon: icon,
               className: "mr-2"
-            }), formatlessName));
+            }), formatlessName)));
           });
-          content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Form"], {
-            onSubmit: this.submitHandler,
-            encType: "multipart/form-data"
-          }, feedback, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
-            title: "User info Gathering",
-            subtitle: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Please provide the information below. Note that all fields are ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-              className: "text-danger"
-            }, "required"), " in this section.")
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-            className: "col-xl-9 px-0"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            className: "col-md-6",
-            type: "text",
-            onChange: this.inputChangeHandler,
-            value: name,
-            validation: {
-              required: true
-            },
-            name: "name",
-            placeholder: "Full Name",
-            required: true
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            className: "col-md-6",
-            type: "select",
-            onChange: this.inputChangeHandler,
-            value: platform_id,
-            validation: {
-              required: true,
-              isNumeric: true
-            },
-            name: "platform_id",
-            placeholder: "Select Platform",
-            required: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Select Platform"), platformsOptions), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            className: "col-md-6",
-            type: "email",
-            onChange: this.inputChangeHandler,
-            value: email,
-            validation: {
-              required: true,
-              isEmail: true
-            },
-            name: "email",
-            placeholder: "E-Mail Address",
-            required: true
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            className: "col-md-6",
-            type: "text",
-            onChange: this.inputChangeHandler,
-            value: ref,
-            validation: {
-              required: platform_id != 3,
-              minLength: platform_id != 3 ? 6 : null
-            },
-            name: "ref",
-            placeholder: "User ID",
-            required: platform_id != 3
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            className: "col-md-6",
-            type: "select",
-            addon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-              className: "text-secondary text-small d-inline-flex"
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-              className: "rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center",
+          var adminFilesContent = admin_files ? admin_files.filter(function (d) {
+            return d;
+          }).map(function (doc) {
+            var arr1 = doc.split('.');
+            var format = arr1[arr1.length - 1];
+            var arr2 = doc.split('/');
+            var arr3 = arr2[arr2.length - 1].split('.');
+            var formatlessName = arr3.filter(function (n, i) {
+              return i < arr3.length - 1;
+            }).join('.');
+            var content;
+
+            switch (format.toLowerCase()) {
+              case 'pdf':
+                content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
+                  icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faFilePdf"],
+                  size: "5x",
+                  className: "text-border position-absolute",
+                  style: {
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%,-50%)'
+                  }
+                });
+                break;
+
+              default:
+                content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+                  className: "embed-responsive embed-responsive-1by1 position-absolute",
+                  style: {
+                    background: 'url("' + doc + '") no-repeat center',
+                    backgroundSize: 'cover',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%,-50%)'
+                  }
+                });
+                break;
+            }
+
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+              xl: 3,
+              key: name + Math.random(),
+              className: "pr-0",
               style: {
-                width: 30,
-                height: 30
+                minWidth: 100
               }
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-              className: "flag-icon text-xx-large position-absolute flag-icon-".concat(country.toLowerCase())
-            }))),
-            onChange: this.inputChangeHandler,
-            value: country,
-            validation: {
-              required: true
-            },
-            name: "country",
-            required: true,
-            placeholder: "Select Country"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Select your country"), countriesOptions), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-            type: "hidden",
-            value: code,
-            name: "code"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            type: "tel",
-            className: "col-md-6",
-            addon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-              className: "text-secondary text-small"
-            }, "+", code),
-            onChange: this.inputChangeHandler,
-            value: phone,
-            validation: {
-              required: true,
-              isNumeric: true
-            },
-            name: "phone",
-            required: true,
-            placeholder: "Phone Number"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            className: "col-md-6",
-            type: "select",
-            onChange: this.inputChangeHandler,
-            value: issue_id,
-            validation: {
-              required: true,
-              isNumeric: true
-            },
-            name: "issue_id",
-            placeholder: "Select Issue",
-            required: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Select Issue"), issuesOptions))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
-            title: "User documents",
-            subtitle: "Please upload recommended documents"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-            xl: 9,
-            className: "px-0"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, documentsContent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-            type: "file",
-            name: "documents[]",
-            onChange: this.inputChangeHandler,
-            required: true,
-            accept: ".png,.jpg,.jpeg,.pdf",
-            tabIndex: 0,
-            className: "d-none documents"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-            type: "file",
-            name: "documents[]",
-            onChange: this.inputChangeHandler,
-            required: true,
-            accept: ".png,.jpg,.jpeg,.pdf",
-            tabIndex: 1,
-            className: "d-none documents"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-            type: "file",
-            name: "documents[]",
-            onChange: this.inputChangeHandler,
-            required: true,
-            accept: ".png,.jpg,.jpeg,.pdf",
-            tabIndex: 2,
-            className: "d-none documents"
-          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "text-danger"
-          }, "Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 500 kB max/file."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
-            title: "Issue description",
-            subtitle: "Please provide a detailed description of the problem you are facing"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-            xl: 9,
-            className: "px-0"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
-            className: "px-0 col-xl-9"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-            type: "textarea",
-            onChange: this.inputChangeHandler,
-            value: description,
-            validation: {
-              required: true
-            },
-            name: "description",
-            style: {
-              height: 250
-            },
-            className: "border-light text-secondary"
-          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "d-flex"
-          }, issueFilesContent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-            type: "file",
-            name: "issue_files[]",
-            onChange: this.inputChangeHandler,
-            accept: ".png,.jpg,.jpeg,.pdf",
-            tabIndex: 0,
-            className: "d-none issue_files"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-            type: "file",
-            name: "issue_files[]",
-            onChange: this.inputChangeHandler,
-            accept: ".png,.jpg,.jpeg,.pdf",
-            tabIndex: 1,
-            className: "d-none issue_files"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-            type: "file",
-            name: "issue_files[]",
-            onChange: this.inputChangeHandler,
-            accept: ".png,.jpg,.jpeg,.pdf",
-            tabIndex: 2,
-            className: "d-none issue_files"
-          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "text-danger"
-          }, "Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 500kB max/file."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
-            className: "pl-2 my-md-5 text-secondary text-left"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], {
-            check: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CustomInput"], {
-            color: "yellow",
-            type: "checkbox",
-            id: "terms",
-            name: "terms",
-            label: "Accept terms and conditions",
-            inline: true
-          }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-            xl: 9,
-            className: "d-md-flex align-items-center"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              className: "rounded-4 overflow-hidden p-2 bg-light d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
+              icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faFilePdf"],
+              className: "mr-2"
+            }), "NID_45094M", content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Download_Download__WEBPACK_IMPORTED_MODULE_11__["default"], {
+              link: doc,
+              name: formatlessName + '.' + format
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              className: "text-uppercase text-truncate pt-3 text-darkblue"
+            }, formatlessName)));
+          }) : null;
+          var tableContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(TableRow, {
+            border: "border border-" + colors[status],
+            label: "Full Name"
+          }, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(TableRow, {
+            border: "border border-" + colors[status],
+            label: "Selected Platform"
+          }, platform.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(TableRow, {
+            border: "border border-" + colors[status],
+            label: "E-Mail Address"
+          }, email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(TableRow, {
+            border: "border border-" + colors[status],
+            label: "User ID"
+          }, ref), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(TableRow, {
+            border: "border border-" + colors[status],
+            label: "Country"
+          }, countryEl.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(TableRow, {
+            border: "border border-" + colors[status],
+            label: "Phone Number"
+          }, phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(TableRow, {
+            border: "border border-" + colors[status],
+            label: "Isue Selected"
+          }, issue.name));
+          content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "pt-3"
+          }, feedback, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "rounded-2 text-secondary p-1 bg-" + colors[status] + "-25"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "pr-md-3"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
-            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faPaperPlane"],
-            pill: true,
-            className: "py-3 px-4 text-truncate",
-            color: "darkblue"
-          }, "Submit a request")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "text-danger pt-3 pt-md-0"
-          }, "Be sure to provide all of the required documents above before submitting your request."))));
+            className: "py-3 px-4 d-flex justify-content-between flex-wrap align-items-center border-bottom border-2 border-" + colors[status]
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faUser"],
+            className: "mr-2 text-" + colors[status]
+          }), "Information ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+            className: "text-700"
+          }, "provided")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faUser"],
+            className: "mr-2 text-" + colors[status]
+          }), "Request Status :", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+            className: "pl-4 text-" + colors[status]
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
+            icon: icons[status],
+            className: [0, 1].includes(status) ? "fa-spin" : ""
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+            className: "ml-2 text-700"
+          }, texts[status])))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "p-4"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+            lg: 6
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "table-responsive"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Table"], {
+            borderless: true,
+            className: "text-secondary border border-" + colors[status]
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, tableContent)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+            lg: 6,
+            className: "pt-3 pt-lg-0"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "mb-3"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faEdit"],
+            className: "mr-2 text-" + colors[status]
+          }), "Issue description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "text-justify py-4 px-4 bg-white-20 rounded-1 border border-" + colors[status] + "-50",
+            style: {
+              height: 298,
+              overflowY: 'auto'
+            }
+          }, description))))));
         }
       }
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
+        className: "Check"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
         className: "pt-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
         lg: 8,
         className: "pt-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
         className: "text-700 text-darkblue"
-      }, "Submit a request to get started"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
+      }, "Check a request of yours"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
         className: "text-300 text-secondary"
       }, "Fill the form below and send"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "w-60 border-top border-secondary mt-4 pt-4 pb-5 text-secondary"
@@ -841,7 +811,7 @@ var Request = /*#__PURE__*/function (_Component) {
         className: "justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
         lg: 8
-      }, errors, redirect, content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+      }, errors, form, content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
         md: 6,
         className: "embed-responsive embed-responsive-21by9"
       }));
@@ -857,11 +827,11 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onGetRequest: function onGetRequest() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_12__["getRequest"]());
+    onPostCheckRequest: function onPostCheckRequest(data) {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_12__["postCheckRequest"](data));
     },
-    onPostRequest: function onPostRequest(data) {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_12__["postRequest"](data));
+    onResetRequest: function onResetRequest() {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_12__["resetRequest"]());
     }
   };
 };

@@ -3,6 +3,7 @@ import { Col, Table, Button, Input, Row } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faFileExcel, faFilePdf, faFileCsv, faPrint, faAngleDoubleLeft, faChevronLeft, faChevronRight, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import jsxToString from 'jsx-to-string';
 
 import { updateObject } from '../../../../shared/utility';
 
@@ -24,8 +25,12 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
         let check = false;
         for (const iterator of fields) {
             const key = iterator.key;
-            if (typeof item[key] === 'string') check = item[key].toLowerCase().includes(search.toLowerCase());
-            if (check) return check;
+            if (item[key]) {
+                if (typeof item[key] === 'string') check = item[key].toLowerCase().includes(search.toLowerCase());
+                else if (typeof item[key] === 'object') check = jsxToString(item[key]).toLowerCase().includes(search.toLowerCase());
+                else check = item[key].toString().includes(search.toLowerCase());
+                if (check) return check;
+            }
         }
     });
     const limitedArray = show === 'All' ? filteredArray : filteredArray.filter((item, i) => (i >= (page - 1) * show) && (i < page * show));
@@ -34,7 +39,7 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
 
     const content = limitedArray.map((item, index) => {
         if (limit && index >= limit) return null;
-        let inside = [<th className="text-center align-middle" key={'primary' + index}>{(page - 1) * show + index + 1}</th>];
+        let inside = [<th className="text-center align-middle" key={'primary' + index}>{(show === 'All' ? 0 : (page - 1) * show) + index + 1}</th>];
         if (select) inside.unshift(<th className="text-center align-middle" key={'secondary' + index}>
             <input type="checkbox" value={item._id} />
         </th>);

@@ -72,14 +72,22 @@ class Request extends Component {
         if (name === 'phone') return !isNaN(value) && this.setState({ [name]: value });
         if (name === 'country') return this.setState({ country: value, code: this.state.countries.find(({ country }) => country === value).code });
         if (name === 'documents[]') {
-            const { documents } = this.state;
-            documents[tabIndex] = files[0];
-            return this.setState({ documents });
+            if (files[0].size <= 300 * 1024) {
+                const { documents } = this.state;
+                documents[tabIndex] = files[0];
+                return this.setState({ documents });
+            }
+            document.getElementsByClassName('documents')[tabIndex].value = "";
+            $('.documents-btn')[tabIndex].addClass('border-red').delay(5000).removeClass('border-red');
         }
         if (name === 'issue_files[]') {
-            const { issue_files } = this.state;
-            issue_files[tabIndex] = files[0];
-            return this.setState({ issue_files });
+            if (files[0].size <= 100 * 1024) {
+                const { issue_files } = this.state;
+                issue_files[tabIndex] = files[0];
+                return this.setState({ issue_files });
+            }
+            document.getElementsByClassName('issue_files')[tabIndex].value = "";
+            $('.issue_files-btn')[tabIndex].addClass('border-red').delay(5000).removeClass('border-red');
         }
         this.setState({ [name]: value });
     }
@@ -112,7 +120,7 @@ class Request extends Component {
                     if (!d) {
                         const backgrounds = [SelfieWithNID, SignedCopyOfNID, NIDDataPage];
                         return <Col xl={4} key={Math.random()}>
-                            <Button color="light" style={{ backgroundImage: 'url("' + backgrounds[index] + '")', backgroundSize: '90% 90%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} onClick={() => this.documentClickHandler(index)} className="rounded-4 overflow-hidden p-2 d-flex justify-content-center align-items-center text-nowrap text-transparent position-relative embed-responsive embed-responsive-1by1">
+                            <Button color="light" style={{ backgroundImage: 'url("' + backgrounds[index] + '")', backgroundSize: '90% 90%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} onClick={() => this.documentClickHandler(index)} className="documents-btn rounded-4 overflow-hidden p-2 d-flex justify-content-center align-items-center text-nowrap text-transparent position-relative embed-responsive embed-responsive-1by1">
                                 <FontAwesomeIcon icon={faFilePdf} className="mr-2" />NID_45094M
                             </Button>
                         </Col>;
@@ -143,7 +151,7 @@ class Request extends Component {
 
                 const issueFilesContent = issue_files.map((i, index) => {
                     if (!i) return <div key={Math.random()} className="pr-3 d-inline-block">
-                        <Button color="light" onClick={() => this.issueFileClickHandler(index)} className="rounded-2 p-2 text-truncate text-nowrap">
+                        <Button color="light" onClick={() => this.issueFileClickHandler(index)} className="issue_files-btn rounded-2 p-2 text-truncate text-nowrap">
                             <span className="text-dark"><FontAwesomeIcon icon={faPaperclip} className="mr-2" />Attach a file</span>
                         </Button>
                     </div>;
@@ -213,7 +221,7 @@ class Request extends Component {
                                 <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg,.pdf" tabIndex={2} className="d-none documents" />
                             </FormGroup>
 
-                            <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 500 kB max/file.</div>
+                            <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 300 kB max/file.</div>
                         </Col>
                     </FormBlock>
 
@@ -235,7 +243,7 @@ class Request extends Component {
                                 <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" tabIndex={2} className="d-none issue_files" />
                             </FormGroup>
 
-                            <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 500kB max/file.</div>
+                            <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 100 kB max/file.</div>
                         </Col>
                     </FormBlock>
 

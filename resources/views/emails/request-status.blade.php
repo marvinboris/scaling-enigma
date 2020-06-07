@@ -9,19 +9,19 @@
 
                     @if ($request->comments)
                     Here are some information about your request. <br><br>
-                    <div style="background-color: rgba(245, 163, 0, .25); padding: 1rem 1.25rem; border-radius: .25rem;">"{{ $request->comments }}"</div>
+                    <div style="background-color: rgba(245, 163, 0, .25); padding: 1rem 1.25rem; border-radius: .25rem;">"{!! $request->comments !!}"</div>
                     @endif
                     @break
                 @case(2)
                     Your request <strong>{{ $request->reqid }}</strong> has been cancelled. Please check below to find the reason. <br><br>
-                    <div style="background-color: rgba(245, 163, 0, .25); padding: 1rem 1.25rem; border-radius: .25rem;">"{{ $request->comments }}"</div>
+                    <div style="background-color: rgba(245, 163, 0, .25); padding: 1rem 1.25rem; border-radius: .25rem;">"{!! $request->comments !!}"</div>
                     @break
                 @case(3)
                     We are informing you that your request <strong>{{ $request->reqid }}</strong> has been solved. Thanks for your patience. Come back to us if you have any queries.
 
                     @if ($request->comments)
                     Here are some information about your request. <br><br>
-                    <div style="background-color: rgba(245, 163, 0, .25); padding: 1rem 1.25rem; border-radius: .25rem;">"{{ $request->comments }}"</div>
+                    <div style="background-color: rgba(245, 163, 0, .25); padding: 1rem 1.25rem; border-radius: .25rem;">"{!! $request->comments !!}"</div>
                     @endif
                     @break
             @endswitch
