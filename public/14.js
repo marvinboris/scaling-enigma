@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[14],{
 
-/***/ "./resources/js/src/containers/Backend/User/Requests/Important/Important.js":
+/***/ "./resources/js/src/containers/Backend/User/Requests/Cancelled/Cancelled.js":
 /*!**********************************************************************************!*\
-  !*** ./resources/js/src/containers/Backend/User/Requests/Important/Important.js ***!
+  !*** ./resources/js/src/containers/Backend/User/Requests/Cancelled/Cancelled.js ***!
   \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -92,15 +92,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Important = /*#__PURE__*/function (_Component) {
-  _inherits(Important, _Component);
+var Cancelled = /*#__PURE__*/function (_Component) {
+  _inherits(Cancelled, _Component);
 
-  var _super = _createSuper(Important);
+  var _super = _createSuper(Cancelled);
 
-  function Important() {
+  function Cancelled() {
     var _this;
 
-    _classCallCheck(this, Important);
+    _classCallCheck(this, Cancelled);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -115,7 +115,7 @@ var Important = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(Important, [{
+  _createClass(Cancelled, [{
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -124,7 +124,7 @@ var Important = /*#__PURE__*/function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.props.onGetImportantRequests();
+                this.props.onGetCancelledRequests();
                 cors = 'https://cors-anywhere.herokuapp.com/';
                 _context.next = 4;
                 return fetch(cors + 'http://country.io/phone.json', {
@@ -226,7 +226,7 @@ var Important = /*#__PURE__*/function (_Component) {
             });
             var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_18__["default"], {
               request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
-                page_status: 'important'
+                page_status: 'cancelled'
               })
             });
             return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
@@ -347,7 +347,7 @@ var Important = /*#__PURE__*/function (_Component) {
             add: "File a Request",
             link: "/user/requests/add",
             icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"],
-            title: "Important Requests",
+            title: "Cancelled Requests",
             className: "bg-white shadow-sm",
             fields: [{
               name: 'Creation Date',
@@ -399,20 +399,20 @@ var Important = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "bg-white py-4 pl-5 pr-4 position-relative"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Breadcrumb_Breadcrumb__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        main: "Important Requests",
+        main: "Cancelled Requests",
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Titles_SpecialTitle_SpecialTitle__WEBPACK_IMPORTED_MODULE_8__["default"], {
         user: true,
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"]
       }, "User panel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Titles_Subtitle_Subtitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
         user: true
-      }, "Important Requests")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Cancelled Requests")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "p-4 pb-0"
       }, errors, feedback, content));
     }
   }]);
 
-  return Important;
+  return Cancelled;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -421,8 +421,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onGetImportantRequests: function onGetImportantRequests() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getImportantRequests"]());
+    onGetCancelledRequests: function onGetCancelledRequests() {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getCancelledRequests"]());
     },
     onPostRequestDelete: function onPostRequestDelete(id) {
       return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["postRequestDelete"](id));
@@ -436,7 +436,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Important)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Cancelled)));
 
 /***/ })
 

@@ -5,6 +5,8 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, Label, CustomInput, Form, Input, Alert, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import TinyMCE from '../../../../components/UI/TinyMCE/TinyMCE';
+
 import * as actions from '../../../../store/actions';
 import { updateObject } from '../../../../shared/utility';
 
@@ -22,7 +24,11 @@ class Edit extends Component {
     }
 
     inputChangedHandler = e => {
-        const { name, value, files } = e.target;
+        const { name, value, files, targetElm } = e.target;
+        if (targetElm) {
+            document.getElementById(targetElm.id).value = e.target.getContent();
+            return this.setState({ [targetElm.name]: e.target.getContent() });
+        }
         if (name === 'admin_files') return this.setState({ [name]: files });
         this.setState({ [name]: value });
     }
@@ -75,7 +81,9 @@ class Edit extends Component {
             {(+request.status < 2 && +status > 0) && <>
                 <FormGroup>
                     <Label className="text-700" for="comments">{+status === 2 ? 'Reason' : 'Reply'}</Label>
-                    <Input type="textarea" id="comments" name="comments" onChange={this.inputChangedHandler} style={{ height: 250 }} value={comments} />
+                    {/* <Input type="textarea" id="comments" name="comments" onChange={this.inputChangedHandler} style={{ height: 250 }} value={comments} /> */}
+                    {/* <Jodit name="comments" /> */}
+                    <TinyMCE name="comments" onChange={this.inputChangedHandler} />
                 </FormGroup>
                 <FormGroup>
                     <Label className="text-700" for="admin_files">Attach files</Label>

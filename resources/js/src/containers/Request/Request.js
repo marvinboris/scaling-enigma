@@ -10,6 +10,7 @@ import MyInput from '../../components/UI/Input/Input';
 import CustomSpinner from '../../components/UI/CustomSpinner/CustomSpinner';
 import Error from '../../components/Error/Error';
 import Feedback from '../../components/Feedback/Feedback';
+import TinyMCE from '../../components/UI/TinyMCE/TinyMCE';
 
 import * as actions from '../../store/actions';
 
@@ -68,26 +69,44 @@ class Request extends Component {
     issueFileClickHandler = index => document.getElementsByClassName('issue_files')[index].click();
 
     inputChangeHandler = e => {
-        const { name, value, files, tabIndex } = e.target;
+        const { name, value, files, targetElm, tabIndex } = e.target;
+        if (targetElm) {
+            document.getElementById(targetElm.id).value = e.target.getContent();
+            return this.setState({ [targetElm.name]: e.target.getContent() });
+        }
         if (name === 'phone') return !isNaN(value) && this.setState({ [name]: value });
         if (name === 'country') return this.setState({ country: value, code: this.state.countries.find(({ country }) => country === value).code });
         if (name === 'documents[]') {
+            const { documents } = this.state;
             if (files[0].size <= 300 * 1024) {
-                const { documents } = this.state;
                 documents[tabIndex] = files[0];
                 return this.setState({ documents });
             }
-            document.getElementsByClassName('documents')[tabIndex].value = "";
-            $('.documents-btn')[tabIndex].addClass('border-red').delay(5000).removeClass('border-red');
+            documents[tabIndex] = null;
+            return this.setState({ documents }, () => {
+                document.getElementsByClassName('documents')[tabIndex].value = "";
+                const btn = $('.documents-btn').eq(tabIndex);
+                btn.removeClass('btn-light').addClass('btn-danger');
+                return setTimeout(() => {
+                    btn.removeClass('btn-danger').addClass('btn-light');
+                }, 5000);
+            });
         }
         if (name === 'issue_files[]') {
+            const { issue_files } = this.state;
             if (files[0].size <= 100 * 1024) {
-                const { issue_files } = this.state;
                 issue_files[tabIndex] = files[0];
                 return this.setState({ issue_files });
             }
-            document.getElementsByClassName('issue_files')[tabIndex].value = "";
-            $('.issue_files-btn')[tabIndex].addClass('border-red').delay(5000).removeClass('border-red');
+            issue_files[tabIndex] = null;
+            return this.setState({ issue_files }, () => {
+                document.getElementsByClassName('issue_files')[tabIndex].value = "";
+                const btn = $('.issue_files-btn').eq(tabIndex);
+                btn.removeClass('btn-light').addClass('btn-danger');
+                return setTimeout(() => {
+                    btn.removeClass('btn-danger').addClass('btn-light');
+                }, 5000);
+            });
         }
         this.setState({ [name]: value });
     }
@@ -120,7 +139,7 @@ class Request extends Component {
                     if (!d) {
                         const backgrounds = [SelfieWithNID, SignedCopyOfNID, NIDDataPage];
                         return <Col xl={4} key={Math.random()}>
-                            <Button color="light" style={{ backgroundImage: 'url("' + backgrounds[index] + '")', backgroundSize: '90% 90%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} onClick={() => this.documentClickHandler(index)} className="documents-btn rounded-4 overflow-hidden p-2 d-flex justify-content-center align-items-center text-nowrap text-transparent position-relative embed-responsive embed-responsive-1by1">
+                            <Button color="light" style={{ backgroundImage: 'url("' + backgrounds[index] + '")', backgroundSize: '90% 90%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} onClick={() => this.documentClickHandler(index)} className="documents-btn rounded-4 border overflow-hidden p-2 d-flex justify-content-center align-items-center text-nowrap text-transparent position-relative embed-responsive embed-responsive-1by1">
                                 <FontAwesomeIcon icon={faFilePdf} className="mr-2" />NID_45094M
                             </Button>
                         </Col>;
@@ -140,7 +159,7 @@ class Request extends Component {
                     const formatlessName = arr.filter((n, i) => i < arr.length - 1).join('.');
 
                     return <Col xl={4} key={name + Math.random()}>
-                        <div onClick={() => this.documentClickHandler(index)} style={{ cursor: 'pointer' }} className="rounded-4 overflow-hidden p-2 bg-light d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1">
+                        <div onClick={() => this.documentClickHandler(index)} style={{ cursor: 'pointer' }} className="rounded-4 overflow-hidden p-2 bg-success d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1">
                             <FontAwesomeIcon icon={icon} size="5x" className="text-border position-absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
                         </div>
                         <div className="text-uppercase text-truncate pt-3 text-darkblue">
@@ -151,7 +170,7 @@ class Request extends Component {
 
                 const issueFilesContent = issue_files.map((i, index) => {
                     if (!i) return <div key={Math.random()} className="pr-3 d-inline-block">
-                        <Button color="light" onClick={() => this.issueFileClickHandler(index)} className="issue_files-btn rounded-2 p-2 text-truncate text-nowrap">
+                        <Button color="light" onClick={() => this.issueFileClickHandler(index)} className="issue_files-btn border rounded-2 p-2 text-truncate text-nowrap">
                             <span className="text-dark"><FontAwesomeIcon icon={faPaperclip} className="mr-2" />Attach a file</span>
                         </Button>
                     </div>;
@@ -170,7 +189,7 @@ class Request extends Component {
                     const formatlessName = arr.filter((n, i) => i < arr.length - 1).join('.');
 
                     return <div key={name + Math.random()} className="pr-3 d-inline-block" style={{ maxWidth: 200 }}>
-                        <div style={{ cursor: 'pointer' }} onClick={() => this.issueFileClickHandler(index)} className="rounded-2 p-2 bg-light text-dark text-uppercase text-truncate text-nowrap">
+                        <div style={{ cursor: 'pointer' }} onClick={() => this.issueFileClickHandler(index)} className="rounded-2 p-2 bg-success text-dark text-uppercase text-truncate text-nowrap">
                             <FontAwesomeIcon icon={icon} className="mr-2" />{formatlessName}
                         </div>
                     </div>
@@ -188,7 +207,7 @@ class Request extends Component {
                                 {platformsOptions}
                             </MyInput>
                             <MyInput className="col-md-6" type="email" onChange={this.inputChangeHandler} value={email} validation={{ required: true, isEmail: true }} name="email" placeholder="E-Mail Address" required />
-                            <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={ref} validation={{ required: platform_id != 3, minLength: platform_id != 3 ? 6 : null }} name="ref" placeholder="User ID" required={platform_id != 3} />
+                            <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={ref} validation={{ required: platform_id != 3, minLength: platform_id != 3 ? 6 : null, maxLength: platform_id != 3 ? 6 : null }} name="ref" placeholder="User ID" required={platform_id != 3} />
                             <MyInput className="col-md-6" type="select" addon={<span className="text-secondary text-small d-inline-flex">
                                 <div className="rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center" style={{ width: 30, height: 30 }}>
                                     <span className={`flag-icon text-xx-large position-absolute flag-icon-${country.toLowerCase()}`} />
@@ -230,7 +249,9 @@ class Request extends Component {
                         subtitle="Please provide a detailed description of the problem you are facing">
                         <Col xl={9} className="px-0">
                             <FormGroup className="px-0 col-xl-9">
-                                <Input type="textarea" onChange={this.inputChangeHandler} value={description} validation={{ required: true }} name="description" style={{ height: 250 }} className="border-light text-secondary" />
+                                {/* <Input type="textarea" onChange={this.inputChangeHandler} value={description} validation={{ required: true }} name="description" style={{ height: 250 }} className="border-light text-secondary" /> */}
+
+                                <TinyMCE name="description" onChange={this.inputChangeHandler} />
                             </FormGroup>
 
                             <FormGroup>
