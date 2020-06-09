@@ -30,6 +30,12 @@ Route::namespace('Frontend')->prefix('frontend')->name('frontend.')->group(funct
         Route::post('', 'RequestController@store')->name('store');
         Route::get('', 'RequestController@index')->name('index');
     });
+
+    Route::prefix('chat')->name('chat.')->group(function () {
+        Route::get('check', 'ChatController@check')->name('check');
+        Route::post('verify', 'ChatController@verify')->name('verify');
+        Route::post('reqid', 'ChatController@reqid')->name('reqid');
+    });
 });
 
 Route::namespace('Auth')->prefix('auth')->name('auth.')->group(function () {
@@ -64,18 +70,5 @@ Route::name('export.')->prefix('export')->group(function () {
 });
 
 Route::get('test', function () {
-    $budget = new BudgetSMS([
-        'username' => env('BUDGET_USERNAME'),
-        'userid' => env('BUDGET_USER_ID'),
-        'handle' => env('BUDGET_HANDLE'),
-        'from' => env('APP_NAME'),
-    ]);
-
-    $send = $budget->send('+237655588688', 'Testing the provider');
-    dd($send);
-});
-
-Route::get('dashboard', function () {
-    event(new Dashboard());
-    return 'Event sent';
+    return request()->token;
 });

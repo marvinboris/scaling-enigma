@@ -116,8 +116,6 @@ export const authLogout = () => async dispatch => {
 
         const resData = await res.json();
 
-        console.log("authLogout")
-
         dispatch(authLogoutSuccess());
     } catch (err) {
         dispatch(authFail(err));

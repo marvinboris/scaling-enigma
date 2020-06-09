@@ -24,19 +24,22 @@ const asyncUserRequestsCancelled = asyncComponent(() => import('./containers/Bac
 const asyncRequestCheck = asyncComponent(() => import('./containers/Request/Check/Check'));
 const asyncRequestSuccess = asyncComponent(() => import('./containers/Request/Success/Success'));
 const asyncRequest = asyncComponent(() => import('./containers/Request/Request'));
-const asyncContact = asyncComponent(() => import('./containers/Contact/Contact'));
+const asyncChatVerify = asyncComponent(() => import('./containers/Chat/Verify/Verify'));
+const asyncChatEntrance = asyncComponent(() => import('./containers/Chat/Entrance/Entrance'));
+const asyncChat = asyncComponent(() => import('./containers/Chat/Chat'));
 const asyncLogin = asyncComponent(() => import('./containers/Auth/Login/Login'));
 const asyncVerify = asyncComponent(() => import('./containers/Auth/Verify/Verify'));
 
 class App extends Component {
     componentDidMount() {
-        const { onTryAuthSignup } = this.props;
+        const { onTryAuthSignup, onTryChat } = this.props;
         onTryAuthSignup();
+        onTryChat();
         init();
     }
 
     render() {
-        const { auth: { token } } = this.props;
+        const { auth: { token }, frontend: { chat } } = this.props;
 
         let routes = (
             <Switch>
@@ -44,10 +47,15 @@ class App extends Component {
                 <Route path="/auth/login" component={asyncLogin} />
                 <Redirect path="/login" to="/auth/login" />
 
-                <Route path="/contact" component={asyncContact} />
+                {chat.token && <Redirect path="/chat" to="/chat" />}
+                <Route path="/chat/verify" component={asyncChatVerify} />
+                <Route path="/chat/entrance" component={asyncChatEntrance} />
+                <Route path="/chat" component={asyncChat} />
+
                 <Route path="/request/check" component={asyncRequestCheck} />
                 <Route path="/request/success" component={asyncRequestSuccess} />
                 <Route path="/request" component={asyncRequest} />
+
                 <Route path="/" component={Home} />
                 <Redirect to="/" />
             </Switch>
@@ -64,7 +72,7 @@ class App extends Component {
                     <Route path="/user/requests/cancelled" component={asyncUserRequestsCancelled} />
                     <Redirect path="/auth" to="/user/dashboard" />
 
-                    <Route path="/contact" component={asyncContact} />
+                    <Route path="/chat" component={asyncChat} />
                     <Route path="/request/check" component={asyncRequestCheck} />
                     <Route path="/request/success" component={asyncRequestSuccess} />
                     <Route path="/request" component={asyncRequest} />
@@ -88,6 +96,7 @@ const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
     onTryAuthSignup: () => dispatch(actions.authCheckState()),
+    onTryChat: () => dispatch(actions.chatCheckState()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

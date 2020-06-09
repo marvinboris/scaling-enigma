@@ -18,6 +18,14 @@ export const REQUEST_START = 'REQUEST_START';
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const REQUEST_FAIL = 'REQUEST_FAIL';
 
+export const RESET_CHAT = 'RESET_CHAT';
+export const SET_CHAT_HASH = 'SET_CHAT_HASH';
+export const CHAT_START = 'CHAT_START';
+export const CHAT_SUCCESS = 'CHAT_SUCCESS';
+export const CHAT_CLOSE_SUCCESS = 'CHAT_CLOSE_SUCCESS';
+export const RESEND_CHAT_CODE_SUCCESS = 'RESEND_CHAT_CODE_SUCCESS';
+export const CHAT_FAIL = 'CHAT_FAIL';
+
 
 
 // Backend

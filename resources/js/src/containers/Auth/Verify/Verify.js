@@ -13,7 +13,7 @@ import CustomSpinner from '../../../components/UI/CustomSpinner/CustomSpinner';
 
 import * as actions from '../../../store/actions/index';
 
-export class Home extends Component {
+export class Verify extends Component {
     state = {
         code: '',
     }
@@ -71,4 +71,4 @@ const mapDispatchToProps = dispatch => ({
     onResendCode: hash => dispatch(actions.resendCode(hash))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Verify);

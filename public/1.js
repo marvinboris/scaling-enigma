@@ -333,8 +333,8 @@ __webpack_require__.r(__webpack_exports__);
     cloudChannel: "5-stable",
     onChange: onChange,
     tagName: "div",
-    textareaName: name,
-    value: content
+    textareaName: name // value={content}
+
   });
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))

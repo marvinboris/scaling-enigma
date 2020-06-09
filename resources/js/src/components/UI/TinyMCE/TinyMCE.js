@@ -8,6 +8,6 @@ export default ({ name, onChange }) => {
         onChange={onChange}
         tagName='div'
         textareaName={name}
-        value={content}
+        // value={content}
     />;
 }

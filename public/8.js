@@ -198,12 +198,12 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************************!*\
   !*** ./resources/js/src/containers/Auth/Verify/Verify.js ***!
   \***********************************************************/
-/*! exports provided: Home, default */
+/*! exports provided: Verify, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Home", function() { return Home; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Verify", function() { return Verify; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -255,15 +255,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Home = /*#__PURE__*/function (_Component) {
-  _inherits(Home, _Component);
+var Verify = /*#__PURE__*/function (_Component) {
+  _inherits(Verify, _Component);
 
-  var _super = _createSuper(Home);
+  var _super = _createSuper(Verify);
 
-  function Home() {
+  function Verify() {
     var _this;
 
-    _classCallCheck(this, Home);
+    _classCallCheck(this, Verify);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -288,7 +288,7 @@ var Home = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(Home, [{
+  _createClass(Verify, [{
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       var onSetHash = this.props.onSetHash;
@@ -359,7 +359,7 @@ var Home = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return Home;
+  return Verify;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -380,7 +380,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Home));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Verify));
 
 /***/ })
 

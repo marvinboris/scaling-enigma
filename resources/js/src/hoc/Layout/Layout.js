@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Spinner, } from 'reactstrap';
+import { Row, Col, Spinner, Card, CardHeader, CardBody, } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import $ from 'jquery';
 
@@ -50,6 +50,15 @@ class Layout extends Component {
 
         let content = null;
         if (url.includes('auth')) content = children;
+        else if (url.includes('chat')) content = <Card className="mx-auto shadow vh-100 d-flex flex-column" style={{ maxWidth: 640 }}>
+            <CardHeader>
+                <Logo />
+            </CardHeader>
+
+            <CardBody className="flex-fill">
+                {children}
+            </CardBody>
+        </Card>;
         else if (url.includes('user')) content = <BackendLayout>{children}</BackendLayout>;
         else content = <>
             <Toolbar isAuth={token !== null} name={name} notifications={notifications} role={role} logoutHandler={logoutHandler} drawerToggleClicked={sideDrawerToggleHandler} />
@@ -59,15 +68,7 @@ class Layout extends Component {
             <Footer />
         </>;
 
-        return (
-            <>
-                {/* <div className="w-100 h-100 d-flex justify-content-center bg-white align-items-center" id="guard" style={{ position: 'fixed', top: 0, left: 0, zIndex: 10000 }}>
-                    <Spinner style={{ width: '15rem', height: '15rem' }} color="darkblue" />
-                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}><Logo dark big /></div>
-                </div> */}
-                {content}
-            </>
-        );
+        return content;
     }
 }
 

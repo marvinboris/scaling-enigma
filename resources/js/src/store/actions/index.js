@@ -13,6 +13,15 @@ export {
     getRequest,
     postRequest,
     postCheckRequest,
+
+    resetChat,
+    setChatHash,
+    chatClose,
+    getRoom,
+    postReqid,
+    postChatVerify,
+    resendChatCode,
+    chatCheckState,
 } from './frontend';
 
 export {
