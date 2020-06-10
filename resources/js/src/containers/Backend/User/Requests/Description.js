@@ -1,5 +1,9 @@
 import React from 'react';
+import { Parser } from 'html-to-react';
+
 import { convertDate } from '../../../../shared/utility';
+
+const parser = new Parser();
 
 export default ({ request }) => {
     let comments;
@@ -10,11 +14,11 @@ export default ({ request }) => {
         <div>
             {texts[request.status]} by: <span className="text-700">{request.edited_by}</span> on {convertDate(request.created_at)}
         </div>
-        {request.comments && <div className="mt-2" dangerouslySetInnerHTML={{ __html: request.comments }} />}
+        {request.comments && <div className="mt-2">{parser.parse(request.comments)}</div>}
     </div>;
 
     return <div className="text-justify">
-        {request.description}
+        {parser.parse(request.description)}
 
         {comments}
     </div>;

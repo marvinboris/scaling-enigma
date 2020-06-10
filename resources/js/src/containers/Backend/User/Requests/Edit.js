@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, Label, CustomInput, Form, Input, Alert, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Parser } from 'html-to-react';
 
 import TinyMCE from '../../../../components/UI/TinyMCE/TinyMCE';
 
 import * as actions from '../../../../store/actions';
 import { updateObject } from '../../../../shared/utility';
+
+const parser = new Parser();
 
 class Edit extends Component {
     state = {
@@ -76,7 +79,7 @@ class Edit extends Component {
             </FormGroup>
             <FormGroup>
                 <Label className="text-700" for="description">Issue description</Label>
-                <div className="bg-soft rounded p-3" dangerouslySetInnerHTML={{ __html: request.description }} />
+                <div className="bg-soft rounded p-3">{parser.parse(request.description)}</div>
             </FormGroup>
             {(+request.status < 2 && +status > 0) && <>
                 <FormGroup>

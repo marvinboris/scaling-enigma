@@ -36,6 +36,7 @@
         "@tinymce/tinymce-react": "^3.6.0",
         "aos": "^2.3.4",
         "flag-icon-css": "^3.4.6",
+        "html-to-react": "^1.4.3",
         "jodit-react": "^1.0.42",
         "jsx-to-string": "^1.4.0",
         "laravel-echo": "^1.8.0",

@@ -141,16 +141,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /***/ }),
 
-/***/ "./resources/js/src/containers/Chat/Verify/Verify.js":
-/*!***********************************************************!*\
-  !*** ./resources/js/src/containers/Chat/Verify/Verify.js ***!
-  \***********************************************************/
-/*! exports provided: Verify, default */
+/***/ "./resources/js/src/containers/Chat/Entrance/Entrance.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/src/containers/Chat/Entrance/Entrance.js ***!
+  \***************************************************************/
+/*! exports provided: Entrance, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Verify", function() { return Verify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Entrance", function() { return Entrance; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -200,15 +200,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Verify = /*#__PURE__*/function (_Component) {
-  _inherits(Verify, _Component);
+var Entrance = /*#__PURE__*/function (_Component) {
+  _inherits(Entrance, _Component);
 
-  var _super = _createSuper(Verify);
+  var _super = _createSuper(Entrance);
 
-  function Verify() {
+  function Entrance() {
     var _this;
 
-    _classCallCheck(this, Verify);
+    _classCallCheck(this, Entrance);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -217,7 +217,8 @@ var Verify = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      code: ''
+      reqid: '',
+      otp: 'email'
     });
 
     _defineProperty(_assertThisInitialized(_this), "submitHandler", function (e) {
@@ -226,33 +227,37 @@ var Verify = /*#__PURE__*/function (_Component) {
       _this.props.onAuth(e.target);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "inputChangeHandler", function (e, name) {
-      _this.setState(_defineProperty({}, name, e.target.value));
+    _defineProperty(_assertThisInitialized(_this), "inputChangeHandler", function (e) {
+      var _e$target = e.target,
+          name = _e$target.name,
+          value = _e$target.value;
+
+      _this.setState(_defineProperty({}, name, value));
     });
 
     return _this;
   }
 
-  _createClass(Verify, [{
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      var onSetHash = this.props.onSetHash;
-      onSetHash(null);
+  _createClass(Entrance, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var _this$props = this.props,
+          hash = _this$props.frontend.chat.hash,
+          onSetHash = _this$props.onSetHash,
+          history = _this$props.history;
+
+      if (hash) {
+        onSetHash(hash);
+        history.push('/chat/verify');
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      var _this$props = this.props,
-          _this$props$frontend$ = _this$props.frontend.chat,
-          hash = _this$props$frontend$.hash,
+      var _this$props$frontend$ = this.props.frontend.chat,
           loading = _this$props$frontend$.loading,
           error = _this$props$frontend$.error,
-          message = _this$props$frontend$.message,
-          history = _this$props.history,
-          onResendCode = _this$props.onResendCode;
-      if (!hash) history.push('/chat/entrance');
+          message = _this$props$frontend$.message;
       var errors = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_6__["default"], {
         err: error
       });
@@ -264,47 +269,53 @@ var Verify = /*#__PURE__*/function (_Component) {
         className: "h-100 d-flex justify-content-center align-items-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_8__["default"], null));else content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "h4 mb-4 text-darkblue text-sm-left"
-      }, "Enter ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, "Get into ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "text-yellow"
-      }, "Verification code")), errors, feedback, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], {
+      }, "Request Chat")), errors, feedback, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], {
         onSubmit: this.submitHandler
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
         type: "text",
-        icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCode"],
-        onChange: function onChange(e) {
-          return _this2.inputChangeHandler(e, "code");
-        },
-        value: this.state.code,
-        name: "code",
+        icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faUser"],
+        onChange: this.inputChangeHandler,
+        value: this.state.reqid,
+        name: "reqid",
         required: true,
-        placeholder: "Verification code"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "hidden",
-        name: "hash",
-        value: hash
+        placeholder: "Request ID"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
-        className: "ml-2 mb-5 mt-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-darkblue text-right"
-      }, "Didn't receive code? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", {
-        className: "text-yellow",
-        style: {
-          cursor: 'pointer'
-        },
-        onClick: function onClick() {
-          return onResendCode(hash);
-        }
-      }, "Resend"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        className: "ml-2 mt-4 mb-5 d-flex align-items-center text-darkblue"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-700 pr-4"
+      }, "OTP Method"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
+        check: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["CustomInput"], {
+        type: "radio",
+        id: "sms",
+        name: "otp",
+        value: "sms",
+        label: "SMS",
+        disabled: true,
+        inline: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
+        check: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["CustomInput"], {
+        type: "radio",
+        id: "email",
+        defaultChecked: true,
+        name: "otp",
+        value: "email",
+        label: "Email",
+        inline: true
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
         color: "yellow",
         pill: true,
         className: "py-3 px-4 btn-block",
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSignInAlt"]
-      }, "Continue")));
+      }, "Get In")));
       return content;
     }
   }]);
 
-  return Verify;
+  return Entrance;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -314,18 +325,15 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onAuth: function onAuth(data) {
-      return dispatch(_store_actions_index__WEBPACK_IMPORTED_MODULE_9__["postChatVerify"](data));
+      return dispatch(_store_actions_index__WEBPACK_IMPORTED_MODULE_9__["postReqid"](data));
     },
     onSetHash: function onSetHash(hash) {
       return dispatch(_store_actions_index__WEBPACK_IMPORTED_MODULE_9__["setChatHash"](hash));
-    },
-    onResendCode: function onResendCode(hash) {
-      return dispatch(_store_actions_index__WEBPACK_IMPORTED_MODULE_9__["resendChatCode"](hash));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Verify));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Entrance));
 
 /***/ })
 

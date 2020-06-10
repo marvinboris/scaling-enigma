@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
 
-/***/ "./resources/js/src/containers/Backend/User/Requests/Cancelled/Cancelled.js":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/src/containers/Backend/User/Requests/Cancelled/Cancelled.js ***!
-  \**********************************************************************************/
+/***/ "./resources/js/src/containers/Backend/User/RequestReport/RequestReport.js":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/src/containers/Backend/User/RequestReport/RequestReport.js ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18,22 +18,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _components_Backend_UI_Breadcrumb_Breadcrumb__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../../components/Backend/UI/Breadcrumb/Breadcrumb */ "./resources/js/src/components/Backend/UI/Breadcrumb/Breadcrumb.js");
-/* harmony import */ var _components_UI_Titles_SpecialTitle_SpecialTitle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../../components/UI/Titles/SpecialTitle/SpecialTitle */ "./resources/js/src/components/UI/Titles/SpecialTitle/SpecialTitle.js");
-/* harmony import */ var _components_UI_Titles_Subtitle_Subtitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../../components/UI/Titles/Subtitle/Subtitle */ "./resources/js/src/components/UI/Titles/Subtitle/Subtitle.js");
-/* harmony import */ var _components_Backend_UI_List_List__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../../components/Backend/UI/List/List */ "./resources/js/src/components/Backend/UI/List/List.js");
-/* harmony import */ var _components_Error_Error__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../../components/Error/Error */ "./resources/js/src/components/Error/Error.js");
-/* harmony import */ var _components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../../components/UI/CustomSpinner/CustomSpinner */ "./resources/js/src/components/UI/CustomSpinner/CustomSpinner.js");
-/* harmony import */ var _components_UI_WithTooltip_WithTooltip__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../../components/UI/WithTooltip/WithTooltip */ "./resources/js/src/components/UI/WithTooltip/WithTooltip.js");
-/* harmony import */ var _components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../../components/Feedback/Feedback */ "./resources/js/src/components/Feedback/Feedback.js");
-/* harmony import */ var _components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../../components/Backend/UI/Delete/Delete */ "./resources/js/src/components/Backend/UI/Delete/Delete.js");
-/* harmony import */ var _components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../../../components/Backend/UI/View/View */ "./resources/js/src/components/Backend/UI/View/View.js");
-/* harmony import */ var _components_Backend_UI_Counter_Counter__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../../../components/Backend/UI/Counter/Counter */ "./resources/js/src/components/Backend/UI/Counter/Counter.js");
-/* harmony import */ var _Edit__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../Edit */ "./resources/js/src/containers/Backend/User/Requests/Edit.js");
-/* harmony import */ var _Description__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../Description */ "./resources/js/src/containers/Backend/User/Requests/Description.js");
-/* harmony import */ var _View__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../View */ "./resources/js/src/containers/Backend/User/Requests/View.js");
-/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../../../store/actions */ "./resources/js/src/store/actions/index.js");
-/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../../../shared/utility */ "./resources/js/src/shared/utility.js");
+/* harmony import */ var _components_Backend_UI_Breadcrumb_Breadcrumb__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/Backend/UI/Breadcrumb/Breadcrumb */ "./resources/js/src/components/Backend/UI/Breadcrumb/Breadcrumb.js");
+/* harmony import */ var _components_UI_Titles_SpecialTitle_SpecialTitle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/UI/Titles/SpecialTitle/SpecialTitle */ "./resources/js/src/components/UI/Titles/SpecialTitle/SpecialTitle.js");
+/* harmony import */ var _components_UI_Titles_Subtitle_Subtitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../components/UI/Titles/Subtitle/Subtitle */ "./resources/js/src/components/UI/Titles/Subtitle/Subtitle.js");
+/* harmony import */ var _components_Backend_UI_List_List__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../components/Backend/UI/List/List */ "./resources/js/src/components/Backend/UI/List/List.js");
+/* harmony import */ var _components_Error_Error__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../components/Error/Error */ "./resources/js/src/components/Error/Error.js");
+/* harmony import */ var _components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../components/UI/CustomSpinner/CustomSpinner */ "./resources/js/src/components/UI/CustomSpinner/CustomSpinner.js");
+/* harmony import */ var _components_UI_WithTooltip_WithTooltip__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../components/UI/WithTooltip/WithTooltip */ "./resources/js/src/components/UI/WithTooltip/WithTooltip.js");
+/* harmony import */ var _components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../components/Feedback/Feedback */ "./resources/js/src/components/Feedback/Feedback.js");
+/* harmony import */ var _components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../components/Backend/UI/Delete/Delete */ "./resources/js/src/components/Backend/UI/Delete/Delete.js");
+/* harmony import */ var _components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../../components/Backend/UI/View/View */ "./resources/js/src/components/Backend/UI/View/View.js");
+/* harmony import */ var _components_Backend_UI_Counter_Counter__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../../components/Backend/UI/Counter/Counter */ "./resources/js/src/components/Backend/UI/Counter/Counter.js");
+/* harmony import */ var _Requests_Edit__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../Requests/Edit */ "./resources/js/src/containers/Backend/User/Requests/Edit.js");
+/* harmony import */ var _Requests_Description__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../Requests/Description */ "./resources/js/src/containers/Backend/User/Requests/Description.js");
+/* harmony import */ var _Requests_View__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../Requests/View */ "./resources/js/src/containers/Backend/User/Requests/View.js");
+/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../../store/actions */ "./resources/js/src/store/actions/index.js");
+/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../../shared/utility */ "./resources/js/src/shared/utility.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -92,15 +92,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Cancelled = /*#__PURE__*/function (_Component) {
-  _inherits(Cancelled, _Component);
+var RequestReport = /*#__PURE__*/function (_Component) {
+  _inherits(RequestReport, _Component);
 
-  var _super = _createSuper(Cancelled);
+  var _super = _createSuper(RequestReport);
 
-  function Cancelled() {
+  function RequestReport() {
     var _this;
 
-    _classCallCheck(this, Cancelled);
+    _classCallCheck(this, RequestReport);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -115,7 +115,7 @@ var Cancelled = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(Cancelled, [{
+  _createClass(RequestReport, [{
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -124,7 +124,7 @@ var Cancelled = /*#__PURE__*/function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.props.onGetCancelledRequests();
+                this.props.onGetRequests();
                 cors = 'https://cors-anywhere.herokuapp.com/';
                 _context.next = 4;
                 return fetch(cors + 'http://country.io/phone.json', {
@@ -217,16 +217,16 @@ var Cancelled = /*#__PURE__*/function (_Component) {
               var country = _ref.country;
               return country === request.country;
             });
-            var descriptionContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Description__WEBPACK_IMPORTED_MODULE_19__["default"], {
+            var descriptionContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Requests_Description__WEBPACK_IMPORTED_MODULE_19__["default"], {
               request: request
             });
-            var viewContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_View__WEBPACK_IMPORTED_MODULE_20__["default"], {
+            var viewContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Requests_View__WEBPACK_IMPORTED_MODULE_20__["default"], {
               request: request,
               country: country
             });
-            var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_18__["default"], {
+            var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Requests_Edit__WEBPACK_IMPORTED_MODULE_18__["default"], {
               request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
-                page_status: 'cancelled'
+                page_status: 'report'
               })
             });
             return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
@@ -267,22 +267,6 @@ var Cancelled = /*#__PURE__*/function (_Component) {
                 className: [0, 1].includes(request.status) ? "fa-spin" : "",
                 fixedWidth: true
               }), " ", texts[request.status]),
-              documents: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
-                color: "nightblue",
-                className: "badge-block position-static"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFileArchive"],
-                className: "text-orange",
-                fixedWidth: true
-              }), " ", request.documents.length, " Document", request.documents.length > 1 ? 's' : ''),
-              attachment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
-                color: "nightblue",
-                className: "badge-block position-static"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFileArchive"],
-                className: "text-orange",
-                fixedWidth: true
-              }), " ", request.issue_files.length, " Attached File", request.issue_files.length > 1 ? 's' : ''),
               description: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 className: "d-flex"
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -347,7 +331,7 @@ var Cancelled = /*#__PURE__*/function (_Component) {
             add: "File a Request",
             link: "/user/requests/add",
             icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"],
-            title: "Cancelled Requests",
+            title: "Request Report",
             className: "bg-white shadow-sm",
             fields: [{
               name: 'Creation Date',
@@ -362,8 +346,14 @@ var Cancelled = /*#__PURE__*/function (_Component) {
               name: 'Platform',
               key: 'platform'
             }, {
-              name: 'E-Mail',
-              key: 'email'
+              name: 'Admin E-Mail',
+              key: 'edited_by'
+            }, {
+              name: 'Admin IP',
+              key: 'user_ip'
+            }, {
+              name: 'Admin Browser',
+              key: 'user_browser'
             }, {
               name: 'Country',
               key: 'country'
@@ -374,16 +364,8 @@ var Cancelled = /*#__PURE__*/function (_Component) {
               name: 'Issue',
               key: 'issue'
             }, {
-              name: 'User Documents',
-              key: 'documents',
-              minWidth: 150
-            }, {
               name: 'Description',
               key: 'description'
-            }, {
-              name: 'Attached Files',
-              key: 'attachment',
-              minWidth: 180
             }, {
               name: 'Status',
               key: 'status',
@@ -399,20 +381,20 @@ var Cancelled = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "bg-white py-4 pl-5 pr-4 position-relative"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Breadcrumb_Breadcrumb__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        main: "Cancelled Requests",
+        main: "Request Report",
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Titles_SpecialTitle_SpecialTitle__WEBPACK_IMPORTED_MODULE_8__["default"], {
         user: true,
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"]
       }, "User panel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Titles_Subtitle_Subtitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
         user: true
-      }, "Cancelled Requests")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Request Report")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "p-4 pb-0"
       }, errors, feedback, content));
     }
   }]);
 
-  return Cancelled;
+  return RequestReport;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -421,8 +403,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onGetCancelledRequests: function onGetCancelledRequests() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getCancelledRequests"]());
+    onGetRequests: function onGetRequests() {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getRequests"]());
     },
     onPostRequestDelete: function onPostRequestDelete(id) {
       return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["postRequestDelete"](id));
@@ -436,7 +418,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Cancelled)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(RequestReport)));
 
 /***/ })
 
