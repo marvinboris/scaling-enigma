@@ -538,8 +538,11 @@ __webpack_require__.r(__webpack_exports__);
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, texts[request.status], " by: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "text-700"
   }, request.edited_by), " on ", Object(_shared_utility__WEBPACK_IMPORTED_MODULE_1__["convertDate"])(request.created_at)), request.comments && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "mt-2"
-  }, request.comments));
+    className: "mt-2",
+    dangerouslySetInnerHTML: {
+      __html: request.comments
+    }
+  }));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "text-justify"
   }, request.description, comments);

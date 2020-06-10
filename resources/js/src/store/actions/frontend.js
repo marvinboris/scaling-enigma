@@ -63,6 +63,7 @@ const chatStart = () => ({ type: actionTypes.CHAT_START });
 const chatSuccess = data => ({ type: actionTypes.CHAT_SUCCESS, ...data });
 const chatCloseSuccess = () => {
     localStorage.removeItem('chatToken');
+    localStorage.removeItem('chatExpirationDate');
     return {
         type: actionTypes.CHAT_CLOSE_SUCCESS
     };
@@ -170,13 +171,11 @@ export const chatCheckState = () => async dispatch => {
     else {
         try {
             const res = await fetch(prefix + 'chat/check?token=' + token);
-            console.log(prefix + 'chat/check?token=' + token)
 
             const resData = await res.json();
 
             if (res.status === 521) await dispatch(chatCloseSuccess());
             else if (res.status !== 200 && res.status !== 201) throw new Error(resData);
-
 
             const expirationDate = new Date(localStorage.getItem('chatExpirationDate'));
             if (expirationDate > new Date()) {

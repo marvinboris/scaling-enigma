@@ -251,7 +251,7 @@ class Request extends Component {
                             <FormGroup className="px-0 col-xl-9">
                                 {/* <Input type="textarea" onChange={this.inputChangeHandler} value={description} validation={{ required: true }} name="description" style={{ height: 250 }} className="border-light text-secondary" /> */}
 
-                                <TinyMCE name="description" onChange={this.inputChangeHandler} />
+                                <TinyMCE name="description" onChange={this.inputChangeHandler} value={description} />
                             </FormGroup>
 
                             <FormGroup>

@@ -190,14 +190,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var name = _ref.name,
+      _ref$value = _ref.value,
+      value = _ref$value === void 0 ? '' : _ref$value,
       onChange = _ref.onChange;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tinymce_tinymce_react__WEBPACK_IMPORTED_MODULE_1__["Editor"], {
     apiKey: process.env.TINY_API_KEY,
     cloudChannel: "5-stable",
     onChange: onChange,
     tagName: "div",
-    textareaName: name // value={content}
-
+    textareaName: name,
+    value: value
   });
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
@@ -835,7 +837,8 @@ var Request = /*#__PURE__*/function (_Component) {
             className: "px-0 col-xl-9"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_TinyMCE_TinyMCE__WEBPACK_IMPORTED_MODULE_12__["default"], {
             name: "description",
-            onChange: this.inputChangeHandler
+            onChange: this.inputChangeHandler,
+            value: description
           })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "d-flex"
           }, issueFilesContent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {

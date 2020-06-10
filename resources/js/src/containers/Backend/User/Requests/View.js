@@ -111,7 +111,7 @@ export default ({ request, country }) => {
             </Col>
             <Col xs={12}>
                 <Row>
-                    <Col xs={12} className="pb-3">{request.description}</Col>
+                    <Col xs={12} className="pb-3" dangerouslySetInnerHTML={{ __html: request.description }} />
                     <Col xl={12}>{issueFilesContent}</Col>
                 </Row>
             </Col>

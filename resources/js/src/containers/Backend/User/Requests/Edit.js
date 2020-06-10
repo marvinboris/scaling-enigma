@@ -76,14 +76,14 @@ class Edit extends Component {
             </FormGroup>
             <FormGroup>
                 <Label className="text-700" for="description">Issue description</Label>
-                <div className="bg-soft rounded p-3">{request.description}</div>
+                <div className="bg-soft rounded p-3" dangerouslySetInnerHTML={{ __html: request.description }} />
             </FormGroup>
             {(+request.status < 2 && +status > 0) && <>
                 <FormGroup>
                     <Label className="text-700" for="comments">{+status === 2 ? 'Reason' : 'Reply'}</Label>
                     {/* <Input type="textarea" id="comments" name="comments" onChange={this.inputChangedHandler} style={{ height: 250 }} value={comments} /> */}
                     {/* <Jodit name="comments" /> */}
-                    <TinyMCE name="comments" onChange={this.inputChangedHandler} />
+                    <TinyMCE name="comments" onChange={this.inputChangedHandler} value={comments} />
                 </FormGroup>
                 <FormGroup>
                     <Label className="text-700" for="admin_files">Attach files</Label>
