@@ -164,3 +164,70 @@ export const postRequestDelete = id => async dispatch => {
         dispatch(requestsFail(error));
     }
 };
+
+
+// Chat
+export const resetBChat = () => ({ type: actionTypes.RESET_B_CHAT });
+const bChatStart = () => ({ type: actionTypes.B_CHAT_START });
+const bChatSuccess = data => ({ type: actionTypes.B_CHAT_SUCCESS, ...data });
+const bChatMessageSuccess = data => ({ type: actionTypes.B_CHAT_MESSAGE_SUCCESS, data });
+const bChatFail = error => ({ type: actionTypes.B_CHAT_FAIL, error });
+export const getRequestsWithMessages = () => async dispatch => {
+    dispatch(bChatStart());
+    const token = localStorage.getItem('token');
+    try {
+        const res = await fetch(prefix + 'chat/requests', {
+            headers: {
+                Authorization: token
+            }
+        });
+
+        const resData = await res.json();
+
+        dispatch(bChatSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(bChatFail(error));
+    }
+};
+
+export const getRequestMessages = id => async dispatch => {
+    const token = localStorage.getItem('token');
+    try {
+        const res = await fetch(prefix + 'chat/requests/' + id, {
+            headers: {
+                Authorization: token
+            }
+        });
+
+        const resData = await res.json();
+
+        dispatch(bChatSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(bChatFail(error));
+    }
+};
+
+export const postChatSubmitMessage = (data, cb) => async dispatch => {
+    const token = localStorage.getItem('token');
+    try {
+        const form = new FormData(data);
+        const res = await fetch(prefix + 'chat/message', {
+            method: 'POST',
+            headers: {
+                Authorization: token
+            },
+            body: form
+        });
+
+        const resData = await res.json();
+        if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
+
+        dispatch(bChatMessageSuccess(resData));
+        cb();
+    } catch (error) {
+        console.log(error);
+        dispatch(bChatFail(error));
+    }
+};

@@ -22,6 +22,7 @@ export {
     postChatVerify,
     resendChatCode,
     chatCheckState,
+    submitMessage,
 } from './frontend';
 
 export {
@@ -36,4 +37,9 @@ export {
     getCancelledRequests,
     postRequestUpdate,
     postRequestDelete,
+
+    resetBChat,
+    getRequestsWithMessages,
+    getRequestMessages,
+    postChatSubmitMessage,
 } from './backend';

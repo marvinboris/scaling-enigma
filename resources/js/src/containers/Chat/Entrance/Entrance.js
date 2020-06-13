@@ -18,7 +18,8 @@ export class Entrance extends Component {
     }
 
     componentDidUpdate() {
-        const { frontend: { chat: { hash } }, onSetHash, history } = this.props;
+        const { frontend: { chat: { hash, token } }, onSetHash, history } = this.props;
+        if (token) history.push('/chat');
         if (hash) {
             onSetHash(hash);
             history.push('/chat/verify');

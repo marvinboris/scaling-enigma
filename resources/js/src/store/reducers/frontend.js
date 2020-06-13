@@ -25,6 +25,7 @@ const chatCloseSuccess = (state, action) => updateObject(state, { chat: updateOb
 const setChatHash = (state, action) => updateObject(state, { chat: updateObject(state.chat, { hash: action.hash }) });
 const chatStart = (state, action) => updateObject(state, { chat: updateObject(state.chat, { loading: true, message: null }) });
 const chatSuccess = (state, action) => updateObject(state, { chat: updateObject(state.chat, { loading: false, error: null, ...action }) });
+const chatMessageSuccess = (state, action) => updateObject(state, { chat: updateObject(state.chat, { loading: false, error: null }) });
 const chatFail = (state, action) => updateObject(state, { chat: updateObject(state.chat, { loading: false, ...action }) });
 
 export default (state = initialState, action) => {
@@ -40,6 +41,7 @@ export default (state = initialState, action) => {
         case actionTypes.SET_CHAT_HASH: return setChatHash(state, action);
         case actionTypes.CHAT_START: return chatStart(state, action);
         case actionTypes.CHAT_SUCCESS: return chatSuccess(state, action);
+        case actionTypes.CHAT_MESSAGE_SUCCESS: return chatMessageSuccess(state, action);
         case actionTypes.CHAT_FAIL: return chatFail(state, action);
 
         default: return state;

@@ -15,16 +15,16 @@ export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, proc
 
     return <div className="px-3 bg-nightblue flex-fill d-flex align-items-center text-white text-large position-relative" style={{ height: 70 }}>
         <Nav className="mr-auto d-flex align-items-center" navbar>
-            <FontAwesomeIcon icon={faBars} className="mr-3 mr-md-5 ml-2 ml-md-4" style={{ cursor: 'pointer' }} onClick={sidedrawerToggle} size="2x" />
-            <div className="mr-4 d-none d-md-block">
+            <FontAwesomeIcon icon={faBars} className="mr-3 mr-lg-5 ml-2 ml-lg-4" style={{ cursor: 'pointer' }} onClick={sidedrawerToggle} size="2x" />
+            <div className="mr-4 d-none d-lg-block">
                 <FontAwesomeIcon icon={faCalendar} className="mr-2" />
                 <span className="text-300">Today is</span> <strong>{weekDay} {day} {month} {year}</strong>
             </div>
-            <div className="d-none d-md-block">
+            <div className="d-none d-lg-block">
                 <FontAwesomeIcon icon={faClock} className="mr-2" />
                 <strong>TIME : {hours} : {minutes} : {seconds}</strong>
             </div>
-            <div className="py-3 d-none d-md-flex align-items-center position-absolute" style={{ left: 650 }}>
+            <div className="py-3 d-none d-xl-flex align-items-center position-absolute" style={{ left: 650 }}>
                 <Link className="position-relative text-decoration-none" to="/user/requests/pending">
                     <Button color="orange" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Pending</span><FontAwesomeIcon icon={faSpinner} className="fa-spin" /></Button>
                     <Badge color="orange" className="position-absolute text-x-small text-500 rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{pending}</Badge>
@@ -48,8 +48,8 @@ export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, proc
             </div>
         </Nav>
         <div className="ml-auto d-flex align-items-center">
-            <div onClick={toggle} style={{ cursor: 'pointer' }} className="d-flex align-items-center ml-md-5">
-                <span className="d-none d-md-inline">Sign out</span>
+            <div onClick={toggle} style={{ cursor: 'pointer' }} className="d-flex align-items-center ml-lg-5">
+                <span className="d-none d-xl-inline">Sign out</span>
                 <FontAwesomeIcon icon={faPowerOff} size="lg" className="ml-2" />
             </div>
         </div>

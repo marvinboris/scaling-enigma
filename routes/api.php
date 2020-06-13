@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\Dashboard;
+use App\Events\RequestWithMessages;
 use App\Mail\VerificationCode;
 use App\Request as AppRequest;
 use App\User;
@@ -33,6 +34,7 @@ Route::namespace('Frontend')->prefix('frontend')->name('frontend.')->group(funct
 
     Route::prefix('chat')->name('chat.')->group(function () {
         Route::get('check', 'ChatController@check')->name('check');
+        Route::post('message', 'ChatController@message')->name('message');
         Route::post('verify', 'ChatController@verify')->name('verify');
         Route::post('reqid', 'ChatController@reqid')->name('reqid');
     });
@@ -61,6 +63,14 @@ Route::middleware('auth:api')->namespace('User')->prefix('user')->name('user.')-
         Route::get('important', 'RequestsController@important')->name('important');
         Route::get('', 'RequestsController@index')->name('index');
     });
+
+    Route::prefix('chat')->name('chat.')->group(function () {
+        Route::post('message', 'ChatController@message')->name('message');
+        Route::name('requests.')->prefix('requests')->group(function () {
+            Route::get('{id}', 'ChatController@show')->name('show');
+            Route::get('', 'ChatController@index')->name('index');
+        });
+    });
 });
 
 Route::name('export.')->prefix('export')->group(function () {
@@ -70,5 +80,5 @@ Route::name('export.')->prefix('export')->group(function () {
 });
 
 Route::get('test', function () {
-    return request()->token;
+    return 'Event sent';
 });

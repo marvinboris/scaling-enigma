@@ -31,8 +31,9 @@ export class Verify extends Component {
     }
 
     render() {
-        const { frontend: { chat: { hash, loading, error, message } }, history, onResendCode } = this.props;
+        const { frontend: { chat: { hash, loading, error, message, token } }, history, onResendCode } = this.props;
         if (!hash) history.push('/chat/entrance');
+        if (token) history.push('/chat');
 
         const errors = <Error err={error} />;
         const feedback = <Feedback message={message} />;

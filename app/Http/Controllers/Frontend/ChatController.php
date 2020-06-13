@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\RequestWithMessages;
 use App\Http\Controllers\Controller;
 use App\Mail\VerificationCode;
+use App\Message;
 use App\Request as AppRequest;
 use App\User;
 use buibr\Budget\BudgetSMS;
@@ -90,8 +92,17 @@ class ChatController extends Controller
             $appRequest = AppRequest::findOrFail($data->id);
 
             $messages = [];
-            $messages[] = $appRequest->description;
-            if ($appRequest->comments) $messages[] = $appRequest->comments;
+            $messages[] = [
+                'created_at' => $appRequest->created_at,
+                'content' => $appRequest->description,
+                'from' => 'client',
+                'files' => $appRequest->issue_files
+            ];
+            if ($appRequest->comments) $messages[] = [
+                'created_at' => $appRequest->updated_at,
+                'content' => $appRequest->comments,
+                'from' => $appRequest->edited_by
+            ];
 
             $expires_at = Carbon::now()->addHours(6)->toDateTimeString();
 
@@ -101,7 +112,9 @@ class ChatController extends Controller
                     'expires_at' => $expires_at,
                 ])),
                 'expires_at' => $expires_at,
-                'messages' => $messages,
+                'request' => array_merge($appRequest->toArray(), [
+                    'messages' => array_merge($messages, Message::whereRequestId($appRequest->id)->get()->toArray()),
+                ]),
             ]);
         }
 
@@ -133,7 +146,8 @@ class ChatController extends Controller
         $messages[] = [
             'created_at' => $appRequest->created_at,
             'content' => $appRequest->description,
-            'from' => 'client'
+            'from' => 'client',
+            'files' => $appRequest->issue_files
         ];
         if ($appRequest->comments) $messages[] = [
             'created_at' => $appRequest->updated_at,
@@ -143,7 +157,57 @@ class ChatController extends Controller
 
         return response()->json([
             'token' => $request->token,
-            'messages' => $messages
+            'request' => array_merge($appRequest->toArray(), [
+                'messages' => array_merge($messages, Message::whereRequestId($appRequest->id)->get()->toArray())
+            ])
+        ]);
+    }
+
+    public function message(Request $request)
+    {
+        $data = json_decode(Crypt::decryptString($request->token));
+
+        $request->validate([
+            'body' => 'required|string',
+        ]);
+
+        $appRequest = AppRequest::whereReqid($data->reqid)->first();
+
+        if (!$appRequest) return response()->json([
+            'message' => [
+                'type' => 'danger',
+                'content' => 'Not existing request'
+            ]
+        ]);
+
+        if (Carbon::parse($data->expires_at)->timestamp < time()) return response()->json([
+            'message' => [
+                'type' => 'danger',
+                'content' => 'Token expired'
+            ]
+        ]);
+
+        $files = [];
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $name = $appRequest->reqid . ' - ' . $file->getClientOriginalName();
+                $file->move('requests', $name);
+                $files[] = htmlspecialchars($name);
+            }
+        }
+
+        $message = Message::create([
+            'request_id' => $appRequest->id,
+            'content' => $request->body,
+            'files' => json_encode($files),
+            'from' => 'client'
+        ]);
+
+        event(new RequestWithMessages($appRequest->id, $message));
+
+        return response()->json([
+            'id' => $appRequest->id,
+            'message' => $message
         ]);
     }
 }

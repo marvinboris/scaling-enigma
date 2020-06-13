@@ -1,0 +1,11 @@
+.UserChat .SideBar {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+@media (min-width: 900px) {
+    .UserChat .SideBar {
+        flex: 0 0 400px;
+        max-width: 400px;
+    }
+}

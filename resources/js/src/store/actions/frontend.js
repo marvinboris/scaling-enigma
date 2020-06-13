@@ -61,6 +61,7 @@ export const postCheckRequest = data => async dispatch => {
 export const resetChat = () => ({ type: actionTypes.RESET_CHAT });
 const chatStart = () => ({ type: actionTypes.CHAT_START });
 const chatSuccess = data => ({ type: actionTypes.CHAT_SUCCESS, ...data });
+const chatMessageSuccess = data => ({ type: actionTypes.CHAT_SUCCESS, ...data });
 const chatCloseSuccess = () => {
     localStorage.removeItem('chatToken');
     localStorage.removeItem('chatExpirationDate');
@@ -152,7 +153,7 @@ export const postChatVerify = data => async dispatch => {
 
         if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
         // else if (res.status === 403 || res.status === 401) return dispatch(chatMessage(resData.message));
-        else if (res.status !== 200 && res.status !== 201) throw new Error(resData);
+        else if (res.status !== 200 && res.status !== 201) throw new Error(resData.message);
 
         const chatExpirationDate = new Date(expires_at);
         localStorage.setItem('chatToken', token);
@@ -175,7 +176,7 @@ export const chatCheckState = () => async dispatch => {
             const resData = await res.json();
 
             if (res.status === 521) await dispatch(chatCloseSuccess());
-            else if (res.status !== 200 && res.status !== 201) throw new Error(resData);
+            else if (res.status !== 200 && res.status !== 201) throw new Error(typeof resData.message === 'object' ? resData.message.content : resData.message);
 
             const expirationDate = new Date(localStorage.getItem('chatExpirationDate'));
             if (expirationDate > new Date()) {
@@ -188,3 +189,23 @@ export const chatCheckState = () => async dispatch => {
         }
     }
 };
+
+export const submitMessage = (data, cb) => async dispatch => {
+    const token = localStorage.getItem('chatToken');
+    try {
+        const form = new FormData(data);
+        const res = await fetch(prefix + 'chat/message?token=' + token, {
+            method: 'POST',
+            body: form
+        });
+
+        const resData = await res.json();
+        if (res.status !== 200 && res.status !== 201) throw new Error(resData);
+
+        dispatch(chatMessageSuccess(resData));
+        cb();
+    } catch (error) {
+        console.log(error);
+        dispatch(chatFail(error))
+    }
+}

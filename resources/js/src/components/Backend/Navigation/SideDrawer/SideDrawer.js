@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Badge, ButtonGroup, Button, Collapse } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTachometerAlt, faUserTie, faCalendarAlt, faEnvelope, faTasks, faCog, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTachometerAlt, faUserTie, faCalendarAlt, faEnvelope, faTasks, faCog, faEdit, faComments } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 
 import SideDrawerItem from './SideDrawerItem/SideDrawerItem';
@@ -31,6 +31,7 @@ export default ({ name, messages = [], photo = "https://placehold.it/100x100", r
                     { link: '/user/settings/cms', text: 'CMS' },
                     { link: '/user/settings/language', text: 'Language Settings' },
                 ]}>System Settings</SideDrawerItem>
+                <SideDrawerItem id="Chat" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faComments} href="/user/chat">Chat</SideDrawerItem>
             </>;
             break;
 

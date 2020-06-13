@@ -14,6 +14,7 @@ import 'aos/dist/aos.css';
 
 // User routes
 const asyncUserDashboard = asyncComponent(() => import('./containers/Backend/User/Dashboard/Dashboard'));
+const asyncUserChat = asyncComponent(() => import('./containers/Backend/User/Chat/Chat'));
 const asyncUserRequestReport = asyncComponent(() => import('./containers/Backend/User/RequestReport/RequestReport'));
 const asyncUserRequestsImportant = asyncComponent(() => import('./containers/Backend/User/Requests/Important/Important'));
 const asyncUserRequestsPending = asyncComponent(() => import('./containers/Backend/User/Requests/Pending/Pending'));
@@ -39,7 +40,7 @@ class App extends Component {
     }
 
     render() {
-        const { auth: { token }, frontend: { chat } } = this.props;
+        const { auth: { token } } = this.props;
 
         let routes = (
             <Switch>
@@ -47,7 +48,6 @@ class App extends Component {
                 <Route path="/auth/login" component={asyncLogin} />
                 <Redirect path="/login" to="/auth/login" />
 
-                {chat.token && <Redirect path="/chat" to="/chat" />}
                 <Route path="/chat/verify" component={asyncChatVerify} />
                 <Route path="/chat/entrance" component={asyncChatEntrance} />
                 <Route path="/chat" component={asyncChat} />
@@ -65,6 +65,7 @@ class App extends Component {
             routes = (
                 <Switch>
                     <Route path="/user/dashboard" component={asyncUserDashboard} />
+                    <Route path="/user/chat" component={asyncUserChat} />
                     <Route path="/user/request-report" component={asyncUserRequestReport} />
                     <Route path="/user/requests/important" component={asyncUserRequestsImportant} />
                     <Route path="/user/requests/pending" component={asyncUserRequestsPending} />

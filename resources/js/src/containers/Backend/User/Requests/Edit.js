@@ -84,8 +84,6 @@ class Edit extends Component {
             {(+request.status < 2 && +status > 0) && <>
                 <FormGroup>
                     <Label className="text-700" for="comments">{+status === 2 ? 'Reason' : 'Reply'}</Label>
-                    {/* <Input type="textarea" id="comments" name="comments" onChange={this.inputChangedHandler} style={{ height: 250 }} value={comments} /> */}
-                    {/* <Jodit name="comments" /> */}
                     <TinyMCE name="comments" onChange={this.inputChangedHandler} value={comments} />
                 </FormGroup>
                 <FormGroup>

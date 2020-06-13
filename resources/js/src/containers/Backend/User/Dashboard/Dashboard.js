@@ -208,7 +208,7 @@ class Dashboard extends Component {
                                 <Link to="/user/requests/pending" className="text-secondary">View full task list | ></Link>
                             </Table>
 
-                            <Col lg={6} className="pt-3 pt-sm-0">
+                            <Col lg={6} className="pt-3 pt-lg-0">
                                 <div className="bg-brokenblue shadow-sm text-soft h-100 d-flex flex-column">
                                     <div className="p-3 border-bottom border-border text-700 position-relative d-flex">
                                         <span className="d-inline-flex align-items-center"><FontAwesomeIcon size="lg" className="text-orange mr-2" fixedWidth icon={faTasks} />Request Chart</span>
@@ -221,7 +221,7 @@ class Dashboard extends Component {
                                     </div>
 
                                     <Row className="p-3 flex-fill d-flex flex-column justify-content-center">
-                                        <Col xs={12} lg={11}>
+                                        <Col xs={12} lg={11} style={{ minHeight: 150 }}>
                                             <RequestChart data={requestChart} />
                                         </Col>
                                     </Row>

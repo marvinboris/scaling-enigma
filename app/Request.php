@@ -24,7 +24,17 @@ class Request extends Model
         return $this->belongsTo('App\Issue');
     }
 
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
+
     public function getRefAttribute($value)
+    {
+        return $value ?? 'Unidentified';
+    }
+
+    public function getEditedByAttribute($value)
     {
         return $value ?? 'Unidentified';
     }
