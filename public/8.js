@@ -845,26 +845,26 @@ var Request = /*#__PURE__*/function (_Component) {
             type: "file",
             name: "issue_files[]",
             onChange: this.inputChangeHandler,
-            accept: ".png,.jpg,.jpeg,.pdf",
+            accept: ".png,.jpg,.jpeg",
             tabIndex: 0,
             className: "d-none issue_files"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
             type: "file",
             name: "issue_files[]",
             onChange: this.inputChangeHandler,
-            accept: ".png,.jpg,.jpeg,.pdf",
+            accept: ".png,.jpg,.jpeg",
             tabIndex: 1,
             className: "d-none issue_files"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
             type: "file",
             name: "issue_files[]",
             onChange: this.inputChangeHandler,
-            accept: ".png,.jpg,.jpeg,.pdf",
+            accept: ".png,.jpg,.jpeg",
             tabIndex: 2,
             className: "d-none issue_files"
           })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "text-danger"
-          }, "Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 100 kB max/file."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+          }, "Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 100 kB max/file."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
             className: "pl-2 my-md-5 text-secondary text-left"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], {
             check: true

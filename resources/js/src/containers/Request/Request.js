@@ -259,12 +259,12 @@ class Request extends Component {
                                     {issueFilesContent}
                                 </div>
 
-                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" tabIndex={0} className="d-none issue_files" />
-                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" tabIndex={1} className="d-none issue_files" />
-                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" tabIndex={2} className="d-none issue_files" />
+                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg" tabIndex={0} className="d-none issue_files" />
+                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg" tabIndex={1} className="d-none issue_files" />
+                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg" tabIndex={2} className="d-none issue_files" />
                             </FormGroup>
 
-                            <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 100 kB max/file.</div>
+                            <div className="text-danger">Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 100 kB max/file.</div>
                         </Col>
                     </FormBlock>
 
