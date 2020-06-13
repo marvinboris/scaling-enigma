@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
-import { Input, Button, Col, Row, Form } from 'reactstrap';
+import { Input, Button, Col, Row, Form, Alert } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import TextareaAutoResize from 'react-autosize-textarea';
+import moment from 'moment';
 
 import Error from '../../components/Error/Error';
 
@@ -100,7 +101,7 @@ class Chat extends Component {
                         {messagesContent}
                         {status > 1 && <>
                             <hr />
-                            <Alert color={[null, null, 'danger', 'success'][status]} className="text-center">{[null, null, 'Cancelled', 'Solved'][status]} on <span className="text-700">{moment(this.props.request.updated_at).format('LLL')}</span></Alert>
+                            <Alert color={[null, null, 'danger', 'success'][status]} className="text-center">{[null, null, 'Cancelled', 'Solved'][status]} on <span className="text-700">{moment(request.updated_at).format('LLL')}</span></Alert>
                         </>}
                     </div>
 
