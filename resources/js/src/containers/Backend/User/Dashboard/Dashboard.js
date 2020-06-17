@@ -205,7 +205,7 @@ class Dashboard extends Component {
                                     { name: 'Country', key: 'country' },
                                     { name: 'Action', key: 'action' }
                                 ]}>
-                                <Link to="/user/requests/pending" className="text-secondary">View full task list | ></Link>
+                                <Link to="/user/requests/pending" className="text-secondary">{'View full task list | >'}</Link>
                             </Table>
 
                             <Col lg={6} className="pt-3 pt-lg-0">

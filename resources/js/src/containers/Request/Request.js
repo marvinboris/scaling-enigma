@@ -249,9 +249,9 @@ class Request extends Component {
                         subtitle="Please provide a detailed description of the problem you are facing">
                         <Col xl={9} className="px-0">
                             <FormGroup className="px-0 col-xl-9">
-                                {/* <Input type="textarea" onChange={this.inputChangeHandler} value={description} validation={{ required: true }} name="description" style={{ height: 250 }} className="border-light text-secondary" /> */}
+                                <Input type="textarea" onChange={this.inputChangeHandler} value={description} validation={{ required: true }} name="description" style={{ height: 250 }} className="border-light text-secondary" />
 
-                                <TinyMCE name="description" onChange={this.inputChangeHandler} value={description} />
+                                {/* <TinyMCE name="description" onChange={this.inputChangeHandler} value={description} /> */}
                             </FormGroup>
 
                             <FormGroup>

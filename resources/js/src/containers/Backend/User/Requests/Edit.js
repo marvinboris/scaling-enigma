@@ -84,7 +84,8 @@ class Edit extends Component {
             {(+request.status < 2 && +status > 0) && <>
                 <FormGroup>
                     <Label className="text-700" for="comments">{+status === 2 ? 'Reason' : 'Reply'}</Label>
-                    <TinyMCE name="comments" onChange={this.inputChangedHandler} value={comments} />
+                    {/* <TinyMCE name="comments" onChange={this.inputChangedHandler} value={comments} /> */}
+                    <Input type="textarea" name="comments" value={comments} onChange={this.inputChangedHandler} className="border-light text-secondary" />
                 </FormGroup>
                 <FormGroup>
                     <Label className="text-700" for="admin_files">Attach files</Label>
