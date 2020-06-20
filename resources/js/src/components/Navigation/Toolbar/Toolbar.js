@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Container, Row, NavbarBrand, Navbar, Collapse, NavbarToggler } from 'reactstrap';
+import { Container, Row, NavbarBrand, Navbar, Collapse, NavbarToggler, Button } from 'reactstrap';
 import { faCircle, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faSkype } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 
 import NavigationItems from '../NavigationItems/NavigationItems';
@@ -38,6 +39,15 @@ export default ({ isAuth, name, drawerToggleClicked, logoutHandler, role, cartIt
 
                                 <NavbarToggler onClick={toggleNavbar} className="ml-3 d-lg-none" />
                             </div>
+                        </div>
+
+                        <div className="pl-lg-5">
+                            <a href="skype:live:.cid.568f33d31f35e59d?call" className="text-decoration-none">
+                                <Button color="primary" className="rounded-pill py-2 px-4 d-inline-flex align-items-center">
+                                    <FontAwesomeIcon icon={faSkype} className="mr-2" size="lg" />
+                                    <span className="text-small">Call</span>
+                                </Button>
+                            </a>
                         </div>
                     </div>
                 </Navbar>
