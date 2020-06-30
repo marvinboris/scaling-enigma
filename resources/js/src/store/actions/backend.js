@@ -27,6 +27,7 @@ export const getDashboard = () => async dispatch => {
 
 export const resetRequests = () => ({ type: actionTypes.RESET_REQUESTS });
 const requestsStart = () => ({ type: actionTypes.REQUESTS_START });
+const requestsStatusStart = () => ({ type: actionTypes.REQUESTS_STATUS_START });
 const requestsSuccess = data => ({ type: actionTypes.REQUESTS_SUCCESS, ...data });
 const requestsFail = error => ({ type: actionTypes.REQUESTS_FAIL, error });
 export const getRequests = () => async dispatch => {
@@ -154,6 +155,26 @@ export const postRequestDelete = id => async dispatch => {
             method: 'POST',
             headers: {
                 Authorization: token
+            }
+        });
+        const resData = await res.json();
+        if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
+        dispatch(requestsSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(requestsFail(error));
+    }
+};
+
+export const patchRequestStatusUpdate = id => async dispatch => {
+    dispatch(requestsStatusStart());
+
+    try {
+        const res = await fetch(prefix + 'requests/' + id + '/status', {
+            method: 'PATCH',
+            headers: {
+                Authorization: token,
+                'Content-Type': 'application/json',
             }
         });
         const resData = await res.json();

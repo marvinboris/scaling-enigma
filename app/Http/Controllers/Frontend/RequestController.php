@@ -21,6 +21,18 @@ class RequestController extends Controller
         return response()->json([
             'platforms' => Platform::all(),
             'issues' => Issue::all(),
+            'refs' => array_map(function ($item) {
+                $documents = [];
+                foreach ($item['documents'] as $document) {
+                    $parts = explode('.', strtolower($document));
+                    if (end($parts) === 'pdf') $documents[] = ['type' => 'application/pdf'];
+                    else $documents[] = ['type' => 'image'];
+                }
+                return [
+                    'ref' => $item['ref'],
+                    'documents' => $documents,
+                ];
+            }, AppRequest::whereApproved(1)->get()->toArray()),
         ]);
     }
 
@@ -54,6 +66,11 @@ class RequestController extends Controller
             $issue_file->move('requests', $name);
             $issue_files[] = htmlspecialchars($name);
         }
+
+        if (count($documents) === 0) $documents = array_map(function ($item) {
+            $parts = explode('/', $item);
+            return end($parts);
+        }, AppRequest::whereRef($request->ref)->first()->documents);
 
         $name = ucwords(strtolower($request->name));
         $appRequest = AppRequest::create(array_merge($request->except(['documents', 'issue_files', 'code', 'name', 'phone']), [

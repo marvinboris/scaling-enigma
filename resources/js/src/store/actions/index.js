@@ -37,6 +37,7 @@ export {
     getCancelledRequests,
     postRequestUpdate,
     postRequestDelete,
+    patchRequestStatusUpdate,
 
     resetBChat,
     getRequestsWithMessages,

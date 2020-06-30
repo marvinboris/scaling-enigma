@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Col, Row, Form, Container, Input, FormGroup, Label, CustomInput, Button } from 'reactstrap';
+import { Col, Row, Form, Container, Input, FormGroup, Label, CustomInput, Button, Alert } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faFilePdf, faPaperPlane, faFile, faFileImage, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
@@ -118,7 +118,7 @@ class Request extends Component {
 
     render() {
         const { name, platform_id, email, ref, phone, issue_id, country, code, documents, description, issue_files, countries } = this.state;
-        const { frontend: { request: { loading, error, message, platforms, issues, reqid } } } = this.props;
+        const { frontend: { request: { loading, error, message, platforms, issues, reqid, refs } } } = this.props;
 
         let redirect;
         let errors;
@@ -135,41 +135,72 @@ class Request extends Component {
                 const countriesOptions = countries.map(({ country, code, name }) => <option key={country} value={country} code={code}>{name}</option>);
                 const issuesOptions = issues.map(({ id, name }) => <option key={name + id} value={id}>{name}</option>);
 
-                const documentsContent = documents.map((d, index) => {
-                    if (!d) {
-                        const backgrounds = [SelfieWithNID, SignedCopyOfNID, NIDDataPage];
-                        return <Col xl={4} key={Math.random()}>
-                            <Button color="light" style={{ backgroundImage: 'url("' + backgrounds[index] + '")', backgroundSize: '90% 90%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} onClick={() => this.documentClickHandler(index)} className="documents-btn rounded-4 border overflow-hidden p-2 d-flex justify-content-center align-items-center text-nowrap text-transparent position-relative embed-responsive embed-responsive-1by1">
-                                <FontAwesomeIcon icon={faFilePdf} className="mr-2" />NID_45094M
-                            </Button>
-                        </Col>;
-                    }
-                    const { type, name } = d;
-                    let icon;
-                    switch (type) {
-                        case 'application/pdf':
-                            icon = faFilePdf;
-                            break;
-                        default:
-                            icon = faFileImage;
-                            break;
-                    }
+                const documentInputs = !refs.map(item => item.ref).includes(ref) && <>
+                    <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={0} className="d-none documents" />
+                    <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={1} className="d-none documents" />
+                    <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={2} className="d-none documents" />
+                </>;
 
-                    const arr = name.split('.');
-                    const formatlessName = arr.filter((n, i) => i < arr.length - 1).join('.');
+                let documentsContent;
+                if (refs.map(item => item.ref).includes(ref)) documentsContent = <>
+                    {refs.find(item => item.ref === ref).documents.map((d, index) => {
+                        const { type } = d;
+                        let icon;
+                        switch (type) {
+                            case 'application/pdf':
+                                icon = faFilePdf;
+                                break;
+                            default:
+                                icon = faFileImage;
+                                break;
+                        }
 
-                    return <Col xl={4} key={name + Math.random()}>
-                        <div onClick={() => this.documentClickHandler(index)} style={{ cursor: 'pointer' }} className="rounded-4 overflow-hidden p-2 bg-success d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1">
-                            <FontAwesomeIcon icon={icon} size="5x" className="text-border position-absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
-                        </div>
-                        <div className="text-uppercase text-truncate pt-3 text-darkblue">
-                            {formatlessName}
-                        </div>
+                        return <Col xl={4} className="pt-3 pt-xl-0" key={Math.random()}>
+                            <div className="rounded-4 overflow-hidden p-2 bg-success d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1">
+                                <FontAwesomeIcon icon={icon} size="5x" className="text-border position-absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
+                            </div>
+                        </Col>
+                    })}
+                    <Col xs={12} className="pt-3">
+                        <Alert color="success">You have already uploaded approved documents</Alert>
                     </Col>
-                });
+                </>;
+                else
+                    documentsContent = documents.map((d, index) => {
+                        if (!d) {
+                            const backgrounds = [SelfieWithNID, SignedCopyOfNID, NIDDataPage];
+                            return <Col xl={4} className="pt-3 pt-xl-0" key={Math.random()}>
+                                <Button color="light" style={{ backgroundImage: 'url("' + backgrounds[index] + '")', backgroundSize: '90% 90%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} onClick={() => this.documentClickHandler(index)} className="documents-btn rounded-4 border overflow-hidden p-2 d-flex justify-content-center align-items-center text-nowrap text-transparent position-relative embed-responsive embed-responsive-1by1">
+                                    <FontAwesomeIcon icon={faFilePdf} className="mr-2" />NID_45094M
+                            </Button>
+                            </Col>;
+                        }
+                        const { type, name } = d;
+                        let icon;
+                        switch (type) {
+                            case 'application/pdf':
+                                icon = faFilePdf;
+                                break;
+                            default:
+                                icon = faFileImage;
+                                break;
+                        }
+
+                        const arr = name.split('.');
+                        const formatlessName = arr.filter((n, i) => i < arr.length - 1).join('.');
+
+                        return <Col xl={4} className="pt-3 pt-xl-0" key={name + Math.random()}>
+                            <div onClick={() => this.documentClickHandler(index)} style={{ cursor: 'pointer' }} className="rounded-4 overflow-hidden p-2 bg-success d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1">
+                                <FontAwesomeIcon icon={icon} size="5x" className="text-border position-absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
+                            </div>
+                            <div className="text-uppercase text-truncate pt-3 text-darkblue">
+                                {formatlessName}
+                            </div>
+                        </Col>
+                    });
 
                 const issueFilesContent = issue_files.map((i, index) => {
-                    if (!i) return <div key={Math.random()} className="pr-3 d-inline-block">
+                    if (!i) return <div key={Math.random()} className="pr-3 pt-3 pt-xl-0 d-inline-block">
                         <Button color="light" onClick={() => this.issueFileClickHandler(index)} className="issue_files-btn border rounded-2 p-2 text-truncate text-nowrap">
                             <span className="text-dark"><FontAwesomeIcon icon={faPaperclip} className="mr-2" />Attach a file</span>
                         </Button>
@@ -188,7 +219,7 @@ class Request extends Component {
                     const arr = name.split('.');
                     const formatlessName = arr.filter((n, i) => i < arr.length - 1).join('.');
 
-                    return <div key={name + Math.random()} className="pr-3 d-inline-block" style={{ maxWidth: 200 }}>
+                    return <div key={name + Math.random()} className="pr-3 pt-3 pt-xl-0 d-inline-block" style={{ maxWidth: 200 }}>
                         <div style={{ cursor: 'pointer' }} onClick={() => this.issueFileClickHandler(index)} className="rounded-2 p-2 bg-success text-dark text-uppercase text-truncate text-nowrap">
                             <FontAwesomeIcon icon={icon} className="mr-2" />{formatlessName}
                         </div>
@@ -235,12 +266,10 @@ class Request extends Component {
                                     {documentsContent}
                                 </Row>
 
-                                <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg,.pdf" tabIndex={0} className="d-none documents" />
-                                <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg,.pdf" tabIndex={1} className="d-none documents" />
-                                <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg,.pdf" tabIndex={2} className="d-none documents" />
+                                {documentInputs}
                             </FormGroup>
 
-                            <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 300 kB max/file.</div>
+                            <div className="text-danger">Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 300 kB max/file.</div>
                         </Col>
                     </FormBlock>
 
@@ -255,32 +284,32 @@ class Request extends Component {
                             </FormGroup>
 
                             <FormGroup>
-                                <div className="d-flex">
+                                <div>
                                     {issueFilesContent}
                                 </div>
 
-                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg" tabIndex={0} className="d-none issue_files" />
-                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg" tabIndex={1} className="d-none issue_files" />
-                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg" tabIndex={2} className="d-none issue_files" />
+                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" tabIndex={0} className="d-none issue_files" />
+                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" tabIndex={1} className="d-none issue_files" />
+                                <input type="file" name="issue_files[]" onChange={this.inputChangeHandler} accept=".png,.jpg,.jpeg,.pdf" tabIndex={2} className="d-none issue_files" />
                             </FormGroup>
 
-                            <div className="text-danger">Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 100 kB max/file.</div>
+                            <div className="text-danger">Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 100 kB max/file.</div>
                         </Col>
                     </FormBlock>
 
-                    <FormGroup className="pl-2 my-md-5 text-secondary text-left">
-                        <Label check>
-                            <CustomInput color="yellow" type="checkbox" id="terms" name="terms" label="Accept terms and conditions" inline />
-                        </Label>
-                    </FormGroup>
-
                     <Row>
-                        <Col xl={9} className="d-md-flex align-items-center">
+                        <Col xl={9} className="pt-3">
+                            <Alert color="danger">Be sure to provide all of the required documents above before submitting your request.</Alert>
+
+                            <FormGroup className="pl-2 my-md-5 text-secondary text-left">
+                                <Label check>
+                                    <CustomInput color="yellow" type="checkbox" id="terms" name="terms" label="Accept terms and conditions" inline />
+                                </Label>
+                            </FormGroup>
+
                             <div className="pr-md-3">
                                 <BetweenButton icon={faPaperPlane} pill className="py-3 px-4 text-truncate" color="darkblue">Submit a request</BetweenButton>
                             </div>
-
-                            <div className="text-danger pt-3 pt-md-0">Be sure to provide all of the required documents above before submitting your request.</div>
                         </Col>
                     </Row>
                 </Form>;

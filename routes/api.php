@@ -21,10 +21,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::namespace('Frontend')->prefix('frontend')->name('frontend.')->group(function () {
     Route::prefix('request')->name('request.')->group(function () {
         Route::post('check', 'RequestController@check')->name('check');
@@ -44,10 +40,10 @@ Route::namespace('Auth')->prefix('auth')->name('auth.')->group(function () {
     Route::post('resend', 'AuthController@resend')->name('resend');
     Route::post('verify', 'AuthController@verify')->name('verify');
     Route::post('login', 'AuthController@login')->name('login');
+    Route::get('user', 'AuthController@user')->name('user');
 
     Route::middleware('auth:api')->group(function () {
         Route::get('logout', 'AuthController@logout')->name('logout');
-        Route::get('user', 'AuthController@user')->name('user');
     });
 });
 
@@ -55,6 +51,7 @@ Route::middleware('auth:api')->namespace('User')->prefix('user')->name('user.')-
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
     Route::prefix('requests')->name('requests.')->group(function () {
+        Route::patch('{id}/status', 'RequestsController@status')->name('status');
         Route::post('{id}/delete', 'RequestsController@delete')->name('delete');
         Route::post('{id}', 'RequestsController@update')->name('update');
         Route::get('cancelled', 'RequestsController@cancelled')->name('cancelled');

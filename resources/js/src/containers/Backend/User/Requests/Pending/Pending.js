@@ -50,7 +50,7 @@ class Pending extends Component {
     }
 
     render() {
-        let { backend: { requests: { loading, error, message, requests } } } = this.props;
+        let { backend: { requests: { loading, statusLoading, error, message, requests } } } = this.props;
         const { countries } = this.state;
 
         let content;
@@ -76,7 +76,7 @@ class Pending extends Component {
 
                     const descriptionContent = <Description request={request} />;
 
-                    const viewContent = <RequestView request={request} country={country} />;
+                    const viewContent = <RequestView request={request} country={country} onApprovedStatusChanged={this.props.onApprovedStatusChanged} onApprovedStatusChanging={statusLoading} />;
 
                     const editContent = <Edit request={updateObject(request, { page_status: 'pending' })} />;
 
@@ -108,7 +108,7 @@ class Pending extends Component {
                                 <FontAwesomeIcon icon={faEye} className="text-green mr-2" fixedWidth />
                             </View>
                             <View title={'Request edit: ' + request.reqid} content={editContent}>
-                                <FontAwesomeIcon icon={faEdit} className="text-brokenblue" fixedWidth />
+                                <FontAwesomeIcon icon={faEdit} className="text-brokenblue mr-2" fixedWidth />
                             </View>
                             <Delete deleteAction={() => this.props.onPostRequestDelete(request.id)}><FontAwesomeIcon icon={faTrash} className="text-red mr-2" fixedWidth /></Delete>
                             <FontAwesomeIcon icon={faDownload} className="text-darkblue" fixedWidth />
@@ -172,6 +172,7 @@ const mapDispatchToProps = dispatch => ({
     onPostRequestDelete: id => dispatch(actions.postRequestDelete(id)),
     onPostRequestUpdate: (id, data) => dispatch(actions.postRequestUpdate(id, data)),
     onResetRequests: () => dispatch(actions.resetRequests()),
+    onApprovedStatusChanged: id => dispatch(actions.patchRequestStatusUpdate(id)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Pending));

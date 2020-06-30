@@ -1,14 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faEdit, faBook, faFileImage, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faEdit, faBook, faFileImage, faUser, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Download from '../../../../components/Backend/UI/Download/Download';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, CustomInput } from 'reactstrap';
 
 const I = ({ size = 6, label = null, children }) => <Col lg={size} className="pb-3">
     {label ? (label + ': ') : ''}<span className="text-green text-500">{children}</span>
 </Col>;
 
-export default ({ request, country }) => {
+export default ({ request, country, onApprovedStatusChanged, onApprovedStatusChanging = false }) => {
     const documentsContent = request.documents.filter(d => d).map(doc => {
         const arr1 = doc.split('.');
         const format = arr1[arr1.length - 1];
@@ -88,9 +88,18 @@ export default ({ request, country }) => {
 
         <Row className="mt-4 mx-0 p-3 rounded bg-orange-20">
             <Col xs={12}>
-                <div className="text-orange text-700 mb-2">
-                    <FontAwesomeIcon icon={faBook} className="mr-2" fixedWidth />
-                    User documents
+                <div className="d-flex justify-content-between">
+                    <div className="text-orange text-700 mb-2">
+                        <FontAwesomeIcon icon={faBook} className="mr-2" fixedWidth />
+                        User documents
+                    </div>
+
+                    <div className="d-flex align-items-center">
+                        {onApprovedStatusChanging && <span className="pr-2">
+                            <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
+                        </span>}
+                        <CustomInput type="switch" id="approved" defaultChecked={+request.approved === 1} name="approved" label="Approved documents" onChange={onApprovedStatusChanged} />
+                    </div>
                 </div>
                 <hr />
             </Col>

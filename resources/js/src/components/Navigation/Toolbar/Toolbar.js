@@ -26,7 +26,7 @@ export default ({ isAuth, name, drawerToggleClicked, logoutHandler, role, cartIt
 
                         <div className="pl-lg-5">
                             <div className="d-inline-flex align-items-center">
-                                <a href="#language-dropdown" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="language-dropdown" className="text-dark text-decoration-none d-flex justify-content-around align-items-center">
+                                <a href="#language-dropdown" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="language-dropdown" className="text-dark text-decoration-none d-none d-sm-flex justify-content-around align-items-center">
                                     <span className="language-flag shadow-lg mr-2 overflow-hidden d-none d-lg-inline-flex justify-content-center align-items-center position-relative">
                                         <span className="flag-icon position-absolute flag-icon-gb"></span>
                                     </span>
@@ -37,7 +37,7 @@ export default ({ isAuth, name, drawerToggleClicked, logoutHandler, role, cartIt
                                     <FontAwesomeIcon icon={faCaretDown} />
                                 </a>
 
-                                <NavbarToggler onClick={toggleNavbar} className="ml-3 d-lg-none" />
+                                <NavbarToggler onClick={toggleNavbar} className="ml-sm-3 d-lg-none" />
                             </div>
                         </div>
 

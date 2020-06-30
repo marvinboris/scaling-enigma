@@ -30,7 +30,7 @@ export const authLogin = data => async dispatch => {
     try {
         const form = new FormData(data);
 
-        const res = await fetch(prefix + 'login', {
+        const res = await fetch(`${prefix}login`, {
             method: 'POST',
             body: form
         });
@@ -41,7 +41,7 @@ export const authLogin = data => async dispatch => {
 
         if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
         else if (res.status === 403 || res.status === 401) return dispatch(authMessage(resData.message));
-        else if (res.status !== 200 && res.status !== 201) throw new Error(resData);
+        else if (res.status !== 200 && res.status !== 201) throw new Error(resData.message);
 
         dispatch(authLoginSuccess(hash));
     } catch (err) {
@@ -55,7 +55,7 @@ export const authVerify = data => async dispatch => {
     try {
         const form = new FormData(data);
 
-        const res = await fetch(prefix + 'verify', {
+        const res = await fetch(`${prefix}verify`, {
             method: 'POST',
             body: form,
         });
@@ -68,7 +68,7 @@ export const authVerify = data => async dispatch => {
 
         if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
         else if (res.status === 403 || res.status === 401) return dispatch(authMessage(resData.message));
-        else if (res.status !== 200 && res.status !== 201) throw new Error(resData);
+        else if (res.status !== 200 && res.status !== 201) throw new Error(resData.message);
 
         const expirationDate = new Date(expires_at);
         localStorage.setItem('token', token);
@@ -87,7 +87,7 @@ export const resendCode = hash => async dispatch => {
         const formData = new FormData();
         formData.append('hash', hash);
 
-        const res = await fetch(prefix + 'resend', {
+        const res = await fetch(`${prefix}resend`, {
             method: 'POST',
             body: formData,
         });
@@ -96,7 +96,7 @@ export const resendCode = hash => async dispatch => {
 
         dispatch(resendCodeSuccess(resData.hash, resData.message));
     } catch (err) {
-        dispatch(authFail());
+        dispatch(authFail(err));
     }
 };
 
@@ -105,7 +105,7 @@ export const authLogout = () => async dispatch => {
     const token = localStorage.getItem('token');
 
     try {
-        const res = await fetch(prefix + 'logout', {
+        const res = await fetch(`${prefix}logout`, {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -118,6 +118,7 @@ export const authLogout = () => async dispatch => {
 
         dispatch(authLogoutSuccess());
     } catch (err) {
+        console.log(err);
         dispatch(authFail(err));
     }
 };
@@ -131,26 +132,30 @@ export const authCheckState = () => async dispatch => {
     if (!token) dispatch(authLogoutSuccess());
     else {
         try {
-            const res = await fetch(prefix + 'user', {
-                method: 'GET',
+            const res = await fetch(`${prefix}user`, {
                 headers: {
-                    'Authorization': token
+                    Authorization: token,
+                    Accept: 'application/json',
                 }
             });
 
+            const resData = await res.json();
+            console.log(resData.message, res.status)
+
             if (res.status === 521) await dispatch(authLogoutSuccess());
             else if (res.status !== 200 && res.status !== 201) {
-                throw new Error('Erreur lors de la récupération des informations.');
+                // throw new Error('Erreur lors de la récupération des informations.');
+                console.log(resData.error)
+                throw new Error(resData.error.message);
             }
-
-            const { data } = await res.json();
 
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
             if (expirationDate > new Date()) {
-                dispatch(authVerifySuccess(token, data));
+                dispatch(authVerifySuccess(token, resData.data));
                 dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
             } else dispatch(authLogoutSuccess());
         } catch (err) {
+            console.log(err)
             dispatch(authFail(err));
         }
     }

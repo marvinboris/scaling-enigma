@@ -143,11 +143,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     addonType: "prepend"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroupText"], {
     className: "bg-transparent border-light rounded-pill rounded-right-0 px-4"
-  }, addon)) : null, children ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+  }, addon)) : null, children ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["CustomInput"], {
     valid: touched && Object(_shared_utility__WEBPACK_IMPORTED_MODULE_2__["checkValidity"])(value, validation),
     invalid: touched && !Object(_shared_utility__WEBPACK_IMPORTED_MODULE_2__["checkValidity"])(value, validation),
     onChange: inputChangedHandler,
     type: type,
+    id: name,
     name: name,
     required: required,
     readOnly: readonly,
@@ -523,7 +524,8 @@ var Request = /*#__PURE__*/function (_Component) {
           message = _this$props$frontend$.message,
           platforms = _this$props$frontend$.platforms,
           issues = _this$props$frontend$.issues,
-          reqid = _this$props$frontend$.reqid;
+          reqid = _this$props$frontend$.reqid,
+          refs = _this$props$frontend$.refs;
       var redirect;
       var errors;
       var content;
@@ -565,11 +567,79 @@ var Request = /*#__PURE__*/function (_Component) {
               value: id
             }, name);
           });
-          var documentsContent = documents.map(function (d, index) {
+          var documentInputs = !refs.map(function (item) {
+            return item.ref;
+          }).includes(ref) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+            type: "file",
+            name: "documents[]",
+            onChange: this.inputChangeHandler,
+            required: true,
+            accept: ".png,.jpg,.jpeg",
+            tabIndex: 0,
+            className: "d-none documents"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+            type: "file",
+            name: "documents[]",
+            onChange: this.inputChangeHandler,
+            required: true,
+            accept: ".png,.jpg,.jpeg",
+            tabIndex: 1,
+            className: "d-none documents"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+            type: "file",
+            name: "documents[]",
+            onChange: this.inputChangeHandler,
+            required: true,
+            accept: ".png,.jpg,.jpeg",
+            tabIndex: 2,
+            className: "d-none documents"
+          }));
+          var documentsContent;
+          if (refs.map(function (item) {
+            return item.ref;
+          }).includes(ref)) documentsContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, refs.find(function (item) {
+            return item.ref === ref;
+          }).documents.map(function (d, index) {
+            var type = d.type;
+            var icon;
+
+            switch (type) {
+              case 'application/pdf':
+                icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faFilePdf"];
+                break;
+
+              default:
+                icon = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faFileImage"];
+                break;
+            }
+
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+              xl: 4,
+              className: "pt-3 pt-xl-0",
+              key: Math.random()
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+              className: "rounded-4 overflow-hidden p-2 bg-success d-flex justify-content-center align-items-center text-nowrap text-transparent shadow position-relative embed-responsive embed-responsive-1by1"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
+              icon: icon,
+              size: "5x",
+              className: "text-border position-absolute",
+              style: {
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%,-50%)'
+              }
+            })));
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+            xs: 12,
+            className: "pt-3"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Alert"], {
+            color: "success"
+          }, "You have already uploaded approved documents")));else documentsContent = documents.map(function (d, index) {
             if (!d) {
               var backgrounds = [_assets_images_Group_687_2x_png__WEBPACK_IMPORTED_MODULE_14___default.a, _assets_images_Group_688_2x_png__WEBPACK_IMPORTED_MODULE_15___default.a, _assets_images_Group_689_2x_png__WEBPACK_IMPORTED_MODULE_16___default.a];
               return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
                 xl: 4,
+                className: "pt-3 pt-xl-0",
                 key: Math.random()
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
                 color: "light",
@@ -609,6 +679,7 @@ var Request = /*#__PURE__*/function (_Component) {
             }).join('.');
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
               xl: 4,
+              className: "pt-3 pt-xl-0",
               key: name + Math.random()
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
               onClick: function onClick() {
@@ -634,7 +705,7 @@ var Request = /*#__PURE__*/function (_Component) {
           var issueFilesContent = issue_files.map(function (i, index) {
             if (!i) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
               key: Math.random(),
-              className: "pr-3 d-inline-block"
+              className: "pr-3 pt-3 pt-xl-0 d-inline-block"
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
               color: "light",
               onClick: function onClick() {
@@ -667,7 +738,7 @@ var Request = /*#__PURE__*/function (_Component) {
             }).join('.');
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
               key: name + Math.random(),
-              className: "pr-3 d-inline-block",
+              className: "pr-3 pt-3 pt-xl-0 d-inline-block",
               style: {
                 maxWidth: 200
               }
@@ -801,33 +872,9 @@ var Request = /*#__PURE__*/function (_Component) {
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
             xl: 9,
             className: "px-0"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, documentsContent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-            type: "file",
-            name: "documents[]",
-            onChange: this.inputChangeHandler,
-            required: true,
-            accept: ".png,.jpg,.jpeg,.pdf",
-            tabIndex: 0,
-            className: "d-none documents"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-            type: "file",
-            name: "documents[]",
-            onChange: this.inputChangeHandler,
-            required: true,
-            accept: ".png,.jpg,.jpeg,.pdf",
-            tabIndex: 1,
-            className: "d-none documents"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-            type: "file",
-            name: "documents[]",
-            onChange: this.inputChangeHandler,
-            required: true,
-            accept: ".png,.jpg,.jpeg,.pdf",
-            tabIndex: 2,
-            className: "d-none documents"
-          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, documentsContent), documentInputs), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "text-danger"
-          }, "Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 300 kB max/file."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
+          }, "Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 300 kB max/file."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
             title: "Issue description",
             subtitle: "Please provide a detailed description of the problem you are facing"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
@@ -847,32 +894,35 @@ var Request = /*#__PURE__*/function (_Component) {
               height: 250
             },
             className: "border-light text-secondary"
-          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "d-flex"
-          }, issueFilesContent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, issueFilesContent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
             type: "file",
             name: "issue_files[]",
             onChange: this.inputChangeHandler,
-            accept: ".png,.jpg,.jpeg",
+            accept: ".png,.jpg,.jpeg,.pdf",
             tabIndex: 0,
             className: "d-none issue_files"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
             type: "file",
             name: "issue_files[]",
             onChange: this.inputChangeHandler,
-            accept: ".png,.jpg,.jpeg",
+            accept: ".png,.jpg,.jpeg,.pdf",
             tabIndex: 1,
             className: "d-none issue_files"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
             type: "file",
             name: "issue_files[]",
             onChange: this.inputChangeHandler,
-            accept: ".png,.jpg,.jpeg",
+            accept: ".png,.jpg,.jpeg,.pdf",
             tabIndex: 2,
             className: "d-none issue_files"
           })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "text-danger"
-          }, "Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 100 kB max/file."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+          }, "Only PDF, PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 100 kB max/file."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+            xl: 9,
+            className: "pt-3"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Alert"], {
+            color: "danger"
+          }, "Be sure to provide all of the required documents above before submitting your request."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
             className: "pl-2 my-md-5 text-secondary text-left"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], {
             check: true
@@ -883,19 +933,14 @@ var Request = /*#__PURE__*/function (_Component) {
             name: "terms",
             label: "Accept terms and conditions",
             inline: true
-          }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-            xl: 9,
-            className: "d-md-flex align-items-center"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "pr-md-3"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
             icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faPaperPlane"],
             pill: true,
             className: "py-3 px-4 text-truncate",
             color: "darkblue"
-          }, "Submit a request")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "text-danger pt-3 pt-md-0"
-          }, "Be sure to provide all of the required documents above before submitting your request."))));
+          }, "Submit a request")))));
         }
       }
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {

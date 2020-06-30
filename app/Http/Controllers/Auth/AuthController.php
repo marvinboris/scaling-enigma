@@ -132,6 +132,13 @@ class AuthController extends Controller
     {
         $user = request()->user();
 
+        if (!$user) return response()->json([
+            'message' => [
+                'type' => 'danger',
+                'content' => 'No token stored',
+            ]
+        ], 521);
+
         $data = array_merge($user->toArray(), [
             'notifications' => $user->unreadNotifications()->latest()->limit(5)->get(),
             'pending' => count(AppRequest::whereStatus(0)->get()),
