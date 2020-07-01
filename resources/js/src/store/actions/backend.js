@@ -87,6 +87,25 @@ export const getPendingRequests = () => async dispatch => {
     }
 };
 
+export const getProcessingRequests = () => async dispatch => {
+    dispatch(requestsStart());
+
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(prefix + 'requests/processing', {
+            method: 'GET',
+            headers: {
+                Authorization: token
+            }
+        });
+        const resData = await res.json();
+        dispatch(requestsSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(requestsFail(error));
+    }
+};
+
 export const getSolvedRequests = () => async dispatch => {
     dispatch(requestsStart());
 

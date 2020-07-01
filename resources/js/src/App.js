@@ -17,6 +17,7 @@ const asyncUserDashboard = asyncComponent(() => import('./containers/Backend/Use
 const asyncUserChat = asyncComponent(() => import('./containers/Backend/User/Chat/Chat'));
 const asyncUserRequestReport = asyncComponent(() => import('./containers/Backend/User/RequestReport/RequestReport'));
 const asyncUserRequestsImportant = asyncComponent(() => import('./containers/Backend/User/Requests/Important/Important'));
+const asyncUserRequestsProcessing = asyncComponent(() => import('./containers/Backend/User/Requests/Processing/Processing'));
 const asyncUserRequestsPending = asyncComponent(() => import('./containers/Backend/User/Requests/Pending/Pending'));
 const asyncUserRequestsSolved = asyncComponent(() => import('./containers/Backend/User/Requests/Solved/Solved'));
 const asyncUserRequestsCancelled = asyncComponent(() => import('./containers/Backend/User/Requests/Cancelled/Cancelled'));
@@ -46,6 +47,7 @@ class App extends Component {
             <Switch>
                 <Route path="/auth/verify" component={asyncVerify} />
                 <Route path="/auth/login" component={asyncLogin} />
+                <Redirect path="/auth" to="/auth/login" />
                 <Redirect path="/login" to="/auth/login" />
 
                 <Route path="/chat/verify" component={asyncChatVerify} />
@@ -68,10 +70,12 @@ class App extends Component {
                     <Route path="/user/chat" component={asyncUserChat} />
                     <Route path="/user/request-report" component={asyncUserRequestReport} />
                     <Route path="/user/requests/important" component={asyncUserRequestsImportant} />
+                    <Route path="/user/requests/processing" component={asyncUserRequestsProcessing} />
                     <Route path="/user/requests/pending" component={asyncUserRequestsPending} />
                     <Route path="/user/requests/solved" component={asyncUserRequestsSolved} />
                     <Route path="/user/requests/cancelled" component={asyncUserRequestsCancelled} />
                     <Redirect path="/auth" to="/user/dashboard" />
+                    <Redirect path="/login" to="/user/dashboard" />
 
                     <Route path="/chat" component={asyncChat} />
                     <Route path="/request/check" component={asyncRequestCheck} />

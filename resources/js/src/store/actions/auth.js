@@ -36,15 +36,17 @@ export const authLogin = data => async dispatch => {
         });
 
         const resData = await res.json();
+        console.log(resData)
 
         let { hash } = resData;
 
         if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
         else if (res.status === 403 || res.status === 401) return dispatch(authMessage(resData.message));
-        else if (res.status !== 200 && res.status !== 201) throw new Error(resData.message);
+        else if (res.status !== 200 && res.status !== 201) throw new Error(resData.error.message);
 
         dispatch(authLoginSuccess(hash));
     } catch (err) {
+        console.log(err);
         dispatch(authFail(err));
     }
 };

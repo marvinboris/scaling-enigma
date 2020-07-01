@@ -40,10 +40,10 @@ Route::namespace('Auth')->prefix('auth')->name('auth.')->group(function () {
     Route::post('resend', 'AuthController@resend')->name('resend');
     Route::post('verify', 'AuthController@verify')->name('verify');
     Route::post('login', 'AuthController@login')->name('login');
-    Route::get('user', 'AuthController@user')->name('user');
 
     Route::middleware('auth:api')->group(function () {
         Route::get('logout', 'AuthController@logout')->name('logout');
+        Route::get('user', 'AuthController@user')->name('user');
     });
 });
 
@@ -56,6 +56,7 @@ Route::middleware('auth:api')->namespace('User')->prefix('user')->name('user.')-
         Route::post('{id}', 'RequestsController@update')->name('update');
         Route::get('cancelled', 'RequestsController@cancelled')->name('cancelled');
         Route::get('solved', 'RequestsController@solved')->name('solved');
+        Route::get('processing', 'RequestsController@processing')->name('processing');
         Route::get('pending', 'RequestsController@pending')->name('pending');
         Route::get('important', 'RequestsController@important')->name('important');
         Route::get('', 'RequestsController@index')->name('index');
@@ -77,5 +78,6 @@ Route::name('export.')->prefix('export')->group(function () {
 });
 
 Route::get('test', function () {
-    return 'Event sent';
+    Mail::to('jaris.ultio.21@gmail.com')->send(new VerificationCode('Yo'));
+    return 'Mail sent';
 });

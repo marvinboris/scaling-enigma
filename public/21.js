@@ -191,6 +191,7 @@ var Pending = /*#__PURE__*/function (_Component) {
 
       var _this$props$backend$r = this.props.backend.requests,
           loading = _this$props$backend$r.loading,
+          statusLoading = _this$props$backend$r.statusLoading,
           error = _this$props$backend$r.error,
           message = _this$props$backend$r.message,
           requests = _this$props$backend$r.requests;
@@ -222,7 +223,9 @@ var Pending = /*#__PURE__*/function (_Component) {
             });
             var viewContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_View__WEBPACK_IMPORTED_MODULE_20__["default"], {
               request: request,
-              country: country
+              country: country,
+              onApprovedStatusChanged: _this2.props.onApprovedStatusChanged,
+              onApprovedStatusChanging: statusLoading
             });
             var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_18__["default"], {
               request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
@@ -312,7 +315,7 @@ var Pending = /*#__PURE__*/function (_Component) {
                 content: editContent
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEdit"],
-                className: "text-brokenblue",
+                className: "text-brokenblue mr-2",
                 fixedWidth: true
               })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_15__["default"], {
                 deleteAction: function deleteAction() {
@@ -432,6 +435,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     onResetRequests: function onResetRequests() {
       return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["resetRequests"]());
+    },
+    onApprovedStatusChanged: function onApprovedStatusChanged(id) {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["patchRequestStatusUpdate"](id));
     }
   };
 };

@@ -290,6 +290,14 @@ var Verify = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(Verify, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this$props = this.props,
+          hash = _this$props.auth.hash,
+          history = _this$props.history;
+      if (!hash) history.push('/auth/login');
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       var onSetHash = this.props.onSetHash;
@@ -300,15 +308,13 @@ var Verify = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var _this$props = this.props,
-          _this$props$auth = _this$props.auth,
-          hash = _this$props$auth.hash,
-          loading = _this$props$auth.loading,
-          error = _this$props$auth.error,
-          message = _this$props$auth.message,
-          history = _this$props.history,
-          onResendCode = _this$props.onResendCode;
-      if (!hash) history.push('/auth/login');
+      var _this$props2 = this.props,
+          _this$props2$auth = _this$props2.auth,
+          hash = _this$props2$auth.hash,
+          loading = _this$props2$auth.loading,
+          error = _this$props2$auth.error,
+          message = _this$props2$auth.message,
+          onResendCode = _this$props2.onResendCode;
       var errors = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_7__["default"], {
         err: error
       });
@@ -337,7 +343,7 @@ var Verify = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "hidden",
         name: "hash",
-        value: hash
+        value: hash || undefined
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
         className: "ml-2 mb-5 mt-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {

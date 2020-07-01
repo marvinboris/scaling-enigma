@@ -33,6 +33,7 @@ export {
     getRequests,
     getImportantRequests,
     getPendingRequests,
+    getProcessingRequests,
     getSolvedRequests,
     getCancelledRequests,
     postRequestUpdate,

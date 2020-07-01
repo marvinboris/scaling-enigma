@@ -18,6 +18,11 @@ export class Verify extends Component {
         code: '',
     }
 
+    componentDidMount() {
+        const { auth: { hash }, history } = this.props;
+        if (!hash) history.push('/auth/login');
+    }
+
     componentWillUnmount() {
         const { onSetHash } = this.props;
         onSetHash(null);
@@ -33,8 +38,7 @@ export class Verify extends Component {
     }
 
     render() {
-        const { auth: { hash, loading, error, message }, history, onResendCode } = this.props;
-        if (!hash) history.push('/auth/login');
+        const { auth: { hash, loading, error, message }, onResendCode } = this.props;
 
         const errors = <Error err={error} />;
         const feedback = <Feedback message={message} />;
@@ -47,7 +51,7 @@ export class Verify extends Component {
             {feedback}
             <Form onSubmit={this.submitHandler}>
                 <MyInput type="text" icon={faCode} onChange={(e) => this.inputChangeHandler(e, "code")} value={this.state.code} name="code" required placeholder="Verification code" />
-                <input type="hidden" name="hash" value={hash} />
+                <input type="hidden" name="hash" value={hash || undefined} />
                 <FormGroup className="ml-2 mb-5 mt-4">
                     <p className="text-darkblue text-right">Didn't receive code? <strong className="text-yellow" style={{ cursor: 'pointer' }} onClick={() => onResendCode(hash)}>Resend</strong></p>
                 </FormGroup>

@@ -10,6 +10,7 @@ use buibr\Budget\BudgetSMS;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -49,6 +50,9 @@ class AuthController extends Controller
 
                     $budget->send('+' . $user->phone, 'Your User Login Code is ' . $code);
                 } else if ($request->otp === 'email') Mail::to($user->email)->send(new VerificationCode($code));
+                Artisan::call('display:code', [
+                    'code' => $code,
+                ]);
                 $hash = Crypt::encryptString(json_encode([
                     'id' => $user->id,
                     'code' => $code,

@@ -61,6 +61,10 @@ class BackEnd extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        const isAuthenticated = localStorage.getItem('token') !== null;
+
+        if (!isAuthenticated) this.props.history.push('/login');
+
         if (this.props.auth.data.notifications && !prevProps.auth.data.notifications) {
             const audio = new Audio('/audio/swiftly.mp3');
             const channel = Echo.channel('public');
@@ -99,12 +103,7 @@ class BackEnd extends Component {
 
     render() {
         const { isOpen, date, clock, selectedItem, pending, processing, cancelled, solved, important, notifications } = this.state;
-        const {
-            auth: { loading, data: { name, photo } },
-            history, children } = this.props;
-        const isAuthenticated = localStorage.getItem('token') !== null;
-
-        if (!isAuthenticated) history.push('/login');
+        const { auth: { loading, data: { name, photo } }, children } = this.props;
 
         return <div className="BackEnd text-left">
             <Toolbar pending={pending} processing={processing} cancelled={cancelled} solved={solved} notifications={notifications} name={name} toggle={this.toggle} logoutHandler={this.logoutHandler} date={date} clock={clock} />

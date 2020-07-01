@@ -24,6 +24,7 @@ export default ({ name, messages = [], photo = "https://placehold.it/100x100", r
                     { link: '/user/requests/file', text: 'File a Request' },
                     { link: '/user/requests/important', text: 'Important Requests' },
                     { link: '/user/requests/pending', text: 'Pending Requests' },
+                    { link: '/user/requests/processing', text: 'Processing Requests' },
                     { link: '/user/requests/solved', text: 'Solved Requests' },
                     { link: '/user/requests/cancelled', text: 'Cancelled Requests' },
                 ]}>Request Check</SideDrawerItem>

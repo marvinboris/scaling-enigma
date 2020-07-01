@@ -47,7 +47,22 @@ class RequestsController extends Controller
     public function pending()
     {
         $requests = [];
-        foreach (AppRequest::whereStatus(0)->orWhere('status', 1)->get() as $request) {
+        foreach (AppRequest::whereStatus(0)->get() as $request) {
+            $requests[] = array_merge($request->toArray(), [
+                'platform' => $request->platform->name,
+                'issue' => $request->issue->name,
+            ]);
+        }
+
+        return response()->json([
+            'requests' => $requests
+        ]);
+    }
+
+    public function processing()
+    {
+        $requests = [];
+        foreach (AppRequest::whereStatus(1)->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
                 'platform' => $request->platform->name,
                 'issue' => $request->issue->name,
@@ -119,7 +134,10 @@ class RequestsController extends Controller
         $filteredRequests = null;
         switch ($request->page_status) {
             case 'pending':
-                $filteredRequests = AppRequest::whereStatus(0)->orWhere('status', 1)->get();
+                $filteredRequests = AppRequest::whereStatus(0)->get();
+                break;
+            case 'processing':
+                $filteredRequests = AppRequest::whereStatus(1)->get();
                 break;
             case 'solved':
                 $filteredRequests = AppRequest::whereStatus(3)->get();
@@ -173,7 +191,10 @@ class RequestsController extends Controller
         $filteredRequests = null;
         switch ($request->page_status) {
             case 'pending':
-                $filteredRequests = AppRequest::whereStatus(0)->orWhere('status', 1)->get();
+                $filteredRequests = AppRequest::whereStatus(0)->get();
+                break;
+            case 'processing':
+                $filteredRequests = AppRequest::whereStatus(1)->get();
                 break;
             case 'solved':
                 $filteredRequests = AppRequest::whereStatus(3)->get();
@@ -218,7 +239,10 @@ class RequestsController extends Controller
         $filteredRequests = null;
         switch ($request->page_status) {
             case 'pending':
-                $filteredRequests = AppRequest::whereStatus(0)->orWhere('status', 1)->get();
+                $filteredRequests = AppRequest::whereStatus(0)->get();
+                break;
+            case 'processing':
+                $filteredRequests = AppRequest::whereStatus(1)->get();
                 break;
             case 'solved':
                 $filteredRequests = AppRequest::whereStatus(3)->get();
