@@ -177,9 +177,6 @@ class Dashboard extends Component {
                             {country ? country.name : null}
                         </div>,
                         action: <div className="text-center">
-                            <View title={'Request details: ' + request.reqid} content={viewContent}>
-                                <FontAwesomeIcon icon={faEye} className="text-green mr-2" fixedWidth />
-                            </View>
                             <View title={'Request edit: ' + request.reqid} content={editContent}>
                                 <FontAwesomeIcon icon={faEdit} className="text-brokenblue" fixedWidth />
                             </View>

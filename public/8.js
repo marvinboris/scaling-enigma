@@ -545,12 +545,11 @@ var Request = /*#__PURE__*/function (_Component) {
           var other = issues.find(function (i) {
             return i.name === 'Other';
           });
-          var checkRef = refs.map(function (item) {
-            return item.ref;
-          }).includes(ref);
-          var mark = refs.find(function (item) {
-            return item.ref === ref;
+          var refIndex = refs.findIndex(function (r) {
+            return r.r === ref && +r.p === +platform_id && r.e === email;
           });
+          var checkRef = refIndex >= 0;
+          var mark = refs[refIndex];
           var platformsOptions = platforms.sort(function (a, b) {
             return a.name > b.name;
           }).map(function (_ref3) {
@@ -610,12 +609,10 @@ var Request = /*#__PURE__*/function (_Component) {
           })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
             type: "hidden",
             name: "hash",
-            value: mark.hash
+            value: mark.h
           });
           var documentsContent;
-          if (checkRef) documentsContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, refs.find(function (item) {
-            return item.ref === ref;
-          }).documents.map(function (d, index) {
+          if (checkRef) documentsContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, mark.d.map(function (d, index) {
             var type = d.type;
             var icon;
 

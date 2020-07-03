@@ -133,8 +133,9 @@ class Request extends Component {
 
             if (platforms && issues) {
                 const other = issues.find(i => i.name === 'Other');
-                let checkRef = refs.map(item => item.ref).includes(ref);
-                const mark = refs.find(item => item.ref === ref);
+                const refIndex = refs.findIndex(r => r.r === ref && +r.p === +platform_id && r.e === email);
+                const checkRef = refIndex >= 0;
+                const mark = refs[refIndex];
 
                 const platformsOptions = platforms.sort((a, b) => a.name > b.name).map(({ id, name }) => <option key={name + id} value={id}>{name}</option>);
                 const countriesOptions = countries.map(({ country, code, name }) => <option key={country} value={country} code={code}>{name}</option>);
@@ -144,11 +145,11 @@ class Request extends Component {
                     <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={0} className="d-none documents" />
                     <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={1} className="d-none documents" />
                     <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={2} className="d-none documents" />
-                </> : <input type="hidden" name="hash" value={mark.hash} />;
+                </> : <input type="hidden" name="hash" value={mark.h} />;
 
                 let documentsContent;
                 if (checkRef) documentsContent = <>
-                    {refs.find(item => item.ref === ref).documents.map((d, index) => {
+                    {mark.d.map((d, index) => {
                         const { type } = d;
                         let icon;
                         switch (type) {

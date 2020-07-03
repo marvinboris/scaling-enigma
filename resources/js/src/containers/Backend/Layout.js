@@ -35,8 +35,8 @@ class BackEnd extends Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.auth.data.notifications && !prevState.notifications) {
-            const { pending, processing, cancelled, solved, important, total, notifications } = nextProps.auth.data;
-            return updateObject(prevState, { pending, processing, cancelled, solved, important, total, notifications });
+            const { pending, processing, dev, important, total, notifications } = nextProps.auth.data;
+            return updateObject(prevState, { pending, processing, dev, important, total, notifications });
         }
         return prevState;
     }
@@ -68,7 +68,7 @@ class BackEnd extends Component {
         if (this.props.auth.data.notifications && !prevProps.auth.data.notifications) {
             const audio = new Audio('/audio/swiftly.mp3');
             const channel = Echo.channel('public');
-            channel.listen('Requests', ({ pending, processing, cancelled, solved, important, total }) => {
+            channel.listen('Requests', ({ pending, processing, dev, important, total }) => {
                 if (
                     this.props.auth.token && (
                         pending !== this.state.pending ||
@@ -79,7 +79,7 @@ class BackEnd extends Component {
                     )
                 ) {
                     if (total !== this.state.total) audio.play();
-                    this.setState({ pending, processing, cancelled, solved, important, total });
+                    this.setState({ pending, processing, dev, important, total });
                 }
             });
         }
@@ -102,11 +102,11 @@ class BackEnd extends Component {
 
 
     render() {
-        const { isOpen, date, clock, selectedItem, pending, processing, cancelled, solved, important, notifications } = this.state;
+        const { isOpen, date, clock, selectedItem, pending, processing, dev, important, notifications } = this.state;
         const { auth: { loading, data: { name, photo } }, children } = this.props;
 
         return <div className="BackEnd text-left">
-            <Toolbar pending={pending} processing={processing} cancelled={cancelled} solved={solved} notifications={notifications} name={name} toggle={this.toggle} logoutHandler={this.logoutHandler} date={date} clock={clock} />
+            <Toolbar pending={pending} processing={processing} dev={dev} notifications={notifications} name={name} toggle={this.toggle} logoutHandler={this.logoutHandler} date={date} clock={clock} />
             <SideDrawer name={name} isOpen={isOpen} photo={photo} toggle={this.toggle} selectItem={this.selectItem} selectedItem={selectedItem} />
 
             <main className="bg-soft position-relative full-height-user pb-5">

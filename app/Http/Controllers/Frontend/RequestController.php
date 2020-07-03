@@ -30,9 +30,11 @@ class RequestController extends Controller
                     else $documents[] = ['type' => 'image'];
                 }
                 return [
-                    'ref' => $item['ref'],
-                    'documents' => $documents,
-                    'hash' => Crypt::encrypt($item['documents']),
+                    'r' => $item['ref'],
+                    'e' => $item['email'],
+                    'p' => $item['platform_id'],
+                    'd' => $documents,
+                    'h' => Crypt::encrypt($item['documents']),
                 ];
             }, AppRequest::whereApproved(1)->get()->toArray()),
         ]);
@@ -89,6 +91,7 @@ class RequestController extends Controller
             'reqid' => $reqid,
             'phone' => $request->code . $request->phone,
             'documents' => json_encode($documents),
+            'approved' => count($documents) === 0 ? 1 : 0,
             'issue_files' => json_encode($issue_files),
             'client_id' => $request->ip(),
             'client_browser' => Browser::browserName()

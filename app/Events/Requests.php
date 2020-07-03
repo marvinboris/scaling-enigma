@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Request;
+use App\Type;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -15,24 +16,23 @@ class Requests implements ShouldBroadcast
 
     public $pending;
     public $processing;
-    public $cancelled;
-    public $solved;
+    public $dev;
     public $important;
     public $total;
 
     public function __construct()
     {
-        $pending = count(Request::whereStatus(0)->get());
-        $processing = count(Request::whereStatus(1)->get());
-        $cancelled = count(Request::whereStatus(2)->get());
-        $solved = count(Request::whereStatus(3)->get());
+        $dev_type_id = Type::whereAbbr('DEV')->first()->id;
+
+        $pending = count(Request::whereStatus(0)->whereNull('type_id')->get());
+        $processing = count(Request::whereStatus(1)->whereNull('type_id')->get());
+        $dev = count(Request::whereTypeId($dev_type_id)->get());
         $important = count(Request::whereTypeId(1)->get());
         $total = count(Request::get());
 
         $this->pending = $pending;
         $this->processing = $processing;
-        $this->cancelled = $cancelled;
-        $this->solved = $solved;
+        $this->dev = $dev;
         $this->important = $important;
         $this->total = $total;
     }
