@@ -203,7 +203,7 @@ class RequestsController extends Controller
         }
 
         $requests = [];
-        $filteredRequests = $this->requests($request->status);
+        $filteredRequests = $this->requests($request->page_status);
 
         foreach ($filteredRequests as $filteredRequest) {
             $requests[] = array_merge($filteredRequest->toArray(), [
@@ -237,7 +237,7 @@ class RequestsController extends Controller
         $appRequest->delete();
 
         $requests = [];
-        $filteredRequests = $this->requests($request->status);
+        $filteredRequests = $this->requests($request->page_status);
 
         foreach ($filteredRequests as $filteredRequest) {
             $requests[] = array_merge($filteredRequest->toArray(), [
@@ -271,7 +271,7 @@ class RequestsController extends Controller
         $appRequest->update(['approved' => $appRequest->approved === 0 ? 1 : 0]);
 
         $requests = [];
-        $filteredRequests = $this->requests($request->status);
+        $filteredRequests = $this->requests($request->page_status);
 
         foreach ($filteredRequests as $filteredRequest) {
             $requests[] = array_merge($filteredRequest->toArray(), [
