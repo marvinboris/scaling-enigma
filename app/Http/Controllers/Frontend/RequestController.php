@@ -61,7 +61,7 @@ class RequestController extends Controller
             ]
         ]);
 
-        $check = Crypt::decrypt($request->hash);
+        if ($request->has('hash')) Crypt::decrypt($request->hash);
 
         $documents = [];
         $issue_files = [];
