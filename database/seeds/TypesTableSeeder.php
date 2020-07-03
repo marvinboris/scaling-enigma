@@ -14,10 +14,11 @@ class TypesTableSeeder extends Seeder
     {
         //
         $types = [
-            ['name' => 'Important', 'abbr' => 'IM'],
+            ['name' => 'CEO', 'abbr' => 'CEO'],
             ['name' => 'Customer Service', 'abbr' => 'CS'],
             ['name' => 'Limarket', 'abbr' => 'LI'],
             ['name' => 'Payment', 'abbr' => 'PA'],
+            ['name' => 'Dev', 'abbr' => 'DEV'],
         ];
 
         foreach ($types as $type) {

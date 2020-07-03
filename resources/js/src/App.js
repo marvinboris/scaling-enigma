@@ -17,6 +17,7 @@ const asyncUserDashboard = asyncComponent(() => import('./containers/Backend/Use
 const asyncUserChat = asyncComponent(() => import('./containers/Backend/User/Chat/Chat'));
 const asyncUserRequestReport = asyncComponent(() => import('./containers/Backend/User/RequestReport/RequestReport'));
 const asyncUserRequestsImportant = asyncComponent(() => import('./containers/Backend/User/Requests/Important/Important'));
+const asyncUserRequestsDev = asyncComponent(() => import('./containers/Backend/User/Requests/Dev/Dev'));
 const asyncUserRequestsProcessing = asyncComponent(() => import('./containers/Backend/User/Requests/Processing/Processing'));
 const asyncUserRequestsPending = asyncComponent(() => import('./containers/Backend/User/Requests/Pending/Pending'));
 const asyncUserRequestsSolved = asyncComponent(() => import('./containers/Backend/User/Requests/Solved/Solved'));
@@ -70,6 +71,7 @@ class App extends Component {
                     <Route path="/user/chat" component={asyncUserChat} />
                     <Route path="/user/request-report" component={asyncUserRequestReport} />
                     <Route path="/user/requests/important" component={asyncUserRequestsImportant} />
+                    <Route path="/user/requests/dev" component={asyncUserRequestsDev} />
                     <Route path="/user/requests/processing" component={asyncUserRequestsProcessing} />
                     <Route path="/user/requests/pending" component={asyncUserRequestsPending} />
                     <Route path="/user/requests/solved" component={asyncUserRequestsSolved} />

@@ -7,6 +7,7 @@ use App\Events\Requests;
 use App\Http\Controllers\Controller;
 use App\Mail\RequestStatus;
 use App\Request as AppRequest;
+use App\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use hisorange\BrowserDetect\Parser as Browser;
@@ -14,6 +15,42 @@ use hisorange\BrowserDetect\Parser as Browser;
 class RequestsController extends Controller
 {
     //
+    private function requests($status = '')
+    {
+        $filteredRequests = [];
+        switch ($status) {
+            case 'pending':
+                $filteredRequests = AppRequest::whereStatus(0)->whereNull('type_id')->get();
+                break;
+            case 'processing':
+                $filteredRequests = AppRequest::whereStatus(1)->whereNull('type_id')->get();
+                break;
+            case 'solved':
+                $filteredRequests = AppRequest::whereStatus(3)->whereNull('type_id')->get();
+                break;
+            case 'cancelled':
+                $filteredRequests = AppRequest::whereStatus(2)->whereNull('type_id')->get();
+                break;
+            case 'important':
+                $type_id = Type::whereAbbr('CEO')->first()->id;
+                $filteredRequests = AppRequest::whereType($type_id)->get();
+                break;
+            case 'dev':
+                $type_id = Type::whereAbbr('DEV')->first()->id;
+                $filteredRequests = AppRequest::whereType($type_id)->get();
+                break;
+            case 'dashboard':
+                $filteredRequests = AppRequest::latest()->limit(5)->get();
+                break;
+            default:
+                $filteredRequests = AppRequest::get();
+                break;
+        }
+
+        return $filteredRequests;
+    }
+
+
     public function index()
     {
         $requests = [];
@@ -23,84 +60,115 @@ class RequestsController extends Controller
                 'issue' => $request->issue->name,
             ]);
         }
+        $types = Type::all();
 
         return response()->json([
-            'requests' => $requests
+            'requests' => $requests,
+            'types' => $types,
         ]);
     }
 
     public function important()
     {
         $requests = [];
-        foreach (AppRequest::whereTypeId(1)->get() as $request) {
+        $type_id = Type::whereAbbr('CEO')->first()->id;
+        foreach (AppRequest::whereTypeId($type_id)->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
                 'platform' => $request->platform->name,
                 'issue' => $request->issue->name,
             ]);
         }
+        $types = Type::all();
 
         return response()->json([
-            'requests' => $requests
+            'requests' => $requests,
+            'types' => $types,
+        ]);
+    }
+
+    public function dev()
+    {
+        $requests = [];
+        $type_id = Type::whereAbbr('DEV')->first()->id;
+        foreach (AppRequest::whereTypeId($type_id)->get() as $request) {
+            $requests[] = array_merge($request->toArray(), [
+                'platform' => $request->platform->name,
+                'issue' => $request->issue->name,
+            ]);
+        }
+        $types = Type::all();
+
+        return response()->json([
+            'requests' => $requests,
+            'types' => $types,
         ]);
     }
 
     public function pending()
     {
         $requests = [];
-        foreach (AppRequest::whereStatus(0)->get() as $request) {
+        foreach (AppRequest::whereStatus(0)->whereNull('type_id')->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
                 'platform' => $request->platform->name,
                 'issue' => $request->issue->name,
             ]);
         }
+        $types = Type::all();
 
         return response()->json([
-            'requests' => $requests
+            'requests' => $requests,
+            'types' => $types,
         ]);
     }
 
     public function processing()
     {
         $requests = [];
-        foreach (AppRequest::whereStatus(1)->get() as $request) {
+        foreach (AppRequest::whereStatus(1)->whereNull('type_id')->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
                 'platform' => $request->platform->name,
                 'issue' => $request->issue->name,
             ]);
         }
+        $types = Type::all();
 
         return response()->json([
-            'requests' => $requests
+            'requests' => $requests,
+            'types' => $types,
         ]);
     }
 
     public function solved()
     {
         $requests = [];
-        foreach (AppRequest::whereStatus(3)->get() as $request) {
+        foreach (AppRequest::whereStatus(3)->whereNull('type_id')->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
                 'platform' => $request->platform->name,
                 'issue' => $request->issue->name,
             ]);
         }
+        $types = Type::all();
 
         return response()->json([
-            'requests' => $requests
+            'requests' => $requests,
+            'types' => $types,
         ]);
     }
 
     public function cancelled()
     {
         $requests = [];
-        foreach (AppRequest::whereStatus(2)->get() as $request) {
+        foreach (AppRequest::whereStatus(2)->whereNull('type_id')->get() as $request) {
             $requests[] = array_merge($request->toArray(), [
                 'platform' => $request->platform->name,
                 'issue' => $request->issue->name,
             ]);
         }
+        $types = Type::all();
 
         return response()->json([
-            'requests' => $requests
+            'requests' => $requests,
+            'types' => $types,
         ]);
     }
 
@@ -114,47 +182,28 @@ class RequestsController extends Controller
             ]
         ]);
 
-        $admin_files = [];
-        $requestAdminFiles = $request->admin_files ? $request->admin_files : [];
-        foreach ($requestAdminFiles as $admin_file) {
-            $name = $appRequest->reqid . ' - ' . $admin_file->getClientOriginalName();
-            $admin_file->move('requests', $name);
-            $admin_files[] = htmlspecialchars($name);
-        }
-        $appRequest->update(array_merge($request->only(['status', 'comments']), [
-            'admin_files' => $admin_files,
-            'edited_by' => $request->user()->email,
-            'user_ip' => $request->ip(),
-            'user_browser' => Browser::browserName(),
-        ]));
+        if (!$request->has('type_id')) {
+            $admin_files = [];
+            $requestAdminFiles = $request->admin_files ? $request->admin_files : [];
+            foreach ($requestAdminFiles as $admin_file) {
+                $name = $appRequest->reqid . ' - ' . $admin_file->getClientOriginalName();
+                $admin_file->move('requests', $name);
+                $admin_files[] = htmlspecialchars($name);
+            }
+            $appRequest->update(array_merge($request->only(['status', 'comments']), [
+                'admin_files' => $admin_files,
+                'edited_by' => $request->user()->email,
+                'user_ip' => $request->ip(),
+                'user_browser' => Browser::browserName(),
+            ]));
 
-        Mail::to($appRequest->email)->send(new RequestStatus($appRequest));
+            Mail::to($appRequest->email)->send(new RequestStatus($appRequest));
+        } else {
+            $appRequest->update($request->only(['type_id', 'translate']));
+        }
 
         $requests = [];
-        $filteredRequests = null;
-        switch ($request->page_status) {
-            case 'pending':
-                $filteredRequests = AppRequest::whereStatus(0)->get();
-                break;
-            case 'processing':
-                $filteredRequests = AppRequest::whereStatus(1)->get();
-                break;
-            case 'solved':
-                $filteredRequests = AppRequest::whereStatus(3)->get();
-                break;
-            case 'cancelled':
-                $filteredRequests = AppRequest::whereStatus(2)->get();
-                break;
-            case 'important':
-                $filteredRequests = AppRequest::whereType(1)->get();
-                break;
-            case 'dashboard':
-                $filteredRequests = AppRequest::latest()->limit(5)->get();
-                break;
-            case 'report':
-                $filteredRequests = AppRequest::get();
-                break;
-        }
+        $filteredRequests = $this->requests($request->status);
 
         foreach ($filteredRequests as $filteredRequest) {
             $requests[] = array_merge($filteredRequest->toArray(), [
@@ -163,8 +212,8 @@ class RequestsController extends Controller
             ]);
         }
 
-        event(new Requests());
         event(new Dashboard());
+        event(new Requests());
 
         return response()->json([
             'message' => [
@@ -188,21 +237,7 @@ class RequestsController extends Controller
         $appRequest->delete();
 
         $requests = [];
-        $filteredRequests = null;
-        switch ($request->page_status) {
-            case 'pending':
-                $filteredRequests = AppRequest::whereStatus(0)->get();
-                break;
-            case 'processing':
-                $filteredRequests = AppRequest::whereStatus(1)->get();
-                break;
-            case 'solved':
-                $filteredRequests = AppRequest::whereStatus(3)->get();
-                break;
-            case 'cancelled':
-                $filteredRequests = AppRequest::whereStatus(2)->get();
-                break;
-        }
+        $filteredRequests = $this->requests($request->status);
 
         foreach ($filteredRequests as $filteredRequest) {
             $requests[] = array_merge($filteredRequest->toArray(), [
@@ -236,21 +271,7 @@ class RequestsController extends Controller
         $appRequest->update(['approved' => $appRequest->approved === 0 ? 1 : 0]);
 
         $requests = [];
-        $filteredRequests = null;
-        switch ($request->page_status) {
-            case 'pending':
-                $filteredRequests = AppRequest::whereStatus(0)->get();
-                break;
-            case 'processing':
-                $filteredRequests = AppRequest::whereStatus(1)->get();
-                break;
-            case 'solved':
-                $filteredRequests = AppRequest::whereStatus(3)->get();
-                break;
-            case 'cancelled':
-                $filteredRequests = AppRequest::whereStatus(2)->get();
-                break;
-        }
+        $filteredRequests = $this->requests($request->status);
 
         foreach ($filteredRequests as $filteredRequest) {
             $requests[] = array_merge($filteredRequest->toArray(), [

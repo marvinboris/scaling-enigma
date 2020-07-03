@@ -68,6 +68,25 @@ export const getImportantRequests = () => async dispatch => {
     }
 };
 
+export const getDevRequests = () => async dispatch => {
+    dispatch(requestsStart());
+
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(prefix + 'requests/dev', {
+            method: 'GET',
+            headers: {
+                Authorization: token
+            }
+        });
+        const resData = await res.json();
+        dispatch(requestsSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(requestsFail(error));
+    }
+};
+
 export const getPendingRequests = () => async dispatch => {
     dispatch(requestsStart());
 
@@ -189,12 +208,18 @@ export const patchRequestStatusUpdate = id => async dispatch => {
     dispatch(requestsStatusStart());
 
     try {
+        const token = localStorage.getItem('token');
+
+        const parts = window.location.pathname.split('/');
+        const page_status = parts[parts.length - 1];
+
         const res = await fetch(prefix + 'requests/' + id + '/status', {
             method: 'PATCH',
             headers: {
                 Authorization: token,
                 'Content-Type': 'application/json',
-            }
+            },
+            body: JSON.stringify({ page_status }),
         });
         const resData = await res.json();
         if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));

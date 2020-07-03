@@ -25,8 +25,8 @@ const dashboardFail = (state, action) => updateObject(state, { dashboard: update
 const resetRequests = (state, action) => updateObject(state, { requests: initialState.requests });
 const requestsStart = (state, action) => updateObject(state, { requests: updateObject(state.requests, { loading: true, message: null }) });
 const requestsStatusStart = (state, action) => updateObject(state, { requests: updateObject(state.requests, { statusLoading: true }) });
-const requestsSuccess = (state, action) => updateObject(state, { requests: updateObject(state.requests, { loading: false, error: null, ...action }) });
-const requestsFail = (state, action) => updateObject(state, { requests: updateObject(state.requests, { loading: false, ...action }) });
+const requestsSuccess = (state, action) => updateObject(state, { requests: updateObject(state.requests, { loading: false, statusLoading: false, error: null, ...action }) });
+const requestsFail = (state, action) => updateObject(state, { requests: updateObject(state.requests, { loading: false, statusLoading: false, ...action }) });
 
 const resetChat = (state, action) => updateObject(state, { chat: initialState.chat });
 const chatStart = (state, action) => updateObject(state, { chat: updateObject(state.chat, { loading: true, message: null }) });

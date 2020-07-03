@@ -12,6 +12,7 @@ use App\Request as AppRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use hisorange\BrowserDetect\Parser as Browser;
+use Illuminate\Support\Facades\Crypt;
 
 class RequestController extends Controller
 {
@@ -31,6 +32,7 @@ class RequestController extends Controller
                 return [
                     'ref' => $item['ref'],
                     'documents' => $documents,
+                    'hash' => Crypt::encrypt($item['documents']),
                 ];
             }, AppRequest::whereApproved(1)->get()->toArray()),
         ]);
@@ -49,6 +51,15 @@ class RequestController extends Controller
             'description' => 'required|string',
             'terms' => 'accepted',
         ]);
+
+        if (($request->documents && count($request->documents)) < 3 && !$request->hash) return response()->json([
+            'message' => [
+                'type' => 'danger',
+                'content' => 'You have not uploaded all of the required documents.'
+            ]
+        ]);
+
+        $check = Crypt::decrypt($request->hash);
 
         $documents = [];
         $issue_files = [];

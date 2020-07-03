@@ -76,7 +76,7 @@ class Pending extends Component {
 
                     const descriptionContent = <Description request={request} />;
 
-                    const viewContent = <RequestView request={request} country={country} onApprovedStatusChanged={this.props.onApprovedStatusChanged} onApprovedStatusChanging={statusLoading} />;
+                    const viewContent = <RequestView request={request} country={country} />;
 
                     const editContent = <Edit request={updateObject(request, { page_status: 'pending' })} />;
 

@@ -358,6 +358,7 @@ var Request = /*#__PURE__*/function (_Component) {
         return _this.setState(_defineProperty({}, targetElm.name, e.target.getContent()));
       }
 
+      if (name === 'ref') return value.length <= 6 && _this.setState(_defineProperty({}, name, value.toUpperCase()));
       if (name === 'phone') return !isNaN(value) && _this.setState(_defineProperty({}, name, value));
       if (name === 'country') return _this.setState({
         country: value,
@@ -541,7 +542,18 @@ var Request = /*#__PURE__*/function (_Component) {
         });
 
         if (platforms && issues) {
-          var platformsOptions = platforms.map(function (_ref3) {
+          var other = issues.find(function (i) {
+            return i.name === 'Other';
+          });
+          var checkRef = refs.map(function (item) {
+            return item.ref;
+          }).includes(ref);
+          var mark = refs.find(function (item) {
+            return item.ref === ref;
+          });
+          var platformsOptions = platforms.sort(function (a, b) {
+            return a.name > b.name;
+          }).map(function (_ref3) {
             var id = _ref3.id,
                 name = _ref3.name;
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
@@ -559,7 +571,11 @@ var Request = /*#__PURE__*/function (_Component) {
               code: code
             }, name);
           });
-          var issuesOptions = issues.map(function (_ref5) {
+          var issuesOptions = issues.filter(function (i) {
+            return i.name !== 'Other';
+          }).sort(function (a, b) {
+            return a.name > b.name;
+          }).concat(other).map(function (_ref5) {
             var id = _ref5.id,
                 name = _ref5.name;
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
@@ -567,9 +583,7 @@ var Request = /*#__PURE__*/function (_Component) {
               value: id
             }, name);
           });
-          var documentInputs = !refs.map(function (item) {
-            return item.ref;
-          }).includes(ref) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          var documentInputs = !checkRef ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
             type: "file",
             name: "documents[]",
             onChange: this.inputChangeHandler,
@@ -593,11 +607,13 @@ var Request = /*#__PURE__*/function (_Component) {
             accept: ".png,.jpg,.jpeg",
             tabIndex: 2,
             className: "d-none documents"
-          }));
+          })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+            type: "hidden",
+            name: "hash",
+            value: mark.hash
+          });
           var documentsContent;
-          if (refs.map(function (item) {
-            return item.ref;
-          }).includes(ref)) documentsContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, refs.find(function (item) {
+          if (checkRef) documentsContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, refs.find(function (item) {
             return item.ref === ref;
           }).documents.map(function (d, index) {
             var type = d.type;

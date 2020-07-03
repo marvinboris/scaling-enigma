@@ -74,6 +74,7 @@ class Request extends Component {
             document.getElementById(targetElm.id).value = e.target.getContent();
             return this.setState({ [targetElm.name]: e.target.getContent() });
         }
+        if (name === 'ref') return value.length <= 6 && this.setState({ [name]: value.toUpperCase() });
         if (name === 'phone') return !isNaN(value) && this.setState({ [name]: value });
         if (name === 'country') return this.setState({ country: value, code: this.state.countries.find(({ country }) => country === value).code });
         if (name === 'documents[]') {
@@ -131,18 +132,22 @@ class Request extends Component {
             if (reqid) redirect = <Redirect to={'/request/success'} />;
 
             if (platforms && issues) {
-                const platformsOptions = platforms.map(({ id, name }) => <option key={name + id} value={id}>{name}</option>);
-                const countriesOptions = countries.map(({ country, code, name }) => <option key={country} value={country} code={code}>{name}</option>);
-                const issuesOptions = issues.map(({ id, name }) => <option key={name + id} value={id}>{name}</option>);
+                const other = issues.find(i => i.name === 'Other');
+                let checkRef = refs.map(item => item.ref).includes(ref);
+                const mark = refs.find(item => item.ref === ref);
 
-                const documentInputs = !refs.map(item => item.ref).includes(ref) && <>
+                const platformsOptions = platforms.sort((a, b) => a.name > b.name).map(({ id, name }) => <option key={name + id} value={id}>{name}</option>);
+                const countriesOptions = countries.map(({ country, code, name }) => <option key={country} value={country} code={code}>{name}</option>);
+                const issuesOptions = issues.filter(i => i.name !== 'Other').sort((a, b) => a.name > b.name).concat(other).map(({ id, name }) => <option key={name + id} value={id}>{name}</option>);
+
+                const documentInputs = !checkRef ? <>
                     <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={0} className="d-none documents" />
                     <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={1} className="d-none documents" />
                     <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={2} className="d-none documents" />
-                </>;
+                </> : <input type="hidden" name="hash" value={mark.hash} />;
 
                 let documentsContent;
-                if (refs.map(item => item.ref).includes(ref)) documentsContent = <>
+                if (checkRef) documentsContent = <>
                     {refs.find(item => item.ref === ref).documents.map((d, index) => {
                         const { type } = d;
                         let icon;

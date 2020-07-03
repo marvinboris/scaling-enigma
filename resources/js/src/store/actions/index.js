@@ -32,6 +32,7 @@ export {
     resetRequests,
     getRequests,
     getImportantRequests,
+    getDevRequests,
     getPendingRequests,
     getProcessingRequests,
     getSolvedRequests,
