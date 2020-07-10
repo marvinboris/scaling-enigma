@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\VerificationCode;
 use App\Request as AppRequest;
+use App\Type;
 use App\User;
 use buibr\Budget\BudgetSMS;
 use Carbon\Carbon;
@@ -143,12 +144,15 @@ class AuthController extends Controller
             ]
         ], 521);
 
+        $dev_type_id = Type::whereAbbr('DEV')->first()->id;
+        $ceo_type_id = Type::whereAbbr('CEO')->first()->id;
+
         $data = array_merge($user->toArray(), [
             'notifications' => $user->unreadNotifications()->latest()->limit(5)->get(),
-            'pending' => count(AppRequest::whereStatus(0)->get()),
-            'processing' => count(AppRequest::whereStatus(1)->get()),
-            'cancelled' => count(AppRequest::whereStatus(2)->get()),
-            'solved' => count(AppRequest::whereStatus(3)->get()),
+            'pending' => count(AppRequest::whereStatus(0)->whereNull('type_id')->get()),
+            'processing' => count(AppRequest::whereStatus(1)->whereNull('type_id')->get()),
+            'dev' => count(AppRequest::whereTypeId($dev_type_id)->whereStatus(0)->orWhere('status', 1)->get()),
+            'important' => count(AppRequest::whereTypeId($ceo_type_id)->whereStatus(0)->orWhere('status', 1)->get()),
         ]);
 
         return response()->json([

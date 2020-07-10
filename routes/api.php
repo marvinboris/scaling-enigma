@@ -6,7 +6,9 @@ use App\Mail\VerificationCode;
 use App\Request as AppRequest;
 use App\User;
 use buibr\Budget\BudgetSMS;
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -78,7 +80,57 @@ Route::name('export.')->prefix('export')->group(function () {
     Route::name('pdf')->post('pdf', 'ExportController@pdf');
 });
 
-Route::get('test', function () {
-    Mail::to('jaris.ultio.21@gmail.com')->send(new VerificationCode('Yo'));
-    return 'Mail sent';
+Route::post('test', function (Request $request) {
+    $file = $request->file('file');
+
+    $name = $file->getClientOriginalName();
+    $type = $file->getClientOriginalExtension();
+    $size = $file->getSize();
+    $path = $file->getRealPath();
+
+    $max_size = 300 * 1024;
+    $destinationPath = public_path('/test');
+    $destination = time() . ' - ' . $name;
+
+    if ($size > $max_size) {
+        $percentage = round($max_size * 100 / $size);
+
+        $img = Image::make($path);
+        $img->save($destinationPath . '/' . $destination, $percentage);
+    }
+
+    // $location = storage_path('/app/' . $file->store('test'));
+    // $image = null;
+    // switch ($type) {
+    //     case 'png':
+    //         $image = imagecreatefrompng($location);
+    //         break;
+
+    //     case 'jpg':
+    //         $image = imagecreatefromjpeg($location);
+    //         break;
+
+    //     case 'jpeg':
+    //         $image = imagecreatefromjpeg($location);
+    //         break;
+    // }
+    // imagepng($image, ('../test/' . time() . '.png'));
+    // imagedestroy($image);
+
+    // $headers = array(
+    //     'Content-Type' => 'image/png'
+    // );
+
+    // respond with the image then delete it
+    // return response()->file($location, $headers)->deleteFileAfterSend(true);
+
+    return [
+        'name' => $name,
+        'type' => $type,
+        'size' => $size,
+    ];
+})->middleware('optimizeImages');
+
+Route::get('view', function () {
+    return view('test');
 });

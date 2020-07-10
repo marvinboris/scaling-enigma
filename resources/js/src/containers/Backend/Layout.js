@@ -24,8 +24,7 @@ class BackEnd extends Component {
 
         pending: 0,
         processing: 0,
-        cancelled: 0,
-        solved: 0,
+        dev: 0,
         important: 0,
 
         total: 0,
@@ -73,9 +72,8 @@ class BackEnd extends Component {
                     this.props.auth.token && (
                         pending !== this.state.pending ||
                         processing !== this.state.processing ||
-                        cancelled !== this.state.cancelled ||
-                        important !== this.state.important ||
-                        solved !== this.state.solved
+                        dev !== this.state.dev ||
+                        important !== this.state.important
                     )
                 ) {
                     if (total !== this.state.total) audio.play();
@@ -106,7 +104,7 @@ class BackEnd extends Component {
         const { auth: { loading, data: { name, photo } }, children } = this.props;
 
         return <div className="BackEnd text-left">
-            <Toolbar pending={pending} processing={processing} dev={dev} notifications={notifications} name={name} toggle={this.toggle} logoutHandler={this.logoutHandler} date={date} clock={clock} />
+            <Toolbar pending={pending} processing={processing} dev={dev} important={important} notifications={notifications} name={name} toggle={this.toggle} logoutHandler={this.logoutHandler} date={date} clock={clock} />
             <SideDrawer name={name} isOpen={isOpen} photo={photo} toggle={this.toggle} selectItem={this.selectItem} selectedItem={selectedItem} />
 
             <main className="bg-soft position-relative full-height-user pb-5">

@@ -79,7 +79,7 @@ class Request extends Component {
         if (name === 'country') return this.setState({ country: value, code: this.state.countries.find(({ country }) => country === value).code });
         if (name === 'documents[]') {
             const { documents } = this.state;
-            if (files[0].size <= 300 * 1024) {
+            if (files[0].size <= 1024 * 1024) {
                 documents[tabIndex] = files[0];
                 return this.setState({ documents });
             }
@@ -275,7 +275,7 @@ class Request extends Component {
                                 {documentInputs}
                             </FormGroup>
 
-                            <div className="text-danger">Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 300 kB max/file.</div>
+                            <div className="text-danger">Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 1 MB max/file.</div>
                         </Col>
                     </FormBlock>
 

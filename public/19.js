@@ -362,6 +362,9 @@ var Cancelled = /*#__PURE__*/function (_Component) {
               name: 'Platform',
               key: 'platform'
             }, {
+              name: 'Issue',
+              key: 'issue'
+            }, {
               name: 'E-Mail',
               key: 'email'
             }, {
@@ -370,9 +373,6 @@ var Cancelled = /*#__PURE__*/function (_Component) {
             }, {
               name: 'Phone Number',
               key: 'phone'
-            }, {
-              name: 'Issue',
-              key: 'issue'
             }, {
               name: 'User Documents',
               key: 'documents',

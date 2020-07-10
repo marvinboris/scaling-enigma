@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Collapse, Nav, UncontrolledDropdown, DropdownToggle, Badge, DropdownMenu, DropdownItem, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCalendar, faPowerOff, faTimes, faSpinner, faCheckCircle, faTimesCircle, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCalendar, faPowerOff, faTimes, faSpinner, faCheckCircle, faCode, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 
 // import NavigationItem from './NavigationItem/NavigationItem';
@@ -34,7 +34,7 @@ export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, proc
                     <Badge color="myprimary" className="position-absolute text-x-small text-500 rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{processing}</Badge>
                 </Link>
                 <Link className="position-relative text-decoration-none" to="/user/requests/dev">
-                    <Button color="soft" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Dev</span><FontAwesomeIcon icon={faTimesCircle} /></Button>
+                    <Button color="soft" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Dev</span><FontAwesomeIcon icon={faCode} /></Button>
                     <Badge color="soft" className="position-absolute text-x-small text-500 rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{dev}</Badge>
                 </Link>
                 <Link className="position-relative text-decoration-none" to="/user/requests/important">

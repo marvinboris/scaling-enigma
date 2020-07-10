@@ -17,6 +17,7 @@ class RequestsController extends Controller
     //
     private function requests($status = '')
     {
+        $requests = [];
         $filteredRequests = [];
         switch ($status) {
             case 'pending':
@@ -26,18 +27,18 @@ class RequestsController extends Controller
                 $filteredRequests = AppRequest::whereStatus(1)->whereNull('type_id')->get();
                 break;
             case 'solved':
-                $filteredRequests = AppRequest::whereStatus(3)->whereNull('type_id')->get();
+                $filteredRequests = AppRequest::whereStatus(3)->get();
                 break;
             case 'cancelled':
-                $filteredRequests = AppRequest::whereStatus(2)->whereNull('type_id')->get();
+                $filteredRequests = AppRequest::whereStatus(2)->get();
                 break;
             case 'important':
                 $type_id = Type::whereAbbr('CEO')->first()->id;
-                $filteredRequests = AppRequest::whereTypeId($type_id)->get();
+                $filteredRequests = AppRequest::whereTypeId($type_id)->whereStatus(0)->orWhere('status', 1)->get();
                 break;
             case 'dev':
                 $type_id = Type::whereAbbr('DEV')->first()->id;
-                $filteredRequests = AppRequest::whereTypeId($type_id)->get();
+                $filteredRequests = AppRequest::whereTypeId($type_id)->whereStatus(0)->orWhere('status', 1)->get();
                 break;
             case 'dashboard':
                 $filteredRequests = AppRequest::latest()->limit(5)->get();
@@ -46,20 +47,20 @@ class RequestsController extends Controller
                 $filteredRequests = AppRequest::get();
                 break;
         }
-
-        return $filteredRequests;
-    }
-
-
-    public function index()
-    {
-        $requests = [];
-        foreach (AppRequest::all() as $request) {
+        foreach ($filteredRequests as $request) {
             $requests[] = array_merge($request->toArray(), [
                 'platform' => $request->platform->name,
                 'issue' => $request->issue->name,
             ]);
         }
+
+        return $requests;
+    }
+
+
+    public function index()
+    {
+        $requests = $this->requests();
         $types = Type::all();
 
         return response()->json([
@@ -70,14 +71,7 @@ class RequestsController extends Controller
 
     public function important()
     {
-        $requests = [];
-        $type_id = Type::whereAbbr('CEO')->first()->id;
-        foreach (AppRequest::whereTypeId($type_id)->get() as $request) {
-            $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform->name,
-                'issue' => $request->issue->name,
-            ]);
-        }
+        $requests = $this->requests('important');
         $types = Type::all();
 
         return response()->json([
@@ -88,14 +82,7 @@ class RequestsController extends Controller
 
     public function dev()
     {
-        $requests = [];
-        $type_id = Type::whereAbbr('DEV')->first()->id;
-        foreach (AppRequest::whereTypeId($type_id)->get() as $request) {
-            $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform->name,
-                'issue' => $request->issue->name,
-            ]);
-        }
+        $requests = $this->requests('dev');
         $types = Type::all();
 
         return response()->json([
@@ -106,13 +93,7 @@ class RequestsController extends Controller
 
     public function pending()
     {
-        $requests = [];
-        foreach (AppRequest::whereStatus(0)->whereNull('type_id')->get() as $request) {
-            $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform->name,
-                'issue' => $request->issue->name,
-            ]);
-        }
+        $requests = $this->requests('pending');
         $types = Type::all();
 
         return response()->json([
@@ -123,13 +104,7 @@ class RequestsController extends Controller
 
     public function processing()
     {
-        $requests = [];
-        foreach (AppRequest::whereStatus(1)->whereNull('type_id')->get() as $request) {
-            $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform->name,
-                'issue' => $request->issue->name,
-            ]);
-        }
+        $requests = $this->requests('processing');
         $types = Type::all();
 
         return response()->json([
@@ -140,13 +115,7 @@ class RequestsController extends Controller
 
     public function solved()
     {
-        $requests = [];
-        foreach (AppRequest::whereStatus(3)->whereNull('type_id')->get() as $request) {
-            $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform->name,
-                'issue' => $request->issue->name,
-            ]);
-        }
+        $requests = $this->requests('solved');
         $types = Type::all();
 
         return response()->json([
@@ -157,13 +126,7 @@ class RequestsController extends Controller
 
     public function cancelled()
     {
-        $requests = [];
-        foreach (AppRequest::whereStatus(2)->whereNull('type_id')->get() as $request) {
-            $requests[] = array_merge($request->toArray(), [
-                'platform' => $request->platform->name,
-                'issue' => $request->issue->name,
-            ]);
-        }
+        $requests = $this->requests('cancelled');
         $types = Type::all();
 
         return response()->json([
