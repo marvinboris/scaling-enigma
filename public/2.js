@@ -837,6 +837,8 @@ var View = /*#__PURE__*/function (_Component) {
           statusLoading = _this$props$backend$r.statusLoading,
           types = _this$props$backend$r.types,
           onApprovalStatusUpdate = _this$props.onApprovalStatusUpdate;
+      var parts = window.location.pathname.split('/');
+      var page_status = parts[parts.length - 1];
       var nullType = types.find(function (t) {
         return t.id === null;
       });
@@ -1047,7 +1049,11 @@ var View = /*#__PURE__*/function (_Component) {
         onChange: this.inputChangedHandler,
         placeholder: "Text here",
         value: translate
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        name: "page_status",
+        value: page_status
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
         color: "green",
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faSave"]
       }, "Save"))))));

@@ -40,6 +40,9 @@ class View extends Component {
         const { type_id, translate } = this.state;
         let { request, country, backend: { requests: { statusLoading, types } }, onApprovalStatusUpdate } = this.props;
 
+        const parts = window.location.pathname.split('/');
+        const page_status = parts[parts.length - 1];
+
         const nullType = types.find(t => t.id === null);
         if (!nullType) types.push({ id: null, name: 'Technical Support', abbr: 'TS' })
 
@@ -171,6 +174,7 @@ class View extends Component {
                         <FormGroup>
                             <Input type="textarea" name="translate" onChange={this.inputChangedHandler} placeholder="Text here" value={translate} />
                         </FormGroup>
+                        <input type="hidden" name="page_status" value={page_status} />
                         <FormGroup>
                             <BetweenButton color="green" icon={faSave}>Save</BetweenButton>
                         </FormGroup>

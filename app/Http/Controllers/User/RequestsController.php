@@ -165,15 +165,7 @@ class RequestsController extends Controller
             $appRequest->update($request->only(['type_id', 'translate']));
         }
 
-        $requests = [];
-        $filteredRequests = $this->requests($request->page_status);
-
-        foreach ($filteredRequests as $filteredRequest) {
-            $requests[] = array_merge($filteredRequest->toArray(), [
-                'platform' => $filteredRequest->platform->name,
-                'issue' => $filteredRequest->issue->name,
-            ]);
-        }
+        $requests = $this->requests($request->page_status);
 
         event(new Dashboard());
         event(new Requests());
@@ -199,15 +191,7 @@ class RequestsController extends Controller
 
         $appRequest->delete();
 
-        $requests = [];
-        $filteredRequests = $this->requests($request->page_status);
-
-        foreach ($filteredRequests as $filteredRequest) {
-            $requests[] = array_merge($filteredRequest->toArray(), [
-                'platform' => $filteredRequest->platform->name,
-                'issue' => $filteredRequest->issue->name,
-            ]);
-        }
+        $requests = $this->requests($request->page_status);
 
         event(new Requests());
         event(new Dashboard());
@@ -233,15 +217,7 @@ class RequestsController extends Controller
 
         $appRequest->update(['approved' => $appRequest->approved === 0 ? 1 : 0]);
 
-        $requests = [];
-        $filteredRequests = $this->requests($request->page_status);
-
-        foreach ($filteredRequests as $filteredRequest) {
-            $requests[] = array_merge($filteredRequest->toArray(), [
-                'platform' => $filteredRequest->platform->name,
-                'issue' => $filteredRequest->issue->name,
-            ]);
-        }
+        $requests = $this->requests($request->page_status);
 
         return response()->json([
             'message' => [
