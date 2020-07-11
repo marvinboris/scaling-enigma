@@ -79,10 +79,10 @@ class Request extends Component {
         if (name === 'country') return this.setState({ country: value, code: this.state.countries.find(({ country }) => country === value).code });
         if (name === 'documents[]') {
             const { documents } = this.state;
-            if (files[0].size <= 1024 * 1024) {
-                documents[tabIndex] = files[0];
-                return this.setState({ documents });
-            }
+            // if (files[0].size <= 1024 * 1024) {
+            documents[tabIndex] = files[0];
+            return this.setState({ documents });
+            // }
             documents[tabIndex] = null;
             return this.setState({ documents }, () => {
                 document.getElementsByClassName('documents')[tabIndex].value = "";

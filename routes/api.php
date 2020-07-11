@@ -87,17 +87,52 @@ Route::post('test', function (Request $request) {
     $type = $file->getClientOriginalExtension();
     $size = $file->getSize();
     $path = $file->getRealPath();
+    $dimensions = getimagesize($path);
 
-    $max_size = 300 * 1024;
+    // $max_size = 300 * 1024;
     $destinationPath = public_path('/test');
     $destination = time() . ' - ' . $name;
 
-    if ($size > $max_size) {
-        $percentage = round($max_size * 100 / $size);
+    // if ($size > $max_size) {
+    //     $percentage = round($max_size * 100 / $size);
 
-        $img = Image::make($path);
-        $img->save($destinationPath . '/' . $destination, $percentage);
+    //     $img = Image::make($path);
+    //     $img->save($destinationPath . '/' . $destination, $percentage);
+    // }
+
+    $maxHeight = 640;
+    $maxWidth = 640;
+
+    $actualHeight = $dimensions[1];
+    $actualWidth = $dimensions[0];
+
+    $imgRatio = $actualWidth / $actualHeight;
+    $maxRatio = $maxWidth / $maxHeight;
+    $compressionQuality  = 0.6;
+
+    if ($actualHeight > $maxHeight || $actualWidth > $maxWidth) {
+        if ($imgRatio < $maxRatio) {
+            //adjust width according to maxHeight
+            $imgRatio = $maxHeight / $actualHeight;
+            $actualWidth = $imgRatio * $actualWidth;
+            $actualHeight = $maxHeight;
+        } else if ($imgRatio > $maxRatio) {
+            //adjust height according to maxWidth
+            $imgRatio = $maxWidth / $actualWidth;
+            $actualHeight = $imgRatio * $actualHeight;
+            $actualWidth = $maxWidth;
+        } else {
+            $actualHeight = $maxHeight;
+            $actualWidth = $maxWidth;
+            $compressionQuality = 1;
+        }
     }
+
+    $img = Image::make($path);
+    $img
+        ->resize($actualWidth, $actualHeight)
+        ->encode('jpg', $compressionQuality * 100)
+        ->save($destinationPath . '/' . $destination);
 
     // $location = storage_path('/app/' . $file->store('test'));
     // $image = null;
@@ -128,6 +163,7 @@ Route::post('test', function (Request $request) {
         'name' => $name,
         'type' => $type,
         'size' => $size,
+        'newsize' => $img->filesize(),
     ];
 })->middleware('optimizeImages');
 

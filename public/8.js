@@ -369,14 +369,12 @@ var Request = /*#__PURE__*/function (_Component) {
       });
 
       if (name === 'documents[]') {
-        var documents = _this.state.documents;
+        var documents = _this.state.documents; // if (files[0].size <= 1024 * 1024) {
 
-        if (files[0].size <= 1024 * 1024) {
-          documents[tabIndex] = files[0];
-          return _this.setState({
-            documents: documents
-          });
-        }
+        documents[tabIndex] = files[0];
+        return _this.setState({
+          documents: documents
+        }); // }
 
         documents[tabIndex] = null;
         return _this.setState({

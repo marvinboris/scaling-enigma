@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Events\Dashboard;
 use App\Events\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UtilController;
 use App\Issue;
 use App\Mail\RequestSubmitted;
 use App\Platform;
@@ -52,6 +53,8 @@ class RequestController extends Controller
             'issue_id' => 'required|numeric',
             'description' => 'required|string',
             'terms' => 'accepted',
+            'documents.*' => 'nullable|image|mimes:jpg,jpeg,png',
+            'issue_files.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
         ]);
 
         if (($request->documents && count($request->documents)) < 3 && !$request->hash) return response()->json([
@@ -71,12 +74,12 @@ class RequestController extends Controller
         $reqid = AppRequest::reqid();
         foreach ($requestDocuments as $document) {
             $name = $reqid . ' - ' . $document->getClientOriginalName();
-            $document->move('requests', $name);
+            UtilController::resize($document, $reqid);
             $documents[] = htmlspecialchars($name);
         }
         foreach ($requestIssueFiles as $issue_file) {
             $name = $reqid . ' - ' . $document->getClientOriginalName();
-            $issue_file->move('requests', $name);
+            UtilController::resize($issue_file, $reqid);
             $issue_files[] = htmlspecialchars($name);
         }
 

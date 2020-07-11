@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Events\Dashboard;
 use App\Events\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UtilController;
 use App\Mail\RequestStatus;
 use App\Request as AppRequest;
 use App\Type;
@@ -150,7 +151,7 @@ class RequestsController extends Controller
             $requestAdminFiles = $request->admin_files ? $request->admin_files : [];
             foreach ($requestAdminFiles as $admin_file) {
                 $name = $appRequest->reqid . ' - ' . $admin_file->getClientOriginalName();
-                $admin_file->move('requests', $name);
+                UtilController::resize($admin_file, $appRequest->reqid);
                 $admin_files[] = htmlspecialchars($name);
             }
             $appRequest->update(array_merge($request->only(['status', 'comments']), [
