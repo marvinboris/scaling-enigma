@@ -885,7 +885,7 @@ var Request = /*#__PURE__*/function (_Component) {
             className: "px-0"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, documentsContent), documentInputs), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "text-danger"
-          }, "Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 1 MB max/file."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
+          }, "Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
             title: "Issue description",
             subtitle: "Please provide a detailed description of the problem you are facing"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {

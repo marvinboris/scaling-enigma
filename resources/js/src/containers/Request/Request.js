@@ -275,7 +275,7 @@ class Request extends Component {
                                 {documentInputs}
                             </FormGroup>
 
-                            <div className="text-danger">Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum. 1 MB max/file.</div>
+                            <div className="text-danger">Only PNG, JPG, JPEG files are allowed and limited to 3 files maximum.</div>
                         </Col>
                     </FormBlock>
 
