@@ -42,7 +42,10 @@ export default ({ isAuth, name, drawerToggleClicked, logoutHandler, role, cartIt
                         </div>
 
                         <div className="pl-md-5 pl-3">
-                            <a href="skype:live:.cid.568f33d31f35e59d?call" className="text-decoration-none">
+                            <a
+                                href="#"
+                                // href="skype:live:.cid.568f33d31f35e59d?call" 
+                                className="text-decoration-none">
                                 <Button color="primary" className="rounded-pill py-2 px-2 px-md-4 d-inline-flex align-items-center">
                                     <FontAwesomeIcon icon={faSkype} className="mr-md-2" size="lg" />
                                     <span className="text-small d-none d-md-inline">Call</span>
