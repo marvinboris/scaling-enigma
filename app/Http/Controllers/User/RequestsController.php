@@ -151,7 +151,7 @@ class RequestsController extends Controller
             $requestAdminFiles = $request->admin_files ? $request->admin_files : [];
             foreach ($requestAdminFiles as $admin_file) {
                 $name = $appRequest->reqid . ' - ' . $admin_file->getClientOriginalName();
-                UtilController::resize($admin_file, $appRequest->reqid);
+                $admin_file->move('requests', $name);
                 $admin_files[] = htmlspecialchars($name);
             }
             $appRequest->update(array_merge($request->only(['status', 'comments']), [

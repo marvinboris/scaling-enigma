@@ -78,8 +78,8 @@ class RequestController extends Controller
             $documents[] = htmlspecialchars($name);
         }
         foreach ($requestIssueFiles as $issue_file) {
-            $name = $reqid . ' - ' . $document->getClientOriginalName();
-            UtilController::resize($issue_file, $reqid);
+            $name = $reqid . ' - ' . $issue_file->getClientOriginalName();
+            $issue_file->move('requests', $name);
             $issue_files[] = htmlspecialchars($name);
         }
 
