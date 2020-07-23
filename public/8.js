@@ -881,6 +881,8 @@ var Request = /*#__PURE__*/function (_Component) {
             required: true
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Select Issue"), issuesOptions), issues.find(function (i) {
             return +i.id === +issue_id;
+          }) && issues.find(function (i) {
+            return +i.id === +issue_id;
           }).name.toLowerCase().includes('bitcoin') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
             className: "col-md-6",
             type: "text",

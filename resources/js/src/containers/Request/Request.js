@@ -261,7 +261,7 @@ class Request extends Component {
                                 <option>Select Issue</option>
                                 {issuesOptions}
                             </MyInput>
-                            {issues.find(i => +i.id === +issue_id).name.toLowerCase().includes('bitcoin') && <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={hash} validation={{ required: true }} name="name" placeholder="Hash" required />}
+                            {issues.find(i => +i.id === +issue_id) && issues.find(i => +i.id === +issue_id).name.toLowerCase().includes('bitcoin') && <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={hash} validation={{ required: true }} name="name" placeholder="Hash" required />}
                         </Row>
                     </FormBlock>
 
