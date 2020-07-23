@@ -166,7 +166,7 @@ class View extends Component {
                     </Col>
                     <Col xs={12}>
                         <Row>
-                            <Col xs={12} className="pb-3" dangerouslySetInnerHTML={{ __html: request.description }} />
+                            <Col xs={12} className="pb-3 text-break" dangerouslySetInnerHTML={{ __html: request.description }} />
                             <Col xl={12}>{issueFilesContent}</Col>
                         </Row>
                     </Col>

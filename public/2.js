@@ -1035,7 +1035,7 @@ var View = /*#__PURE__*/function (_Component) {
         xs: 12
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
         xs: 12,
-        className: "pb-3",
+        className: "pb-3 text-break",
         dangerouslySetInnerHTML: {
           __html: request.description
         }

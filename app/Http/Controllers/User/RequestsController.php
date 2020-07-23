@@ -35,11 +35,15 @@ class RequestsController extends Controller
                 break;
             case 'important':
                 $type_id = Type::whereAbbr('CEO')->first()->id;
-                $filteredRequests = AppRequest::whereTypeId($type_id)->whereStatus(0)->orWhere('status', 1)->get();
+                foreach (AppRequest::whereTypeId($type_id)->get() as $filteredRequest) {
+                    if (in_array($filteredRequest->status, [0, 1])) $filteredRequests[] = $filteredRequest;
+                }
                 break;
             case 'dev':
                 $type_id = Type::whereAbbr('DEV')->first()->id;
-                $filteredRequests = AppRequest::whereTypeId($type_id)->whereStatus(0)->orWhere('status', 1)->get();
+                foreach (AppRequest::whereTypeId($type_id)->get() as $filteredRequest) {
+                    if (in_array($filteredRequest->status, [0, 1])) $filteredRequests[] = $filteredRequest;
+                }
                 break;
             case 'dashboard':
                 $filteredRequests = AppRequest::latest()->limit(5)->get();

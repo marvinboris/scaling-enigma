@@ -26,8 +26,16 @@ class Requests implements ShouldBroadcast
 
         $pending = count(Request::whereStatus(0)->whereNull('type_id')->get());
         $processing = count(Request::whereStatus(1)->whereNull('type_id')->get());
-        $dev = count(Request::whereTypeId($dev_type_id)->whereStatus(0)->orWhere('status', 1)->get());
-        $important = count(Request::whereTypeId(1)->whereStatus(0)->orWhere('status', 1)->get());
+        $dev = 0;
+        foreach (Request::whereTypeId($dev_type_id)->get() as $request) {
+            if (in_array($request->status, [0, 1])) $dev++;
+        }
+
+        $important = 0;
+        foreach (Request::whereTypeId(1)->get() as $request) {
+            if (in_array($request->status, [0, 1])) $important++;
+        }
+
         $total = count(Request::get());
 
         $this->pending = $pending;

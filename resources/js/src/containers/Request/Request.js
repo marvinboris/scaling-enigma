@@ -35,6 +35,7 @@ class Request extends Component {
         code: '237',
         phone: '',
         issue_id: '',
+        hash: '',
         documents: [null, null, null],
         description: '',
         issue_files: [null, null, null],
@@ -118,7 +119,7 @@ class Request extends Component {
     }
 
     render() {
-        const { name, platform_id, email, ref, phone, issue_id, country, code, documents, description, issue_files, countries } = this.state;
+        const { name, platform_id, email, ref, phone, issue_id, hash, country, code, documents, description, issue_files, countries } = this.state;
         const { frontend: { request: { loading, error, message, platforms, issues, reqid, refs } } } = this.props;
 
         let redirect;
@@ -260,6 +261,7 @@ class Request extends Component {
                                 <option>Select Issue</option>
                                 {issuesOptions}
                             </MyInput>
+                            {issues.find(i => +i.id === +issue_id).name.toLowerCase().includes('bitcoin') && <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={hash} validation={{ required: true }} name="name" placeholder="Hash" required />}
                         </Row>
                     </FormBlock>
 

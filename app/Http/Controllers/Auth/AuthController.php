@@ -112,6 +112,22 @@ class AuthController extends Controller
             $tokenResult = $user->createToken('User Personal Access Token');
             $token = $tokenResult->token;
             $token->save();
+
+            $dev_type_id = Type::whereAbbr('DEV')->first()->id;
+            $ceo_type_id = Type::whereAbbr('CEO')->first()->id;
+
+            $pending = count(AppRequest::whereStatus(0)->whereNull('type_id')->get());
+            $processing = count(AppRequest::whereStatus(1)->whereNull('type_id')->get());
+            $dev = 0;
+            foreach (AppRequest::whereTypeId($dev_type_id)->get() as $request) {
+                if (in_array($request->status, [0, 1])) $dev++;
+            }
+
+            $important = 0;
+            foreach (AppRequest::whereTypeId($ceo_type_id)->get() as $request) {
+                if (in_array($request->status, [0, 1])) $important++;
+            }
+
             return response()->json([
                 'access_token' => $tokenResult->accessToken,
                 'token_type' => 'Bearer',
@@ -120,10 +136,10 @@ class AuthController extends Controller
                 )->toDateTimeString(),
                 'userData' => array_merge($user->toArray(), [
                     'notifications' => $user->unreadNotifications()->latest()->limit(5)->get(),
-                    'pending' => count(AppRequest::whereStatus(0)->get()),
-                    'processing' => count(AppRequest::whereStatus(1)->get()),
-                    'cancelled' => count(AppRequest::whereStatus(2)->get()),
-                    'solved' => count(AppRequest::whereStatus(3)->get()),
+                    'pending' => $pending,
+                    'processing' => $processing,
+                    'dev' => $dev,
+                    'important' => $important,
                 ])
             ]);
         }
@@ -147,12 +163,24 @@ class AuthController extends Controller
         $dev_type_id = Type::whereAbbr('DEV')->first()->id;
         $ceo_type_id = Type::whereAbbr('CEO')->first()->id;
 
+        $pending = count(AppRequest::whereStatus(0)->whereNull('type_id')->get());
+        $processing = count(AppRequest::whereStatus(1)->whereNull('type_id')->get());
+        $dev = 0;
+        foreach (AppRequest::whereTypeId($dev_type_id)->get() as $request) {
+            if (in_array($request->status, [0, 1])) $dev++;
+        }
+
+        $important = 0;
+        foreach (AppRequest::whereTypeId($ceo_type_id)->get() as $request) {
+            if (in_array($request->status, [0, 1])) $important++;
+        }
+
         $data = array_merge($user->toArray(), [
             'notifications' => $user->unreadNotifications()->latest()->limit(5)->get(),
-            'pending' => count(AppRequest::whereStatus(0)->whereNull('type_id')->get()),
-            'processing' => count(AppRequest::whereStatus(1)->whereNull('type_id')->get()),
-            'dev' => count(AppRequest::whereTypeId($dev_type_id)->whereStatus(0)->orWhere('status', 1)->get()),
-            'important' => count(AppRequest::whereTypeId($ceo_type_id)->whereStatus(0)->orWhere('status', 1)->get()),
+            'pending' => $pending,
+            'processing' => $processing,
+            'dev' => $dev,
+            'important' => $important,
         ]);
 
         return response()->json([

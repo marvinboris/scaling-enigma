@@ -331,6 +331,7 @@ var Request = /*#__PURE__*/function (_Component) {
       code: '237',
       phone: '',
       issue_id: '',
+      hash: '',
       documents: [null, null, null],
       description: '',
       issue_files: [null, null, null],
@@ -511,6 +512,7 @@ var Request = /*#__PURE__*/function (_Component) {
           ref = _this$state.ref,
           phone = _this$state.phone,
           issue_id = _this$state.issue_id,
+          hash = _this$state.hash,
           country = _this$state.country,
           code = _this$state.code,
           documents = _this$state.documents,
@@ -877,7 +879,20 @@ var Request = /*#__PURE__*/function (_Component) {
             name: "issue_id",
             placeholder: "Select Issue",
             required: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Select Issue"), issuesOptions))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Select Issue"), issuesOptions), issues.find(function (i) {
+            return +i.id === +issue_id;
+          }).name.toLowerCase().includes('bitcoin') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            className: "col-md-6",
+            type: "text",
+            onChange: this.inputChangeHandler,
+            value: hash,
+            validation: {
+              required: true
+            },
+            name: "name",
+            placeholder: "Hash",
+            required: true
+          }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
             title: "User documents",
             subtitle: "Please upload recommended documents"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
