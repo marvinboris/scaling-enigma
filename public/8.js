@@ -364,7 +364,7 @@ var Request = /*#__PURE__*/function (_Component) {
         var platforms = _this.props.frontend.request.platforms;
         var selectedPlatform = platforms.find(function (_ref2) {
           var id = _ref2.id;
-          return +id === +platform_id;
+          return +id === +_this.state.platform_id;
         });
         var platform_name;
         if (selectedPlatform) platform_name = selectedPlatform.name;

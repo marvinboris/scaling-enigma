@@ -79,7 +79,7 @@ class Request extends Component {
         if (name === 'ref') {
             const { frontend: { request: { platforms } } } = this.props;
 
-            const selectedPlatform = platforms.find(({ id }) => +id === +platform_id);
+            const selectedPlatform = platforms.find(({ id }) => +id === +this.state.platform_id);
             let platform_name;
             if (selectedPlatform) platform_name = selectedPlatform.name;
             const platformIdSize = platform_name && platform_name.toLowerCase().includes('dca') ? 10 : 6;
