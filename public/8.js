@@ -360,12 +360,23 @@ var Request = /*#__PURE__*/function (_Component) {
         return _this.setState(_defineProperty({}, targetElm.name, e.target.getContent()));
       }
 
-      if (name === 'ref') return value.length <= 6 && _this.setState(_defineProperty({}, name, value.toUpperCase()));
+      if (name === 'ref') {
+        var platforms = _this.props.frontend.request.platforms;
+        var selectedPlatform = platforms.find(function (_ref2) {
+          var id = _ref2.id;
+          return +id === +platform_id;
+        });
+        var platform_name;
+        if (selectedPlatform) platform_name = selectedPlatform.name;
+        var platformIdSize = platform_name && platform_name.toLowerCase().includes('dca') ? 10 : 6;
+        return value.length <= platformIdSize && _this.setState(_defineProperty({}, name, value.toUpperCase()));
+      }
+
       if (name === 'phone') return !isNaN(value) && _this.setState(_defineProperty({}, name, value));
       if (name === 'country') return _this.setState({
         country: value,
-        code: _this.state.countries.find(function (_ref2) {
-          var country = _ref2.country;
+        code: _this.state.countries.find(function (_ref3) {
+          var country = _ref3.country;
           return country === value;
         }).code
       });
@@ -554,18 +565,18 @@ var Request = /*#__PURE__*/function (_Component) {
           var mark = refs[refIndex];
           var platformsOptions = platforms.sort(function (a, b) {
             return a.name > b.name;
-          }).map(function (_ref3) {
-            var id = _ref3.id,
-                name = _ref3.name;
+          }).map(function (_ref4) {
+            var id = _ref4.id,
+                name = _ref4.name;
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
               key: name + id,
               value: id
             }, name);
           });
-          var countriesOptions = countries.map(function (_ref4) {
-            var country = _ref4.country,
-                code = _ref4.code,
-                name = _ref4.name;
+          var countriesOptions = countries.map(function (_ref5) {
+            var country = _ref5.country,
+                code = _ref5.code,
+                name = _ref5.name;
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
               key: country,
               value: country,
@@ -576,24 +587,24 @@ var Request = /*#__PURE__*/function (_Component) {
             return i.name !== 'Other';
           }).sort(function (a, b) {
             return a.name > b.name;
-          }).concat(other).map(function (_ref5) {
-            var id = _ref5.id,
-                name = _ref5.name;
+          }).concat(other).map(function (_ref6) {
+            var id = _ref6.id,
+                name = _ref6.name;
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
               key: name + id,
               value: id
             }, name);
           });
-          var selectedPlatform = platforms.find(function (_ref6) {
-            var id = _ref6.id;
+          var selectedPlatform = platforms.find(function (_ref7) {
+            var id = _ref7.id;
             return +id === +platform_id;
           });
           var platform_name;
           if (selectedPlatform) platform_name = selectedPlatform.name;
           var isPlatformRequired = platform_name && !platform_name.toLowerCase().includes('limarket');
           var platformIdSize = platform_name && platform_name.toLowerCase().includes('dca') ? 10 : 6;
-          var selectedIssue = issues.find(function (_ref7) {
-            var id = _ref7.id;
+          var selectedIssue = issues.find(function (_ref8) {
+            var id = _ref8.id;
             return +id === +issue_id;
           });
           var documentInputs = !checkRef ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {

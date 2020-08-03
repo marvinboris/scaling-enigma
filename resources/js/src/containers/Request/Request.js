@@ -76,7 +76,16 @@ class Request extends Component {
             document.getElementById(targetElm.id).value = e.target.getContent();
             return this.setState({ [targetElm.name]: e.target.getContent() });
         }
-        if (name === 'ref') return value.length <= 6 && this.setState({ [name]: value.toUpperCase() });
+        if (name === 'ref') {
+            const { frontend: { request: { platforms } } } = this.props;
+
+            const selectedPlatform = platforms.find(({ id }) => +id === +platform_id);
+            let platform_name;
+            if (selectedPlatform) platform_name = selectedPlatform.name;
+            const platformIdSize = platform_name && platform_name.toLowerCase().includes('dca') ? 10 : 6;
+
+            return value.length <= platformIdSize && this.setState({ [name]: value.toUpperCase() });
+        }
         if (name === 'phone') return !isNaN(value) && this.setState({ [name]: value });
         if (name === 'country') return this.setState({ country: value, code: this.state.countries.find(({ country }) => country === value).code });
         if (name === 'documents[]') {
