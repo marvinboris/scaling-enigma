@@ -57,14 +57,14 @@ class RequestController extends Controller
             'issue_files.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
         ]);
 
-        if (($request->documents && count($request->documents)) < 3 && !$request->hash) return response()->json([
+        if (($request->documents && count($request->documents)) < 3 && !$request->doc_hash) return response()->json([
             'message' => [
                 'type' => 'danger',
                 'content' => 'You have not uploaded all of the required documents.'
             ]
         ]);
 
-        if ($request->has('hash')) Crypt::decrypt($request->hash);
+        if ($request->has('doc_hash')) Crypt::decrypt($request->doc_hash);
 
         $documents = [];
         $issue_files = [];

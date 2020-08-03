@@ -36,6 +36,7 @@ class Request extends Component {
         phone: '',
         issue_id: '',
         hash: '',
+        pack_ids: '',
         documents: [null, null, null],
         description: '',
         issue_files: [null, null, null],
@@ -119,7 +120,7 @@ class Request extends Component {
     }
 
     render() {
-        const { name, platform_id, email, ref, phone, issue_id, hash, country, code, documents, description, issue_files, countries } = this.state;
+        const { name, platform_id, email, ref, phone, issue_id, hash, pack_ids, country, code, documents, description, issue_files, countries } = this.state;
         const { frontend: { request: { loading, error, message, platforms, issues, reqid, refs } } } = this.props;
 
         let redirect;
@@ -142,11 +143,19 @@ class Request extends Component {
                 const countriesOptions = countries.map(({ country, code, name }) => <option key={country} value={country} code={code}>{name}</option>);
                 const issuesOptions = issues.filter(i => i.name !== 'Other').sort((a, b) => a.name > b.name).concat(other).map(({ id, name }) => <option key={name + id} value={id}>{name}</option>);
 
+                const selectedPlatform = platforms.find(({ id }) => +id === +platform_id);
+                let platform_name;
+                if (selectedPlatform) platform_name = selectedPlatform.name;
+                const isPlatformRequired = platform_name && !platform_name.toLowerCase().includes('limarket');
+                const platformIdSize = platform_name && platform_name.toLowerCase().includes('dca') ? 10 : 6;
+
+                const selectedIssue = issues.find(({ id }) => +id === +issue_id);
+
                 const documentInputs = !checkRef ? <>
                     <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={0} className="d-none documents" />
                     <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={1} className="d-none documents" />
                     <input type="file" name="documents[]" onChange={this.inputChangeHandler} required accept=".png,.jpg,.jpeg" tabIndex={2} className="d-none documents" />
-                </> : <input type="hidden" name="hash" value={mark.h} />;
+                </> : <input type="hidden" name="doc_hash" value={mark.h} />;
 
                 let documentsContent;
                 if (checkRef) documentsContent = <>
@@ -245,7 +254,7 @@ class Request extends Component {
                                 {platformsOptions}
                             </MyInput>
                             <MyInput className="col-md-6" type="email" onChange={this.inputChangeHandler} value={email} validation={{ required: true, isEmail: true }} name="email" placeholder="E-Mail Address" required />
-                            <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={ref} validation={{ required: platform_id != 3, minLength: platform_id != 3 ? 6 : null, maxLength: platform_id != 3 ? 6 : null }} name="ref" placeholder="User ID" required={platform_id != 3} />
+                            <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={ref} validation={{ required: isPlatformRequired, minLength: isPlatformRequired ? platformIdSize : null, maxLength: isPlatformRequired ? platformIdSize : null }} name="ref" placeholder="User ID" required={isPlatformRequired} />
                             <MyInput className="col-md-6" type="select" addon={<span className="text-secondary text-small d-inline-flex">
                                 <div className="rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center" style={{ width: 30, height: 30 }}>
                                     <span className={`flag-icon text-xx-large position-absolute flag-icon-${country.toLowerCase()}`} />
@@ -261,7 +270,8 @@ class Request extends Component {
                                 <option>Select Issue</option>
                                 {issuesOptions}
                             </MyInput>
-                            {issues.find(i => +i.id === +issue_id) && issues.find(i => +i.id === +issue_id).name.toLowerCase().includes('bitcoin') && <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={hash} validation={{ required: true }} name="name" placeholder="Hash" required />}
+                            {selectedIssue && selectedIssue.name.toLowerCase().includes('bitcoin') && <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={hash} validation={{ required: true }} name="hash" placeholder="Hash" required />}
+                            {selectedIssue && selectedIssue.name.toLowerCase().includes('payout') && <MyInput className="col-md-6" type="text" onChange={this.inputChangeHandler} value={pack_ids} validation={{ required: true }} name="pack_ids" placeholder="Package IDs (separated by commas)" required />}
                         </Row>
                     </FormBlock>
 

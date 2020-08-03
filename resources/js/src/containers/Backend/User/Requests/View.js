@@ -97,11 +97,11 @@ class View extends Component {
             }
 
             return <div key={formatlessName + Math.random()} className="pr-3 d-inline-block" style={{ maxWidth: 200 }}>
-                <Download link={issue_file} name={formatlessName + '.' + format}>
+                <a href={issue_file} target="_blank" className="text-decoration-none">
                     <div className="rounded-2 p-2 bg-light text-darkblue text-uppercase text-truncate text-nowrap">
                         <FontAwesomeIcon icon={icon} className="mr-2" />{formatlessName}
                     </div>
-                </Download>
+                </a>
             </div>
         });
 
@@ -121,6 +121,8 @@ class View extends Component {
                 <I label="Country">{country ? country.name : null}</I>
                 <I label="Phone Number">{request.phone}</I>
                 <I label="Issue">{request.issue}</I>
+                {request.hash && <I label="Hash">{request.hash}</I>}
+                {request.pack_ids && <I label="Package IDs">{request.pack_ids}</I>}
             </Row>
 
             <Row className="mt-4 mx-0 p-3 rounded bg-orange-20">

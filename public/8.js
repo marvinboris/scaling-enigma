@@ -332,6 +332,7 @@ var Request = /*#__PURE__*/function (_Component) {
       phone: '',
       issue_id: '',
       hash: '',
+      pack_ids: '',
       documents: [null, null, null],
       description: '',
       issue_files: [null, null, null],
@@ -513,6 +514,7 @@ var Request = /*#__PURE__*/function (_Component) {
           phone = _this$state.phone,
           issue_id = _this$state.issue_id,
           hash = _this$state.hash,
+          pack_ids = _this$state.pack_ids,
           country = _this$state.country,
           code = _this$state.code,
           documents = _this$state.documents,
@@ -582,6 +584,18 @@ var Request = /*#__PURE__*/function (_Component) {
               value: id
             }, name);
           });
+          var selectedPlatform = platforms.find(function (_ref6) {
+            var id = _ref6.id;
+            return +id === +platform_id;
+          });
+          var platform_name;
+          if (selectedPlatform) platform_name = selectedPlatform.name;
+          var isPlatformRequired = platform_name && !platform_name.toLowerCase().includes('limarket');
+          var platformIdSize = platform_name && platform_name.toLowerCase().includes('dca') ? 10 : 6;
+          var selectedIssue = issues.find(function (_ref7) {
+            var id = _ref7.id;
+            return +id === +issue_id;
+          });
           var documentInputs = !checkRef ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
             type: "file",
             name: "documents[]",
@@ -608,7 +622,7 @@ var Request = /*#__PURE__*/function (_Component) {
             className: "d-none documents"
           })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
             type: "hidden",
-            name: "hash",
+            name: "doc_hash",
             value: mark.h
           });
           var documentsContent;
@@ -819,13 +833,13 @@ var Request = /*#__PURE__*/function (_Component) {
             onChange: this.inputChangeHandler,
             value: ref,
             validation: {
-              required: platform_id != 3,
-              minLength: platform_id != 3 ? 6 : null,
-              maxLength: platform_id != 3 ? 6 : null
+              required: isPlatformRequired,
+              minLength: isPlatformRequired ? platformIdSize : null,
+              maxLength: isPlatformRequired ? platformIdSize : null
             },
             name: "ref",
             placeholder: "User ID",
-            required: platform_id != 3
+            required: isPlatformRequired
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
             className: "col-md-6",
             type: "select",
@@ -879,11 +893,7 @@ var Request = /*#__PURE__*/function (_Component) {
             name: "issue_id",
             placeholder: "Select Issue",
             required: true
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Select Issue"), issuesOptions), issues.find(function (i) {
-            return +i.id === +issue_id;
-          }) && issues.find(function (i) {
-            return +i.id === +issue_id;
-          }).name.toLowerCase().includes('bitcoin') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Select Issue"), issuesOptions), selectedIssue && selectedIssue.name.toLowerCase().includes('bitcoin') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
             className: "col-md-6",
             type: "text",
             onChange: this.inputChangeHandler,
@@ -891,8 +901,19 @@ var Request = /*#__PURE__*/function (_Component) {
             validation: {
               required: true
             },
-            name: "name",
+            name: "hash",
             placeholder: "Hash",
+            required: true
+          }), selectedIssue && selectedIssue.name.toLowerCase().includes('payout') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Input_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            className: "col-md-6",
+            type: "text",
+            onChange: this.inputChangeHandler,
+            value: pack_ids,
+            validation: {
+              required: true
+            },
+            name: "pack_ids",
+            placeholder: "Package IDs (separated by commas)",
             required: true
           }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormBlock, {
             title: "User documents",
