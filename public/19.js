@@ -312,7 +312,15 @@ var Cancelled = /*#__PURE__*/function (_Component) {
                 content: editContent
               }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
                 icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEdit"],
-                className: "text-brokenblue",
+                className: "text-brokenblue mr-2",
+                fixedWidth: true
+              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+                href: '/request/details/' + request.external,
+                target: "_blank",
+                className: "text-decoration-none"
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faExternalLinkAlt"],
+                className: "text-secondary mr-2",
                 fixedWidth: true
               })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_15__["default"], {
                 deleteAction: function deleteAction() {

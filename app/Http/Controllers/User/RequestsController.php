@@ -56,6 +56,7 @@ class RequestsController extends Controller
             $requests[] = array_merge($request->toArray(), [
                 'platform' => $request->platform->name,
                 'issue' => $request->issue->name,
+                'external' => bin2hex($request->reqid)
             ]);
         }
 

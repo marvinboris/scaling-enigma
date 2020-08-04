@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Col, Row, Spinner, Label, Input, Button, Badge, Form, FormGroup, CustomInput, Alert } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTachometerAlt, faEnvelope, faTicketAlt, faTasks, faArrowsAlt, faTimes, faEye, faEdit, faTrash, faClock, faLandmark, faCalendarAlt, faDownload, faSpinner, faTimesCircle, faCheckCircle, faFileArchive, faFilePdf, faFileImage, faUser, faBook, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faTachometerAlt, faEnvelope, faTicketAlt, faTasks, faArrowsAlt, faTimes, faEye, faEdit, faTrash, faClock, faLandmark, faCalendarAlt, faDownload, faSpinner, faTimesCircle, faCheckCircle, faFileArchive, faFilePdf, faFileImage, faUser, faBook, faCheck, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 // Components
 import Breadcrumb from '../../../../../components/Backend/UI/Breadcrumb/Breadcrumb';
@@ -108,8 +108,11 @@ class Dev extends Component {
                                 <FontAwesomeIcon icon={faEye} className="text-green mr-2" fixedWidth />
                             </View>
                             <View title={'Request edit: ' + request.reqid} content={editContent}>
-                                <FontAwesomeIcon icon={faEdit} className="text-brokenblue" fixedWidth />
+                                <FontAwesomeIcon icon={faEdit} className="text-brokenblue mr-2" fixedWidth />
                             </View>
+                            <a href={'/request/details/' + request.external} target="_blank" className="text-decoration-none">
+                                <FontAwesomeIcon icon={faExternalLinkAlt} className="text-secondary mr-2" fixedWidth />
+                            </a>
                             <Delete deleteAction={() => this.props.onPostRequestDelete(request.id)}><FontAwesomeIcon icon={faTrash} className="text-red mr-2" fixedWidth /></Delete>
                             <FontAwesomeIcon icon={faDownload} className="text-darkblue" fixedWidth />
                         </div>,
