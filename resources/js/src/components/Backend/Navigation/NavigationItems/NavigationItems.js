@@ -8,7 +8,7 @@ import { faClock } from '@fortawesome/free-regular-svg-icons';
 // import NavigationItem from './NavigationItem/NavigationItem';
 // import MyDropdownItem from '../../../Navigation/NavigationItems/DropdownItem/DropdownItem';
 
-export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, processing = 0, dev = 0, important = 0, date: { weekDay, day, month, year }, clock: { hours, minutes, seconds } }) => {
+export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, processing = 0, dev = 0, attention = 0, important = 0, date: { weekDay, day, month, year }, clock: { hours, minutes, seconds } }) => {
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
@@ -36,6 +36,10 @@ export default ({ name, sidedrawerToggle, logoutHandler, role, pending = 0, proc
                 <Link className="position-relative text-decoration-none" to="/user/requests/dev">
                     <Button color="soft" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Dev</span><FontAwesomeIcon icon={faCode} /></Button>
                     <Badge color="soft" className="position-absolute text-x-small text-500 rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{dev}</Badge>
+                </Link>
+                <Link className="position-relative text-decoration-none" to="/user/requests/attention">
+                    <Button color="pink" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Attention</span><FontAwesomeIcon icon={faExclamationTriangle} /></Button>
+                    <Badge color="pink" className="position-absolute text-x-small text-500 rounded-circle d-inline-flex justify-content-center align-items-center border border-white border-1" style={{ width: 20, height: 20, transform: 'translate(-25px, -10px)', zIndex: 2 }}>{attention}</Badge>
                 </Link>
                 <Link className="position-relative text-decoration-none" to="/user/requests/important">
                     <Button color="lemongreen" className="d-inline-flex align-items-center rounded-2 mr-3"><span className="mr-2">Important</span><FontAwesomeIcon icon={faExclamationTriangle} /></Button>

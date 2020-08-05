@@ -25,6 +25,7 @@ class BackEnd extends Component {
         pending: 0,
         processing: 0,
         dev: 0,
+        attention: 0,
         important: 0,
 
         total: 0,
@@ -67,17 +68,18 @@ class BackEnd extends Component {
         if (this.props.auth.data.notifications && !prevProps.auth.data.notifications) {
             const audio = new Audio('/audio/swiftly.mp3');
             const channel = Echo.channel('public');
-            channel.listen('Requests', ({ pending, processing, dev, important, total }) => {
+            channel.listen('Requests', ({ pending, processing, dev, attention, important, total }) => {
                 if (
                     this.props.auth.token && (
                         pending !== this.state.pending ||
                         processing !== this.state.processing ||
                         dev !== this.state.dev ||
+                        attention !== this.state.attention ||
                         important !== this.state.important
                     )
                 ) {
                     if (total !== this.state.total) audio.play();
-                    this.setState({ pending, processing, dev, important, total });
+                    this.setState({ pending, processing, dev, attention, important, total });
                 }
             });
         }
@@ -100,11 +102,11 @@ class BackEnd extends Component {
 
 
     render() {
-        const { isOpen, date, clock, selectedItem, pending, processing, dev, important, notifications } = this.state;
+        const { isOpen, date, clock, selectedItem, pending, processing, dev, attention, important, notifications } = this.state;
         const { auth: { loading, data: { name, photo } }, children } = this.props;
 
         return <div className="BackEnd text-left">
-            <Toolbar pending={pending} processing={processing} dev={dev} important={important} notifications={notifications} name={name} toggle={this.toggle} logoutHandler={this.logoutHandler} date={date} clock={clock} />
+            <Toolbar pending={pending} processing={processing} dev={dev} attention={attention} important={important} notifications={notifications} name={name} toggle={this.toggle} logoutHandler={this.logoutHandler} date={date} clock={clock} />
             <SideDrawer name={name} isOpen={isOpen} photo={photo} toggle={this.toggle} selectItem={this.selectItem} selectedItem={selectedItem} />
 
             <main className="bg-soft position-relative full-height-user pb-5">

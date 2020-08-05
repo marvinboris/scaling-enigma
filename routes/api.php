@@ -62,6 +62,7 @@ Route::middleware('auth:api')->namespace('User')->prefix('user')->name('user.')-
         Route::get('pending', 'RequestsController@pending')->name('pending');
         Route::get('dev', 'RequestsController@dev')->name('dev');
         Route::get('important', 'RequestsController@important')->name('important');
+        Route::get('attention', 'RequestsController@attention')->name('attention');
         Route::get('', 'RequestsController@index')->name('index');
     });
 

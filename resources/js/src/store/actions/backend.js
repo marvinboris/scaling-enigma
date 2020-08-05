@@ -68,6 +68,25 @@ export const getImportantRequests = () => async dispatch => {
     }
 };
 
+export const getAttentionRequests = () => async dispatch => {
+    dispatch(requestsStart());
+
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(`${prefix}requests/attention`, {
+            method: 'GET',
+            headers: {
+                Authorization: token
+            }
+        });
+        const resData = await res.json();
+        dispatch(requestsSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(requestsFail(error));
+    }
+};
+
 export const getDevRequests = () => async dispatch => {
     dispatch(requestsStart());
 

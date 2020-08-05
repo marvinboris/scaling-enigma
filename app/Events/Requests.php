@@ -18,11 +18,13 @@ class Requests implements ShouldBroadcast
     public $processing;
     public $dev;
     public $important;
+    public $attetion;
     public $total;
 
     public function __construct()
     {
         $dev_type_id = Type::whereAbbr('DEV')->first()->id;
+        $at_type_id = Type::whereAbbr('AT')->first()->id;
 
         $pending = count(Request::whereStatus(0)->whereNull('type_id')->get());
         $processing = count(Request::whereStatus(1)->whereNull('type_id')->get());
@@ -36,12 +38,18 @@ class Requests implements ShouldBroadcast
             if (in_array($request->status, [0, 1])) $important++;
         }
 
+        $attention = 0;
+        foreach (Request::whereTypeId($at_type_id)->get() as $request) {
+            if (in_array($request->status, [0, 1])) $attention++;
+        }
+
         $total = count(Request::get());
 
         $this->pending = $pending;
         $this->processing = $processing;
         $this->dev = $dev;
         $this->important = $important;
+        $this->attention = $attention;
         $this->total = $total;
     }
 

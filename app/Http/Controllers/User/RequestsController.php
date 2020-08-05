@@ -33,6 +33,12 @@ class RequestsController extends Controller
             case 'cancelled':
                 $filteredRequests = AppRequest::whereStatus(2)->get();
                 break;
+            case 'attention':
+                $type_id = Type::whereAbbr('AT')->first()->id;
+                foreach (AppRequest::whereTypeId($type_id)->get() as $filteredRequest) {
+                    if (in_array($filteredRequest->status, [0, 1])) $filteredRequests[] = $filteredRequest;
+                }
+                break;
             case 'important':
                 $type_id = Type::whereAbbr('CEO')->first()->id;
                 foreach (AppRequest::whereTypeId($type_id)->get() as $filteredRequest) {
@@ -78,6 +84,17 @@ class RequestsController extends Controller
     public function important()
     {
         $requests = $this->requests('important');
+        $types = Type::all();
+
+        return response()->json([
+            'requests' => $requests,
+            'types' => $types,
+        ]);
+    }
+
+    public function attention()
+    {
+        $requests = $this->requests('attention');
         $types = Type::all();
 
         return response()->json([
