@@ -512,43 +512,6 @@ __webpack_require__.r(__webpack_exports__);
   }, message.content) : null;
 });
 
-/***/ }),
-
-/***/ "./resources/js/src/containers/Backend/User/Requests/Description.js":
-/*!**************************************************************************!*\
-  !*** ./resources/js/src/containers/Backend/User/Requests/Description.js ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var html_to_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js");
-/* harmony import */ var html_to_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(html_to_react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../shared/utility */ "./resources/js/src/shared/utility.js");
-
-
-
-var parser = new html_to_react__WEBPACK_IMPORTED_MODULE_1__["Parser"]();
-/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
-  var request = _ref.request;
-  var comments;
-  var colors = ['orange', 'myprimary', 'red', 'green'];
-  var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
-  comments = request.status > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: 'rounded p-4 mt-3 text-' + colors[request.status] + ' bg-' + colors[request.status] + '-25'
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, texts[request.status], " by: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "text-700"
-  }, request.edited_by), " on ", Object(_shared_utility__WEBPACK_IMPORTED_MODULE_2__["convertDate"])(request.created_at)), request.comments && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "mt-2"
-  }, parser.parse(request.comments)));
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "text-justify"
-  }, parser.parse(request.description), comments);
-});
-
 /***/ })
 
 }]);

@@ -2,7 +2,9 @@
 
 use App\Events\Dashboard;
 use App\Events\RequestWithMessages;
+use App\Http\Controllers\UtilController;
 use App\Mail\VerificationCode;
+use App\Personality;
 use App\Request as AppRequest;
 use App\User;
 use buibr\Budget\BudgetSMS;
@@ -24,6 +26,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace('Frontend')->prefix('frontend')->name('frontend.')->group(function () {
+    Route::prefix('personality')->name('personality.')->group(function () {
+        Route::post('', 'PersonalityController@store')->name('store');
+        Route::get('', 'PersonalityController@index')->name('index');
+    });
+
     Route::prefix('request')->name('request.')->group(function () {
         Route::post('check', 'RequestController@check')->name('check');
         Route::post('', 'RequestController@store')->name('store');
@@ -64,6 +71,12 @@ Route::middleware('auth:api')->namespace('User')->prefix('user')->name('user.')-
         Route::get('important', 'RequestsController@important')->name('important');
         Route::get('attention', 'RequestsController@attention')->name('attention');
         Route::get('', 'RequestsController@index')->name('index');
+    });
+
+    Route::prefix('personalities')->name('personalities.')->group(function () {
+        Route::post('{id}/delete', 'PersonalitiesController@delete')->name('delete');
+        Route::post('{id}', 'PersonalitiesController@update')->name('update');
+        Route::get('', 'PersonalitiesController@index')->name('index');
     });
 
     Route::prefix('chat')->name('chat.')->group(function () {

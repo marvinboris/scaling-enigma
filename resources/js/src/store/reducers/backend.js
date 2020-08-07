@@ -6,6 +6,10 @@ const initialState = {
         loading: false,
         error: null
     },
+    personalities: {
+        loading: false,
+        error: null
+    },
     requests: {
         loading: false,
         statusLoading: false,
@@ -21,6 +25,11 @@ const resetDashboard = (state, action) => updateObject(state, { dashboard: initi
 const dashboardStart = (state, action) => updateObject(state, { dashboard: updateObject(state.dashboard, { loading: true, message: null }) });
 const dashboardSuccess = (state, action) => updateObject(state, { dashboard: updateObject(state.dashboard, { loading: false, error: null, ...action }) });
 const dashboardFail = (state, action) => updateObject(state, { dashboard: updateObject(state.dashboard, { loading: false, ...action }) });
+
+const resetPersonalities = (state, action) => updateObject(state, { personalities: initialState.personalities });
+const personalitiesStart = (state, action) => updateObject(state, { personalities: updateObject(state.personalities, { loading: true, message: null }) });
+const personalitiesSuccess = (state, action) => updateObject(state, { personalities: updateObject(state.personalities, { loading: false, error: null, ...action }) });
+const personalitiesFail = (state, action) => updateObject(state, { personalities: updateObject(state.personalities, { loading: false, ...action }) });
 
 const resetRequests = (state, action) => updateObject(state, { requests: initialState.requests });
 const requestsStart = (state, action) => updateObject(state, { requests: updateObject(state.requests, { loading: true, message: null }) });
@@ -40,6 +49,11 @@ export default (state = initialState, action) => {
         case actionTypes.DASHBOARD_START: return dashboardStart(state, action);
         case actionTypes.DASHBOARD_SUCCESS: return dashboardSuccess(state, action);
         case actionTypes.DASHBOARD_FAIL: return dashboardFail(state, action);
+        
+        case actionTypes.RESET_PERSONALITIES: return resetPersonalities(state, action);
+        case actionTypes.PERSONALITIES_START: return personalitiesStart(state, action);
+        case actionTypes.PERSONALITIES_SUCCESS: return personalitiesSuccess(state, action);
+        case actionTypes.PERSONALITIES_FAIL: return personalitiesFail(state, action);
 
         case actionTypes.RESET_REQUESTS: return resetRequests(state, action);
         case actionTypes.REQUESTS_START: return requestsStart(state, action);

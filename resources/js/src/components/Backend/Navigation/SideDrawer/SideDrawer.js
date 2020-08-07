@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Badge, ButtonGroup, Button, Collapse } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTachometerAlt, faUserTie, faCalendarAlt, faEnvelope, faTasks, faCog, faEdit, faComments } from '@fortawesome/free-solid-svg-icons';
+import { faTachometerAlt, faUserTie, faCalendarAlt, faEnvelope, faTasks, faCog, faEdit, faComments, faStickyNote } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 
 import SideDrawerItem from './SideDrawerItem/SideDrawerItem';
@@ -19,7 +19,7 @@ export default ({ name, messages = [], photo = "https://placehold.it/100x100", r
         case 'user':
             sideDrawerItems = <>
                 <SideDrawerItem id="Dashboard" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faTachometerAlt} href="/user/dashboard">Dashboard</SideDrawerItem>
-                <SideDrawerItem id="Request Report" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faUserTie} href="/user/request-report">Request Report</SideDrawerItem>
+                <SideDrawerItem id="Request Report" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faStickyNote} href="/user/request-report">Request Report</SideDrawerItem>
                 <SideDrawerItem id="Request Check" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faCalendarAlt} dropdown path="/user/requests" items={[
                     { link: '/user/requests/file', text: 'File a Request' },
                     { link: '/user/requests/important', text: 'Important Requests' },
@@ -30,6 +30,7 @@ export default ({ name, messages = [], photo = "https://placehold.it/100x100", r
                     { link: '/user/requests/solved', text: 'Solved Requests' },
                     { link: '/user/requests/cancelled', text: 'Cancelled Requests' },
                 ]}>Request Check</SideDrawerItem>
+                <SideDrawerItem id="Personalities" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faUserTie} href="/user/personalities">Personalities</SideDrawerItem>
                 <SideDrawerItem id="System Settings" sideDrawerToggle={toggle} select={selectItem} selected={selectedItem} icon={faCog} dropdown path="/user/settings" items={[
                     { link: '/user/settings/cms', text: 'CMS' },
                     { link: '/user/settings/language', text: 'Language Settings' },

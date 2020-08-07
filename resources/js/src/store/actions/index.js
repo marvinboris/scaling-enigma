@@ -13,6 +13,10 @@ export {
     getRequest,
     postRequest,
     postCheckRequest,
+    
+    resetPersonality,
+    getPersonality,
+    postPersonality,
 
     resetChat,
     setChatHash,
@@ -28,6 +32,11 @@ export {
 export {
     resetDashboard,
     getDashboard,
+
+    resetPersonalities,
+    getPersonalities,
+    postPersonalityUpdate,
+    postPersonalityDelete,
 
     resetRequests,
     getRequests,

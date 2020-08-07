@@ -6,6 +6,10 @@ const initialState = {
         loading: false,
         error: null
     },
+    personality: {
+        loading: false,
+        error: null
+    },
     chat: {
         loading: false,
         error: null,
@@ -18,6 +22,11 @@ const resetRequest = (state, action) => updateObject(state, { request: initialSt
 const requestStart = (state, action) => updateObject(state, { request: updateObject(state.request, { loading: true, message: null }) });
 const requestSuccess = (state, action) => updateObject(state, { request: updateObject(state.request, { loading: false, error: null, ...action }) });
 const requestFail = (state, action) => updateObject(state, { request: updateObject(state.request, { loading: false, ...action }) });
+
+const resetPersonality = (state, action) => updateObject(state, { personality: initialState.personality });
+const personalityStart = (state, action) => updateObject(state, { personality: updateObject(state.personality, { loading: true, message: null }) });
+const personalitySuccess = (state, action) => updateObject(state, { personality: updateObject(state.personality, { loading: false, error: null, ...action }) });
+const personalityFail = (state, action) => updateObject(state, { personality: updateObject(state.personality, { loading: false, ...action }) });
 
 const resetChat = (state, action) => updateObject(state, { chat: initialState.chat });
 const resendChatCodeSuccess = (state, action) => updateObject(state, { chat: updateObject(state.chat, { error: null, loading: false, ...action }) });
@@ -34,6 +43,11 @@ export default (state = initialState, action) => {
         case actionTypes.REQUEST_START: return requestStart(state, action);
         case actionTypes.REQUEST_SUCCESS: return requestSuccess(state, action);
         case actionTypes.REQUEST_FAIL: return requestFail(state, action);
+
+        case actionTypes.RESET_PERSONALITY: return resetPersonality(state, action);
+        case actionTypes.PERSONALITY_START: return personalityStart(state, action);
+        case actionTypes.PERSONALITY_SUCCESS: return personalitySuccess(state, action);
+        case actionTypes.PERSONALITY_FAIL: return personalityFail(state, action);
 
         case actionTypes.RESET_CHAT: return resetChat(state, action);
         case actionTypes.RESEND_CHAT_CODE_SUCCESS: return resendChatCodeSuccess(state, action);

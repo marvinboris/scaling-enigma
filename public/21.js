@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[21],{
 
-/***/ "./resources/js/src/containers/Backend/User/Requests/Dev/Dev.js":
-/*!**********************************************************************!*\
-  !*** ./resources/js/src/containers/Backend/User/Requests/Dev/Dev.js ***!
-  \**********************************************************************/
+/***/ "./resources/js/src/containers/Backend/User/Requests/Attention/Attention.js":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/src/containers/Backend/User/Requests/Attention/Attention.js ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -92,15 +92,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Dev = /*#__PURE__*/function (_Component) {
-  _inherits(Dev, _Component);
+var Attention = /*#__PURE__*/function (_Component) {
+  _inherits(Attention, _Component);
 
-  var _super = _createSuper(Dev);
+  var _super = _createSuper(Attention);
 
-  function Dev() {
+  function Attention() {
     var _this;
 
-    _classCallCheck(this, Dev);
+    _classCallCheck(this, Attention);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -115,7 +115,7 @@ var Dev = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(Dev, [{
+  _createClass(Attention, [{
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -124,7 +124,7 @@ var Dev = /*#__PURE__*/function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.props.onGetDevRequests();
+                this.props.onGetAttentionRequests();
                 cors = 'https://cors-anywhere.herokuapp.com/';
                 _context.next = 4;
                 return fetch(cors + 'http://country.io/phone.json', {
@@ -226,7 +226,7 @@ var Dev = /*#__PURE__*/function (_Component) {
             });
             var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_18__["default"], {
               request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
-                page_status: 'important'
+                page_status: 'attention'
               })
             });
             return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
@@ -355,7 +355,7 @@ var Dev = /*#__PURE__*/function (_Component) {
             add: "File a Request",
             link: "/user/requests/add",
             icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"],
-            title: "Dev Requests",
+            title: "Attention Requests",
             className: "bg-white shadow-sm",
             fields: [{
               name: 'Creation Date',
@@ -407,20 +407,20 @@ var Dev = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "bg-white py-4 pl-5 pr-4 position-relative"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Breadcrumb_Breadcrumb__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        main: "Dev Requests",
+        main: "Attention Requests",
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Titles_SpecialTitle_SpecialTitle__WEBPACK_IMPORTED_MODULE_8__["default"], {
         user: true,
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"]
       }, "User panel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Titles_Subtitle_Subtitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
         user: true
-      }, "Dev Requests")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Attention Requests")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "p-4 pb-0"
       }, errors, feedback, content));
     }
   }]);
 
-  return Dev;
+  return Attention;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -429,8 +429,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onGetDevRequests: function onGetDevRequests() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getDevRequests"]());
+    onGetAttentionRequests: function onGetAttentionRequests() {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getAttentionRequests"]());
     },
     onPostRequestDelete: function onPostRequestDelete(id) {
       return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["postRequestDelete"](id));
@@ -444,7 +444,44 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Dev)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Attention)));
+
+/***/ }),
+
+/***/ "./resources/js/src/containers/Backend/User/Requests/Description.js":
+/*!**************************************************************************!*\
+  !*** ./resources/js/src/containers/Backend/User/Requests/Description.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var html_to_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js");
+/* harmony import */ var html_to_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(html_to_react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../shared/utility */ "./resources/js/src/shared/utility.js");
+
+
+
+var parser = new html_to_react__WEBPACK_IMPORTED_MODULE_1__["Parser"]();
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var request = _ref.request;
+  var comments;
+  var colors = ['orange', 'myprimary', 'red', 'green'];
+  var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
+  comments = request.status > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: 'rounded p-4 mt-3 text-' + colors[request.status] + ' bg-' + colors[request.status] + '-25'
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, texts[request.status], " by: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "text-700"
+  }, request.edited_by), " on ", Object(_shared_utility__WEBPACK_IMPORTED_MODULE_2__["convertDate"])(request.created_at)), request.comments && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mt-2"
+  }, parser.parse(request.comments)));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "text-justify"
+  }, parser.parse(request.description), comments);
+});
 
 /***/ })
 

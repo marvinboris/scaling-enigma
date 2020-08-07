@@ -21,7 +21,10 @@ export default ({ icon, addon, onChange, className = '', name, type = 'text', re
             {children ?
                 <CustomInput valid={touched && checkValidity(value, validation)} invalid={touched && !checkValidity(value, validation)} onChange={inputChangedHandler} type={type} id={name} name={name} required={required} readOnly={readonly} value={value} className={"bg-white rounded-pill " + (addon ? 'rounded-left-0' : '') + " border-light text-small text-secondary h-100 px-4 py-3"} placeholder={placeholder}>{children}</CustomInput>
                 :
-                <Input valid={touched && checkValidity(value, validation)} invalid={touched && !checkValidity(value, validation)} onChange={inputChangedHandler} type={type} name={name} required={required} readOnly={readonly} value={value} className={"bg-transparent rounded-pill " + (addon ? 'rounded-left-0' : '') + " border-light text-small text-secondary h-100 px-4 py-3"} placeholder={placeholder} />
+                type === 'file' ? 
+                <Input valid={touched && checkValidity(value, validation)} invalid={touched && !checkValidity(value, validation)} type={type} name={name} required={required} readOnly={readonly} className={"bg-transparent border rounded-pill " + (addon ? 'rounded-left-0' : '') + " border-light text-small text-secondary h-100 px-4 py-3"} placeholder={placeholder} />
+                :
+                <Input valid={touched && checkValidity(value, validation)} invalid={touched && !checkValidity(value, validation)} onChange={inputChangedHandler} type={type} name={name} required={required} readOnly={readonly} value={value} className={"bg-transparent border rounded-pill " + (addon ? 'rounded-left-0' : '') + " border-light text-small text-secondary h-100 px-4 py-3"} placeholder={placeholder} />
             }
 
             {append ? <InputGroupAddon addonType="append">

@@ -15,6 +15,7 @@ import 'aos/dist/aos.css';
 // User routes
 const asyncUserDashboard = asyncComponent(() => import('./containers/Backend/User/Dashboard/Dashboard'));
 const asyncUserChat = asyncComponent(() => import('./containers/Backend/User/Chat/Chat'));
+const asyncUserPersonalities = asyncComponent(() => import('./containers/Backend/User/Personalities/Personalities'));
 const asyncUserRequestReport = asyncComponent(() => import('./containers/Backend/User/RequestReport/RequestReport'));
 const asyncUserRequestsImportant = asyncComponent(() => import('./containers/Backend/User/Requests/Important/Important'));
 const asyncUserRequestsAttention = asyncComponent(() => import('./containers/Backend/User/Requests/Attention/Attention'));
@@ -28,6 +29,7 @@ const asyncUserRequestsCancelled = asyncComponent(() => import('./containers/Bac
 const asyncRequestCheck = asyncComponent(() => import('./containers/Request/Check/Check'));
 const asyncRequestSuccess = asyncComponent(() => import('./containers/Request/Success/Success'));
 const asyncRequest = asyncComponent(() => import('./containers/Request/Request'));
+const asyncPersonality = asyncComponent(() => import('./containers/Personality/Personality'));
 const asyncChatVerify = asyncComponent(() => import('./containers/Chat/Verify/Verify'));
 const asyncChatEntrance = asyncComponent(() => import('./containers/Chat/Entrance/Entrance'));
 const asyncChat = asyncComponent(() => import('./containers/Chat/Chat'));
@@ -60,6 +62,8 @@ class App extends Component {
                 <Route path="/request/success" component={asyncRequestSuccess} />
                 <Route path="/request" component={asyncRequest} />
 
+                <Route path="/personality" component={asyncPersonality} />
+
                 <Route path="/" component={Home} />
                 <Redirect to="/" />
             </Switch>
@@ -70,6 +74,7 @@ class App extends Component {
                 <Switch>
                     <Route path="/user/dashboard" component={asyncUserDashboard} />
                     <Route path="/user/chat" component={asyncUserChat} />
+                    <Route path="/user/personalities" component={asyncUserPersonalities} />
                     <Route path="/user/request-report" component={asyncUserRequestReport} />
                     <Route path="/user/requests/important" component={asyncUserRequestsImportant} />
                     <Route path="/user/requests/attention" component={asyncUserRequestsAttention} />
@@ -85,6 +90,7 @@ class App extends Component {
                     <Route path="/request/check" component={asyncRequestCheck} />
                     <Route path="/request/success" component={asyncRequestSuccess} />
                     <Route path="/request" component={asyncRequest} />
+                    <Route path="/personality" component={asyncPersonality} />
                     <Route path="/" component={Home} />
                     <Redirect to="/" />
                 </Switch>

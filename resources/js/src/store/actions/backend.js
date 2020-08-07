@@ -25,6 +25,70 @@ export const getDashboard = () => async dispatch => {
     }
 };
 
+export const resetPersonalities = () => ({ type: actionTypes.RESET_PERSONALITIES });
+const personalitiesStart = () => ({ type: actionTypes.PERSONALITIES_START });
+const personalitiesSuccess = data => ({ type: actionTypes.PERSONALITIES_SUCCESS, ...data });
+const personalitiesFail = error => ({ type: actionTypes.PERSONALITIES_FAIL, error });
+export const getPersonalities = () => async dispatch => {
+    dispatch(personalitiesStart());
+
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(prefix + 'personalities', {
+            method: 'GET',
+            headers: {
+                Authorization: token
+            }
+        });
+        const resData = await res.json();
+        dispatch(personalitiesSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(personalitiesFail(error));
+    }
+};
+
+export const postPersonalityUpdate = (id, data) => async dispatch => {
+    dispatch(personalitiesStart());
+
+    try {
+        const token = localStorage.getItem('token');
+        const form = new FormData(data);
+        const res = await fetch(prefix + 'personalities/' + id, {
+            method: 'POST',
+            body: form,
+            headers: {
+                Authorization: token
+            }
+        });
+        const resData = await res.json();
+        if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
+        dispatch(personalitiesSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(personalitiesFail(error));
+    }
+};
+
+export const postPersonalityDelete = id => async dispatch => {
+    dispatch(personalitiesStart());
+
+    try {
+        const res = await fetch(prefix + 'personalities/' + id + '/delete', {
+            method: 'POST',
+            headers: {
+                Authorization: token
+            }
+        });
+        const resData = await res.json();
+        if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
+        dispatch(personalitiesSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(personalitiesFail(error));
+    }
+};
+
 export const resetRequests = () => ({ type: actionTypes.RESET_REQUESTS });
 const requestsStart = () => ({ type: actionTypes.REQUESTS_START });
 const requestsStatusStart = () => ({ type: actionTypes.REQUESTS_STATUS_START });

@@ -58,6 +58,44 @@ export const postCheckRequest = data => async dispatch => {
 
 
 
+export const resetPersonality = () => ({ type: actionTypes.RESET_PERSONALITY });
+const personalityStart = () => ({ type: actionTypes.PERSONALITY_START });
+const personalitySuccess = data => ({ type: actionTypes.PERSONALITY_SUCCESS, ...data });
+const personalityFail = error => ({ type: actionTypes.PERSONALITY_FAIL, error });
+export const getPersonality = () => async dispatch => {
+    dispatch(personalityStart());
+
+    try {
+        const res = await fetch(prefix + 'personality');
+        const resData = await res.json();
+        dispatch(personalitySuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(personalityFail(error));
+    }
+};
+
+export const postPersonality = data => async dispatch => {
+    dispatch(personalityStart());
+
+    try {
+        const form = new FormData(data);
+        const res = await fetch(prefix + 'personality', {
+            method: 'POST',
+            body: form
+        });
+        const resData = await res.json();
+        if (res.status === 422) throw new Error(Object.values(resData.errors).join('\n'));
+        dispatch(personalitySuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(personalityFail(error));
+    }
+};
+
+
+
+
 export const resetChat = () => ({ type: actionTypes.RESET_CHAT });
 const chatStart = () => ({ type: actionTypes.CHAT_START });
 const chatSuccess = data => ({ type: actionTypes.CHAT_SUCCESS, ...data });
