@@ -164,7 +164,7 @@ class Edit extends Component {
             </FormGroup>
             <FormGroup>
                 <Label className="text-700" for="description">Issue description</Label>
-                <div className="bg-soft rounded p-3">{parser.parse(request.description)}</div>
+                <div className="bg-soft rounded p-3">{request.description}</div>
             </FormGroup>
             {(+request.status < 2 && +status > 0) && <>
                 <FormGroup>
