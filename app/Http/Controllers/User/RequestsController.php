@@ -105,6 +105,7 @@ class RequestsController extends Controller
             'requests' => $requests,
             'total' => $total,
             'types' => $types,
+            'info' => 'index'
         ]);
     }
 
