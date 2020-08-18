@@ -106,6 +106,7 @@ export const getRequests = (page = 1, show = 10, search = '') => async dispatch 
             }
         });
         const resData = await res.json();
+        console.log({show, page, search}, resData)
         dispatch(requestsSuccess(resData));
     } catch (error) {
         console.log(error);
