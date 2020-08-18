@@ -71,9 +71,10 @@ class RequestsController extends Controller
                         ->orWhere('comments', 'LIKE', "%$search%");
             });
 
+            $total = $filteredRequests->count();
+
             if ($show !== 'All') $filteredRequests = $filteredRequests->skip(($page - 1) * $show)->take($show);
 
-            $total = $filteredRequests->count();
             $filteredRequests = $filteredRequests->get();
         }
 
