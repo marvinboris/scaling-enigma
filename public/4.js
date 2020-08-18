@@ -231,17 +231,14 @@ var timeout;
         name = _e$target.name,
         value = _e$target.value;
     firstPageHandler();
-    if (timeout) clearTimeout(timeout);
 
     if (name === 'show') {
-      timeout = setTimeout(function () {
-        get(page, value, search);
-        clearTimeout(timeout);
-      }, 1000);
+      get(page, value, search);
       return setShow(value);
     }
 
     if (name === 'search') {
+      if (timeout) clearTimeout(timeout);
       timeout = setTimeout(function () {
         get(page, show, search);
         clearTimeout(timeout);
@@ -251,50 +248,25 @@ var timeout;
   };
 
   var previousPageHandler = function previousPageHandler() {
-    var lastPage = pageNumber;
     if (page <= 1) return;
-    if (page === 2) firstPageHandler();else if (page === lastPage) {
-      get(page - 1, show, search);
-      setPage(page - 1);
-    } else {
-      get(page - 1, show, search);
-      setPage(page - 1);
-      setPageFirst(pageFirst - 1);
-      setPageSecond(pageSecond - 1);
-      setPageLast(pageLast - 1);
-    }
+    pageChangeHandler(page - 1);
   };
 
   var nextPageHandler = function nextPageHandler() {
     var lastPage = pageNumber;
     if (page >= lastPage) return;
-    get(page + 1, show, search);
-    setPage(page + 1);
-
-    if (page > 2) {
-      setPageFirst(pageFirst + 1);
-      setPageSecond(pageSecond + 1);
-      setPageLast(pageLast + 1);
-    }
+    pageChangeHandler(page + 1);
   };
 
   var firstPageHandler = function firstPageHandler() {
     if (page <= 1) return;
-    get(1, show, search);
-    setPage(1);
-    setPageFirst(1);
-    setPageSecond(2);
-    setPageLast(3);
+    pageChangeHandler(1);
   };
 
   var lastPageHandler = function lastPageHandler() {
     var lastPage = pageNumber;
     if (page >= lastPage) return;
-    get(lastPage, show, search);
-    setPage(lastPage);
-    setPageFirst(lastPage - 2);
-    setPageSecond(lastPage - 1);
-    setPageLast(lastPage);
+    pageChangeHandler(lastPage);
   };
 
   var pageChangeHandler = function pageChangeHandler(page) {
