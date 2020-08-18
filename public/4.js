@@ -161,9 +161,7 @@ var timeout;
       setPageLast = _useState12[1];
 
   var filteredArray = array;
-  var limitedArray = show === 'All' ? filteredArray : filteredArray.filter(function (item, i) {
-    return i >= (page - 1) * show && i < page * show;
-  });
+  var limitedArray = filteredArray;
   var pageNumber = Math.ceil(total / show);
   var content = limitedArray.map(function (item, index) {
     if (limit && index >= limit) return null;

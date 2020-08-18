@@ -26,7 +26,7 @@ export default ({ fields, array, loading = false, get, total = 0, data, limit, b
     const [pageLast, setPageLast] = useState(3);
 
     const filteredArray = array;
-    const limitedArray = show === 'All' ? filteredArray : filteredArray.filter((item, i) => (i >= (page - 1) * show) && (i < page * show));
+    const limitedArray = filteredArray;
 
     const pageNumber = Math.ceil(total / show);
 
