@@ -265,6 +265,11 @@ var Solved = /*#__PURE__*/function (_Component) {
           })
         });
         return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
+          reqid: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+            href: '/request/details/' + request.external,
+            target: "_blank",
+            className: "text-decoration-none"
+          }, request.reqid),
           ref: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "d-flex justify-content-between position-relative",
             style: {
@@ -396,6 +401,9 @@ var Solved = /*#__PURE__*/function (_Component) {
         title: "Solved Requests",
         className: "bg-white shadow-sm",
         fields: [{
+          name: 'Request ID',
+          key: 'reqid'
+        }, {
           name: 'Creation Date',
           key: 'created_at'
         }, {

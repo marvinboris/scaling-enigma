@@ -256,6 +256,11 @@ var Attention = /*#__PURE__*/function (_Component) {
             className: [0, 1].includes(request.status) ? "fa-spin" : "",
             fixedWidth: true
           })))),
+          reqid: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+            href: '/request/details/' + request.external,
+            target: "_blank",
+            className: "text-decoration-none"
+          }, request.reqid),
           created_at: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["convertDate"])(request.created_at),
           status: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
             color: colors[request.status],
@@ -359,6 +364,9 @@ var Attention = /*#__PURE__*/function (_Component) {
         title: "Attention Requests",
         className: "bg-white shadow-sm",
         fields: [{
+          name: 'Request ID',
+          key: 'reqid'
+        }, {
           name: 'Creation Date',
           key: 'created_at'
         }, {

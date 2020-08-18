@@ -81,6 +81,9 @@ class Pending extends Component {
             const editContent = <Edit request={updateObject(request, { page_status: 'pending' })} />;
 
             return updateObject(request, {
+                reqid: <a href={'/request/details/' + request.external} target="_blank" className="text-decoration-none">
+                    {request.reqid}
+                </a>,
                 ref: <div className="d-flex justify-content-between position-relative" style={{ minWidth: request.status === 1 ? 130 : 0 }}>
                     {request.ref}
                     <WithTooltip id={'request-' + request.reqid} content={request.edited_by}>
@@ -130,6 +133,7 @@ class Pending extends Component {
             <Row>
                 <List loading={loading} array={requestsData} data={JSON.stringify(requests)} get={this.props.onGetPendingRequests} total={total} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Pending Requests" className="bg-white shadow-sm"
                     fields={[
+                        { name: 'Request ID', key: 'reqid' },
                         { name: 'Creation Date', key: 'created_at' },
                         { name: 'User ID', key: 'ref' },
                         { name: 'Full Name', key: 'name' },

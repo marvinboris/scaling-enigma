@@ -93,6 +93,9 @@ class Attention extends Component {
                             </Badge>}
                     </WithTooltip>
                 </div>,
+                reqid: <a href={'/request/details/' + request.external} target="_blank" className="text-decoration-none">
+                    {request.reqid}
+                </a>,
                 created_at: convertDate(request.created_at),
                 status: <Badge color={colors[request.status]} className="badge-block position-static"><FontAwesomeIcon icon={icons[request.status]} className={[0, 1].includes(request.status) ? "fa-spin" : ""} fixedWidth /> {texts[request.status]}</Badge>,
                 documents: <Badge color="nightblue" className="badge-block position-static"><FontAwesomeIcon icon={faFileArchive} className="text-orange" fixedWidth /> {request.documents.length} Document{request.documents.length > 1 ? 's' : ''}</Badge>,
@@ -131,6 +134,7 @@ class Attention extends Component {
                 <Row>
                     <List loading={loading} array={requestsData} data={JSON.stringify(requests)} get={this.props.onGetAttentionRequests} total={total} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Attention Requests" className="bg-white shadow-sm"
                         fields={[
+                            { name: 'Request ID', key: 'reqid' },
                             { name: 'Creation Date', key: 'created_at' },
                             { name: 'User ID', key: 'ref' },
                             { name: 'Full Name', key: 'name' },

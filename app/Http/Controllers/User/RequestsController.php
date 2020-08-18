@@ -62,13 +62,8 @@ class RequestsController extends Controller
         if ($status !== 'dashboard') {
             $filteredRequests = $filteredRequests->when($search, function ($query, $search) {
                 if ($search !== "")
-                    $query->where('name', 'LIKE', "%$search%")
-                        ->orWhere('reqid', 'LIKE', "%$search%")
-                        ->orWhere('phone', 'LIKE', "%$search%")
-                        ->orWhere('email', 'LIKE', "%$search%")
-                        ->orWhere('ref', 'LIKE', "%$search%")
-                        ->orWhere('description', 'LIKE', "%$search%")
-                        ->orWhere('comments', 'LIKE', "%$search%");
+                    $query->where('reqid', 'LIKE', "%$search%")
+                        ->orWhere('ref', 'LIKE', "%$search%");
             });
 
             $total = $filteredRequests->count();
