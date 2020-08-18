@@ -18,7 +18,7 @@ class RequestsController extends Controller
     //
     private function requests($status = '')
     {
-        $page = request()->page;
+        $page = +request()->page;
         $show = request()->show;
         $search = request()->search;
 
