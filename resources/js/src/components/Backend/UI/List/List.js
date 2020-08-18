@@ -25,18 +25,7 @@ export default ({ fields, array, loading = false, get, total = 0, data, limit, b
     const [pageSecond, setPageSecond] = useState(2);
     const [pageLast, setPageLast] = useState(3);
 
-    const filteredArray = search === '' ? array : array.filter((item, i) => {
-        let check = false;
-        for (const iterator of fields) {
-            const key = iterator.key;
-            if (item[key]) {
-                if (typeof item[key] === 'string') check = item[key].toLowerCase().includes(search.toLowerCase());
-                else if (typeof item[key] === 'object') check = jsxToString(item[key]).toLowerCase().includes(search.toLowerCase());
-                else check = item[key].toString().includes(search.toLowerCase());
-                if (check) return check;
-            }
-        }
-    });
+    const filteredArray = array;
     const limitedArray = show === 'All' ? filteredArray : filteredArray.filter((item, i) => (i >= (page - 1) * show) && (i < page * show));
 
     const pageNumber = Math.ceil(total / show);
