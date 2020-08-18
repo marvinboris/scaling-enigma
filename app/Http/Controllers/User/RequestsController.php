@@ -18,46 +18,62 @@ class RequestsController extends Controller
     //
     private function requests($status = '')
     {
+        $page = request()->page;
+        $show = request()->show;
+        $search = request()->search;
+
         $requests = [];
         $filteredRequests = [];
         switch ($status) {
             case 'pending':
-                $filteredRequests = AppRequest::whereStatus(0)->whereNull('type_id')->get();
+                $filteredRequests = AppRequest::whereStatus(0)->whereNull('type_id');
                 break;
             case 'processing':
-                $filteredRequests = AppRequest::whereStatus(1)->whereNull('type_id')->get();
+                $filteredRequests = AppRequest::whereStatus(1)->whereNull('type_id');
                 break;
             case 'solved':
-                $filteredRequests = AppRequest::whereStatus(3)->get();
+                $filteredRequests = AppRequest::whereStatus(3);
                 break;
             case 'cancelled':
-                $filteredRequests = AppRequest::whereStatus(2)->get();
+                $filteredRequests = AppRequest::whereStatus(2);
                 break;
             case 'attention':
                 $type_id = Type::whereAbbr('AT')->first()->id;
-                foreach (AppRequest::whereTypeId($type_id)->get() as $filteredRequest) {
-                    if (in_array($filteredRequest->status, [0, 1])) $filteredRequests[] = $filteredRequest;
-                }
+                $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
                 break;
             case 'important':
                 $type_id = Type::whereAbbr('CEO')->first()->id;
-                foreach (AppRequest::whereTypeId($type_id)->get() as $filteredRequest) {
-                    if (in_array($filteredRequest->status, [0, 1])) $filteredRequests[] = $filteredRequest;
-                }
+                $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
                 break;
             case 'dev':
                 $type_id = Type::whereAbbr('DEV')->first()->id;
-                foreach (AppRequest::whereTypeId($type_id)->get() as $filteredRequest) {
-                    if (in_array($filteredRequest->status, [0, 1])) $filteredRequests[] = $filteredRequest;
-                }
+                $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
                 break;
             case 'dashboard':
                 $filteredRequests = AppRequest::latest()->limit(5)->get();
                 break;
             default:
-                $filteredRequests = AppRequest::get();
+                $filteredRequests = AppRequest::whereBetween('status', [0, 3]);
                 break;
         }
+
+        if ($status !== 'dashboard') {
+            $filteredRequests = $filteredRequests->when($search, function ($query, $search) {
+                if ($search !== "")
+                    $query->where('name', 'LIKE', "%$search%")
+                        ->orWhere('reqid', 'LIKE', "%$search%")
+                        ->orWhere('phone', 'LIKE', "%$search%")
+                        ->orWhere('email', 'LIKE', "%$search%")
+                        ->orWhere('ref', 'LIKE', "%$search%")
+                        ->orWhere('description', 'LIKE', "%$search%")
+                        ->orWhere('comments', 'LIKE', "%$search%");
+            });
+
+            if ($show !== 'All') $filteredRequests = $filteredRequests->skip(($page - 1) * $show)->take($show);
+
+            $filteredRequests = $filteredRequests->get();
+        }
+
         foreach ($filteredRequests as $request) {
             $requests[] = array_merge($request->toArray(), [
                 'platform' => $request->platform->name,

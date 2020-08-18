@@ -94,12 +94,12 @@ const requestsStart = () => ({ type: actionTypes.REQUESTS_START });
 const requestsStatusStart = () => ({ type: actionTypes.REQUESTS_STATUS_START });
 const requestsSuccess = data => ({ type: actionTypes.REQUESTS_SUCCESS, ...data });
 const requestsFail = error => ({ type: actionTypes.REQUESTS_FAIL, error });
-export const getRequests = () => async dispatch => {
+export const getRequests = (page = 1, show = 10, search = '') => async dispatch => {
     dispatch(requestsStart());
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(prefix + 'requests', {
+        const res = await fetch(`${prefix}requests?show=${show}&page=${page}&search=${search}`, {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -113,12 +113,12 @@ export const getRequests = () => async dispatch => {
     }
 };
 
-export const getImportantRequests = () => async dispatch => {
+export const getImportantRequests = (page = 1, show = 10, search = '') => async dispatch => {
     dispatch(requestsStart());
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(prefix + 'requests/important', {
+        const res = await fetch(`${prefix}requests/important?show=${show}&page=${page}&search=${search}`, {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -132,12 +132,12 @@ export const getImportantRequests = () => async dispatch => {
     }
 };
 
-export const getAttentionRequests = () => async dispatch => {
+export const getAttentionRequests = (page = 1, show = 10, search = '') => async dispatch => {
     dispatch(requestsStart());
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`${prefix}requests/attention`, {
+        const res = await fetch(`${prefix}requests/attention?show=${show}&page=${page}&search=${search}`, {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -151,12 +151,12 @@ export const getAttentionRequests = () => async dispatch => {
     }
 };
 
-export const getDevRequests = () => async dispatch => {
+export const getDevRequests = (page = 1, show = 10, search = '') => async dispatch => {
     dispatch(requestsStart());
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(prefix + 'requests/dev', {
+        const res = await fetch(`${prefix}requests/dev?show=${show}&page=${page}&search=${search}`, {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -170,12 +170,12 @@ export const getDevRequests = () => async dispatch => {
     }
 };
 
-export const getPendingRequests = () => async dispatch => {
+export const getPendingRequests = (page = 1, show = 10, search = '') => async dispatch => {
     dispatch(requestsStart());
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(prefix + 'requests/pending', {
+        const res = await fetch(`${prefix}requests/pending?show=${show}&page=${page}&search=${search}`, {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -189,12 +189,12 @@ export const getPendingRequests = () => async dispatch => {
     }
 };
 
-export const getProcessingRequests = () => async dispatch => {
+export const getProcessingRequests = (page = 1, show = 10, search = '') => async dispatch => {
     dispatch(requestsStart());
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(prefix + 'requests/processing', {
+        const res = await fetch(`${prefix}requests/processing?show=${show}&page=${page}&search=${search}`, {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -208,12 +208,12 @@ export const getProcessingRequests = () => async dispatch => {
     }
 };
 
-export const getSolvedRequests = () => async dispatch => {
+export const getSolvedRequests = (page = 1, show = 10, search = '') => async dispatch => {
     dispatch(requestsStart());
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(prefix + 'requests/solved', {
+        const res = await fetch(`${prefix}requests/solved?show=${show}&page=${page}&search=${search}`, {
             method: 'GET',
             headers: {
                 Authorization: token
@@ -227,12 +227,12 @@ export const getSolvedRequests = () => async dispatch => {
     }
 };
 
-export const getCancelledRequests = () => async dispatch => {
+export const getCancelledRequests = (page = 1, show = 10, search = '') => async dispatch => {
     dispatch(requestsStart());
 
     try {
         const token = localStorage.getItem('token');
-        const res = await fetch(prefix + 'requests/cancelled', {
+        const res = await fetch(`${prefix}requests/cancelled?show=${show}&page=${page}&search=${search}`, {
             method: 'GET',
             headers: {
                 Authorization: token

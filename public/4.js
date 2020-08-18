@@ -1,5 +1,24 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/components/UI/TableSpinner/Preloader/Preloader.css":
+/*!*************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/src/components/UI/TableSpinner/Preloader/Preloader.css ***!
+  \*************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".Preloader body {\r\n    background-color: #222;\r\n}\r\n\r\n.Preloader #preloader {\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n.Preloader #loader {\r\n    display: block;\r\n    position: relative;\r\n    left: 50%;\r\n    top: 50%;\r\n    width: 150px;\r\n    height: 150px;\r\n    margin: -75px 0 0 -75px;\r\n    border-radius: 50%;\r\n    border: 3px solid transparent;\r\n    border-top-color: #9370DB;\r\n    -webkit-animation: spin 2s linear infinite;\r\n    animation: spin 2s linear infinite;\r\n}\r\n\r\n.Preloader #loader:before {\r\n    content: \"\";\r\n    position: absolute;\r\n    top: 5px;\r\n    left: 5px;\r\n    right: 5px;\r\n    bottom: 5px;\r\n    border-radius: 50%;\r\n    border: 3px solid transparent;\r\n    border-top-color: #BA55D3;\r\n    -webkit-animation: spin 3s linear infinite;\r\n    animation: spin 3s linear infinite;\r\n}\r\n\r\n.Preloader #loader:after {\r\n    content: \"\";\r\n    position: absolute;\r\n    top: 15px;\r\n    left: 15px;\r\n    right: 15px;\r\n    bottom: 15px;\r\n    border-radius: 50%;\r\n    border: 3px solid transparent;\r\n    border-top-color: #FF00FF;\r\n    -webkit-animation: spin 1.5s linear infinite;\r\n    animation: spin 1.5s linear infinite;\r\n}\r\n\r\n@-webkit-keyframes spin {\r\n    0% {\r\n        transform: rotate(0deg);\r\n    }\r\n    100% {\r\n        transform: rotate(360deg);\r\n    }\r\n}\r\n\r\n@keyframes spin {\r\n    0% {\r\n        transform: rotate(0deg);\r\n    }\r\n    100% {\r\n        transform: rotate(360deg);\r\n    }\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./resources/js/src/components/Backend/UI/List/List.js":
 /*!*************************************************************!*\
   !*** ./resources/js/src/components/Backend/UI/List/List.js ***!
@@ -19,7 +38,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var jsx_to_string__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jsx-to-string */ "./node_modules/jsx-to-string/lib/index.js");
 /* harmony import */ var jsx_to_string__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jsx_to_string__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../shared/utility */ "./resources/js/src/shared/utility.js");
+/* harmony import */ var _UI_TableSpinner_TableSpinner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../UI/TableSpinner/TableSpinner */ "./resources/js/src/components/UI/TableSpinner/TableSpinner.js");
+/* harmony import */ var _shared_utility__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../shared/utility */ "./resources/js/src/shared/utility.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -49,9 +69,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+var timeout;
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var fields = _ref.fields,
       array = _ref.array,
+      _ref$loading = _ref.loading,
+      loading = _ref$loading === void 0 ? false : _ref$loading,
+      get = _ref.get,
       data = _ref.data,
       limit = _ref.limit,
       bordered = _ref.bordered,
@@ -182,7 +207,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           fixed = _ref3.fixed;
       inside.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "align-middle text-nowrap",
-        style: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_7__["updateObject"])({
+        style: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_8__["updateObject"])({
           minWidth: minWidth,
           borderColor: '#DEE2E6'
         }, fixed ? {
@@ -204,14 +229,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         name = _e$target.name,
         value = _e$target.value;
     firstPageHandler();
-    if (name === 'show') return setShow(value);
-    if (name === 'search') return setSearch(value);
+    if (timeout) clearTimeout(timeout);
+
+    if (name === 'show') {
+      timeout = setTimeout(function () {
+        get(page, value, search);
+        clearTimeout(timeout);
+      }, 1000);
+      return setShow(value);
+    }
+
+    if (name === 'search') {
+      timeout = setTimeout(function () {
+        get(page, show, search);
+        clearTimeout(timeout);
+      }, 1000);
+      return setSearch(value);
+    }
   };
 
   var previousPageHandler = function previousPageHandler() {
     var lastPage = pageNumber;
     if (page <= 1) return;
-    if (page === 2) firstPageHandler();else if (page === lastPage) setPage(page - 1);else {
+    if (page === 2) firstPageHandler();else if (page === lastPage) {
+      get(page - 1, show, search);
+      setPage(page - 1);
+    } else {
+      get(page - 1, show, search);
       setPage(page - 1);
       setPageFirst(pageFirst - 1);
       setPageSecond(pageSecond - 1);
@@ -222,6 +266,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   var nextPageHandler = function nextPageHandler() {
     var lastPage = pageNumber;
     if (page >= lastPage) return;
+    get(page + 1, show, search);
     setPage(page + 1);
 
     if (page > 2) {
@@ -233,6 +278,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
   var firstPageHandler = function firstPageHandler() {
     if (page <= 1) return;
+    get(1, show, search);
     setPage(1);
     setPageFirst(1);
     setPageSecond(2);
@@ -242,6 +288,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   var lastPageHandler = function lastPageHandler() {
     var lastPage = pageNumber;
     if (page >= lastPage) return;
+    get(lastPage, show, search);
     setPage(lastPage);
     setPageFirst(lastPage - 2);
     setPageSecond(lastPage - 1);
@@ -252,6 +299,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     var lastPage = pageNumber;
     var pageFirst;
     if (page === 1) pageFirst = 1;else if (page === lastPage) pageFirst = lastPage - 2;else pageFirst = page - 1;
+    get(page, show, search);
     setPage(page);
     setPageFirst(pageFirst);
     setPageSecond(pageFirst + 1);
@@ -445,7 +493,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "bg-soft text-secondary"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, titles)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", {
     className: "bg-soft-50 text-secondary"
-  }, content))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Showing ", limitedArray.length, " of ", filteredArray.length, " entries."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, !loading && content))), loading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+    xs: 12,
+    className: "text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "text-center py-3"
+  }, "Processing...")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Showing ", limitedArray.length, " of ", filteredArray.length, " entries."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "pt-2 d-flex justify-content-end"
   }, show === 'All' ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
     className: "pagination btn-group"
@@ -510,6 +563,95 @@ __webpack_require__.r(__webpack_exports__);
   return message ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Alert"], {
     color: message.type
   }, message.content) : null;
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/components/UI/TableSpinner/Preloader/Preloader.css":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/src/components/UI/TableSpinner/Preloader/Preloader.css ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../../node_modules/css-loader??ref--6-1!../../../../../../../node_modules/postcss-loader/src??ref--6-2!./Preloader.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/components/UI/TableSpinner/Preloader/Preloader.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./resources/js/src/components/UI/TableSpinner/Preloader/Preloader.js":
+/*!****************************************************************************!*\
+  !*** ./resources/js/src/components/UI/TableSpinner/Preloader/Preloader.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Preloader_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Preloader.css */ "./resources/js/src/components/UI/TableSpinner/Preloader/Preloader.css");
+/* harmony import */ var _Preloader_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Preloader_css__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Preloader"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "preloader"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "loader"
+  })));
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/components/UI/TableSpinner/TableSpinner.js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/src/components/UI/TableSpinner/TableSpinner.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var _Preloader_Preloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Preloader/Preloader */ "./resources/js/src/components/UI/TableSpinner/Preloader/Preloader.js");
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "py-5 my-3 text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Spinner"], {
+    color: "darkblue",
+    style: {
+      width: '5rem',
+      height: '5rem'
+    },
+    type: "grow",
+    className: "my-2"
+  }));
 });
 
 /***/ })

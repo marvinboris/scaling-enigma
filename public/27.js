@@ -235,212 +235,209 @@ var Solved = /*#__PURE__*/function (_Component) {
       var content;
       var errors;
       var feedback;
-      if (loading) content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-        xs: 12
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_CustomSpinner_CustomSpinner__WEBPACK_IMPORTED_MODULE_12__["default"], null));else {
-        errors = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_11__["default"], {
-          err: error
-        }));
-
-        if (requests) {
-          feedback = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_14__["default"], {
-            message: message
-          });
-          var requestsData = requests.map(function (request) {
-            var colors = ['orange', 'myprimary', 'red', 'green'];
-            var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
-            var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCheckCircle"]];
-            var country = countries.find(function (_ref) {
-              var country = _ref.country;
-              return country === request.country;
-            });
-            var descriptionContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Description__WEBPACK_IMPORTED_MODULE_19__["default"], {
-              request: request
-            });
-            var viewContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_View__WEBPACK_IMPORTED_MODULE_20__["default"], {
-              request: request,
-              country: country
-            });
-            var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_18__["default"], {
-              request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
-                page_status: 'solved'
-              })
-            });
-            return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
-              ref: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                className: "d-flex justify-content-between position-relative",
-                style: {
-                  minWidth: request.status === 1 ? 130 : 0
-                }
-              }, request.ref, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_WithTooltip_WithTooltip__WEBPACK_IMPORTED_MODULE_13__["default"], {
-                id: 'request-' + request.reqid,
-                content: request.edited_by
-              }, request.status === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
-                color: colors[request.status],
-                style: {
-                  width: 70
-                },
-                className: "position-static d-inline-block text-center ml-2"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Counter_Counter__WEBPACK_IMPORTED_MODULE_17__["default"], {
-                start: request.updated_at
-              })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
-                color: colors[request.status],
-                style: {
-                  width: 20,
-                  height: 20
-                },
-                className: "position-static p-0 ml-2 rounded-circle d-inline-flex justify-content-center align-items-center"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: icons[request.status],
-                className: [0, 1].includes(request.status) ? "fa-spin" : "",
-                fixedWidth: true
-              })))),
-              created_at: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["convertDate"])(request.created_at),
-              status: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
-                color: colors[request.status],
-                className: "badge-block position-static"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: icons[request.status],
-                className: [0, 1].includes(request.status) ? "fa-spin" : "",
-                fixedWidth: true
-              }), " ", texts[request.status]),
-              documents: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
-                color: "nightblue",
-                className: "badge-block position-static"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFileArchive"],
-                className: "text-orange",
-                fixedWidth: true
-              }), " ", request.documents.length, " Document", request.documents.length > 1 ? 's' : ''),
-              attachment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
-                color: "nightblue",
-                className: "badge-block position-static"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFileArchive"],
-                className: "text-orange",
-                fixedWidth: true
-              }), " ", request.issue_files.length, " Attached File", request.issue_files.length > 1 ? 's' : ''),
-              description: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                className: "d-flex"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                style: {
-                  maxWidth: 150
-                },
-                className: "flex-fill text-truncate"
-              }, request.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__["default"], {
-                title: 'Request description: ' + request.reqid,
-                content: descriptionContent
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEye"],
-                className: "text-green",
-                fixedWidth: true
-              }))),
-              action: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                className: "text-center"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__["default"], {
-                title: 'Request details: ' + request.reqid,
-                content: viewContent
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEye"],
-                className: "text-green mr-2",
-                fixedWidth: true
-              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__["default"], {
-                title: 'Request edit: ' + request.reqid,
-                content: editContent
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEdit"],
-                className: "text-brokenblue mr-2",
-                fixedWidth: true
-              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-                href: '/request/details/' + request.external,
-                target: "_blank",
-                className: "text-decoration-none"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faExternalLinkAlt"],
-                className: "text-secondary mr-2",
-                fixedWidth: true
-              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_15__["default"], {
-                deleteAction: function deleteAction() {
-                  return _this2.props.onPostRequestDelete(request.id);
-                }
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTrash"],
-                className: "text-red mr-2",
-                fixedWidth: true
-              })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-                icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faDownload"],
-                className: "text-darkblue",
-                fixedWidth: true
-              })),
-              country: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                className: "d-flex align-items-center"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-                className: "border border-1 border-white rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center mr-2",
-                style: {
-                  width: 20,
-                  height: 20
-                }
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-                className: "flag-icon text-large position-absolute flag-icon-".concat(request.country.toLowerCase())
-              })), country ? country.name : null)
-            });
-          });
-          content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_List_List__WEBPACK_IMPORTED_MODULE_10__["default"], {
-            array: requestsData,
-            data: JSON.stringify(requests),
-            bordered: true,
-            add: "File a Request",
-            link: "/user/requests/add",
-            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"],
-            title: "Solved Requests",
-            className: "bg-white shadow-sm",
-            fields: [{
-              name: 'Creation Date',
-              key: 'created_at'
-            }, {
-              name: 'User ID',
-              key: 'ref'
-            }, {
-              name: 'Full Name',
-              key: 'name'
-            }, {
-              name: 'Platform',
-              key: 'platform'
-            }, {
-              name: 'Issue',
-              key: 'issue'
-            }, {
-              name: 'E-Mail',
-              key: 'email'
-            }, {
-              name: 'Country',
-              key: 'country'
-            }, {
-              name: 'Phone Number',
-              key: 'phone'
-            }, {
-              name: 'User Documents',
-              key: 'documents',
-              minWidth: 150
-            }, {
-              name: 'Description',
-              key: 'description'
-            }, {
-              name: 'Attached Files',
-              key: 'attachment',
-              minWidth: 180
-            }, {
-              name: 'Status',
-              key: 'status',
-              minWidth: 140
-            }, {
-              name: 'Action',
-              key: 'action',
-              fixed: true
-            }]
-          })));
-        }
-      }
+      if (!requests) requests = [];
+      var requestsData = [];
+      errors = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Error_Error__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        err: error
+      }));
+      feedback = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Feedback_Feedback__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        message: message
+      });
+      requestsData = requests.map(function (request) {
+        var colors = ['orange', 'myprimary', 'red', 'green'];
+        var texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
+        var icons = [_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSpinner"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCheckCircle"]];
+        var country = countries.find(function (_ref) {
+          var country = _ref.country;
+          return country === request.country;
+        });
+        var descriptionContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Description__WEBPACK_IMPORTED_MODULE_19__["default"], {
+          request: request
+        });
+        var viewContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_View__WEBPACK_IMPORTED_MODULE_20__["default"], {
+          request: request,
+          country: country
+        });
+        var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_18__["default"], {
+          request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
+            page_status: 'solved'
+          })
+        });
+        return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
+          ref: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "d-flex justify-content-between position-relative",
+            style: {
+              minWidth: request.status === 1 ? 130 : 0
+            }
+          }, request.ref, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_WithTooltip_WithTooltip__WEBPACK_IMPORTED_MODULE_13__["default"], {
+            id: 'request-' + request.reqid,
+            content: request.edited_by
+          }, request.status === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
+            color: colors[request.status],
+            style: {
+              width: 70
+            },
+            className: "position-static d-inline-block text-center ml-2"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Counter_Counter__WEBPACK_IMPORTED_MODULE_17__["default"], {
+            start: request.updated_at
+          })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
+            color: colors[request.status],
+            style: {
+              width: 20,
+              height: 20
+            },
+            className: "position-static p-0 ml-2 rounded-circle d-inline-flex justify-content-center align-items-center"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+            icon: icons[request.status],
+            className: [0, 1].includes(request.status) ? "fa-spin" : "",
+            fixedWidth: true
+          })))),
+          created_at: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["convertDate"])(request.created_at),
+          status: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
+            color: colors[request.status],
+            className: "badge-block position-static"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+            icon: icons[request.status],
+            className: [0, 1].includes(request.status) ? "fa-spin" : "",
+            fixedWidth: true
+          }), " ", texts[request.status]),
+          documents: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
+            color: "nightblue",
+            className: "badge-block position-static"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFileArchive"],
+            className: "text-orange",
+            fixedWidth: true
+          }), " ", request.documents.length, " Document", request.documents.length > 1 ? 's' : ''),
+          attachment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], {
+            color: "nightblue",
+            className: "badge-block position-static"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faFileArchive"],
+            className: "text-orange",
+            fixedWidth: true
+          }), " ", request.issue_files.length, " Attached File", request.issue_files.length > 1 ? 's' : ''),
+          description: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "d-flex"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            style: {
+              maxWidth: 150
+            },
+            className: "flex-fill text-truncate"
+          }, request.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__["default"], {
+            title: 'Request description: ' + request.reqid,
+            content: descriptionContent
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEye"],
+            className: "text-green",
+            fixedWidth: true
+          }))),
+          action: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "text-center"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__["default"], {
+            title: 'Request details: ' + request.reqid,
+            content: viewContent
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEye"],
+            className: "text-green mr-2",
+            fixedWidth: true
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_View_View__WEBPACK_IMPORTED_MODULE_16__["default"], {
+            title: 'Request edit: ' + request.reqid,
+            content: editContent
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faEdit"],
+            className: "text-brokenblue mr-2",
+            fixedWidth: true
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+            href: '/request/details/' + request.external,
+            target: "_blank",
+            className: "text-decoration-none"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faExternalLinkAlt"],
+            className: "text-secondary mr-2",
+            fixedWidth: true
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Delete_Delete__WEBPACK_IMPORTED_MODULE_15__["default"], {
+            deleteAction: function deleteAction() {
+              return _this2.props.onPostRequestDelete(request.id);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faTrash"],
+            className: "text-red mr-2",
+            fixedWidth: true
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faDownload"],
+            className: "text-darkblue",
+            fixedWidth: true
+          })),
+          country: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "d-flex align-items-center"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "border border-1 border-white rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center mr-2",
+            style: {
+              width: 20,
+              height: 20
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+            className: "flag-icon text-large position-absolute flag-icon-".concat(request.country.toLowerCase())
+          })), country ? country.name : null)
+        });
+      });
+      content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_List_List__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        loading: loading,
+        array: requestsData,
+        data: JSON.stringify(requests),
+        get: this.props.onGetSolvedRequests,
+        bordered: true,
+        add: "File a Request",
+        link: "/user/requests/add",
+        icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"],
+        title: "Solved Requests",
+        className: "bg-white shadow-sm",
+        fields: [{
+          name: 'Creation Date',
+          key: 'created_at'
+        }, {
+          name: 'User ID',
+          key: 'ref'
+        }, {
+          name: 'Full Name',
+          key: 'name'
+        }, {
+          name: 'Platform',
+          key: 'platform'
+        }, {
+          name: 'Issue',
+          key: 'issue'
+        }, {
+          name: 'E-Mail',
+          key: 'email'
+        }, {
+          name: 'Country',
+          key: 'country'
+        }, {
+          name: 'Phone Number',
+          key: 'phone'
+        }, {
+          name: 'User Documents',
+          key: 'documents',
+          minWidth: 150
+        }, {
+          name: 'Description',
+          key: 'description'
+        }, {
+          name: 'Attached Files',
+          key: 'attachment',
+          minWidth: 180
+        }, {
+          name: 'Status',
+          key: 'status',
+          minWidth: 140
+        }, {
+          name: 'Action',
+          key: 'action',
+          fixed: true
+        }]
+      })));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "bg-white py-4 pl-5 pr-4 position-relative"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Breadcrumb_Breadcrumb__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -466,8 +463,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onGetSolvedRequests: function onGetSolvedRequests() {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getSolvedRequests"]());
+    onGetSolvedRequests: function onGetSolvedRequests(page, show, search) {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getSolvedRequests"](page, show, search));
     },
     onPostRequestDelete: function onPostRequestDelete(id) {
       return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["postRequestDelete"](id));

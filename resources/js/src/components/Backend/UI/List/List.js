@@ -5,9 +5,13 @@ import { faPlusCircle, faFileExcel, faFilePdf, faFileCsv, faPrint, faAngleDouble
 import { Link } from 'react-router-dom';
 import jsxToString from 'jsx-to-string';
 
+import TableSpinner from '../../../UI/TableSpinner/TableSpinner';
+
 import { updateObject } from '../../../../shared/utility';
 
-export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 12, lg = 12, xl = 12, icon, title, add, link, className = '', dark, borderless, innerClassName = '', outerClassName = '', p0, select, children, selectHandler, style }) => {
+let timeout;
+
+export default ({ fields, array, loading = false, get, data, limit, bordered, xs = 12, sm = 12, md = 12, lg = 12, xl = 12, icon, title, add, link, className = '', dark, borderless, innerClassName = '', outerClassName = '', p0, select, children, selectHandler, style }) => {
     const titles = fields.map(({ name, fixed }) => <th className="align-middle text-nowrap bg-soft" style={fixed ? { position: 'sticky', right: 0 } : {}} key={name}>{name}</th>);
     titles.unshift(<th className="text-center align-middle" key="#">SL</th>);
     if (select) titles.unshift(<th className="align-middle text-center" key="select_all">
@@ -53,16 +57,33 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
     const inputChangedHandler = e => {
         const { name, value } = e.target;
         firstPageHandler();
-        if (name === 'show') return setShow(value);
-        if (name === 'search') return setSearch(value);
+        if (timeout) clearTimeout(timeout);
+        if (name === 'show') {
+            timeout = setTimeout(() => {
+                get(page, value, search);
+                clearTimeout(timeout);
+            }, 1000);
+            return setShow(value);
+        }
+        if (name === 'search') {
+            timeout = setTimeout(() => {
+                get(page, show, search);
+                clearTimeout(timeout);
+            }, 1000);
+            return setSearch(value);
+        }
     }
 
     const previousPageHandler = () => {
         const lastPage = pageNumber;
         if (page <= 1) return;
         if (page === 2) firstPageHandler();
-        else if (page === lastPage) setPage(page - 1);
+        else if (page === lastPage) {
+            get(page - 1, show, search);
+            setPage(page - 1);
+        }
         else {
+            get(page - 1, show, search);
             setPage(page - 1);
             setPageFirst(pageFirst - 1);
             setPageSecond(pageSecond - 1);
@@ -73,6 +94,7 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
     const nextPageHandler = () => {
         const lastPage = pageNumber;
         if (page >= lastPage) return;
+        get(page + 1, show, search);
         setPage(page + 1);
         if (page > 2) {
             setPageFirst(pageFirst + 1);
@@ -83,6 +105,7 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
 
     const firstPageHandler = () => {
         if (page <= 1) return;
+        get(1, show, search);
         setPage(1);
         setPageFirst(1);
         setPageSecond(2);
@@ -92,6 +115,7 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
     const lastPageHandler = () => {
         const lastPage = pageNumber;
         if (page >= lastPage) return;
+        get(lastPage, show, search);
         setPage(lastPage);
         setPageFirst(lastPage - 2);
         setPageSecond(lastPage - 1);
@@ -104,6 +128,7 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
         if (page === 1) pageFirst = 1;
         else if (page === lastPage) pageFirst = lastPage - 2;
         else pageFirst = page - 1;
+        get(page, show, search);
         setPage(page);
         setPageFirst(pageFirst);
         setPageSecond(pageFirst + 1);
@@ -204,9 +229,14 @@ export default ({ fields, array, data, limit, bordered, xs = 12, sm = 12, md = 1
                     <div className="table-responsive flex-fill">
                         <Table dark={dark} bordered={bordered} hover borderless={borderless} className={innerClassName}>
                             <thead className="bg-soft text-secondary"><tr>{titles}</tr></thead>
-                            <tbody className="bg-soft-50 text-secondary">{content}</tbody>
+                            <tbody className="bg-soft-50 text-secondary">{!loading && content}</tbody>
                         </Table>
                     </div>
+
+                    {loading && <Col xs={12} className="text-center">
+                        {/* <TableSpinner /> */}
+                        <div className="text-center py-3">Processing...</div>
+                    </Col>}
 
                     <div>
                         {children}

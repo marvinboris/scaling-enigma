@@ -18,7 +18,7 @@ class Requests implements ShouldBroadcast
     public $processing;
     public $dev;
     public $important;
-    public $attetion;
+    public $attention;
     public $total;
 
     public function __construct()
@@ -26,24 +26,12 @@ class Requests implements ShouldBroadcast
         $dev_type_id = Type::whereAbbr('DEV')->first()->id;
         $at_type_id = Type::whereAbbr('AT')->first()->id;
 
-        $pending = count(Request::whereStatus(0)->whereNull('type_id')->get());
-        $processing = count(Request::whereStatus(1)->whereNull('type_id')->get());
-        $dev = 0;
-        foreach (Request::whereTypeId($dev_type_id)->get() as $request) {
-            if (in_array($request->status, [0, 1])) $dev++;
-        }
-
-        $important = 0;
-        foreach (Request::whereTypeId(1)->get() as $request) {
-            if (in_array($request->status, [0, 1])) $important++;
-        }
-
-        $attention = 0;
-        foreach (Request::whereTypeId($at_type_id)->get() as $request) {
-            if (in_array($request->status, [0, 1])) $attention++;
-        }
-
-        $total = count(Request::get());
+        $pending = Request::whereStatus(0)->whereNull('type_id')->count();
+        $processing = Request::whereStatus(1)->whereNull('type_id')->count();
+        $dev = Request::whereTypeId($dev_type_id)->whereIn('status', [0, 1])->count();
+        $important = Request::whereTypeId(1)->whereIn('status', [0, 1])->count();
+        $attention = Request::whereTypeId($at_type_id)->whereIn('status', [0, 1])->count();
+        $total = Request::count();
 
         $this->pending = $pending;
         $this->processing = $processing;

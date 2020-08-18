@@ -57,99 +57,97 @@ class Processing extends Component {
         let errors;
         let feedback;
 
-        if (loading) content = <Col xs={12}>
-            <CustomSpinner />
-        </Col>;
-        else {
-            errors = <>
-                <Error err={error} />
-            </>;
-            if (requests) {
-                feedback = <Feedback message={message} />;
+        if (!requests) requests = [];
 
-                const requestsData = requests.map(request => {
-                    const colors = ['orange', 'myprimary', 'red', 'green'];
-                    const texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
-                    const icons = [faSpinner, faSpinner, faTimesCircle, faCheckCircle];
+        let requestsData = [];
 
-                    const country = countries.find(({ country }) => country === request.country);
+        errors = <>
+            <Error err={error} />
+        </>;
 
-                    const descriptionContent = <Description request={request} />;
+        feedback = <Feedback message={message} />;
 
-                    const viewContent = <RequestView request={request} country={country} />;
+        requestsData = requests.map(request => {
+            const colors = ['orange', 'myprimary', 'red', 'green'];
+            const texts = ['Pending', 'Processing', 'Cancelled', 'Solved'];
+            const icons = [faSpinner, faSpinner, faTimesCircle, faCheckCircle];
 
-                    const editContent = <Edit request={updateObject(request, { page_status: 'pending' })} />;
+            const country = countries.find(({ country }) => country === request.country);
 
-                    return updateObject(request, {
-                        ref: <div className="d-flex justify-content-between position-relative" style={{ minWidth: request.status === 1 ? 130 : 0 }}>
-                            {request.ref}
-                            <WithTooltip id={'request-' + request.reqid} content={request.edited_by}>
-                                {request.status === 1 ?
-                                    <Badge color={colors[request.status]} style={{ width: 70 }} className="position-static d-inline-block text-center ml-2">
-                                        <Counter start={request.updated_at} />
-                                    </Badge> :
-                                    <Badge color={colors[request.status]} style={{ width: 20, height: 20 }} className="position-static p-0 ml-2 rounded-circle d-inline-flex justify-content-center align-items-center">
-                                        <FontAwesomeIcon icon={icons[request.status]} className={[0, 1].includes(request.status) ? "fa-spin" : ""} fixedWidth />
-                                    </Badge>}
-                            </WithTooltip>
-                        </div>,
-                        created_at: convertDate(request.created_at),
-                        status: <Badge color={colors[request.status]} className="badge-block position-static"><FontAwesomeIcon icon={icons[request.status]} className={[0, 1].includes(request.status) ? "fa-spin" : ""} fixedWidth /> {texts[request.status]}</Badge>,
-                        documents: <Badge color="nightblue" className="badge-block position-static"><FontAwesomeIcon icon={faFileArchive} className="text-orange" fixedWidth /> {request.documents.length} Document{request.documents.length > 1 ? 's' : ''}</Badge>,
-                        attachment: <Badge color="nightblue" className="badge-block position-static"><FontAwesomeIcon icon={faFileArchive} className="text-orange" fixedWidth /> {request.issue_files.length} Attached File{request.issue_files.length > 1 ? 's' : ''}</Badge>,
-                        description: <div className="d-flex">
-                            <div style={{ maxWidth: 150 }} className="flex-fill text-truncate">{request.description}</div>
-                            <View title={'Request description: ' + request.reqid} content={descriptionContent}>
-                                <FontAwesomeIcon icon={faEye} className="text-green" fixedWidth />
-                            </View>
-                        </div>,
-                        action: <div className="text-center">
-                            <View title={'Request details: ' + request.reqid} content={viewContent}>
-                                <FontAwesomeIcon icon={faEye} className="text-green mr-2" fixedWidth />
-                            </View>
-                            <View title={'Request edit: ' + request.reqid} content={editContent}>
-                                <FontAwesomeIcon icon={faEdit} className="text-brokenblue mr-2" fixedWidth />
-                            </View>
-                            <a href={'/request/details/' + request.external} target="_blank" className="text-decoration-none">
-                                <FontAwesomeIcon icon={faExternalLinkAlt} className="text-secondary mr-2" fixedWidth />
-                            </a>
-                            <Delete deleteAction={() => this.props.onPostRequestDelete(request.id)}><FontAwesomeIcon icon={faTrash} className="text-red mr-2" fixedWidth /></Delete>
-                            <FontAwesomeIcon icon={faDownload} className="text-darkblue" fixedWidth />
-                        </div>,
-                        country: <div className="d-flex align-items-center">
-                            <div className="border border-1 border-white rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center mr-2" style={{ width: 20, height: 20 }}>
-                                <span className={`flag-icon text-large position-absolute flag-icon-${request.country.toLowerCase()}`} />
-                            </div>
+            const descriptionContent = <Description request={request} />;
 
-                            {country ? country.name : null}
-                        </div>,
-                    });
-                });
+            const viewContent = <RequestView request={request} country={country} />;
 
-                content = (
-                    <>
-                        <Row>
-                            <List array={requestsData} data={JSON.stringify(requests)} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Processing Requests" className="bg-white shadow-sm"
-                                fields={[
-                                    { name: 'Creation Date', key: 'created_at' },
-                                    { name: 'User ID', key: 'ref' },
-                                    { name: 'Full Name', key: 'name' },
-                                    { name: 'Platform', key: 'platform' },
-                                    { name: 'Issue', key: 'issue' },
-                                    { name: 'E-Mail', key: 'email' },
-                                    { name: 'Country', key: 'country' },
-                                    { name: 'Phone Number', key: 'phone' },
-                                    { name: 'User Documents', key: 'documents', minWidth: 150 },
-                                    { name: 'Description', key: 'description' },
-                                    { name: 'Attached Files', key: 'attachment', minWidth: 180 },
-                                    { name: 'Status', key: 'status', minWidth: 140 },
-                                    { name: 'Action', key: 'action', fixed: true }
-                                ]} />
-                        </Row>
-                    </>
-                );
-            }
-        }
+            const editContent = <Edit request={updateObject(request, { page_status: 'pending' })} />;
+
+            return updateObject(request, {
+                ref: <div className="d-flex justify-content-between position-relative" style={{ minWidth: request.status === 1 ? 130 : 0 }}>
+                    {request.ref}
+                    <WithTooltip id={'request-' + request.reqid} content={request.edited_by}>
+                        {request.status === 1 ?
+                            <Badge color={colors[request.status]} style={{ width: 70 }} className="position-static d-inline-block text-center ml-2">
+                                <Counter start={request.updated_at} />
+                            </Badge> :
+                            <Badge color={colors[request.status]} style={{ width: 20, height: 20 }} className="position-static p-0 ml-2 rounded-circle d-inline-flex justify-content-center align-items-center">
+                                <FontAwesomeIcon icon={icons[request.status]} className={[0, 1].includes(request.status) ? "fa-spin" : ""} fixedWidth />
+                            </Badge>}
+                    </WithTooltip>
+                </div>,
+                created_at: convertDate(request.created_at),
+                status: <Badge color={colors[request.status]} className="badge-block position-static"><FontAwesomeIcon icon={icons[request.status]} className={[0, 1].includes(request.status) ? "fa-spin" : ""} fixedWidth /> {texts[request.status]}</Badge>,
+                documents: <Badge color="nightblue" className="badge-block position-static"><FontAwesomeIcon icon={faFileArchive} className="text-orange" fixedWidth /> {request.documents.length} Document{request.documents.length > 1 ? 's' : ''}</Badge>,
+                attachment: <Badge color="nightblue" className="badge-block position-static"><FontAwesomeIcon icon={faFileArchive} className="text-orange" fixedWidth /> {request.issue_files.length} Attached File{request.issue_files.length > 1 ? 's' : ''}</Badge>,
+                description: <div className="d-flex">
+                    <div style={{ maxWidth: 150 }} className="flex-fill text-truncate">{request.description}</div>
+                    <View title={'Request description: ' + request.reqid} content={descriptionContent}>
+                        <FontAwesomeIcon icon={faEye} className="text-green" fixedWidth />
+                    </View>
+                </div>,
+                action: <div className="text-center">
+                    <View title={'Request details: ' + request.reqid} content={viewContent}>
+                        <FontAwesomeIcon icon={faEye} className="text-green mr-2" fixedWidth />
+                    </View>
+                    <View title={'Request edit: ' + request.reqid} content={editContent}>
+                        <FontAwesomeIcon icon={faEdit} className="text-brokenblue mr-2" fixedWidth />
+                    </View>
+                    <a href={'/request/details/' + request.external} target="_blank" className="text-decoration-none">
+                        <FontAwesomeIcon icon={faExternalLinkAlt} className="text-secondary mr-2" fixedWidth />
+                    </a>
+                    <Delete deleteAction={() => this.props.onPostRequestDelete(request.id)}><FontAwesomeIcon icon={faTrash} className="text-red mr-2" fixedWidth /></Delete>
+                    <FontAwesomeIcon icon={faDownload} className="text-darkblue" fixedWidth />
+                </div>,
+                country: <div className="d-flex align-items-center">
+                    <div className="border border-1 border-white rounded-circle overflow-hidden position-relative d-flex justify-content-center align-items-center mr-2" style={{ width: 20, height: 20 }}>
+                        <span className={`flag-icon text-large position-absolute flag-icon-${request.country.toLowerCase()}`} />
+                    </div>
+
+                    {country ? country.name : null}
+                </div>,
+            });
+        });
+
+        content = (
+            <>
+                <Row>
+                    <List loading={loading} array={requestsData} data={JSON.stringify(requests)} get={this.props.onGetProcessingRequests} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Processing Requests" className="bg-white shadow-sm"
+                        fields={[
+                            { name: 'Creation Date', key: 'created_at' },
+                            { name: 'User ID', key: 'ref' },
+                            { name: 'Full Name', key: 'name' },
+                            { name: 'Platform', key: 'platform' },
+                            { name: 'Issue', key: 'issue' },
+                            { name: 'E-Mail', key: 'email' },
+                            { name: 'Country', key: 'country' },
+                            { name: 'Phone Number', key: 'phone' },
+                            { name: 'User Documents', key: 'documents', minWidth: 150 },
+                            { name: 'Description', key: 'description' },
+                            { name: 'Attached Files', key: 'attachment', minWidth: 180 },
+                            { name: 'Status', key: 'status', minWidth: 140 },
+                            { name: 'Action', key: 'action', fixed: true }
+                        ]} />
+                </Row>
+            </>
+        );
 
         return (
             <>
@@ -171,7 +169,7 @@ class Processing extends Component {
 const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
-    onGetProcessingRequests: () => dispatch(actions.getProcessingRequests()),
+    onGetProcessingRequests: (page, show, search) => dispatch(actions.getProcessingRequests(page, show, search)),
     onPostRequestDelete: id => dispatch(actions.postRequestDelete(id)),
     onPostRequestUpdate: (id, data) => dispatch(actions.postRequestUpdate(id, data)),
     onResetRequests: () => dispatch(actions.resetRequests()),

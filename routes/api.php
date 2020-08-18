@@ -181,6 +181,12 @@ Route::post('test', function (Request $request) {
     ];
 })->middleware('optimizeImages');
 
-Route::get('view', function () {
-    return view('test');
+Route::get('query', function () {
+    $show = request()->show;
+    $search = request()->search;
+
+    dd([
+        'show' => $show,
+        'search' => $search,
+    ]);
 });
