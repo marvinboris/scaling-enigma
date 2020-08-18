@@ -39,7 +39,7 @@ export default ({ fields, array, loading = false, get, total = 0, data, limit, b
     });
     const limitedArray = show === 'All' ? filteredArray : filteredArray.filter((item, i) => (i >= (page - 1) * show) && (i < page * show));
 
-    const pageNumber = Math.ceil(filteredArray.length / show);
+    const pageNumber = Math.ceil(total / show);
 
     const content = limitedArray.map((item, index) => {
         if (limit && index >= limit) return null;

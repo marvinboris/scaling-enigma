@@ -189,7 +189,7 @@ var timeout;
   var limitedArray = show === 'All' ? filteredArray : filteredArray.filter(function (item, i) {
     return i >= (page - 1) * show && i < page * show;
   });
-  var pageNumber = Math.ceil(filteredArray.length / show);
+  var pageNumber = Math.ceil(total / show);
   var content = limitedArray.map(function (item, index) {
     if (limit && index >= limit) return null;
     var inside = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
