@@ -50,7 +50,7 @@ class RequestReport extends Component {
     }
 
     render() {
-        let { backend: { requests: { loading, error, message, requests } } } = this.props;
+        let { backend: { requests: { loading, error, message, requests, total } } } = this.props;
         const { countries } = this.state;
 
         let content;
@@ -123,7 +123,7 @@ class RequestReport extends Component {
 
         content = (
             <Row>
-                <List loading={loading} array={requestsData} data={JSON.stringify(requests)} get={this.props.onGetRequests} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Request Report" className="bg-white shadow-sm"
+                <List loading={loading} array={requestsData} data={JSON.stringify(requests)} get={this.props.onGetRequests} total={total} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Request Report" className="bg-white shadow-sm"
                     fields={[
                         { name: 'Creation Date', key: 'created_at' },
                         { name: 'User ID', key: 'ref' },

@@ -50,7 +50,7 @@ class Cancelled extends Component {
     }
 
     render() {
-        let { backend: { requests: { loading, error, message, requests } } } = this.props;
+        let { backend: { requests: { loading, error, message, requests, total } } } = this.props;
         const { countries } = this.state;
 
         let content;
@@ -128,7 +128,7 @@ class Cancelled extends Component {
 
         content = (
             <Row>
-                <List loading={loading} array={requestsData} data={JSON.stringify(requests)} get={this.props.onGetCancelledRequests} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Cancelled Requests" className="bg-white shadow-sm"
+                <List loading={loading} array={requestsData} data={JSON.stringify(requests)} get={this.props.onGetCancelledRequests} total={total} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Cancelled Requests" className="bg-white shadow-sm"
                     fields={[
                         { name: 'Creation Date', key: 'created_at' },
                         { name: 'User ID', key: 'ref' },

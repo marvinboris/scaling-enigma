@@ -77,6 +77,8 @@ var timeout;
       _ref$loading = _ref.loading,
       loading = _ref$loading === void 0 ? false : _ref$loading,
       get = _ref.get,
+      _ref$total = _ref.total,
+      total = _ref$total === void 0 ? 0 : _ref$total,
       data = _ref.data,
       limit = _ref.limit,
       bordered = _ref.bordered,
@@ -498,7 +500,7 @@ var timeout;
     className: "text-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "text-center py-3"
-  }, "Processing...")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Showing ", limitedArray.length, " of ", filteredArray.length, " entries."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Processing...")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Showing ", total > show ? show : total, " of ", total, " entries."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "pt-2 d-flex justify-content-end"
   }, show === 'All' ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
     className: "pagination btn-group"

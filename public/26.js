@@ -231,7 +231,8 @@ var Processing = /*#__PURE__*/function (_Component) {
           statusLoading = _this$props$backend$r.statusLoading,
           error = _this$props$backend$r.error,
           message = _this$props$backend$r.message,
-          requests = _this$props$backend$r.requests;
+          requests = _this$props$backend$r.requests,
+          total = _this$props$backend$r.total;
       var countries = this.state.countries;
       var content;
       var errors;
@@ -388,6 +389,7 @@ var Processing = /*#__PURE__*/function (_Component) {
         array: requestsData,
         data: JSON.stringify(requests),
         get: this.props.onGetProcessingRequests,
+        total: total,
         bordered: true,
         add: "File a Request",
         link: "/user/requests/add",

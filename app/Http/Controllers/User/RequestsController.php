@@ -22,6 +22,8 @@ class RequestsController extends Controller
         $show = request()->show;
         $search = request()->search;
 
+        $total = 0;
+
         $requests = [];
         $filteredRequests = [];
         switch ($status) {
@@ -71,6 +73,7 @@ class RequestsController extends Controller
 
             if ($show !== 'All') $filteredRequests = $filteredRequests->skip(($page - 1) * $show)->take($show);
 
+            $total = $filteredRequests->count();
             $filteredRequests = $filteredRequests->get();
         }
 
@@ -82,94 +85,137 @@ class RequestsController extends Controller
             ]);
         }
 
-        return $requests;
+        return [
+            'requests' => $requests,
+            'total' => $total,
+        ];
     }
 
 
     public function index()
     {
-        $requests = $this->requests();
+        $data = $this->requests();
+
+        $requests = $data['requests'];
+        $total = $data['total'];
+
         $types = Type::all();
 
         return response()->json([
             'requests' => $requests,
+            'total' => $total,
             'types' => $types,
         ]);
     }
 
     public function important()
     {
-        $requests = $this->requests('important');
+        $data = $this->requests('important');
+
+        $requests = $data['requests'];
+        $total = $data['total'];
+
         $types = Type::all();
 
         return response()->json([
             'requests' => $requests,
+            'total' => $total,
             'types' => $types,
         ]);
     }
 
     public function attention()
     {
-        $requests = $this->requests('attention');
+        $data = $this->requests('attention');
+
+        $requests = $data['requests'];
+        $total = $data['total'];
+
         $types = Type::all();
 
         return response()->json([
             'requests' => $requests,
+            'total' => $total,
             'types' => $types,
         ]);
     }
 
     public function dev()
     {
-        $requests = $this->requests('dev');
+        $data = $this->requests('dev');
+
+        $requests = $data['requests'];
+        $total = $data['total'];
+
         $types = Type::all();
 
         return response()->json([
             'requests' => $requests,
+            'total' => $total,
             'types' => $types,
         ]);
     }
 
     public function pending()
     {
-        $requests = $this->requests('pending');
+        $data = $this->requests('pending');
+
+        $requests = $data['requests'];
+        $total = $data['total'];
+
         $types = Type::all();
 
         return response()->json([
             'requests' => $requests,
+            'total' => $total,
             'types' => $types,
         ]);
     }
 
     public function processing()
     {
-        $requests = $this->requests('processing');
+        $data = $this->requests('processing');
+
+        $requests = $data['requests'];
+        $total = $data['total'];
+
         $types = Type::all();
 
         return response()->json([
             'requests' => $requests,
+            'total' => $total,
             'types' => $types,
         ]);
     }
 
     public function solved()
     {
-        $requests = $this->requests('solved');
+        $data = $this->requests('solved');
+
+        $requests = $data['requests'];
+        $total = $data['total'];
+
         $types = Type::all();
 
         return response()->json([
             'requests' => $requests,
+            'total' => $total,
             'types' => $types,
         ]);
     }
 
     public function cancelled()
     {
-        $requests = $this->requests('cancelled');
+        $data = $this->requests('cancelled');
+
+        $requests = $data['requests'];
+        $total = $data['total'];
+
         $types = Type::all();
 
         return response()->json([
             'requests' => $requests,
+            'total' => $total,
             'types' => $types,
         ]);
     }
@@ -204,7 +250,10 @@ class RequestsController extends Controller
             $appRequest->update($request->only(['type_id', 'translate']));
         }
 
-        $requests = $this->requests($request->page_status);
+        $data = $this->requests($request->page_status);
+
+        $requests = $data['requests'];
+        $total = $data['total'];
 
         event(new Dashboard());
         event(new Requests());
@@ -214,7 +263,8 @@ class RequestsController extends Controller
                 'type' => 'success',
                 'content' => 'Successfully updated request.'
             ],
-            'requests' => $requests
+            'requests' => $requests,
+            'total' => $total,
         ]);
     }
 
@@ -230,7 +280,10 @@ class RequestsController extends Controller
 
         $appRequest->delete();
 
-        $requests = $this->requests($request->page_status);
+        $data = $this->requests($request->page_status);
+
+        $requests = $data['requests'];
+        $total = $data['total'];
 
         event(new Requests());
         event(new Dashboard());
@@ -241,6 +294,7 @@ class RequestsController extends Controller
                 'content' => 'Successfully deleted request.'
             ],
             'requests' => $requests,
+            'total' => $total,
         ]);
     }
 
@@ -256,7 +310,10 @@ class RequestsController extends Controller
 
         $appRequest->update(['approved' => $appRequest->approved === 0 ? 1 : 0]);
 
-        $requests = $this->requests($request->page_status);
+        $data = $this->requests($request->page_status);
+
+        $requests = $data['requests'];
+        $total = $data['total'];
 
         return response()->json([
             'message' => [
@@ -264,6 +321,7 @@ class RequestsController extends Controller
                 'content' => 'Successfully deleted request.'
             ],
             'requests' => $requests,
+            'total' => $total,
         ]);
     }
 }

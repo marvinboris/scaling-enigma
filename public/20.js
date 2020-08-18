@@ -193,7 +193,8 @@ var RequestReport = /*#__PURE__*/function (_Component) {
           loading = _this$props$backend$r.loading,
           error = _this$props$backend$r.error,
           message = _this$props$backend$r.message,
-          requests = _this$props$backend$r.requests;
+          requests = _this$props$backend$r.requests,
+          total = _this$props$backend$r.total;
       var countries = this.state.countries;
       var content;
       var errors;
@@ -326,6 +327,7 @@ var RequestReport = /*#__PURE__*/function (_Component) {
         array: requestsData,
         data: JSON.stringify(requests),
         get: this.props.onGetRequests,
+        total: total,
         bordered: true,
         add: "File a Request",
         link: "/user/requests/add",

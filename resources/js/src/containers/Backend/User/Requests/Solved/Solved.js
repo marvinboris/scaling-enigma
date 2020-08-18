@@ -50,7 +50,7 @@ class Solved extends Component {
     }
 
     render() {
-        let { backend: { requests: { loading, error, message, requests } } } = this.props;
+        let { backend: { requests: { loading, error, message, requests, total } } } = this.props;
         const { countries } = this.state;
 
         let content;
@@ -129,7 +129,7 @@ class Solved extends Component {
         content = (
             <>
                 <Row>
-                    <List loading={loading} array={requestsData} data={JSON.stringify(requests)} get={this.props.onGetSolvedRequests} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Solved Requests" className="bg-white shadow-sm"
+                    <List loading={loading} array={requestsData} data={JSON.stringify(requests)} get={this.props.onGetSolvedRequests} total={total} bordered add="File a Request" link="/user/requests/add" icon={faCalendarAlt} title="Solved Requests" className="bg-white shadow-sm"
                         fields={[
                             { name: 'Creation Date', key: 'created_at' },
                             { name: 'User ID', key: 'ref' },

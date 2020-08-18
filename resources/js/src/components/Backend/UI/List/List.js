@@ -11,7 +11,7 @@ import { updateObject } from '../../../../shared/utility';
 
 let timeout;
 
-export default ({ fields, array, loading = false, get, data, limit, bordered, xs = 12, sm = 12, md = 12, lg = 12, xl = 12, icon, title, add, link, className = '', dark, borderless, innerClassName = '', outerClassName = '', p0, select, children, selectHandler, style }) => {
+export default ({ fields, array, loading = false, get, total = 0, data, limit, bordered, xs = 12, sm = 12, md = 12, lg = 12, xl = 12, icon, title, add, link, className = '', dark, borderless, innerClassName = '', outerClassName = '', p0, select, children, selectHandler, style }) => {
     const titles = fields.map(({ name, fixed }) => <th className="align-middle text-nowrap bg-soft" style={fixed ? { position: 'sticky', right: 0 } : {}} key={name}>{name}</th>);
     titles.unshift(<th className="text-center align-middle" key="#">SL</th>);
     if (select) titles.unshift(<th className="align-middle text-center" key="select_all">
@@ -243,7 +243,7 @@ export default ({ fields, array, loading = false, get, data, limit, bordered, xs
                     </div>
 
                     <div>
-                        <div>Showing {limitedArray.length} of {filteredArray.length} entries.</div>
+                        <div>Showing {total > show ? show : total} of {total} entries.</div>
 
                         <div className="pt-2 d-flex justify-content-end">
                             {show === 'All' ? null : <ul className="pagination btn-group">
