@@ -23,12 +23,24 @@ class Edit extends Component {
         page_status: '',
         status: 0,
         comments: '',
-        admin_files: []
+        admin_files: [],
+
+        show: 10,
+        page: 1,
+        search: '',
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.request && prevState.page_status === '') return updateObject(prevState, { ...nextProps.request });
         return prevState;
+    }
+
+    componentDidMount() {
+        const show = document.getElementById('table-show').value;
+        const page = document.getElementById('table-page').value;
+        const search = document.getElementById('table-search').value;
+
+        this.setState({ show, page, search });
     }
 
     inputChangedHandler = e => {
@@ -47,7 +59,7 @@ class Edit extends Component {
     }
 
     render() {
-        const { page_status, status, comments, admin_files, id } = this.state;
+        const { page_status, status, comments, admin_files, id, show, page, search } = this.state;
         let { request, country } = this.props;
         const colors = ['orange', 'primary', 'danger', 'success'];
 
@@ -178,6 +190,9 @@ class Edit extends Component {
                 </FormGroup>
             </>}
             <input type="hidden" name="page_status" value={page_status} />
+            <input type="hidden" name="show" value={show} />
+            <input type="hidden" name="page" value={page} />
+            <input type="hidden" name="search" value={search} />
 
             <div className="mt-4">
                 {additionalContent}

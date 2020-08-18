@@ -139,6 +139,10 @@ export default ({ fields, array, loading = false, get, total = 0, data, limit, b
 
     return (
         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} className={outerClassName}>
+            <input type="hidden" id="table-show" value={show} />
+            <input type="hidden" id="table-page" value={page} />
+            <input type="hidden" id="table-search" value={search} />
+
             <div className={"rounded-4 d-flex justify-content-between align-items-center mb-5 mt-3 py-4 px-4 text-large " + className}>
                 <span className="d-inline-flex align-items-center text-700 text-orange">{icon ? <FontAwesomeIcon fixedWidth className="mr-2" icon={icon} size="lg" /> : null}<span className="text-brokenblue">{title}</span></span>
 

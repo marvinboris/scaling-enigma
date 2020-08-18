@@ -550,7 +550,10 @@ var Edit = /*#__PURE__*/function (_Component) {
       page_status: '',
       status: 0,
       comments: '',
-      admin_files: []
+      admin_files: [],
+      show: 10,
+      page: 1,
+      search: ''
     });
 
     _defineProperty(_assertThisInitialized(_this), "inputChangedHandler", function (e) {
@@ -580,6 +583,18 @@ var Edit = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(Edit, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var show = document.getElementById('table-show').value;
+      var page = document.getElementById('table-page').value;
+      var search = document.getElementById('table-search').value;
+      this.setState({
+        show: show,
+        page: page,
+        search: search
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,
@@ -587,7 +602,10 @@ var Edit = /*#__PURE__*/function (_Component) {
           status = _this$state.status,
           comments = _this$state.comments,
           admin_files = _this$state.admin_files,
-          id = _this$state.id;
+          id = _this$state.id,
+          show = _this$state.show,
+          page = _this$state.page,
+          search = _this$state.search;
       var _this$props = this.props,
           request = _this$props.request,
           country = _this$props.country;
@@ -820,6 +838,18 @@ var Edit = /*#__PURE__*/function (_Component) {
         type: "hidden",
         name: "page_status",
         value: page_status
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        name: "show",
+        value: show
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        name: "page",
+        value: page
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        name: "search",
+        value: search
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "mt-4"
       }, additionalContent));
