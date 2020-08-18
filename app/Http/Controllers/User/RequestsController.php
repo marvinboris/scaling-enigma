@@ -55,7 +55,7 @@ class RequestsController extends Controller
                 $filteredRequests = AppRequest::latest()->limit(5)->get();
                 break;
             default:
-                $filteredRequests = AppRequest::whereBetween('status', [0, 3]);
+                $filteredRequests = AppRequest::latest();
                 break;
         }
 
