@@ -96,7 +96,10 @@ var twoDigits = function twoDigits(number) {
       time = _useState2[0],
       setTime = _useState2[1];
 
-  setInterval(function () {
+  var counterStart = new Date(start).getTime();
+  var counterEnd = counterStart + 72 * 3600 * 1000;
+  var now = new Date().getTime();
+  if (counterEnd - now < 0) setTime('Expired');else setInterval(function () {
     var counterStart = new Date(start).getTime();
     var counterEnd = counterStart + 72 * 3600 * 1000;
     var now = new Date().getTime();
