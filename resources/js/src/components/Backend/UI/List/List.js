@@ -53,7 +53,7 @@ export default ({ fields, array, loading = false, get, total = 0, data, limit, b
         if (name === 'search') {
             if (timeout) clearTimeout(timeout);
             timeout = setTimeout(() => {
-                get(page, show, search);
+                get(page, show, value);
                 clearTimeout(timeout);
             }, 1000);
             return setSearch(value);
@@ -217,11 +217,11 @@ export default ({ fields, array, loading = false, get, total = 0, data, limit, b
                                         <li className="btn btn-darkblue text-secondary" onClick={(previousPageHandler)}><FontAwesomeIcon icon={faChevronLeft} /></li>
                                     </>
                                 }
-                                {pageFirst > 0 && <li className={"btn btn-darkblue " + (page === pageFirst ? 'text-700 active' : 'secondary')} onClick={() => pageChangeHandler(pageFirst)}>{pageFirst}</li>}
+                                {pageFirst > 0 && <li className={`btn btn-darkblue ${page === pageFirst ? 'text-700 active' : 'secondary'}`} onClick={() => pageChangeHandler(pageFirst)}>{pageFirst}</li>}
                                 {pageNumber > 1 ?
                                     <>
-                                        <li className={"btn btn-darkblue " + (page === pageSecond ? 'text-700 active' : 'secondary')} onClick={() => pageChangeHandler(pageSecond)}>{pageSecond}</li>
-                                        {pageNumber > 2 && <li className={"btn btn-darkblue " + (page === pageLast ? 'text-700 active' : 'secondary')} onClick={() => pageChangeHandler(pageLast)}>{pageLast}</li>}
+                                        <li className={`btn btn-darkblue ${page === pageSecond ? 'text-700 active' : 'secondary'}`} onClick={() => pageChangeHandler(pageSecond)}>{pageSecond}</li>
+                                        {pageNumber > 2 && <li className={`btn btn-darkblue ${page === pageLast ? 'text-700 active' : 'secondary'}`} onClick={() => pageChangeHandler(pageLast)}>{pageLast}</li>}
                                         {page === pageNumber ? null :
                                             <>
                                                 <li className="btn btn-darkblue text-secondary" onClick={nextPageHandler}><FontAwesomeIcon icon={faChevronRight} /></li>

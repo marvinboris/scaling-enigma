@@ -213,7 +213,7 @@ var timeout;
     if (name === 'search') {
       if (timeout) clearTimeout(timeout);
       timeout = setTimeout(function () {
-        get(page, show, search);
+        get(page, show, value);
         clearTimeout(timeout);
       }, 1000);
       return setSearch(value);
@@ -473,17 +473,17 @@ var timeout;
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faChevronLeft"]
   }))), pageFirst > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-    className: "btn btn-darkblue " + (page === pageFirst ? 'text-700 active' : 'secondary'),
+    className: "btn btn-darkblue ".concat(page === pageFirst ? 'text-700 active' : 'secondary'),
     onClick: function onClick() {
       return pageChangeHandler(pageFirst);
     }
   }, pageFirst), pageNumber > 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-    className: "btn btn-darkblue " + (page === pageSecond ? 'text-700 active' : 'secondary'),
+    className: "btn btn-darkblue ".concat(page === pageSecond ? 'text-700 active' : 'secondary'),
     onClick: function onClick() {
       return pageChangeHandler(pageSecond);
     }
   }, pageSecond), pageNumber > 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-    className: "btn btn-darkblue " + (page === pageLast ? 'text-700 active' : 'secondary'),
+    className: "btn btn-darkblue ".concat(page === pageLast ? 'text-700 active' : 'secondary'),
     onClick: function onClick() {
       return pageChangeHandler(pageLast);
     }
