@@ -9,7 +9,7 @@ export default ({ start }) => {
     const counterEnd = counterStart + 72 * 3600 * 1000;
     const now = new Date().getTime();
 
-    if (counterEnd - now < 0) setTime('Expired');
+    if (counterEnd - now < 0) return 'Expired';
     else setInterval(() => {
         const counterStart = new Date(start).getTime();
         const counterEnd = counterStart + 72 * 3600 * 1000;

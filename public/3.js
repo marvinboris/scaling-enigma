@@ -99,7 +99,7 @@ var twoDigits = function twoDigits(number) {
   var counterStart = new Date(start).getTime();
   var counterEnd = counterStart + 72 * 3600 * 1000;
   var now = new Date().getTime();
-  if (counterEnd - now < 0) setTime('Expired');else setInterval(function () {
+  if (counterEnd - now < 0) return 'Expired';else setInterval(function () {
     var counterStart = new Date(start).getTime();
     var counterEnd = counterStart + 72 * 3600 * 1000;
     var now = new Date().getTime();
