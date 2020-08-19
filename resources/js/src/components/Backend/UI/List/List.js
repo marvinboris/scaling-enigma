@@ -221,9 +221,7 @@ export default ({ fields, array, loading = false, get, total = 0, data, limit, b
                                 {pageNumber > 1 ?
                                     <>
                                         <li className={"btn btn-darkblue " + (page === pageSecond ? 'text-700 active' : 'secondary')} onClick={() => pageChangeHandler(pageSecond)}>{pageSecond}</li>
-                                        {pageNumber > 2 ?
-                                            <li className={"btn btn-darkblue " + (page === pageLast ? 'text-700 active' : 'secondary')} onClick={() => pageChangeHandler(pageLast)}>{pageLast}</li>
-                                            : null}
+                                        {pageNumber > 1 && <li className={"btn btn-darkblue " + (page === pageLast ? 'text-700 active' : 'secondary')} onClick={() => pageChangeHandler(pageLast)}>{pageLast}</li>}
                                         {page === pageNumber ? null :
                                             <>
                                                 <li className="btn btn-darkblue text-secondary" onClick={nextPageHandler}><FontAwesomeIcon icon={faChevronRight} /></li>
