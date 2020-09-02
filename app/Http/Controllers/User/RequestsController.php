@@ -60,11 +60,17 @@ class RequestsController extends Controller
         }
 
         if ($status !== 'dashboard') {
-            $filteredRequests = $filteredRequests->when($search, function ($query, $search) {
-                if ($search !== "")
-                    $query->where('reqid', 'LIKE', "%$search%")
-                        ->orWhere('ref', 'LIKE', "%$search%");
-            });
+            $filteredRequests = $filteredRequests
+                ->join('issues', 'issues.id', '=', 'requests.issue_id')
+                ->join('platforms', 'platforms.id', '=', 'requests.platform_id')
+                ->select('requests.*')
+                ->when($search, function ($query, $search) {
+                    if ($search !== "")
+                        $query->where('reqid', 'LIKE', "%$search%")
+                            ->orWhere('platforms.name', 'LIKE', "%$search%")
+                            ->orWhere('issues.name', 'LIKE', "%$search%")
+                            ->orWhere('ref', 'LIKE', "%$search%");
+                });
 
             $total = $filteredRequests->count();
 

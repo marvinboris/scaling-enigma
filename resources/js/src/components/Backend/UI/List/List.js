@@ -137,6 +137,9 @@ export default ({ fields, array, loading = false, get, total = 0, data, limit, b
         }
     }
 
+    const modulo = total % show;
+    const entries = total === 0 ? total : (modulo !== 0 ? modulo : show);
+
     return (
         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} className={outerClassName}>
             <input type="hidden" id="table-show" value={show} />
@@ -207,7 +210,7 @@ export default ({ fields, array, loading = false, get, total = 0, data, limit, b
                     </div>
 
                     <div>
-                        <div>Showing {total > show ? show : total} of {total} entries.</div>
+                        <div>Showing {page !== pageNumber ? show : entries} of {total} entries.</div>
 
                         <div className="pt-2 d-flex justify-content-end">
                             {show === 'All' ? null : <ul className="pagination btn-group">
@@ -217,11 +220,13 @@ export default ({ fields, array, loading = false, get, total = 0, data, limit, b
                                         <li className="btn btn-darkblue text-secondary" onClick={(previousPageHandler)}><FontAwesomeIcon icon={faChevronLeft} /></li>
                                     </>
                                 }
-                                {pageFirst > 0 && <li className={`btn btn-darkblue ${page === pageFirst ? 'text-700 active' : 'secondary'}`} onClick={() => pageChangeHandler(pageFirst)}>{pageFirst}</li>}
+                                <li className={"btn btn-darkblue " + (page === pageFirst ? 'text-700 active' : 'secondary')} onClick={() => pageChangeHandler(pageFirst)}>{pageFirst}</li>
                                 {pageNumber > 1 ?
                                     <>
-                                        <li className={`btn btn-darkblue ${page === pageSecond ? 'text-700 active' : 'secondary'}`} onClick={() => pageChangeHandler(pageSecond)}>{pageSecond}</li>
-                                        {pageNumber > 2 && <li className={`btn btn-darkblue ${page === pageLast ? 'text-700 active' : 'secondary'}`} onClick={() => pageChangeHandler(pageLast)}>{pageLast}</li>}
+                                        <li className={"btn btn-darkblue " + (page === pageSecond ? 'text-700 active' : 'secondary')} onClick={() => pageChangeHandler(pageSecond)}>{pageSecond}</li>
+                                        {pageNumber > 2 ?
+                                            <li className={"btn btn-darkblue " + (page === pageLast ? 'text-700 active' : 'secondary')} onClick={() => pageChangeHandler(pageLast)}>{pageLast}</li>
+                                            : null}
                                         {page === pageNumber ? null :
                                             <>
                                                 <li className="btn btn-darkblue text-secondary" onClick={nextPageHandler}><FontAwesomeIcon icon={faChevronRight} /></li>
