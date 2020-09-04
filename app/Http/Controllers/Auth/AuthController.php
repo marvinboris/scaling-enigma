@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UtilController;
 use App\Mail\VerificationCode;
 use App\Request as AppRequest;
 use App\Type;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use ReCaptcha\ReCaptcha;
 
 class AuthController extends Controller
 {
@@ -34,7 +36,19 @@ class AuthController extends Controller
     {
         $input = $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
+            'g-recaptcha-response' => 'required',
+        ]);
+
+        $recaptcha = new ReCaptcha(env('GOOGLE_RECAPTCHA_SECRET_KEY'));
+        $response = $recaptcha->setExpectedHostname(url())
+            ->verify($request->input('g-recaptcha-response'));
+
+        if (!$response->isSuccess()) return response()->json([
+            'message' => [
+                'type' => 'danger',
+                'content' => implode('\n', $response->getErrorCodes()),
+            ]
         ]);
         $user = User::where('email', $input['email'])->first();
 

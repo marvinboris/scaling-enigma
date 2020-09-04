@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Form, FormGroup, Label, CustomInput } from 'reactstrap';
 import { faLock, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import Layout from '../Layout';
 
@@ -17,7 +18,9 @@ export class Login extends Component {
     state = {
         email: '',
         password: '',
-        otp: 'email'
+        otp: 'email',
+
+        recaptcha: '',
     }
 
     componentDidUpdate() {
@@ -53,7 +56,7 @@ export class Login extends Component {
                 <MyInput type="text" icon={faUser} onChange={this.inputChangeHandler} value={this.state.email} name="email" required placeholder="E-mail address" />
                 <MyInput type="password" icon={faLock} onChange={this.inputChangeHandler} value={this.state.password} name="password" required placeholder="Password" />
 
-                <FormGroup className="ml-2 mt-4 mb-5 d-flex align-items-center text-darkblue">
+                <FormGroup className="ml-2 mt-4 d-flex align-items-center text-darkblue">
                     <div className='text-700 pr-4'>OTP Method</div>
                     <Label check>
                         <CustomInput type="radio" id="sms" name="otp" value="sms" label="SMS" disabled inline />
@@ -61,6 +64,10 @@ export class Login extends Component {
                     <Label check>
                         <CustomInput type="radio" id="email" defaultChecked name="otp" value="email" label="Email" inline />
                     </Label>
+                </FormGroup>
+
+                <FormGroup className="mb-5">
+                    <ReCAPTCHA sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY || '6LdcjMcZAAAAAOvr2pqHWG9NKAvWuZg_GnLT13Eu'} onChange={this.inputChangeHandler} />
                 </FormGroup>
 
                 <BetweenButton color="yellow" pill className="py-3 px-4 btn-block" icon={faSignInAlt}>Sign In</BetweenButton>
