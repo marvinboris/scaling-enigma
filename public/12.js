@@ -359,7 +359,7 @@ var Login = /*#__PURE__*/function (_Component) {
         required: true,
         placeholder: "Password"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
-        className: "ml-2 mt-4 d-flex align-items-center text-darkblue"
+        className: "ml-2 mt-4 mb-5 d-flex align-items-center text-darkblue"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-700 pr-4"
       }, "OTP Method"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
@@ -382,12 +382,7 @@ var Login = /*#__PURE__*/function (_Component) {
         value: "email",
         label: "Email",
         inline: true
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
-        className: "mb-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_google_recaptcha__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        sitekey: GOOGLE_RECAPTCHA_SITE_KEY,
-        onChange: this.inputChangeHandler
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UI_Button_BetweenButton_BetweenButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
         color: "yellow",
         pill: true,
         className: "py-3 px-4 btn-block",

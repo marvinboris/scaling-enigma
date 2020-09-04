@@ -37,19 +37,19 @@ class AuthController extends Controller
         $input = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'g-recaptcha-response' => 'required',
+            // 'g-recaptcha-response' => 'required',
         ]);
 
-        $recaptcha = new ReCaptcha(env('GOOGLE_RECAPTCHA_SECRET_KEY'));
-        $response = $recaptcha->setExpectedHostname(url())
-            ->verify($request->input('g-recaptcha-response'));
+        // $recaptcha = new ReCaptcha(env('GOOGLE_RECAPTCHA_SECRET_KEY'));
+        // $response = $recaptcha->setExpectedHostname(url())
+        //     ->verify($request->input('g-recaptcha-response'));
 
-        if (!$response->isSuccess()) return response()->json([
-            'message' => [
-                'type' => 'danger',
-                'content' => implode('\n', $response->getErrorCodes()),
-            ]
-        ]);
+        // if (!$response->isSuccess()) return response()->json([
+        //     'message' => [
+        //         'type' => 'danger',
+        //         'content' => implode('\n', $response->getErrorCodes()),
+        //     ]
+        // ]);
         $user = User::where('email', $input['email'])->first();
 
         if ($user) {

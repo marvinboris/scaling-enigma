@@ -56,7 +56,7 @@ export class Login extends Component {
                 <MyInput type="text" icon={faUser} onChange={this.inputChangeHandler} value={this.state.email} name="email" required placeholder="E-mail address" />
                 <MyInput type="password" icon={faLock} onChange={this.inputChangeHandler} value={this.state.password} name="password" required placeholder="Password" />
 
-                <FormGroup className="ml-2 mt-4 d-flex align-items-center text-darkblue">
+                <FormGroup className="ml-2 mt-4 mb-5 d-flex align-items-center text-darkblue">
                     <div className='text-700 pr-4'>OTP Method</div>
                     <Label check>
                         <CustomInput type="radio" id="sms" name="otp" value="sms" label="SMS" disabled inline />
@@ -66,9 +66,9 @@ export class Login extends Component {
                     </Label>
                 </FormGroup>
 
-                <FormGroup className="mb-5">
+                {/* <FormGroup className="mb-5">
                     <ReCAPTCHA sitekey={GOOGLE_RECAPTCHA_SITE_KEY} onChange={this.inputChangeHandler} />
-                </FormGroup>
+                </FormGroup> */}
 
                 <BetweenButton color="yellow" pill className="py-3 px-4 btn-block" icon={faSignInAlt}>Sign In</BetweenButton>
             </Form>
