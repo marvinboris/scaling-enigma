@@ -31,6 +31,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import Echo from 'laravel-echo';
 
+window.GOOGLE_RECAPTCHA_SITE_KEY = process.env.MIX_GOOGLE_RECAPTCHA_SITE_KEY;
+
 window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({

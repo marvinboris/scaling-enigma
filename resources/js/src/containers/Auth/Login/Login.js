@@ -67,7 +67,7 @@ export class Login extends Component {
                 </FormGroup>
 
                 <FormGroup className="mb-5">
-                    <ReCAPTCHA sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY || '6LdcjMcZAAAAAOvr2pqHWG9NKAvWuZg_GnLT13Eu'} onChange={this.inputChangeHandler} />
+                    <ReCAPTCHA sitekey={GOOGLE_RECAPTCHA_SITE_KEY} onChange={this.inputChangeHandler} />
                 </FormGroup>
 
                 <BetweenButton color="yellow" pill className="py-3 px-4 btn-block" icon={faSignInAlt}>Sign In</BetweenButton>
