@@ -111,6 +111,9 @@ class RequestReport extends Component {
                     <View title={'Request edit: ' + request.reqid} content={editContent}>
                         <FontAwesomeIcon icon={faEdit} className="text-brokenblue" fixedWidth />
                     </View>
+                    <a href={'/request/details/' + request.external} target="_blank" className="text-decoration-none">
+                        <FontAwesomeIcon icon={faExternalLinkAlt} className="text-secondary mr-2" fixedWidth />
+                    </a>
                     <Delete deleteAction={() => this.props.onPostRequestDelete(request.id)}><FontAwesomeIcon icon={faTrash} className="text-red mr-2" fixedWidth /></Delete>
                     <FontAwesomeIcon icon={faDownload} className="text-darkblue" fixedWidth />
                 </div>,
