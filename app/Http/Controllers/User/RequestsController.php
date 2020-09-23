@@ -51,6 +51,14 @@ class RequestsController extends Controller
                 $type_id = Type::whereAbbr('DEV')->first()->id;
                 $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
                 break;
+            case 'customer-service':
+                $type_id = Type::whereAbbr('CS')->first()->id;
+                $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
+                break;
+            case 'limarket':
+                $type_id = Type::whereAbbr('LI')->first()->id;
+                $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
+                break;
             case 'dashboard':
                 $filteredRequests = AppRequest::latest()->limit(5)->get();
                 break;
@@ -146,6 +154,38 @@ class RequestsController extends Controller
     public function dev()
     {
         $data = $this->requests('dev');
+
+        $requests = $data['requests'];
+        $total = $data['total'];
+
+        $types = Type::all();
+
+        return response()->json([
+            'requests' => $requests,
+            'total' => $total,
+            'types' => $types,
+        ]);
+    }
+
+    public function customer_service()
+    {
+        $data = $this->requests('customer-service');
+
+        $requests = $data['requests'];
+        $total = $data['total'];
+
+        $types = Type::all();
+
+        return response()->json([
+            'requests' => $requests,
+            'total' => $total,
+            'types' => $types,
+        ]);
+    }
+
+    public function limarket()
+    {
+        $data = $this->requests('limarket');
 
         $requests = $data['requests'];
         $total = $data['total'];

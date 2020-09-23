@@ -37,10 +37,10 @@ var parser = new html_to_react__WEBPACK_IMPORTED_MODULE_1__["Parser"]();
 
 /***/ }),
 
-/***/ "./resources/js/src/containers/Backend/User/Requests/Processing/Processing.js":
-/*!************************************************************************************!*\
-  !*** ./resources/js/src/containers/Backend/User/Requests/Processing/Processing.js ***!
-  \************************************************************************************/
+/***/ "./resources/js/src/containers/Backend/User/Requests/Limarket/Limarket.js":
+/*!********************************************************************************!*\
+  !*** ./resources/js/src/containers/Backend/User/Requests/Limarket/Limarket.js ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -129,15 +129,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Processing = /*#__PURE__*/function (_Component) {
-  _inherits(Processing, _Component);
+var Limarket = /*#__PURE__*/function (_Component) {
+  _inherits(Limarket, _Component);
 
-  var _super = _createSuper(Processing);
+  var _super = _createSuper(Limarket);
 
-  function Processing() {
+  function Limarket() {
     var _this;
 
-    _classCallCheck(this, Processing);
+    _classCallCheck(this, Limarket);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -152,7 +152,7 @@ var Processing = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(Processing, [{
+  _createClass(Limarket, [{
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -161,7 +161,7 @@ var Processing = /*#__PURE__*/function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.props.onGetProcessingRequests();
+                this.props.get();
                 cors = 'https://cors-anywhere.herokuapp.com/';
                 _context.next = 4;
                 return fetch(cors + 'http://country.io/phone.json', {
@@ -228,7 +228,6 @@ var Processing = /*#__PURE__*/function (_Component) {
 
       var _this$props$backend$r = this.props.backend.requests,
           loading = _this$props$backend$r.loading,
-          statusLoading = _this$props$backend$r.statusLoading,
           error = _this$props$backend$r.error,
           message = _this$props$backend$r.message,
           requests = _this$props$backend$r.requests,
@@ -262,7 +261,7 @@ var Processing = /*#__PURE__*/function (_Component) {
         });
         var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_18__["default"], {
           request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
-            page_status: 'pending'
+            page_status: 'important'
           })
         });
         return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
@@ -393,13 +392,13 @@ var Processing = /*#__PURE__*/function (_Component) {
         loading: loading,
         array: requestsData,
         data: JSON.stringify(requests),
-        get: this.props.onGetProcessingRequests,
+        get: this.props.get,
         total: total,
         bordered: true,
         add: "File a Request",
         link: "/user/requests/add",
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"],
-        title: "Processing Requests",
+        title: "Limarket Requests",
         className: "bg-white shadow-sm",
         fields: [{
           name: 'Request ID',
@@ -452,20 +451,20 @@ var Processing = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "bg-white py-4 pl-5 pr-4 position-relative"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Backend_UI_Breadcrumb_Breadcrumb__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        main: "Processing Requests",
+        main: "Limarket Requests",
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Titles_SpecialTitle_SpecialTitle__WEBPACK_IMPORTED_MODULE_8__["default"], {
         user: true,
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faCalendarAlt"]
       }, "User panel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_UI_Titles_Subtitle_Subtitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
         user: true
-      }, "Processing Requests")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Limarket Requests")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "p-4 pb-0"
       }, errors, feedback, content));
     }
   }]);
 
-  return Processing;
+  return Limarket;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -474,8 +473,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onGetProcessingRequests: function onGetProcessingRequests(page, show, search) {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getProcessingRequests"](page, show, search));
+    get: function get(page, show, search) {
+      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["getLimarketRequests"](page, show, search));
     },
     onPostRequestDelete: function onPostRequestDelete(id) {
       return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["postRequestDelete"](id));
@@ -485,14 +484,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     onResetRequests: function onResetRequests() {
       return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["resetRequests"]());
-    },
-    onApprovedStatusChanged: function onApprovedStatusChanged(id) {
-      return dispatch(_store_actions__WEBPACK_IMPORTED_MODULE_21__["patchRequestStatusUpdate"](id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Processing)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Limarket)));
 
 /***/ })
 

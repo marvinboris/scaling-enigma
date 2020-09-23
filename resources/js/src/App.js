@@ -20,6 +20,8 @@ const asyncUserRequestReport = asyncComponent(() => import('./containers/Backend
 const asyncUserRequestsImportant = asyncComponent(() => import('./containers/Backend/User/Requests/Important/Important'));
 const asyncUserRequestsAttention = asyncComponent(() => import('./containers/Backend/User/Requests/Attention/Attention'));
 const asyncUserRequestsDev = asyncComponent(() => import('./containers/Backend/User/Requests/Dev/Dev'));
+const asyncUserRequestsCustomerService = asyncComponent(() => import('./containers/Backend/User/Requests/CustomerService/CustomerService'));
+const asyncUserRequestsLimarket = asyncComponent(() => import('./containers/Backend/User/Requests/Limarket/Limarket'));
 const asyncUserRequestsProcessing = asyncComponent(() => import('./containers/Backend/User/Requests/Processing/Processing'));
 const asyncUserRequestsPending = asyncComponent(() => import('./containers/Backend/User/Requests/Pending/Pending'));
 const asyncUserRequestsSolved = asyncComponent(() => import('./containers/Backend/User/Requests/Solved/Solved'));
@@ -79,6 +81,8 @@ class App extends Component {
                     <Route path="/user/requests/important" component={asyncUserRequestsImportant} />
                     <Route path="/user/requests/attention" component={asyncUserRequestsAttention} />
                     <Route path="/user/requests/dev" component={asyncUserRequestsDev} />
+                    <Route path="/user/requests/customer-service" component={asyncUserRequestsCustomerService} />
+                    <Route path="/user/requests/limarket" component={asyncUserRequestsLimarket} />
                     <Route path="/user/requests/processing" component={asyncUserRequestsProcessing} />
                     <Route path="/user/requests/pending" component={asyncUserRequestsPending} />
                     <Route path="/user/requests/solved" component={asyncUserRequestsSolved} />

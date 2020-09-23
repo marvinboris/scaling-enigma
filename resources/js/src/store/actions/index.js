@@ -43,6 +43,8 @@ export {
     getImportantRequests,
     getAttentionRequests,
     getDevRequests,
+    getCustomerServiceRequests,
+    getLimarketRequests,
     getPendingRequests,
     getProcessingRequests,
     getSolvedRequests,

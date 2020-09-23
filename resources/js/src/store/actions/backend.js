@@ -170,6 +170,44 @@ export const getDevRequests = (page = 1, show = 10, search = '') => async dispat
     }
 };
 
+export const getCustomerServiceRequests = (page = 1, show = 10, search = '') => async dispatch => {
+    dispatch(requestsStart());
+
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(`${prefix}requests/customer-service?show=${show}&page=${page}&search=${search}`, {
+            method: 'GET',
+            headers: {
+                Authorization: token
+            }
+        });
+        const resData = await res.json();
+        dispatch(requestsSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(requestsFail(error));
+    }
+};
+
+export const getLimarketRequests = (page = 1, show = 10, search = '') => async dispatch => {
+    dispatch(requestsStart());
+
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(`${prefix}requests/limarket?show=${show}&page=${page}&search=${search}`, {
+            method: 'GET',
+            headers: {
+                Authorization: token
+            }
+        });
+        const resData = await res.json();
+        dispatch(requestsSuccess(resData));
+    } catch (error) {
+        console.log(error);
+        dispatch(requestsFail(error));
+    }
+};
+
 export const getPendingRequests = (page = 1, show = 10, search = '') => async dispatch => {
     dispatch(requestsStart());
 
