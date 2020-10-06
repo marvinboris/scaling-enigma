@@ -28,36 +28,36 @@ class RequestsController extends Controller
         $filteredRequests = [];
         switch ($status) {
             case 'pending':
-                $filteredRequests = AppRequest::whereStatus(0)->whereNull('type_id');
+                $filteredRequests = AppRequest::orderBy('id')->whereStatus(0)->whereNull('type_id');
                 break;
             case 'processing':
-                $filteredRequests = AppRequest::whereStatus(1)->whereNull('type_id');
+                $filteredRequests = AppRequest::orderBy('id')->whereStatus(1)->whereNull('type_id');
                 break;
             case 'solved':
-                $filteredRequests = AppRequest::whereStatus(3);
+                $filteredRequests = AppRequest::orderBy('id')->whereStatus(3);
                 break;
             case 'cancelled':
-                $filteredRequests = AppRequest::whereStatus(2);
+                $filteredRequests = AppRequest::orderBy('id')->whereStatus(2);
                 break;
             case 'attention':
                 $type_id = Type::whereAbbr('AT')->first()->id;
-                $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
+                $filteredRequests = AppRequest::orderBy('id')->whereTypeId($type_id)->whereIn('status', [0, 1]);
                 break;
             case 'important':
                 $type_id = Type::whereAbbr('CEO')->first()->id;
-                $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
+                $filteredRequests = AppRequest::orderBy('id')->whereTypeId($type_id)->whereIn('status', [0, 1]);
                 break;
             case 'dev':
                 $type_id = Type::whereAbbr('DEV')->first()->id;
-                $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
+                $filteredRequests = AppRequest::orderBy('id')->whereTypeId($type_id)->whereIn('status', [0, 1]);
                 break;
             case 'customer-service':
                 $type_id = Type::whereAbbr('CS')->first()->id;
-                $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
+                $filteredRequests = AppRequest::orderBy('id')->whereTypeId($type_id)->whereIn('status', [0, 1]);
                 break;
             case 'limarket':
                 $type_id = Type::whereAbbr('LI')->first()->id;
-                $filteredRequests = AppRequest::whereTypeId($type_id)->whereIn('status', [0, 1]);
+                $filteredRequests = AppRequest::orderBy('id')->whereTypeId($type_id)->whereIn('status', [0, 1]);
                 break;
             case 'dashboard':
                 $filteredRequests = AppRequest::latest()->limit(5)->get();
