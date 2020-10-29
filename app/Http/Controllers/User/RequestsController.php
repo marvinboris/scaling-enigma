@@ -76,6 +76,7 @@ class RequestsController extends Controller
                     if ($search !== "")
                         $query->where('reqid', 'LIKE', "%$search%")
                             ->orWhere('email', 'LIKE', "%$search%")
+                            ->orWhere('edited_by', 'LIKE', "%$search%")
                             ->orWhere('platforms.name', 'LIKE', "%$search%")
                             ->orWhere('issues.name', 'LIKE', "%$search%")
                             ->orWhere('ref', 'LIKE', "%$search%");
