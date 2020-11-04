@@ -78,7 +78,7 @@ class Dev extends Component {
 
             const viewContent = <RequestView request={request} country={country} />;
 
-            const editContent = <Edit request={updateObject(request, { page_status: 'important' })} />;
+            const editContent = <Edit request={updateObject(request, { page_status: 'dev' })} />;
 
             return updateObject(request, {
                 reqid: <a href={'/request/details/' + request.external} target="_blank" className="text-decoration-none">

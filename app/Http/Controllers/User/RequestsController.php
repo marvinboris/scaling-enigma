@@ -362,7 +362,7 @@ class RequestsController extends Controller
         return response()->json([
             'message' => [
                 'type' => 'success',
-                'content' => 'Successfully deleted request.'
+                'content' => 'Successfully updated request.'
             ],
             'requests' => $requests,
             'total' => $total,
