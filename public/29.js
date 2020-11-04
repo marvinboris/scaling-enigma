@@ -262,7 +262,7 @@ var Processing = /*#__PURE__*/function (_Component) {
         });
         var editContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Edit__WEBPACK_IMPORTED_MODULE_18__["default"], {
           request: Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
-            page_status: 'pending'
+            page_status: 'processing'
           })
         });
         return Object(_shared_utility__WEBPACK_IMPORTED_MODULE_22__["updateObject"])(request, {
