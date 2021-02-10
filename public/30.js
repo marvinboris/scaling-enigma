@@ -156,38 +156,37 @@ var Solved = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var cors, phoneRes, namesRes, phone, names, countries;
+        var phoneRes, namesRes, phone, names, countries;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 this.props.onGetSolvedRequests();
-                cors = 'https://cors-anywhere.herokuapp.com/';
-                _context.next = 4;
-                return fetch(cors + 'http://country.io/phone.json', {
+                _context.next = 3;
+                return fetch(CORS + 'http://country.io/phone.json', {
                   method: 'GET',
                   mode: 'cors'
                 });
 
-              case 4:
+              case 3:
                 phoneRes = _context.sent;
-                _context.next = 7;
-                return fetch(cors + 'http://country.io/names.json', {
+                _context.next = 6;
+                return fetch(CORS + 'http://country.io/names.json', {
                   method: 'GET',
                   mode: 'cors'
                 });
 
-              case 7:
+              case 6:
                 namesRes = _context.sent;
-                _context.next = 10;
+                _context.next = 9;
                 return phoneRes.json();
 
-              case 10:
+              case 9:
                 phone = _context.sent;
-                _context.next = 13;
+                _context.next = 12;
                 return namesRes.json();
 
-              case 13:
+              case 12:
                 names = _context.sent;
                 countries = Object.keys(phone).map(function (key) {
                   return {
@@ -202,7 +201,7 @@ var Solved = /*#__PURE__*/function (_Component) {
                   countries: countries
                 });
 
-              case 16:
+              case 15:
               case "end":
                 return _context.stop();
             }

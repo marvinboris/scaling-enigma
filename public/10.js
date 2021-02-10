@@ -379,37 +379,36 @@ var Request = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var cors, phoneRes, namesRes, phone, names, countries;
+        var phoneRes, namesRes, phone, names, countries;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                cors = 'https://cors-anywhere.herokuapp.com/';
-                _context.next = 3;
-                return fetch(cors + 'http://country.io/phone.json', {
+                _context.next = 2;
+                return fetch(CORS + 'http://country.io/phone.json', {
                   method: 'GET',
                   mode: 'cors'
                 });
 
-              case 3:
+              case 2:
                 phoneRes = _context.sent;
-                _context.next = 6;
-                return fetch(cors + 'http://country.io/names.json', {
+                _context.next = 5;
+                return fetch(CORS + 'http://country.io/names.json', {
                   method: 'GET',
                   mode: 'cors'
                 });
 
-              case 6:
+              case 5:
                 namesRes = _context.sent;
-                _context.next = 9;
+                _context.next = 8;
                 return phoneRes.json();
 
-              case 9:
+              case 8:
                 phone = _context.sent;
-                _context.next = 12;
+                _context.next = 11;
                 return namesRes.json();
 
-              case 12:
+              case 11:
                 names = _context.sent;
                 countries = Object.keys(phone).map(function (key) {
                   return {
@@ -424,7 +423,7 @@ var Request = /*#__PURE__*/function (_Component) {
                   countries: countries
                 });
 
-              case 15:
+              case 14:
               case "end":
                 return _context.stop();
             }
